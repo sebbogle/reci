@@ -1,0 +1,17 @@
+@if (!string.IsNullOrWhiteSpace(Notes))
+{
+    <div class="recipe-section notes-section">
+        <h2>
+            <FluentIcon Value="@(new Icons.Regular.Size20.NoteEdit())" />
+            Notes
+        </h2>
+        <div class="notes-card">
+            <p style="white-space: pre-wrap; margin: 0;">@Notes</p>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string? Notes { get; set; }
+}

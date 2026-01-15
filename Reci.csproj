@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <RunAOTCompilation>True</RunAOTCompilation>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <RunAOTCompilation>True</RunAOTCompilation>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Tests\**" />
+    <Content Remove="Tests\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.13.2" />
+    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.13.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Reci.Core" />
+    <Using Include="Reci.Data.Models" />
+    <Using Include="Reci.Data.Repositories" />
+    <Using Include="Reci.Data.Repositories.Interfaces" />
+    <Using Include="Reci.Mappers" />
+    <Using Include="Reci.Services" />
+    <Using Include="Reci.Services.Interfaces" />
+    <Using Include="Reci.ViewModels" />
+  </ItemGroup>
+
+</Project>

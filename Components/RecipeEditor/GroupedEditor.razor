@@ -1,0 +1,342 @@
+﻿@typeparam TItem
+
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="12">
+    <FluentLabel Typo="Typography.Subject">@Title</FluentLabel>
+
+    @foreach (TItem item in UngroupedItems)
+    {
+        int itemIndex = UngroupedItems.IndexOf(item);
+        <FluentStack Orientation="Orientation.Horizontal"
+                     HorizontalGap="8"
+                     VerticalAlignment="VerticalAlignment.Top">
+
+            <FluentLabel Style="min-width: 15px; font-weight: bold; padding-top: 8px;">
+                @(itemIndex + 1)
+            </FluentLabel>
+
+            @if (ItemTemplate != null)
+            {
+                @ItemTemplate(item)
+            }
+
+            <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
+                          Appearance="Appearance.Lightweight"
+                          OnClick="@(() => RemoveItemFromGroup(UngroupedItems, item))"
+                          Title="@RemoveItemTitle" />
+        </FluentStack>
+
+    }
+
+    @if (ActualGroups.Any())
+    {
+        <FluentAccordion ExpandMode="AccordionExpandMode.Multi" Style="width: 100%">
+            @foreach (GroupVM<TItem> group in ActualGroups)
+            {
+                groupedViewState.TryGetValue(group.Id ?? Guid.Empty, out GroupedViewState? state);
+                if (state is null) state = GroupedViewState.Default;
+
+                int itemNumber = 1;
+                <FluentAccordionItem Expanded="state.IsExpanded" ExpandedChanged="@(() => OnAccordionExpandChange(state))">
+                    <HeadingTemplate>
+                        <div @onclick:stopPropagation="true">
+                        <FluentStack Orientation="Orientation.Horizontal" 
+                                     HorizontalAlignment="HorizontalAlignment.Left" 
+                                     VerticalAlignment="VerticalAlignment.Center"
+                                     Style="width: 100%; justify-content: space-between;">
+                            <FluentStack Orientation="Orientation.Horizontal" 
+                                         HorizontalGap="8" 
+                                         VerticalAlignment="VerticalAlignment.Center">
+                                @if (state.IsEditingName)
+                                {
+                                    <FluentTextField @bind-Value="state.NewName"
+                                                     />
+                                }
+                                else
+                                {
+                                    <div>@group.Name</div>
+                                }
+                                
+                                @if (!state.IsExpanded)
+                                {
+                                    <FluentBadge Appearance="Appearance.Neutral">
+                                        @group.Count
+                                    </FluentBadge>                                
+                                }
+                            </FluentStack>
+                            
+                            <FluentStack Orientation="Orientation.Horizontal"
+                                         HorizontalAlignment="HorizontalAlignment.Right" 
+                                         HorizontalGap="4"
+                                         @onclick:stopPropagation="true">
+                                @if (state.IsEditingName)
+                                {
+                                    <FluentButton IconEnd="@(new Icons.Regular.Size16.Checkmark())"
+                                                  Appearance="Appearance.Lightweight"
+                                                  Title="Rename group"
+                                                  OnClick="@(() => OnConfirmGroupNameEditClick(state, group))" />
+                                    <FluentButton IconEnd="@(new Icons.Regular.Size16.Dismiss())"
+                                                  Appearance="Appearance.Lightweight"
+                                                  Title="Rename group"
+                                                  OnClick="@(() => OnCancelGroupNameEditClick(state, group))" />
+                                }
+                                else
+                                {
+                                    <FluentButton IconEnd="@(new Icons.Regular.Size16.Edit())"
+                                                  Appearance="Appearance.Lightweight"
+                                                  Title="Rename group"
+                                                  OnClick="@(() => OnEditGroupNameClick(state))" />
+                                    <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
+                                                  Appearance="Appearance.Lightweight"
+                                                  Title="Delete group"
+                                                  OnClick="@(() => RemoveGroup(group))" />
+                                }
+                            </FluentStack>
+                            </FluentStack>
+                        </div>
+                    </HeadingTemplate>
+                    <ChildContent>
+                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="8" Style="padding: 8px 0;">
+                        @foreach (TItem item in group)
+                        {
+                            int currentNumber = itemNumber++;
+                            <FluentStack Orientation="Orientation.Horizontal"
+                                         HorizontalGap="8"
+                                         VerticalAlignment="VerticalAlignment.Top">
+
+                                <FluentLabel Style="min-width: 15px; font-weight: bold; padding-top: 8px;">
+                                    @currentNumber.
+                                </FluentLabel>
+
+                                @if (ItemTemplate != null)
+                                {
+                                    @ItemTemplate(item)
+                                }
+
+                                <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
+                                              Appearance="Appearance.Lightweight"
+                                              Title="@RemoveItemTitle"
+                                              OnClick="@(() => RemoveItemFromGroup(group, item))" />
+                            </FluentStack>
+                        }
+
+                        <FluentButton Appearance="Appearance.Stealth"
+                                      IconStart="@(new Icons.Regular.Size16.Add())"
+                                      OnClick="@(() => AddItemToGroup(group))">
+                            @AddItemButtonText
+                        </FluentButton>
+                        </FluentStack>
+                    </ChildContent>
+                </FluentAccordionItem>
+            }
+        </FluentAccordion>
+    }
+
+    <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="8">
+        <FluentButton Appearance="Appearance.Stealth"
+                      IconStart="@(new Icons.Regular.Size16.Add())"
+                      OnClick="AddUngroupedItem">
+            @AddItemButtonText
+        </FluentButton>
+        <FluentButton Appearance="Appearance.Outline"
+                      IconStart="@(new Icons.Regular.Size16.FolderAdd())"
+                      OnClick="AddNewGroup">
+            @AddGroupButtonText
+        </FluentButton>
+    </FluentStack>
+</FluentStack>
+
+@code {
+
+    #region Component Parameters
+
+    [Parameter]
+    public List<GroupVM<TItem>> Groups { get; set; } = new();
+
+    [Parameter]
+    public GroupVM<TItem> UngroupedItems { get; set; } = GroupVM<TItem>.Empty();
+
+    [Parameter]
+    public RenderFragment<TItem>? ItemTemplate { get; set; }
+
+    [Parameter]
+    public Func<TItem> CreateNewItem { get; set; } = default!;
+
+    [Parameter]
+    public Func<TItem, bool> HasContent { get; set; } = _ => true;
+
+    [Parameter]
+    public string Title { get; set; } = "Items";
+
+    [Parameter]
+    public string DefaultGroupName { get; set; } = "Group";
+
+    [Parameter]
+    public string AddItemButtonText { get; set; } = "Add Item";
+
+    [Parameter]
+    public string AddGroupButtonText { get; set; } = "Add Group";
+
+    [Parameter]
+    public string RemoveItemTitle { get; set; } = "Remove item";
+
+    #endregion
+
+    #region Event Handlers
+
+
+    private void OnAccordionExpandChange(GroupedViewState groupedViewState)
+    {
+        groupedViewState.IsExpanded = !groupedViewState.IsExpanded;
+    }
+
+    private void OnEditGroupNameClick(GroupedViewState state)
+    {
+        state.IsEditingName = true;
+    }
+
+    private void OnConfirmGroupNameEditClick(GroupedViewState state, GroupVM<TItem> group)
+    {
+        group.Name = state.NewName;
+        state.IsEditingName = false;
+    }
+
+    private void OnCancelGroupNameEditClick(GroupedViewState state, GroupVM<TItem> group)
+    {
+        state.NewName = group.Name;
+        state.IsEditingName = false;
+    }
+
+
+    
+
+    #endregion
+
+
+
+
+    private Dictionary<Guid, GroupedViewState> groupedViewState = new();
+
+
+    private GroupVM<TItem>? groupBeingRenamed;
+
+    private string? renameGroupValue;
+
+    protected override void OnInitialized()
+    {
+        if (!ContainsAnyItems())
+        {
+            AddUngroupedItem();
+        }
+
+        groupedViewState = Groups.Where(g => g.Id.HasValue).ToDictionary(
+            group => group.Id!.Value,
+            group => new GroupedViewState
+            {
+                IsExpanded = false,
+                IsEditingName = false,
+                NewName = group.Name
+            }
+        );
+    }
+
+    // Filter to only show actual groups (not ungrouped items) in the accordion
+    private IEnumerable<GroupVM<TItem>> ActualGroups => Groups.Where(g => g.Id != null);
+
+    #region Private Methods
+
+    private void AddNewGroup()
+    {
+        GroupVM<TItem> newGroup = new()
+        {
+            Id = Guid.NewGuid(),
+            Name = $"{DefaultGroupName} {ActualGroups.Count() + 1}",
+            SortOrder = ActualGroups.Count()
+        };
+
+        TItem newItem = CreateNewItem();
+        newGroup.Add(newItem);
+
+        groupedViewState.Add(newGroup.Id.Value, new GroupedViewState
+        {
+            IsExpanded = true,
+            IsEditingName = false,
+            NewName = newGroup.Name
+        });
+
+        Groups.Add(newGroup);
+    }
+
+    private void AddItemToGroup(GroupVM<TItem> group)
+    {
+        TItem newItem = CreateNewItem();
+
+        if (newItem is IGroupable groupable)
+        {
+            groupable.GroupId = group.Id;
+        }
+
+        group.Add(newItem);
+    }
+
+    private void AddUngroupedItem()
+    {
+        AddItemToGroup(UngroupedItems);
+    }
+
+    private void RemoveItemFromGroup(GroupVM<TItem> group, TItem item)
+    {
+        group.Remove(item);
+    }
+
+    private void RemoveGroup(GroupVM<TItem> group)
+    {
+        List<TItem> nonEmptyGroupItems = group.Where(HasContent)
+                                              .ToList();
+
+        if (nonEmptyGroupItems.Any())
+        {
+            UngroupedItems.AddRange(nonEmptyGroupItems);
+        }
+
+        Groups.Remove(group);
+    }
+
+    private void RenameGroup(GroupVM<TItem> group)
+    {
+        groupBeingRenamed = group;
+        renameGroupValue = group.Name;
+    }
+
+    private void ConfirmRenameGroup()
+    {
+        if (groupBeingRenamed != null)
+        {
+            groupBeingRenamed.Name = renameGroupValue;
+            groupBeingRenamed = null;
+            renameGroupValue = null;
+        }
+    }
+
+    private bool ContainsAnyItems()
+    {
+        return UngroupedItems.Any() || ActualGroups.Any(g => g.Any());
+    }
+
+    #endregion
+
+    private class GroupedViewState
+    {
+        public bool IsExpanded { get; set; }
+
+        public bool IsEditingName { get; set; }
+
+        public string? NewName { get; set; }
+
+        public static GroupedViewState Default => new GroupedViewState
+        {
+            IsExpanded = false,
+            IsEditingName = false,
+            NewName = null
+        };
+    }
+}

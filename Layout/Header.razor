@@ -1,0 +1,147 @@
+﻿@inject IDataTransferService DataTransferService
+@inject IJSRuntime JSRuntime
+@inject IToastService ToastService
+@inject NavigationManager NavigationManager
+
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <div style="display: flex; align-items: center; cursor: pointer;" @onclick="NavigateToHome">
+        <img src="icon-192-no-background.png" alt="Reci Unicorn" style="width: 40px; height: 40px;" />
+        <FluentLabel Typo="Typography.Header" Color="Color.Lightweight" Weight="FontWeight.Bold">
+            Reci
+        </FluentLabel>
+    </div>
+
+    <div style="display: flex; gap: 8px; align-items: center;">
+        @if (PendingChanges)
+        {
+            <FluentLabel>Unsaved changes</FluentLabel>
+        }
+
+        <FluentButton Appearance="Appearance.Lightweight"
+                      IconEnd="@(new Icons.Regular.Size20.ArrowDownload())" 
+                      OnClick="OnDownloadClick"
+                      Title="Download"
+                      Loading="@isDownloading">
+        </FluentButton>
+        
+        <FluentButton Appearance="Appearance.Lightweight" 
+                      IconEnd="@(new Icons.Regular.Size20.ArrowUpload())" 
+                      OnClick="OnUploadClick"
+                      Title="Upload"
+                      Loading="@isUploading">
+        </FluentButton>
+        
+        <FluentButton Appearance="Appearance.Lightweight" 
+                      IconEnd="@(new Icons.Regular.Size20.Settings())" 
+                      OnClick="OnSettingsClick"
+                      Title="Settings"
+                      Disabled="true">
+        </FluentButton>
+        
+        <InputFile OnChange="OnFileSelected" @ref="fileInput" id="fileUploadInput" style="display: none;" accept=".reci" />
+    </div>
+</div>
+
+@code {
+    public bool PendingChanges { get; set; } = false;
+
+    private InputFile? fileInput;
+    private bool isDownloading = false;
+    private bool isUploading = false;
+
+    private void NavigateToHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private async Task OnDownloadClick()
+    {
+        try
+        {
+            isDownloading = true;
+            
+            ReciFile? reciFile = await DataTransferService.ExportReciDefinitionAsync();
+            
+            if (reciFile == null)
+            {
+                ToastService.ShowError("Failed to export data");
+                return;
+            }
+
+            string jsonContent = System.Text.Json.JsonSerializer.Serialize(reciFile, new System.Text.Json.JsonSerializerOptions 
+            { 
+                WriteIndented = true 
+            });
+            
+            string fileName = $"reci-export-{DateTime.Now:yyyy-MM-dd-HHmmss}.reci";
+            
+            await JSRuntime.InvokeVoidAsync("downloadFile", fileName, jsonContent);
+            
+            ToastService.ShowSuccess("Data exported successfully");
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError($"Export failed: {ex.Message}");
+        }
+        finally
+        {
+            isDownloading = false;
+        }
+    }
+
+    private async Task OnUploadClick()
+    {
+        await JSRuntime.InvokeVoidAsync("eval", "document.getElementById('fileUploadInput').click()");
+    }
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            isUploading = true;
+            
+            var file = e.File;
+            
+            if (file == null)
+            {
+                return;
+            }
+
+            using var stream = file.OpenReadStream(maxAllowedSize: 10 * 1024 * 1024); // 10MB limit
+            using var reader = new StreamReader(stream);
+            string jsonContent = await reader.ReadToEndAsync();
+            
+            ReciFile? reciFile = System.Text.Json.JsonSerializer.Deserialize<ReciFile>(jsonContent);
+            
+            if (reciFile == null)
+            {
+                ToastService.ShowError("Invalid file format");
+                return;
+            }
+
+            Result result = await DataTransferService.ImportReciDefinitionAsync(reciFile);
+            
+            if (result.IsSuccess)
+            {
+                ToastService.ShowSuccess("Data imported successfully");
+            }
+            else
+            {
+                ToastService.ShowError($"Import failed: {result.ErrorMessage}");
+            }
+        }
+        catch (Exception ex)
+        {
+            ToastService.ShowError($"Upload failed: {ex.Message}");
+        }
+        finally
+        {
+            isUploading = false;
+        }
+    }
+
+    private void OnSettingsClick()
+    {
+        // TODO: Implement settings functionality
+    }
+}

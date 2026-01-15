@@ -1,0 +1,253 @@
+{
+  "Version": "1.0.0",
+  "Settings": {},
+  "Recipes": [
+    {
+      "Id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "Name": "Classic Chocolate Chip Cookies",
+      "Description": "Soft and chewy chocolate chip cookies that everyone loves",
+      "GroupId": "11111111-1111-1111-1111-111111111111",
+      "Ingredients": [
+        {
+          "Name": "All-purpose flour",
+          "QuantityAmount": 2.25,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        },
+        {
+          "Name": "Butter",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Granulated sugar",
+          "QuantityAmount": 0.75,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Brown sugar",
+          "QuantityAmount": 0.75,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Eggs",
+          "QuantityAmount": 2,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "Vanilla extract",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Baking soda",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Salt",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Chocolate chips",
+          "QuantityAmount": 2,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Preheat oven to 375°F (190°C)",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "In a large bowl, cream together butter and both sugars until light and fluffy",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Beat in eggs one at a time, then stir in vanilla",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "In a separate bowl, whisk together flour, baking soda, and salt",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Gradually blend dry ingredients into the butter mixture",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Fold in chocolate chips",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Drop rounded tablespoons of dough onto ungreased cookie sheets",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Bake for 9-11 minutes or until golden brown",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Cool on baking sheet for 2 minutes before removing to a wire rack",
+          "Group": null,
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": {
+        "Calories": 180,
+        "Fat": 9.0,
+        "Carbohydrates": 24.0,
+        "Protein": 2.0
+      },
+      "Tags": [
+        "dessert",
+        "cookies",
+        "baking",
+        "chocolate"
+      ],
+      "FurtherNotes": "Makes about 48 cookies. Store in an airtight container for up to 1 week."
+    },
+    {
+      "Id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+      "Name": "Simple Green Salad",
+      "Description": "A fresh and healthy side salad",
+      "GroupId": "22222222-2222-2222-2222-222222222222",
+      "Ingredients": [
+        {
+          "Name": "Mixed greens",
+          "QuantityAmount": 6,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        },
+        {
+          "Name": "Cherry tomatoes",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Cucumber",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "Red onion",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Olive oil",
+          "QuantityAmount": 3,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Lemon juice",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Salt",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Black pepper",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Wash and dry all vegetables thoroughly",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Chop cucumber into bite-sized pieces",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Halve cherry tomatoes",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Thinly slice red onion",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Combine all vegetables in a large bowl",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "In a small bowl, whisk together olive oil, lemon juice, salt, and pepper",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Pour dressing over salad and toss gently to combine",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Serve immediately",
+          "Group": null,
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": {
+        "Calories": 120,
+        "Fat": 10.5,
+        "Carbohydrates": 7.0,
+        "Protein": 2.0
+      },
+      "Tags": [
+        "salad",
+        "healthy",
+        "vegetarian",
+        "side-dish"
+      ],
+      "FurtherNotes": "Serves 4. Best served fresh. Can add feta cheese or nuts for extra flavor."
+    }
+  ],
+  "Groups": [
+    {
+      "Id": "11111111-1111-1111-1111-111111111111",
+      "Name": "Desserts",
+      "SortOrder": 1,
+      "GroupType": 0
+    },
+    {
+      "Id": "22222222-2222-2222-2222-222222222222",
+      "Name": "Salads",
+      "SortOrder": 2,
+      "GroupType": 0
+    }
+  ]
+}
