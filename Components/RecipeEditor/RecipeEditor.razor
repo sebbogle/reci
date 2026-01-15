@@ -1,0 +1,403 @@
+﻿@implements IDialogContentComponent<RecipeVM>
+@inject IGroupingService GroupingService
+@inject IRecipeService RecipeService
+@inject IDialogService DialogService
+@inject IToastService ToastService
+
+<FluentDialogBody>
+    <EditForm Model="@Content" Context="editContext" style="display: flex; flex-direction: column; gap: 16px;">
+        <FluentValidationSummary />
+
+        @* Basic Information Section *@
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
+            <FluentStack Orientation="Orientation.Horizontal" 
+                         HorizontalGap="16" 
+                         Wrap="true"
+                         Style="align-items: flex-start;">
+                <FluentTextField @bind-Value="Content.Name" 
+                               Label="Name" 
+                               Required
+                               Autofocus 
+                               Style="flex: 1; min-width: 300px;" />
+
+                <FluentStack Orientation="Orientation.Horizontal" 
+                             HorizontalGap="8"
+                             Style="flex: 1; min-width: 250px; align-items: flex-end;">
+                    <FluentCombobox TOption="Group"
+                                    @bind-Value="newGroupName"
+                                    @bind-SelectedOption="Content.Group"
+                                    Label="Group"
+                                    Items="@RecipeGroups"
+                                    OptionText="@(g => g?.Name ?? "Ungrouped")"
+                                    Placeholder="Select or type to create..."
+                                    Style="flex: 1;" />
+                    
+                    <FluentButton Appearance="Appearance.Outline"
+                                  OnClick="AddNewGroup"
+                                  Title="Add new group"
+                                  Style="margin-bottom: 2px;">
+                        Add
+                    </FluentButton>
+                </FluentStack>
+            </FluentStack>
+
+            <FluentTextArea @bind-Value="Content.Description" 
+                          Label="Description" 
+                          Rows="3"
+                          Style="width: 100%;" />
+        </FluentStack>
+
+        @* Ingredients Section *@
+        <GroupedEditor TItem="Ingredient"
+                       Groups="@Content.Ingredients"
+                       UngroupedItems="@UngroupedIngredients"
+                       Title="Ingredients"
+                       DefaultGroupName="Ingredients"
+                       AddItemButtonText="Add Ingredient"
+                       AddGroupButtonText="Add Group"
+                       RemoveItemTitle="Remove ingredient"
+                       CreateNewItem="@(() => new Ingredient { Name = string.Empty, QuantityAmount = 0, QuantityUnit = string.Empty })"
+                       HasContent="@(ingredient => !string.IsNullOrWhiteSpace(ingredient.Name))">
+            <ItemTemplate Context="ingredient">
+                <FluentTextField @bind-Value="ingredient.Name"
+                                 Placeholder="Ingredient name..."
+                                 Style="flex: 2;" />
+
+                <FluentNumberField @bind-Value="ingredient.QuantityAmount"
+                                   Placeholder="Qty"
+                                   Min="0"
+                                   Step="0.1m"
+                                   Style="flex: 0.75; min-width: 70px;" />
+
+                <FluentTextField @bind-Value="ingredient.QuantityUnit"
+                                 Placeholder="Unit"
+                                 Style="flex: 0.75; min-width: 70px;" />
+            </ItemTemplate>
+        </GroupedEditor>
+
+        @* Instructions Section *@
+        <GroupedEditor TItem="Instruction"
+                       Groups="@Content.Instructions"
+                       UngroupedItems="@UngroupedInstructions"
+                       Title="Instructions"
+                       DefaultGroupName="Steps"
+                       AddItemButtonText="Add Step"
+                       AddGroupButtonText="Add Group"
+                       RemoveItemTitle="Remove step"
+                       CreateNewItem="@(() => new Instruction { Text = string.Empty })"
+                       HasContent="@(instruction => !string.IsNullOrWhiteSpace(instruction.Text))">
+            <ItemTemplate Context="instruction">
+                <FluentTextArea @bind-Value="instruction.Text"
+                                Placeholder="Describe this step..."
+                                Rows="2"
+                                Style="flex: 1;" />
+            </ItemTemplate>
+        </GroupedEditor>
+
+        @* Tags Section *@
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
+            <FluentLabel Typo="Typography.Subject">Tags</FluentLabel>
+            <FluentStack Orientation="Orientation.Horizontal" Wrap="true" HorizontalGap="8">
+                @foreach (string? tag in Content.Tags)
+                {
+                    <FluentBadge Appearance="Appearance.Accent">
+                        @tag
+                        <FluentButton IconEnd="@(new Icons.Regular.Size16.Dismiss())"
+                                      Appearance="Appearance.Lightweight"
+                                      OnClick="@(() => RemoveTag(tag))" />
+                    </FluentBadge>
+                }
+            </FluentStack>
+
+            <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="8">
+                <FluentTextField @bind-Value="newTag"
+                                 Placeholder="Add a tag..."
+                                 Style="flex: 1;"
+                                 @onkeydown="HandleTagKeyPress" />
+                <FluentButton Appearance="Appearance.Outline"
+                              OnClick="AddTag">
+                    Add
+                </FluentButton>
+            </FluentStack>
+        </FluentStack>
+        
+        @* Nutrition Information Section *@
+        <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="16">
+            <FluentLabel Typo="Typography.Subject">Nutrition</FluentLabel>
+            <FluentNumberField @bind-Value="nutritionCalories"
+                               Label="Calories (kcal)"
+                               Min="0" />
+
+            <FluentNumberField @bind-Value="nutritionProtein"
+                               Label="Protein (g)"
+                               Min="0"
+                               Step="0.1m" />
+
+            <FluentNumberField @bind-Value="nutritionCarbs"
+                               Label="Carbohydrates (g)"
+                               Min="0"
+                               Step="0.1m"/>
+
+            <FluentNumberField @bind-Value="nutritionFat"
+                               Label="Fat (g)"
+                               Min="0"
+                               Step="0.1m" />
+        </FluentStack>
+
+        @* Further Notes Section *@
+        <FluentTextArea @bind-Value="Content.FurtherNotes"
+                        Label="Further Notes"
+                        Placeholder="Any additional notes or comments..."
+                        Rows="5"
+                        Style="width: 100%;" />
+    </EditForm>
+</FluentDialogBody>
+
+<FluentDialogFooter>
+    @if (Content.Id != Guid.Empty)
+    {
+        <FluentButton Appearance="Appearance.Accent"
+                      Style="margin-right: auto; background-color: var(--error, #d13438); color: white;"
+                      OnClick="OnDeleteClick">
+            Delete Recipe
+        </FluentButton>
+    }
+
+    <FluentButton Appearance="Appearance.Neutral"
+                  OnClick="OnCancelClick">
+        Cancel
+    </FluentButton>
+
+    <FluentButton Appearance="Appearance.Accent"
+                  OnClick="OnSaveClick">
+        Save
+    </FluentButton>
+</FluentDialogFooter>
+
+@code {
+
+    #region Private Constants
+
+    private const string CancelEditConfirmationText = "Are you sure you want to discard your changes?";
+    private const string DeleteConfirmationText = "Are you sure you want to delete this recipe?";
+
+    #endregion
+
+    [Parameter]
+    public RecipeVM Content { get; set; } = new();
+
+    [CascadingParameter]
+    public FluentDialog? Dialog { get; set; }
+
+    #region Ungrouped Items Helpers
+
+    private GroupVM<Ingredient> UngroupedIngredients
+    {
+        get
+        {
+            GroupVM<Ingredient>? ungrouped = Content.Ingredients.FirstOrDefault(g => g.Id == null);
+            if (ungrouped == null)
+            {
+                ungrouped = GroupVM<Ingredient>.Empty();
+                Content.Ingredients.Insert(0, ungrouped);
+            }
+            return ungrouped;
+        }
+    }
+
+    private GroupVM<Instruction> UngroupedInstructions
+    {
+        get
+        {
+            GroupVM<Instruction>? ungrouped = Content.Instructions.FirstOrDefault(g => g.Id == null);
+            if (ungrouped == null)
+            {
+                ungrouped = GroupVM<Instruction>.Empty();
+                Content.Instructions.Insert(0, ungrouped);
+            }
+            return ungrouped;
+        }
+    }
+
+    #endregion
+
+    #region Event Handlers
+
+    private async Task OnSaveClick()
+    {
+        if (Content.Group is not null && Content.Group.Id == Guid.Empty)
+        {
+            Group? existingGroup = await GroupingService.GetGroupingAsync(Content.Group.Id);
+            
+            if (existingGroup is null)
+            {
+                Result groupResult = await GroupingService.SaveGroupingAsync(Content.Group);
+                
+                if (!groupResult.IsSuccess)
+                {
+                    ToastService.ShowError("Error saving group: " + groupResult.ErrorMessage);
+                    return;
+                }
+            }
+        }
+
+        Result saveResult = await RecipeService.SaveRecipeAsync(Content);
+
+        if (saveResult.IsSuccess)
+        {
+            ToastService.ShowSuccess($"{Content.Name} saved successfully");
+        }
+        else
+        {
+            ToastService.ShowError("Error: " + saveResult.ErrorMessage);
+
+        }
+
+        if (Dialog is not null)
+        {
+            await Dialog.CloseAsync(Content);
+        }
+    }
+
+    private async Task OnCancelClick()
+    {
+        bool recipeModified = await RecipeService.IsRecipeModifiedAsync(Content);
+
+        if (!recipeModified && Dialog is not null)
+        {
+            await Dialog.CancelAsync();
+            return;
+        }
+
+        IDialogReference dialog = await DialogService.ShowConfirmationAsync(CancelEditConfirmationText, title: "Discard Changes");
+        DialogResult result = await dialog.Result;
+
+        if (!result.Cancelled && Dialog is not null)
+        {
+            await Dialog.CancelAsync();
+        }
+    }
+
+    private async Task OnDeleteClick()
+    {
+        var dialog = await DialogService.ShowConfirmationAsync(DeleteConfirmationText, title: "Delete Recipe");
+        var result = await dialog.Result;
+
+        if (!result.Cancelled && Dialog is not null)
+        {
+            await RecipeService.DeleteRecipeAsync(Content.Id ?? Guid.Empty);
+            await Dialog.CloseAsync();
+        }
+    }
+
+    #endregion
+
+    private string? newTag;
+    private string? newGroupName;
+
+    private List<Group> RecipeGroups = [];
+
+    // Nullable helpers for NutritionInfo binding
+    private int? nutritionCalories
+    {
+        get => Content.NutritionInfo?.Calories;
+        set
+        {
+            EnsureNutritionInfo();
+            Content.NutritionInfo!.Calories = value;
+        }
+    }
+
+    private decimal? nutritionProtein
+    {
+        get => Content.NutritionInfo?.Protein;
+        set
+        {
+            EnsureNutritionInfo();
+            Content.NutritionInfo!.Protein = value;
+        }
+    }
+
+    private decimal? nutritionCarbs
+    {
+        get => Content.NutritionInfo?.Carbohydrates;
+        set
+        {
+            EnsureNutritionInfo();
+            Content.NutritionInfo!.Carbohydrates = value;
+        }
+    }
+
+    private decimal? nutritionFat
+    {
+        get => Content.NutritionInfo?.Fat;
+        set
+        {
+            EnsureNutritionInfo();
+            Content.NutritionInfo!.Fat = value;
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        RecipeGroups = await GroupingService.GetGroupingsAsync(GroupType.Recipe);
+    }
+
+    private void EnsureNutritionInfo()
+    {
+        Content.NutritionInfo ??= new NutritionInfo();
+    }
+
+    private void AddTag()
+    {
+        if (!string.IsNullOrWhiteSpace(newTag) && !Content.Tags.Contains(newTag))
+        {
+            Content.Tags.Add(newTag.Trim());
+            newTag = string.Empty;
+        }
+    }
+
+    private void RemoveTag(string tag)
+    {
+        Content.Tags.Remove(tag);
+    }
+
+    private async Task HandleTagKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            AddTag();
+            await Task.CompletedTask;
+        }
+    }
+
+    private void AddNewGroup()
+    {
+        if (string.IsNullOrWhiteSpace(newGroupName))
+        {
+            return;
+        }
+
+        Group? existingGroup = RecipeGroups.FirstOrDefault(g => 
+            g.Name.Equals(newGroupName.Trim(), StringComparison.OrdinalIgnoreCase));
+
+        if (existingGroup is not null)
+        {
+            Content.Group = existingGroup;
+            newGroupName = string.Empty;
+            return;
+        }
+
+        Group newGroup = new Group
+        {
+            Id = Guid.Empty,
+            Name = newGroupName.Trim(),
+            SortOrder = RecipeGroups.Count,
+            GroupType = GroupType.Recipe
+        };
+
+        RecipeGroups.Add(newGroup);
+        Content.Group = newGroup;
+        newGroupName = string.Empty;
+    }
+}

@@ -1,0 +1,122 @@
+﻿@page "/Recipe/{RecipeSlug?}"
+@inject IRecipeService RecipeService
+@inject NavigationManager NavigationManager
+@inject IDialogService DialogService
+
+<PageTitle>@(Recipe?.Name ?? "Recipe")</PageTitle>
+
+@if (isLoading)
+{
+    <FluentProgressRing />
+    <p>Loading recipe...</p>
+}
+else if (Recipe is null)
+{
+    <div class="recipe-not-found">
+        <FluentLabel Typo="Typography.H5" Weight="FontWeight.Bold">
+            Could not find recipe
+        </FluentLabel>
+        <p>The recipe you're looking for doesn't exist or has been removed.</p>
+        <FluentButton Appearance="Appearance.Accent" @onclick="NavigateToHome">
+            Back to Contents
+        </FluentButton>
+    </div>
+}
+else
+{
+    <div class="recipe-detail">
+        <div class="recipe-header">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
+                <h1 style="margin: 0;">@Recipe.Name</h1>
+                <FluentButton Appearance="Appearance.Accent" 
+                              IconEnd="@(new Icons.Regular.Size20.Edit())"
+                              OnClick="OpenRecipeEditor"
+                              Title="Edit recipe" />
+            </div>
+            
+            @if (Recipe.Group is not null)
+            {
+                <div class="recipe-group-label">
+                    @Recipe.Group.Name
+                </div>
+            }
+
+            @if (Recipe.Tags.Any())
+            {
+                <div class="recipe-tags">
+                    @foreach (var tag in Recipe.Tags)
+                    {
+                        <FluentBadge Appearance="Appearance.Accent">@tag</FluentBadge>
+                    }
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(Recipe.Description))
+            {
+                <p class="recipe-description-detail">@Recipe.Description</p>
+            }
+        </div>
+
+        <FluentGrid Spacing="3" Justify="JustifyContent.FlexStart">
+            <FluentGridItem xs="12" md="6">
+                <IngredientsDisplay Ingredients="@Recipe.Ingredients" />
+            </FluentGridItem>
+
+            <FluentGridItem xs="12" md="6">
+                <InstructionsDisplay Instructions="@Recipe.Instructions" />
+            </FluentGridItem>
+        </FluentGrid>
+
+        <NutritionInfoDisplay NutritionInfo="@Recipe.NutritionInfo" />
+
+        <RecipeNotesDisplay Notes="@Recipe.FurtherNotes" />
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string? RecipeSlug { get; set; }
+
+    private RecipeVM? Recipe { get; set; }
+    private bool isLoading = true;
+    private IDialogReference? _dialog;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        isLoading = true;
+        
+        bool success = Guid.TryParse(RecipeSlug, out Guid recipeId);
+        Recipe = success ? await RecipeService.GetRecipeAsync(recipeId) : null;
+        
+        isLoading = false;
+    }
+
+    private void NavigateToHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    private async Task OpenRecipeEditor()
+    {
+        if (Recipe is null) return;
+
+        _dialog = await DialogService.ShowPanelAsync<RecipeEditor>(Recipe, new DialogParameters()
+        {
+            Alignment = HorizontalAlignment.Left,
+            Title = Recipe.Name,
+            PrimaryAction = "Save",
+            SecondaryAction = "Cancel",
+            ShowDismiss = false,
+            Width = "var(--panel-width, 60%)",
+            PreventDismissOnOverlayClick = true,
+        });
+
+        DialogResult result = await _dialog.Result;
+
+        if (!result.Cancelled && result.Data is RecipeVM updatedRecipe)
+        {
+            Recipe = await RecipeService.GetRecipeAsync((Guid)Recipe.Id);
+            StateHasChanged();
+        }
+    }
+}

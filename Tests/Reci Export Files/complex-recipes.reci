@@ -1,0 +1,492 @@
+{
+  "Version": "1.0.0",
+  "Settings": {},
+  "Recipes": [
+    {
+      "Id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+      "Name": "Homemade Lasagna",
+      "Description": "A rich and hearty Italian classic with layers of pasta, meat sauce, and cheese",
+      "GroupId": "33333333-3333-3333-3333-333333333333",
+      "Ingredients": [
+        {
+          "Name": "Lasagna noodles",
+          "QuantityAmount": 12,
+          "QuantityUnit": "sheets",
+          "GroupId": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        },
+        {
+          "Name": "Ground beef",
+          "QuantityAmount": 1,
+          "QuantityUnit": "lb",
+          "GroupId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        },
+        {
+          "Name": "Italian sausage",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "lb",
+          "GroupId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        },
+        {
+          "Name": "Onion, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        },
+        {
+          "Name": "Garlic cloves, minced",
+          "QuantityAmount": 4,
+          "QuantityUnit": "cloves",
+          "GroupId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        },
+        {
+          "Name": "Crushed tomatoes",
+          "QuantityAmount": 28,
+          "QuantityUnit": "oz",
+          "GroupId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        },
+        {
+          "Name": "Tomato paste",
+          "QuantityAmount": 6,
+          "QuantityUnit": "oz",
+          "GroupId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        },
+        {
+          "Name": "Dried basil",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tsp",
+          "GroupId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        },
+        {
+          "Name": "Dried oregano",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+        },
+        {
+          "Name": "Ricotta cheese",
+          "QuantityAmount": 15,
+          "QuantityUnit": "oz",
+          "GroupId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        },
+        {
+          "Name": "Egg",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        },
+        {
+          "Name": "Fresh parsley, chopped",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        },
+        {
+          "Name": "Mozzarella cheese, shredded",
+          "QuantityAmount": 4,
+          "QuantityUnit": "cups",
+          "GroupId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        },
+        {
+          "Name": "Parmesan cheese, grated",
+          "QuantityAmount": 0.75,
+          "QuantityUnit": "cup",
+          "GroupId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Cook lasagna noodles according to package directions. Drain and set aside",
+          "Group": "Preparation",
+          "GroupId": "dddddddd-dddd-dddd-dddd-dddddddddddd"
+        },
+        {
+          "Text": "In a large skillet, cook ground beef, Italian sausage, and onion over medium heat until meat is browned",
+          "Group": "Meat Sauce",
+          "GroupId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
+        },
+        {
+          "Text": "Add garlic and cook for 1 minute until fragrant",
+          "Group": "Meat Sauce",
+          "GroupId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
+        },
+        {
+          "Text": "Stir in crushed tomatoes, tomato paste, basil, and oregano. Simmer for 30 minutes",
+          "Group": "Meat Sauce",
+          "GroupId": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee"
+        },
+        {
+          "Text": "In a bowl, mix ricotta cheese, egg, and parsley until well combined",
+          "Group": "Cheese Mixture",
+          "GroupId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+        },
+        {
+          "Text": "Preheat oven to 375�F (190�C)",
+          "Group": "Assembly",
+          "GroupId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "Text": "Spread 1 cup of meat sauce in the bottom of a 9x13 inch baking dish",
+          "Group": "Assembly",
+          "GroupId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "Text": "Layer 4 noodles over the sauce",
+          "Group": "Assembly",
+          "GroupId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "Text": "Spread 1/3 of the ricotta mixture over noodles",
+          "Group": "Assembly",
+          "GroupId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "Text": "Sprinkle with 1 cup mozzarella and 1/4 cup Parmesan",
+          "Group": "Assembly",
+          "GroupId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "Text": "Repeat layers twice more",
+          "Group": "Assembly",
+          "GroupId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "Text": "Top with remaining meat sauce and cheeses",
+          "Group": "Assembly",
+          "GroupId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "Text": "Cover with foil and bake for 25 minutes",
+          "Group": "Baking",
+          "GroupId": "aaaabbbb-cccc-dddd-eeee-ffff00001111"
+        },
+        {
+          "Text": "Remove foil and bake for an additional 25 minutes until cheese is golden and bubbly",
+          "Group": "Baking",
+          "GroupId": "aaaabbbb-cccc-dddd-eeee-ffff00001111"
+        },
+        {
+          "Text": "Let stand for 15 minutes before serving",
+          "Group": "Baking",
+          "GroupId": "aaaabbbb-cccc-dddd-eeee-ffff00001111"
+        }
+      ],
+      "NutritionInfo": {
+        "Calories": 520,
+        "Fat": 28.0,
+        "Carbohydrates": 35.0,
+        "Protein": 32.0
+      },
+      "Tags": [
+        "italian",
+        "pasta",
+        "main-course",
+        "comfort-food",
+        "family-friendly"
+      ],
+      "FurtherNotes": "Serves 8-10. Can be prepared ahead and refrigerated overnight before baking. Freezes well for up to 3 months."
+    },
+    {
+      "Id": "d4e5f6a7-b8c9-0123-def0-234567890123",
+      "Name": "Thai Chicken Curry",
+      "Description": "A fragrant and flavorful Thai-style curry with coconut milk",
+      "GroupId": "33333333-3333-3333-3333-333333333333",
+      "Ingredients": [
+        {
+          "Name": "Chicken breast, cubed",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "lbs",
+          "GroupId": null
+        },
+        {
+          "Name": "Coconut milk",
+          "QuantityAmount": 14,
+          "QuantityUnit": "oz",
+          "GroupId": null
+        },
+        {
+          "Name": "Red curry paste",
+          "QuantityAmount": 3,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Fish sauce",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Brown sugar",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Bell pepper, sliced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "Bamboo shoots",
+          "QuantityAmount": 8,
+          "QuantityUnit": "oz",
+          "GroupId": null
+        },
+        {
+          "Name": "Thai basil leaves",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Lime",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "Vegetable oil",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Heat oil in a large wok or skillet over medium-high heat",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Add curry paste and cook for 1 minute, stirring constantly",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Add chicken and cook until no longer pink, about 5-7 minutes",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Pour in coconut milk and bring to a simmer",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Stir in fish sauce and brown sugar",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Add bell pepper and bamboo shoots",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Simmer for 10 minutes until vegetables are tender",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Stir in Thai basil leaves",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Squeeze lime juice over curry",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Serve hot over jasmine rice",
+          "Group": null,
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": {
+        "Calories": 380,
+        "Fat": 22.0,
+        "Carbohydrates": 15.0,
+        "Protein": 28.0
+      },
+      "Tags": [
+        "thai",
+        "curry",
+        "asian",
+        "spicy",
+        "main-course"
+      ],
+      "FurtherNotes": "Serves 4. Adjust curry paste amount based on desired spice level. Can substitute chicken with tofu for vegetarian version."
+    },
+    {
+      "Id": "e5f6a7b8-c9d0-1234-ef01-345678901234",
+      "Name": "Breakfast Smoothie Bowl",
+      "Description": "A nutritious and colorful smoothie bowl topped with fresh fruits and granola",
+      "GroupId": "44444444-4444-4444-4444-444444444444",
+      "Ingredients": [
+        {
+          "Name": "Frozen mixed berries",
+          "QuantityAmount": 2,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        },
+        {
+          "Name": "Banana",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "Greek yogurt",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Almond milk",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Honey",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Fresh strawberries",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Granola",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "Chia seeds",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Coconut flakes",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Add frozen berries, banana, yogurt, almond milk, and honey to a blender",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Blend on high until smooth and thick (should be thicker than a regular smoothie)",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Pour into a bowl",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Slice fresh strawberries",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Arrange strawberries, granola, chia seeds, and coconut flakes on top",
+          "Group": null,
+          "GroupId": null
+        },
+        {
+          "Text": "Serve immediately",
+          "Group": null,
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": {
+        "Calories": 320,
+        "Fat": 8.0,
+        "Carbohydrates": 52.0,
+        "Protein": 12.0
+      },
+      "Tags": [
+        "breakfast",
+        "healthy",
+        "smoothie",
+        "vegetarian"
+      ],
+      "FurtherNotes": "Serves 1. Customize toppings based on preference. Can add protein powder for extra protein."
+    }
+  ],
+  "Groups": [
+    {
+      "Id": "33333333-3333-3333-3333-333333333333",
+      "Name": "Main Courses",
+      "SortOrder": 1,
+      "GroupType": 0
+    },
+    {
+      "Id": "44444444-4444-4444-4444-444444444444",
+      "Name": "Breakfast",
+      "SortOrder": 2,
+      "GroupType": 0
+    },
+    {
+      "Id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "Name": "Pasta",
+      "SortOrder": 1,
+      "GroupType": 1
+    },
+    {
+      "Id": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+      "Name": "Sauce",
+      "SortOrder": 2,
+      "GroupType": 1
+    },
+    {
+      "Id": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+      "Name": "Cheese Filling",
+      "SortOrder": 3,
+      "GroupType": 1
+    },
+    {
+      "Id": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+      "Name": "Preparation",
+      "SortOrder": 1,
+      "GroupType": 2
+    },
+    {
+      "Id": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+      "Name": "Meat Sauce",
+      "SortOrder": 2,
+      "GroupType": 2
+    },
+    {
+      "Id": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+      "Name": "Cheese Mixture",
+      "SortOrder": 3,
+      "GroupType": 2
+    },
+    {
+      "Id": "00000000-0000-0000-0000-000000000000",
+      "Name": "Assembly",
+      "SortOrder": 4,
+      "GroupType": 2
+    },
+    {
+      "Id": "aaaabbbb-cccc-dddd-eeee-ffff00001111",
+      "Name": "Baking",
+      "SortOrder": 5,
+      "GroupType": 2
+    }
+  ]
+}

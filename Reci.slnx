@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Reci.csproj" />
+  <Project Path="Tests/Tests.csproj" Id="60efc6c1-cf7b-4bc7-9178-04b55b145d1a" />
+</Solution>

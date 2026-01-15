@@ -1,0 +1,75 @@
+﻿
+@inject IDialogService DialogService
+@inject IRecipeService RecipeService
+
+
+<div class="navmenu">
+    <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
+    <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
+    <nav class="sitenav" aria-labelledby="main-menu">
+        <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
+             <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.BookOpen())" IconColor="Color.Accent">Contents</FluentNavLink>
+            
+             @foreach (GroupVM<RecipeSummaryVM> recipeGroup in RecipeSummaryVMs)
+            {
+                @if (recipeGroup.Id != null)
+                {
+                    <FluentNavGroup Title="@recipeGroup.Name"
+                                    Icon="@(new Icons.Regular.Size20.FolderOpen())"
+                                    Href="@($"/group/{recipeGroup.Id}")">
+                        @RenderRecipes(recipeGroup)
+                    </FluentNavGroup>
+                }
+                else
+                {
+                    @RenderRecipes(recipeGroup)
+                }
+            }
+         
+            <FluentDivider Style="margin: 10px 0;"></FluentDivider>
+
+            <FluentNavLink Icon="@(new Icons.Regular.Size20.Add())"
+                           OnClick="AddNewRecipe">
+                Add New Recipe
+            </FluentNavLink>
+         
+         </FluentNavMenu>
+    </nav>
+</div>
+
+@code {
+    private bool expanded = true;
+    private IDialogReference? _dialog;
+
+    private List<GroupVM<RecipeSummaryVM>> RecipeSummaryVMs = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        RecipeSummaryVMs = await RecipeService.GetRecipeSummariesAsync();
+    }
+
+    private RenderFragment RenderRecipes(GroupVM<RecipeSummaryVM> recipeGroup) => __builder =>
+    {
+        @foreach (var recipe in recipeGroup)
+        {
+            <FluentNavLink Href="@($"/recipe/{recipe.Id}")"
+                           Icon="@(new Icons.Regular.Size20.Food())">
+                @recipe.Name
+            </FluentNavLink>
+        }
+    };
+
+    private async Task AddNewRecipe()
+    {
+        _dialog = await DialogService.ShowPanelAsync<RecipeEditor>(new DialogParameters()
+        {
+            Alignment = HorizontalAlignment.Left,
+            Title = "New Recipe",
+            PrimaryAction = "Save",
+            ShowDismiss = false,
+            Width = "var(--panel-width, 60%)",
+            PreventDismissOnOverlayClick = true,
+        });
+        DialogResult result = await _dialog.Result;
+    }
+}

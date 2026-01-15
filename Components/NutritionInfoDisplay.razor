@@ -1,0 +1,50 @@
+@if (NutritionInfo is not null && HasNutritionData())
+{
+    <div class="recipe-section nutrition-section">
+        <h2>
+            <FluentIcon Value="@(new Icons.Regular.Size20.DataPie())" />
+            Nutrition Information
+        </h2>
+        <div class="nutrition-grid">
+            @if (NutritionInfo.Calories.HasValue)
+            {
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Calories</span>
+                    <span class="nutrition-value">@NutritionInfo.Calories</span>
+                </div>
+            }
+            @if (NutritionInfo.Protein.HasValue)
+            {
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Protein</span>
+                    <span class="nutrition-value">@NutritionInfo.Protein.Value.ToString("0.#")g</span>
+                </div>
+            }
+            @if (NutritionInfo.Carbohydrates.HasValue)
+            {
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Carbohydrates</span>
+                    <span class="nutrition-value">@NutritionInfo.Carbohydrates.Value.ToString("0.#")g</span>
+                </div>
+            }
+            @if (NutritionInfo.Fat.HasValue)
+            {
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Fat</span>
+                    <span class="nutrition-value">@NutritionInfo.Fat.Value.ToString("0.#")g</span>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public NutritionInfo? NutritionInfo { get; set; }
+
+    private bool HasNutritionData() => 
+        NutritionInfo?.Calories.HasValue == true
+    || NutritionInfo?.Protein.HasValue == true
+    || NutritionInfo?.Carbohydrates.HasValue == true
+    || NutritionInfo?.Fat.HasValue == true;
+}

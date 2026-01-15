@@ -1,0 +1,44 @@
+@if (Instructions.Any())
+{
+    <div class="recipe-section">
+        <h2>
+            <FluentIcon Value="@(new Icons.Regular.Size20.NumberSymbol())" />
+            Instructions
+        </h2>
+        
+        @foreach (GroupVM<Instruction> instructionGroup in Instructions)
+        {
+            int stepNumber = 1;
+            <div class="instruction-group">
+                @if (instructionGroup.Name is not null)
+                {
+                    <h3 class="instruction-group-name">@instructionGroup.Name</h3>
+                }
+
+                <ol class="instruction-list" start="@stepNumber">
+                    @foreach (Instruction instruction in instructionGroup)
+                    {
+                        <li class="instruction-item">@instruction.Text</li>
+                        stepNumber++;
+                    }
+                </ol>
+            </div>
+
+        }
+    </div>
+}
+else
+{
+    <div class="recipe-section">
+        <h2>
+            <FluentIcon Value="@(new Icons.Regular.Size20.NumberSymbol())" />
+            Instructions
+        </h2>
+        <p class="empty-message">No instructions provided.</p>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public List<GroupVM<Instruction>> Instructions { get; set; } = new();
+}

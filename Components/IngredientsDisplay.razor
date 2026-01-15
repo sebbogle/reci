@@ -1,0 +1,48 @@
+@if (Ingredients.Any())
+{
+    <div class="recipe-section">
+        <h2>
+            <FluentIcon Value="@(new Icons.Regular.Size20.List())" />
+            Ingredients
+        </h2>
+
+        @foreach(GroupVM<Ingredient> ingredientGroup in Ingredients)
+        {
+            <div class="ingredient-group">
+                @if (ingredientGroup.Name is not null)
+                {
+                    <h3 class="ingredient-group-name">@ingredientGroup.Name</h3>
+                }
+
+                <ul class="ingredient-list">
+                    @foreach (Ingredient ingredient in ingredientGroup)
+                    {
+                        <li class="ingredient-item">
+                            <strong>@FormatQuantity(ingredient.QuantityAmount) @ingredient.QuantityUnit</strong> @ingredient.Name
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="recipe-section">
+        <h2>
+            <FluentIcon Value="@(new Icons.Regular.Size20.List())" />
+            Ingredients
+        </h2>
+        <p class="empty-message">No ingredients listed.</p>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public List<GroupVM<Ingredient>> Ingredients { get; set; } = new();
+
+    private string FormatQuantity(decimal quantity)
+    {
+        return quantity.ToString("0.###");
+    }
+}
