@@ -93,8 +93,8 @@ else
 
     private void NavigateToHome()
     {
-        var currentPath = new Uri(NavigationManager.Uri).AbsolutePath;
-        if (currentPath != "/")
+        var currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        if (!string.IsNullOrEmpty(currentPath))
         {
             NavigationManager.NavigateTo("/");
         }
