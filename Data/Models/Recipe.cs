@@ -33,8 +33,8 @@ public static class RecipeExtensions
             && string.IsNullOrEmpty(recipe.Name)
             && string.IsNullOrEmpty(recipe.Description)
             && recipe.GroupId is null
-            && recipe.Ingredients.Count == 0
-            && recipe.Instructions.Count == 0
+            && !recipe.Ingredients.Any(ingredient => !ingredient.IsEmpty())
+            && !recipe.Instructions.Any(instruction => !instruction.IsEmpty())
             && recipe.NutritionInfo.IsEmpty()
             && recipe.Tags.Count == 0
             && string.IsNullOrEmpty(recipe.FurtherNotes);

@@ -5,47 +5,55 @@
 @inject IToastService ToastService
 
 <FluentDialogBody>
-    <EditForm Model="@Content" Context="editContext" style="display: flex; flex-direction: column; gap: 16px;">
+<EditForm Model="@Content" Context="editContext" style="overflow-x: hidden; padding-right: 12px;">
         <FluentValidationSummary />
 
         @* Basic Information Section *@
-        <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
-            <FluentStack Orientation="Orientation.Horizontal" 
-                         HorizontalGap="16" 
-                         Wrap="true"
-                         Style="align-items: flex-start;">
-                <FluentTextField @bind-Value="Content.Name" 
-                               Label="Name" 
-                               Required
-                               Autofocus 
-                               Style="flex: 1; min-width: 300px;" />
-
-                <FluentStack Orientation="Orientation.Horizontal" 
-                             HorizontalGap="8"
-                             Style="flex: 1; min-width: 250px; align-items: flex-end;">
-                    <FluentCombobox TOption="Group"
+        <FluentGrid Spacing="1" Style="margin-bottom: 12px">
+            <FluentGridItem xs="12" sm="6" md="6" lg="6">
+                <FluentTextField @bind-Value="Content.Name"
+                                 Required
+                                 Autofocus
+                                 Style="width: 100%;">
+                    <LabelTemplate>
+                        <FluentLabel Typo="Typography.Subject">Name</FluentLabel>
+                    </LabelTemplate>
+                </FluentTextField>
+             </FluentGridItem>
+            <FluentGridItem xs="12" sm="6" md="6" lg="6">
+                <div style="display: flex; gap: 8px;">
+                    <div style="flex: 1;">
+                        <FluentCombobox TOption="Group"
                                     @bind-Value="newGroupName"
                                     @bind-SelectedOption="Content.Group"
-                                    Label="Group"
                                     Items="@RecipeGroups"
                                     OptionText="@(g => g?.Name ?? "Ungrouped")"
                                     Placeholder="Select or type to create..."
-                                    Style="flex: 1;" />
-                    
+                                    Style="width: 100%; min-width: 0"> 
+                            <LabelTemplate>
+                                <FluentLabel Typo="Typography.Subject">Group</FluentLabel>
+                            </LabelTemplate>
+                        </FluentCombobox>
+                    </div>
                     <FluentButton Appearance="Appearance.Outline"
-                                  OnClick="AddNewGroup"
-                                  Title="Add new group"
-                                  Style="margin-bottom: 2px;">
+                              OnClick="AddNewGroup"
+                              Title="Add new group"
+                              Disabled="Content.Group is not null"
+                              Style="align-self: flex-end;">
                         Add
                     </FluentButton>
-                </FluentStack>
-            </FluentStack>
+                </div>
+            </FluentGridItem>
+        </FluentGrid>
 
-            <FluentTextArea @bind-Value="Content.Description" 
-                          Label="Description" 
-                          Rows="3"
-                          Style="width: 100%;" />
-        </FluentStack>
+        @* Description Section *@
+        <FluentTextArea @bind-Value="Content.Description"
+                        Rows="3"
+                        Style="width: 100%; margin-bottom: 12px">
+            <LabelTemplate>
+                <FluentLabel Typo="Typography.Subject">Description</FluentLabel>
+            </LabelTemplate>
+        </FluentTextArea>
 
         @* Ingredients Section *@
         <GroupedEditor TItem="Ingredient"
@@ -95,25 +103,26 @@
         </GroupedEditor>
 
         @* Tags Section *@
-        <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="8" Style="margin-bottom: 12px">
             <FluentLabel Typo="Typography.Subject">Tags</FluentLabel>
-            <FluentStack Orientation="Orientation.Horizontal" Wrap="true" HorizontalGap="8">
-                @foreach (string? tag in Content.Tags)
-                {
-                    <FluentBadge Appearance="Appearance.Accent">
-                        @tag
-                        <FluentButton IconEnd="@(new Icons.Regular.Size16.Dismiss())"
-                                      Appearance="Appearance.Lightweight"
-                                      OnClick="@(() => RemoveTag(tag))" />
-                    </FluentBadge>
-                }
-            </FluentStack>
+            @if (Content.Tags?.Any() == true)
+            {
+                <FluentStack Orientation="Orientation.Horizontal" Wrap="true" HorizontalGap="8">
+                    @foreach (string? tag in Content.Tags)
+                    {
+                        <FluentBadge Appearance="Appearance.Accent" 
+                                     DismissIcon="@(new Icons.Regular.Size12.Dismiss().WithColor("white"))"
+                                     OnDismissClick="@(() => RemoveTag(tag))">
+                            @tag
+                        </FluentBadge>
+                    }
+                </FluentStack>                
+            }
 
             <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="8">
                 <FluentTextField @bind-Value="newTag"
                                  Placeholder="Add a tag..."
-                                 Style="flex: 1;"
-                                 @onkeydown="HandleTagKeyPress" />
+                                 Style="flex: 1;" />
                 <FluentButton Appearance="Appearance.Outline"
                               OnClick="AddTag">
                     Add
@@ -122,46 +131,60 @@
         </FluentStack>
         
         @* Nutrition Information Section *@
-        <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="16">
-            <FluentLabel Typo="Typography.Subject">Nutrition</FluentLabel>
-            <FluentNumberField @bind-Value="nutritionCalories"
-                               Label="Calories (kcal)"
-                               Min="0" />
-
-            <FluentNumberField @bind-Value="nutritionProtein"
-                               Label="Protein (g)"
-                               Min="0"
-                               Step="0.1m" />
-
-            <FluentNumberField @bind-Value="nutritionCarbs"
-                               Label="Carbohydrates (g)"
-                               Min="0"
-                               Step="0.1m"/>
-
-            <FluentNumberField @bind-Value="nutritionFat"
-                               Label="Fat (g)"
-                               Min="0"
-                               Step="0.1m" />
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="2" Style="margin-bottom: 12px">
+            <FluentLabel Typo="Typography.Subject">Nutrition Information</FluentLabel>
+            <FluentGrid Spacing="1">
+                <FluentGridItem xs="6" sm="6" md="3">
+                    <FluentNumberField @bind-Value="nutritionCalories"
+                                       Label="Calories (kcal)"
+                                       Min="0"
+                                       Style="width: 100%;" />
+                </FluentGridItem>
+                <FluentGridItem xs="6" sm="6" md="3">
+                    <FluentNumberField @bind-Value="nutritionProtein"
+                                       Label="Protein (g)"
+                                       Min="0"
+                                       Step="0.1m"
+                                       Style="width: 100%;" />
+                </FluentGridItem>
+                <FluentGridItem xs="6" sm="6" md="3">
+                    <FluentNumberField @bind-Value="nutritionCarbs"
+                                       Label="Carbs (g)"
+                                       Min="0"
+                                       Step="0.1m"
+                                       Style="width: 100%;" />
+                </FluentGridItem>
+                <FluentGridItem xs="6" sm="6" md="3">
+                    <FluentNumberField @bind-Value="nutritionFat"
+                                       Label="Fat (g)"
+                                       Min="0"
+                                       Step="0.1m"
+                                       Style="width: 100%;" />
+                </FluentGridItem>
+            </FluentGrid>
         </FluentStack>
 
         @* Further Notes Section *@
         <FluentTextArea @bind-Value="Content.FurtherNotes"
-                        Label="Further Notes"
                         Placeholder="Any additional notes or comments..."
                         Rows="5"
-                        Style="width: 100%;" />
+                        Style="width: 100%;">
+            <LabelTemplate>
+                <FluentLabel Typo="Typography.Subject">Further Notes</FluentLabel>
+            </LabelTemplate>
+        </FluentTextArea>
     </EditForm>
 </FluentDialogBody>
 
 <FluentDialogFooter>
-    @if (Content.Id != Guid.Empty)
+    @if (Content.Id is not null && Content.Id != Guid.Empty)
     {
         <FluentButton Appearance="Appearance.Accent"
-                      Style="margin-right: auto; background-color: var(--error, #d13438); color: white;"
                       OnClick="OnDeleteClick">
             Delete Recipe
         </FluentButton>
     }
+    <FluentSpacer />
 
     <FluentButton Appearance="Appearance.Neutral"
                   OnClick="OnCancelClick">
@@ -261,12 +284,27 @@
 
     private async Task OnCancelClick()
     {
-        bool recipeModified = await RecipeService.IsRecipeModifiedAsync(Content);
+        bool isNewRecipe = Content.Id == null || Content.Id == Guid.Empty;
 
-        if (!recipeModified && Dialog is not null)
+        if (isNewRecipe)
         {
-            await Dialog.CancelAsync();
-            return;
+            bool recipeEmpty = RecipeService.IsRecipeEmpty(Content);
+
+            if (recipeEmpty && Dialog is not null)
+            {
+                await Dialog.CancelAsync();
+                return;
+            }
+        }
+        else
+        {
+            bool recipeModified = await RecipeService.IsRecipeModifiedAsync(Content);
+
+            if (!recipeModified && Dialog is not null)
+            {
+                await Dialog.CancelAsync();
+                return;
+            }
         }
 
         IDialogReference dialog = await DialogService.ShowConfirmationAsync(CancelEditConfirmationText, title: "Discard Changes");
@@ -360,15 +398,6 @@
     private void RemoveTag(string tag)
     {
         Content.Tags.Remove(tag);
-    }
-
-    private async Task HandleTagKeyPress(KeyboardEventArgs e)
-    {
-        if (e.Key == "Enter")
-        {
-            AddTag();
-            await Task.CompletedTask;
-        }
     }
 
     private void AddNewGroup()
