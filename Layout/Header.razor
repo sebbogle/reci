@@ -51,7 +51,7 @@
 
     private void NavigateToHome()
     {
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/", replace: true);
     }
 
     private async Task OnDownloadClick()
