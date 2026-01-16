@@ -93,7 +93,11 @@ else
 
     private void NavigateToHome()
     {
-        NavigationManager.NavigateTo("/", replace: true);
+        var currentPath = new Uri(NavigationManager.Uri).AbsolutePath;
+        if (currentPath != "/")
+        {
+            NavigationManager.NavigateTo("/");
+        }
     }
 
     private async Task OpenRecipeEditor()
