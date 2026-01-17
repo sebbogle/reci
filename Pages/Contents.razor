@@ -1,6 +1,8 @@
 ﻿@page "/"
 @page "/group/{groupId:guid}"
+@implements IDisposable
 @inject IRecipeService RecipeService
+@inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
 @using Reci.Services.Interfaces
 
@@ -64,6 +66,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
         await LoadRecipes();
     }
 
@@ -83,6 +86,17 @@ else
         {
             isLoading = false;
         }
+    }
+
+    private async void OnRecipesChanged()
+    {
+        await LoadRecipes();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
     }
 
     private void FilterRecipes()
