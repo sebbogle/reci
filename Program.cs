@@ -23,5 +23,6 @@ builder.Services.AddScoped<IScreenWakeLockService, ScreenWakeLockService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IGroupingService, GroupingService>();
 builder.Services.AddScoped<IDataTransferService, DataTransferService>();
+builder.Services.AddScoped<IRecipeStateNotifier, RecipeStateNotifier>();
 
 await builder.Build().RunAsync();

@@ -1,5 +1,7 @@
 ﻿@page "/Recipe/{RecipeSlug?}"
+@implements IDisposable
 @inject IRecipeService RecipeService
+@inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
 @inject IDialogService DialogService
 
@@ -81,7 +83,17 @@ else
     private bool isLoading = true;
     private IDialogReference? _dialog;
 
+    protected override async Task OnInitializedAsync()
+    {
+        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+    }
+
     protected override async Task OnParametersSetAsync()
+    {
+        await LoadRecipeAsync();
+    }
+
+    private async Task LoadRecipeAsync()
     {
         isLoading = true;
         
@@ -89,6 +101,17 @@ else
         Recipe = success ? await RecipeService.GetRecipeAsync(recipeId) : null;
         
         isLoading = false;
+    }
+
+    private async void OnRecipesChanged()
+    {
+        await LoadRecipeAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
     }
 
     private void NavigateToHome()
@@ -116,11 +139,5 @@ else
         });
 
         DialogResult result = await _dialog.Result;
-
-        if (!result.Cancelled && result.Data is RecipeVM updatedRecipe)
-        {
-            Recipe = await RecipeService.GetRecipeAsync((Guid)Recipe.Id);
-            StateHasChanged();
-        }
     }
 }

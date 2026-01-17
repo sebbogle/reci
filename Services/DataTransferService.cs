@@ -1,10 +1,11 @@
 ﻿namespace Reci.Services;
 
-public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository, ISettingsRepository settingsRepository) : IDataTransferService
+public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository, ISettingsRepository settingsRepository, IRecipeStateNotifier recipeStateNotifier) : IDataTransferService
 {
     private readonly IRecipeRepository _recipeRepository = recipeRepository.ThrowIfNull();
     private readonly IGroupingRepository _groupingRepository = groupingRepository.ThrowIfNull();
     private readonly ISettingsRepository _settingsRepository = settingsRepository.ThrowIfNull();
+    private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier.ThrowIfNull();
 
     public async Task<ReciFile?> ExportReciDefinitionAsync(CancellationToken cancellationToken = default)
     {
@@ -41,6 +42,8 @@ public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRe
         {
             await _settingsRepository.SaveSettingsAsync(reciFile.Settings, cancellationToken);
         }
+
+        _recipeStateNotifier.NotifyRecipesChanged();
 
         return Result.Success();
     }
