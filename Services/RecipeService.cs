@@ -82,4 +82,13 @@ public class RecipeService(IRecipeRepository recipeRepository, IGroupingReposito
 
         return !currentRecipe.IsEqualTo(originalRecipe);
     }
+
+    public bool IsRecipeEmpty(RecipeVM recipeVM)
+    {
+        ArgumentNullException.ThrowIfNull(recipeVM);
+
+        Recipe recipe = recipeVM.ToModel();
+
+        return recipe.IsEmpty();
+    }
 }
