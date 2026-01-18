@@ -1,6 +1,8 @@
 ﻿
+@implements IDisposable
 @inject IDialogService DialogService
 @inject IRecipeService RecipeService
+@inject IRecipeStateNotifier RecipeStateNotifier
 
 
 <div class="navmenu">
@@ -45,7 +47,24 @@
 
     protected override async Task OnInitializedAsync()
     {
+        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+        await LoadRecipesAsync();
+    }
+
+    private async Task LoadRecipesAsync()
+    {
         RecipeSummaryVMs = await RecipeService.GetRecipeSummariesAsync();
+    }
+
+    private async void OnRecipesChanged()
+    {
+        await LoadRecipesAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
     }
 
     private RenderFragment RenderRecipes(GroupVM<RecipeSummaryVM> recipeGroup) => __builder =>
@@ -67,7 +86,7 @@
             Title = "New Recipe",
             PrimaryAction = "Save",
             ShowDismiss = false,
-            Width = "var(--panel-width, 60%)",
+            Width = "var(--panel-width, 950px)",
             PreventDismissOnOverlayClick = true,
         });
         DialogResult result = await _dialog.Result;

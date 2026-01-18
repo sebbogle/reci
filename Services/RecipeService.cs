@@ -1,9 +1,10 @@
 ﻿namespace Reci.Services;
 
-public class RecipeService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository) : IRecipeService
+public class RecipeService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository, IRecipeStateNotifier recipeStateNotifier) : IRecipeService
 {
     private readonly IRecipeRepository _recipeRepository = recipeRepository ?? throw new ArgumentNullException(nameof(recipeRepository));
     private readonly IGroupingRepository _groupingRepository = groupingRepository ?? throw new ArgumentNullException(nameof(groupingRepository));
+    private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier ?? throw new ArgumentNullException(nameof(recipeStateNotifier));
 
     public async Task<List<GroupVM<RecipeSummaryVM>>> GetRecipeSummariesAsync(CancellationToken cancellationToken = default)
     {
@@ -31,19 +32,34 @@ public class RecipeService(IRecipeRepository recipeRepository, IGroupingReposito
         
         Recipe recipe = recipeVM.ToModel();
         
+        Result result;
         if (recipe.Id == Guid.Empty)
         {
-            return await _recipeRepository.CreateRecipeAsync(recipe, cancellationToken);
+            result = await _recipeRepository.CreateRecipeAsync(recipe, cancellationToken);
         }
         else
         {
-            return await _recipeRepository.UpdateRecipeAsync(recipe, cancellationToken);
+            result = await _recipeRepository.UpdateRecipeAsync(recipe, cancellationToken);
         }
+
+        if (result.IsSuccess)
+        {
+            _recipeStateNotifier.NotifyRecipesChanged();
+        }
+
+        return result;
     }
 
     public async Task<Result> DeleteRecipeAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _recipeRepository.DeleteRecipeAsync(id, cancellationToken);
+        Result result = await _recipeRepository.DeleteRecipeAsync(id, cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            _recipeStateNotifier.NotifyRecipesChanged();
+        }
+
+        return result;
     }
 
     public async Task<bool> IsRecipeModifiedAsync(RecipeVM recipeVM, CancellationToken cancellationToken = default)
@@ -65,5 +81,14 @@ public class RecipeService(IRecipeRepository recipeRepository, IGroupingReposito
         Recipe currentRecipe = recipeVM.ToModel();
 
         return !currentRecipe.IsEqualTo(originalRecipe);
+    }
+
+    public bool IsRecipeEmpty(RecipeVM recipeVM)
+    {
+        ArgumentNullException.ThrowIfNull(recipeVM);
+
+        Recipe recipe = recipeVM.ToModel();
+
+        return recipe.IsEmpty();
     }
 }

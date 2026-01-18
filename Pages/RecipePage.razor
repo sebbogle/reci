@@ -1,5 +1,7 @@
 ﻿@page "/Recipe/{RecipeSlug?}"
+@implements IDisposable
 @inject IRecipeService RecipeService
+@inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
 @inject IDialogService DialogService
 
@@ -81,7 +83,17 @@ else
     private bool isLoading = true;
     private IDialogReference? _dialog;
 
+    protected override async Task OnInitializedAsync()
+    {
+        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+    }
+
     protected override async Task OnParametersSetAsync()
+    {
+        await LoadRecipeAsync();
+    }
+
+    private async Task LoadRecipeAsync()
     {
         isLoading = true;
         
@@ -91,9 +103,24 @@ else
         isLoading = false;
     }
 
+    private async void OnRecipesChanged()
+    {
+        await LoadRecipeAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
+    }
+
     private void NavigateToHome()
     {
-        NavigationManager.NavigateTo("/");
+        var currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        if (!string.IsNullOrEmpty(currentPath))
+        {
+            NavigationManager.NavigateTo("/");
+        }
     }
 
     private async Task OpenRecipeEditor()
@@ -107,16 +134,10 @@ else
             PrimaryAction = "Save",
             SecondaryAction = "Cancel",
             ShowDismiss = false,
-            Width = "var(--panel-width, 60%)",
+            Width = "var(--panel-width, 950px)",
             PreventDismissOnOverlayClick = true,
         });
 
         DialogResult result = await _dialog.Result;
-
-        if (!result.Cancelled && result.Data is RecipeVM updatedRecipe)
-        {
-            Recipe = await RecipeService.GetRecipeAsync((Guid)Recipe.Id);
-            StateHasChanged();
-        }
     }
 }

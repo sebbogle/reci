@@ -1,6 +1,6 @@
 ﻿@typeparam TItem
 
-<FluentStack Orientation="Orientation.Vertical" VerticalGap="12">
+<FluentStack Orientation="Orientation.Vertical" VerticalGap="12" Style="margin-bottom: 12px">
     <FluentLabel Typo="Typography.Subject">@Title</FluentLabel>
 
     @foreach (TItem item in UngroupedItems)
@@ -11,7 +11,7 @@
                      VerticalAlignment="VerticalAlignment.Top">
 
             <FluentLabel Style="min-width: 15px; font-weight: bold; padding-top: 8px;">
-                @(itemIndex + 1)
+                @(itemIndex + 1).
             </FluentLabel>
 
             @if (ItemTemplate != null)
@@ -48,8 +48,7 @@
                                          VerticalAlignment="VerticalAlignment.Center">
                                 @if (state.IsEditingName)
                                 {
-                                    <FluentTextField @bind-Value="state.NewName"
-                                                     />
+                                    <FluentTextField @bind-Value="state.NewName" />
                                 }
                                 else
                                 {

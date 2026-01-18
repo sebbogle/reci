@@ -286,24 +286,12 @@ code {
 }
 
 :root {
-    --panel-width: 60%;
+    --panel-width: 950px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 950px) {
     :root {
         --panel-width: 100% !important;
-    }
-}
-
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    :root {
-        --panel-width: 85% !important;
-    }
-}
-
-@media screen and (min-width: 1025px) and (max-width: 1440px) {
-    :root {
-        --panel-width: 70% !important;
     }
 }
 
