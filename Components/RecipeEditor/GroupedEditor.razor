@@ -29,26 +29,27 @@
 
     @if (ActualGroups.Any())
     {
-        <FluentAccordion ExpandMode="AccordionExpandMode.Multi" Style="width: 100%">
+        <div class="custom-accordion" style="width: 100%;">
             @foreach (GroupVM<TItem> group in ActualGroups)
             {
                 groupedViewState.TryGetValue(group.Id ?? Guid.Empty, out GroupedViewState? state);
                 if (state is null) state = GroupedViewState.Default;
 
                 int itemNumber = 1;
-                <FluentAccordionItem Expanded="state.IsExpanded" ExpandedChanged="@(() => OnAccordionExpandChange(state))">
-                    <HeadingTemplate>
-                        <div @onclick:stopPropagation="true">
+                <div class="custom-accordion-item">
+                    <div class="custom-accordion-header">
                         <FluentStack Orientation="Orientation.Horizontal" 
                                      HorizontalAlignment="HorizontalAlignment.Left" 
                                      VerticalAlignment="VerticalAlignment.Center"
                                      Style="width: 100%; justify-content: space-between;">
                             <FluentStack Orientation="Orientation.Horizontal" 
                                          HorizontalGap="8" 
-                                         VerticalAlignment="VerticalAlignment.Center">
+                                         VerticalAlignment="VerticalAlignment.Center"
+                                         @onclick="@(() => OnAccordionExpandChange(state))"
+                                         Style="flex: 1; cursor: pointer;">
                                 @if (state.IsEditingName)
                                 {
-                                    <FluentTextField @bind-Value="state.NewName" />
+                                    <FluentTextField @bind-Value="state.NewName" @onclick:stopPropagation="true" />
                                 }
                                 else
                                 {
@@ -65,8 +66,7 @@
                             
                             <FluentStack Orientation="Orientation.Horizontal"
                                          HorizontalAlignment="HorizontalAlignment.Right" 
-                                         HorizontalGap="4"
-                                         @onclick:stopPropagation="true">
+                                         HorizontalGap="4">
                                 @if (state.IsEditingName)
                                 {
                                     <FluentButton IconEnd="@(new Icons.Regular.Size16.Checkmark())"
@@ -89,45 +89,52 @@
                                                   Title="Delete group"
                                                   OnClick="@(() => RemoveGroup(group))" />
                                 }
+                                <div class="accordion-chevron @(state.IsExpanded ? "expanded" : "")"
+                                     @onclick="@(() => OnAccordionExpandChange(state))"
+                                     style="cursor: pointer; display: flex; align-items: center; margin-left: 8px;">
+                                    <FluentIcon Value="@(new Icons.Regular.Size20.ChevronDown())" />
+                                </div>
                             </FluentStack>
-                            </FluentStack>
-                        </div>
-                    </HeadingTemplate>
-                    <ChildContent>
-                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="8" Style="padding: 8px 0;">
-                        @foreach (TItem item in group)
-                        {
-                            int currentNumber = itemNumber++;
-                            <FluentStack Orientation="Orientation.Horizontal"
-                                         HorizontalGap="8"
-                                         VerticalAlignment="VerticalAlignment.Top">
-
-                                <FluentLabel Style="min-width: 15px; font-weight: bold; padding-top: 8px;">
-                                    @currentNumber.
-                                </FluentLabel>
-
-                                @if (ItemTemplate != null)
+                        </FluentStack>
+                    </div>
+                    @if (state.IsExpanded)
+                    {
+                        <div class="custom-accordion-content">
+                            <FluentStack Orientation="Orientation.Vertical" VerticalGap="8" Style="padding: 8px 0;">
+                                @foreach (TItem item in group)
                                 {
-                                    @ItemTemplate(item)
+                                    int currentNumber = itemNumber++;
+                                    <FluentStack Orientation="Orientation.Horizontal"
+                                                 HorizontalGap="8"
+                                                 VerticalAlignment="VerticalAlignment.Top">
+
+                                        <FluentLabel Style="min-width: 15px; font-weight: bold; padding-top: 8px;">
+                                            @currentNumber.
+                                        </FluentLabel>
+
+                                        @if (ItemTemplate != null)
+                                        {
+                                            @ItemTemplate(item)
+                                        }
+
+                                        <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
+                                                      Appearance="Appearance.Lightweight"
+                                                      Title="@RemoveItemTitle"
+                                                      OnClick="@(() => RemoveItemFromGroup(group, item))" />
+                                    </FluentStack>
                                 }
 
-                                <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
-                                              Appearance="Appearance.Lightweight"
-                                              Title="@RemoveItemTitle"
-                                              OnClick="@(() => RemoveItemFromGroup(group, item))" />
+                                <FluentButton Appearance="Appearance.Stealth"
+                                              IconStart="@(new Icons.Regular.Size16.Add())"
+                                              OnClick="@(() => AddItemToGroup(group))">
+                                    @AddItemButtonText
+                                </FluentButton>
                             </FluentStack>
-                        }
-
-                        <FluentButton Appearance="Appearance.Stealth"
-                                      IconStart="@(new Icons.Regular.Size16.Add())"
-                                      OnClick="@(() => AddItemToGroup(group))">
-                            @AddItemButtonText
-                        </FluentButton>
-                        </FluentStack>
-                    </ChildContent>
-                </FluentAccordionItem>
+                        </div>
+                    }
+                </div>
             }
-        </FluentAccordion>
+        </div>
     }
 
     <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="8">
