@@ -44,5 +44,4 @@
     <Using Include="Reci.Services.Interfaces" />
     <Using Include="Reci.ViewModels" />
   </ItemGroup>
-
 </Project>

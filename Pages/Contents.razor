@@ -4,7 +4,6 @@
 @inject IRecipeService RecipeService
 @inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
-@using Reci.Services.Interfaces
 
 <PageTitle>@(selectedGroupName ?? "Contents")</PageTitle>
 
@@ -13,46 +12,63 @@
     <FluentProgressRing />
     <p>Loading recipes...</p>
 }
+else if (GroupId.HasValue && (filteredGroups is null || !filteredGroups.Any()))
+{
+    <ItemNotFound ItemTypeLabel="group" />
+}
 else if (filteredGroups is null || !filteredGroups.Any())
 {
-    <p>No recipes found. Start by adding your first recipe!</p>
+    <FluentStack Orientation="Orientation.Vertical"
+                 VerticalGap="15"
+                 HorizontalAlignment="HorizontalAlignment.Center"
+                 Style="margin-top: 50px;">
+        <FluentLabel Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">
+            No recipes found. Start by adding your first recipe!
+        </FluentLabel>
+    </FluentStack>
 }
 else
-{
-    @foreach (var group in filteredGroups.OrderBy(g => g.SortOrder))
-    {
-        <div class="recipe-group">
+{            
+    <FluentGrid Spacing="2" Justify="JustifyContent.FlexStart">
+        @foreach (GroupVM<RecipeSummaryVM> group in filteredGroups.OrderBy(g => g.SortOrder))
+        {
             @if (!string.IsNullOrEmpty(group.Name) && GroupId == null)
             {
-                <h2 class="group-heading">@group.Name</h2>
-                @* <FluentLabel Class="group-heading">@group.Name</FluentLabel> *@
+                <FluentGridItem xs="12">
+                    <FluentLabel Typo="Typography.H3">@group.Name</FluentLabel>
+                </FluentGridItem>
             }
-            
-            <FluentGrid Spacing="3" Justify="JustifyContent.FlexStart">
-                @foreach (var recipe in group)
-                {
-                    <FluentGridItem xs="12" sm="6" md="4" lg="3">
-                        <FluentCard class="recipe-card" @onclick="() => NavigateToRecipe(recipe.Id)">
-                            <h3>@recipe.Name</h3>
+
+            @foreach (RecipeSummaryVM recipe in group)
+            {
+                <FluentGridItem xs="12" sm="6" md="4" lg="3" @key="recipe.Id">
+                    <FluentCard class="recipe-card" MinimalStyle="true" @onclick="() => NavigateToRecipe(recipe.Id)">
+                        <FluentStack Orientation="Orientation.Vertical">
+                            <FluentLabel Typo="Typography.H5">@recipe.Name</FluentLabel>
+
                             @if (!string.IsNullOrEmpty(recipe.Description))
                             {
-                                <p class="recipe-description">@recipe.Description</p>
+                                <FluentLabel Id="@($"description-{recipe.Id}")" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Class="recipe-description">@recipe.Description</FluentLabel>
+                                <FluentTooltip Anchor="@($"description-{recipe.Id}")" Position="TooltipPosition.Bottom" Delay="500" MaxWidth="300px">
+                                    @recipe.Description
+                                </FluentTooltip>
                             }
                             @if (recipe.Tags.Any())
                             {
-                                <div class="recipe-tags">
-                                    @foreach (var tag in recipe.Tags)
+                                <FluentStack HorizontalGap="3" Wrap="true">
+                                    @foreach (string tag in recipe.Tags)
                                     {
                                         <FluentBadge Appearance="Appearance.Accent">@tag</FluentBadge>
                                     }
-                                </div>
+                                </FluentStack>
                             }
-                        </FluentCard>
-                    </FluentGridItem>
-                }
-            </FluentGrid>
-        </div>
-    }
+                        </FluentStack>
+                    </FluentCard>
+                </FluentGridItem>
+            }
+            <FluentGridItem xs="12" Style="margin-bottom: 10px;"></FluentGridItem>
+        }
+    </FluentGrid>
 }
 
 @code {

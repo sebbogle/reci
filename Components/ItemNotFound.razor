@@ -1,0 +1,31 @@
+﻿@inject NavigationManager NavigationManager
+
+<FluentStack Orientation="Orientation.Vertical" 
+             VerticalGap="15" 
+             HorizontalAlignment="HorizontalAlignment.Center"
+             Style="margin-top: 50px;">
+    <FluentLabel Typo="Typography.H5" Weight="FontWeight.Bold">
+        Could not find @ItemTypeLabel
+    </FluentLabel>
+    <FluentLabel Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">
+        The @ItemTypeLabel you're looking for doesn't exist or has been removed.
+    </FluentLabel>
+    <FluentButton Appearance="Appearance.Accent" @onclick="NavigateToHome">
+        Back to Contents
+    </FluentButton>
+</FluentStack>
+
+@code {
+
+    [Parameter]
+    public required string ItemTypeLabel { get; set; }
+
+    private void NavigateToHome()
+    {
+        var currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        if (!string.IsNullOrEmpty(currentPath))
+        {
+            NavigationManager.NavigateTo("/");
+        }
+    }
+}

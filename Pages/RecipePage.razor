@@ -14,15 +14,7 @@
 }
 else if (Recipe is null)
 {
-    <div class="recipe-not-found">
-        <FluentLabel Typo="Typography.H5" Weight="FontWeight.Bold">
-            Could not find recipe
-        </FluentLabel>
-        <p>The recipe you're looking for doesn't exist or has been removed.</p>
-        <FluentButton Appearance="Appearance.Accent" @onclick="NavigateToHome">
-            Back to Contents
-        </FluentButton>
-    </div>
+    <ItemNotFound ItemTypeLabel="recipe" />
 }
 else
 {
