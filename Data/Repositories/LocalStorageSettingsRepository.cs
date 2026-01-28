@@ -1,8 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Reci.Data.Models;
-using Reci.Data.Repositories.Interfaces;
-
-namespace Reci.Data.Repositories;
+﻿namespace Reci.Data.Repositories;
 
 public class LocalStorageSettingsRepository(ILocalStorageService localStorage, ILogger<LocalStorageSettingsRepository> logger) : ISettingsRepository
 {

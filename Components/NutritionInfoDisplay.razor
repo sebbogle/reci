@@ -1,41 +1,44 @@
 @if (NutritionInfo is not null && HasNutritionData())
 {
-    <div class="recipe-section nutrition-section">
-        <h2>
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="5">
             <FluentIcon Value="@(new Icons.Regular.Size20.DataPie())" />
-            Nutrition Information
-        </h2>
-        <div class="nutrition-grid">
-            @if (NutritionInfo.Calories.HasValue)
-            {
-                <div class="nutrition-item">
-                    <span class="nutrition-label">Calories</span>
-                    <span class="nutrition-value">@NutritionInfo.Calories</span>
-                </div>
-            }
-            @if (NutritionInfo.Protein.HasValue)
-            {
-                <div class="nutrition-item">
-                    <span class="nutrition-label">Protein</span>
-                    <span class="nutrition-value">@NutritionInfo.Protein.Value.ToString("0.#")g</span>
-                </div>
-            }
-            @if (NutritionInfo.Carbohydrates.HasValue)
-            {
-                <div class="nutrition-item">
-                    <span class="nutrition-label">Carbohydrates</span>
-                    <span class="nutrition-value">@NutritionInfo.Carbohydrates.Value.ToString("0.#")g</span>
-                </div>
-            }
-            @if (NutritionInfo.Fat.HasValue)
-            {
-                <div class="nutrition-item">
-                    <span class="nutrition-label">Fat</span>
-                    <span class="nutrition-value">@NutritionInfo.Fat.Value.ToString("0.#")g</span>
-                </div>
-            }
-        </div>
-    </div>
+            <FluentLabel Typo="Typography.H3">Nutrition Information</FluentLabel>
+        </FluentStack>
+
+        <FluentCard MinimalStyle="true">
+            <FluentStack Orientation="Orientation.Vertical" Wrap="true" HorizontalGap="5">
+                @if (NutritionInfo.Calories.HasValue)
+                {
+                    <FluentStack Orientation="Orientation.Horizontal">
+                        <FluentLabel Typo="Typography.H6" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">Calories</FluentLabel>
+                        <FluentLabel Typo="Typography.Body">@(NutritionInfo.Calories)kcal</FluentLabel>
+                    </FluentStack>
+                }
+                @if (NutritionInfo.Protein.HasValue)
+                {
+                    <FluentStack Orientation="Orientation.Horizontal">
+                        <FluentLabel Typo="Typography.H6" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">Protein</FluentLabel>
+                        <FluentLabel Typo="Typography.Body">@NutritionInfo.Protein.Value.ToString("0.#")g</FluentLabel>
+                    </FluentStack>
+                }
+                @if (NutritionInfo.Carbohydrates.HasValue)
+                {
+                    <FluentStack Orientation="Orientation.Horizontal">
+                        <FluentLabel Typo="Typography.H6" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">Carbohydrates</FluentLabel>
+                        <FluentLabel Typo="Typography.Body">@NutritionInfo.Carbohydrates.Value.ToString("0.#")g</FluentLabel>
+                    </FluentStack>
+                }
+                @if (NutritionInfo.Fat.HasValue)
+                {
+                    <FluentStack Orientation="Orientation.Horizontal">
+                        <FluentLabel Typo="Typography.H6" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">Fat</FluentLabel>
+                        <FluentLabel Typo="Typography.Body">@NutritionInfo.Fat.Value.ToString("0.#")g</FluentLabel>
+                    </FluentStack>
+                }
+            </FluentStack>
+        </FluentCard>
+    </FluentStack>
 }
 
 @code {
@@ -44,7 +47,7 @@
 
     private bool HasNutritionData() => 
         NutritionInfo?.Calories.HasValue == true
-    || NutritionInfo?.Protein.HasValue == true
-    || NutritionInfo?.Carbohydrates.HasValue == true
-    || NutritionInfo?.Fat.HasValue == true;
+        || NutritionInfo?.Protein.HasValue == true
+        || NutritionInfo?.Carbohydrates.HasValue == true
+        || NutritionInfo?.Fat.HasValue == true;
 }
