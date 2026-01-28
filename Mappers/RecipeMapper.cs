@@ -35,7 +35,8 @@ public static class RecipeMapper
             Instructions = instructionGroups,
             NutritionInfo = recipe.NutritionInfo,
             Tags = recipe.Tags,
-            FurtherNotes = recipe.FurtherNotes
+            FurtherNotes = recipe.FurtherNotes,
+            Source = recipe.Source
         };
     }
 
@@ -51,7 +52,8 @@ public static class RecipeMapper
             Instructions = recipeVM.Instructions.SelectMany(g => g).ToList(),
             NutritionInfo = recipeVM.NutritionInfo,
             Tags = recipeVM.Tags,
-            FurtherNotes = recipeVM.FurtherNotes
+            FurtherNotes = recipeVM.FurtherNotes,
+            Source = recipeVM.Source
         };
     }
 

@@ -22,10 +22,13 @@ else
         <div class="recipe-header">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
                 <h1 style="margin: 0;">@Recipe.Name</h1>
-                <FluentButton Appearance="Appearance.Accent" 
-                              IconEnd="@(new Icons.Regular.Size20.Edit())"
-                              OnClick="OpenRecipeEditor"
-                              Title="Edit recipe" />
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
+                    <FluentButton Appearance="Appearance.Accent" 
+                                  IconEnd="@(new Icons.Regular.Size20.Edit())"
+                                  OnClick="OpenRecipeEditor"
+                                  Title="Edit recipe" />
+                    <RecipeSourceDisplay Source="@Recipe.Source" />
+                </div>
             </div>
             
             @if (Recipe.Group is not null)

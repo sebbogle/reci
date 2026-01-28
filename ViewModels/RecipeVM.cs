@@ -19,4 +19,6 @@ public class RecipeVM
     public List<string> Tags { get; set; } = [];
 
     public string? FurtherNotes { get; set; }
+
+    public RecipeSource? Source { get; set; }
 }

@@ -1,0 +1,17 @@
+@if (Source is not null && !string.IsNullOrWhiteSpace(Source.Text))
+{
+    <div class="recipe-source">
+        <span class="recipe-source-text">@Source.Text</span>
+        @if (!string.IsNullOrWhiteSpace(Source.Url))
+        {
+            <a href="@Source.Url" target="_blank" rel="noopener noreferrer" title="Open source link" class="recipe-source-link">
+                <FluentIcon Value="@(new Icons.Regular.Size16.Open())" />
+            </a>
+        }
+    </div>
+}
+
+@code {
+    [Parameter]
+    public RecipeSource? Source { get; set; }
+}

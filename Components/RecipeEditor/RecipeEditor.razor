@@ -164,6 +164,31 @@
             </FluentGrid>
         </FluentStack>
 
+        @* Recipe Source Section *@
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="2" Style="margin-bottom: 12px">
+            <FluentLabel Typo="Typography.Subject">Recipe Source</FluentLabel>
+            <FluentGrid Spacing="1">
+                <FluentGridItem xs="12" sm="6">
+                    <FluentTextField @bind-Value="sourceText"
+                                     Placeholder="Source name (e.g., website name, cookbook title)"
+                                     Style="width: 100%;">
+                        <LabelTemplate>
+                            <FluentLabel>Source Text</FluentLabel>
+                        </LabelTemplate>
+                    </FluentTextField>
+                </FluentGridItem>
+                <FluentGridItem xs="12" sm="6">
+                    <FluentTextField @bind-Value="sourceUrl"
+                                     Placeholder="https://example.com/recipe"
+                                     Style="width: 100%;">
+                        <LabelTemplate>
+                            <FluentLabel>Source URL (optional)</FluentLabel>
+                        </LabelTemplate>
+                    </FluentTextField>
+                </FluentGridItem>
+            </FluentGrid>
+        </FluentStack>
+
         @* Further Notes Section *@
         <FluentTextArea @bind-Value="Content.FurtherNotes"
                         Placeholder="Any additional notes or comments..."
@@ -376,6 +401,27 @@
         }
     }
 
+    // Nullable helpers for RecipeSource binding
+    private string? sourceText
+    {
+        get => Content.Source?.Text;
+        set
+        {
+            EnsureRecipeSource();
+            Content.Source!.Text = value ?? string.Empty;
+        }
+    }
+
+    private string? sourceUrl
+    {
+        get => Content.Source?.Url;
+        set
+        {
+            EnsureRecipeSource();
+            Content.Source!.Url = value;
+        }
+    }
+
     protected override async Task OnInitializedAsync()
     {
         RecipeGroups = await GroupingService.GetGroupingsAsync(GroupType.Recipe);
@@ -384,6 +430,11 @@
     private void EnsureNutritionInfo()
     {
         Content.NutritionInfo ??= new NutritionInfo();
+    }
+
+    private void EnsureRecipeSource()
+    {
+        Content.Source ??= new RecipeSource();
     }
 
     private void AddTag()

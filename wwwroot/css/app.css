@@ -499,6 +499,30 @@ code {
     margin-bottom: 1rem;
 }
 
+/* Recipe Source Styles */
+.recipe-source {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--neutral-foreground-hint);
+}
+
+.recipe-source-text {
+    font-style: italic;
+}
+
+.recipe-source-link {
+    color: var(--accent-fill-rest);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.recipe-source-link:hover {
+    color: var(--accent-fill-hover);
+}
+
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .recipe-header h1 {
