@@ -73,8 +73,14 @@
     public void Dispose()
     {
         RecipeStateNotifier.OnRecipesChanged -= OnRecipesChangedAsync;
-        _cts?.Cancel();
-        _cts?.Dispose();
+        try
+        {
+            _cts?.Cancel();
+        }
+        finally
+        {
+            _cts?.Dispose();
+        }
     }
 
     private RenderFragment RenderRecipes(GroupVM<RecipeSummaryVM> recipeGroup) => __builder =>

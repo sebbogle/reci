@@ -13,7 +13,7 @@ public class RecipeStateNotifier : IRecipeStateNotifier
             foreach (Delegate del in delegates)
             {
                 Func<Task> func = (Func<Task>)del;
-                await func().ConfigureAwait(false);
+                await func();
             }
         }
     }
