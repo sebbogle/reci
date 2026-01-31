@@ -18,56 +18,86 @@ else if (Recipe is null)
 }
 else
 {
-    <div class="recipe-detail">
-        <div class="recipe-header">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-                <h1 style="margin: 0;">@Recipe.Name</h1>
-                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
-                    <FluentButton Appearance="Appearance.Accent" 
+    <FluentGrid Spacing="1" Justify="JustifyContent.FlexStart">
+        <FluentGridItem xs="12">
+            <FluentStack Orientation="Orientation.Horizontal">
+                <FluentLabel Typo="Typography.H1">@Recipe.Name</FluentLabel>
+                <FluentSpacer />
+                <FluentStack Orientation="Orientation.Vertical" HorizontalAlignment="HorizontalAlignment.End" VerticalGap="4">
+                    <FluentButton Appearance="Appearance.Accent"
                                   IconEnd="@(new Icons.Regular.Size20.Edit())"
                                   OnClick="OpenRecipeEditor"
                                   Title="Edit recipe" />
                     <RecipeSourceDisplay Source="@Recipe.Source" />
-                </div>
-            </div>
-            
-            @if (Recipe.Group is not null)
-            {
-                <div class="recipe-group-label">
-                    @Recipe.Group.Name
-                </div>
-            }
+                </FluentStack>
+            </FluentStack>
+        </FluentGridItem>
 
-            @if (Recipe.Tags.Any())
-            {
-                <div class="recipe-tags">
-                    @foreach (var tag in Recipe.Tags)
+        @if (Recipe.Group is not null)
+        {
+            <FluentGridItem xs="12">
+                <FluentLabel Typo="Typography.H5" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">@Recipe.Group.Name</FluentLabel>
+            </FluentGridItem>
+        }
+
+        @if (Recipe.Tags.Any())
+        {
+            <FluentGridItem xs="12">
+                <FluentStack HorizontalGap="3" Wrap="true">
+                    @foreach (string tag in Recipe.Tags)
                     {
                         <FluentBadge Appearance="Appearance.Accent">@tag</FluentBadge>
                     }
-                </div>
-            }
+                </FluentStack>
+            </FluentGridItem>
+        }
 
-            @if (!string.IsNullOrWhiteSpace(Recipe.Description))
-            {
-                <p class="recipe-description-detail">@Recipe.Description</p>
-            }
-        </div>
+        @if (!string.IsNullOrWhiteSpace(Recipe.Description))
+        {
+            <FluentGridItem xs="12">
+                <FluentLabel>@Recipe.Description</FluentLabel>
+            </FluentGridItem>
+        }
+        
+        <FluentGridItem xs="12">
+            <FluentDivider Role="DividerRole.Separator" />
+        </FluentGridItem>
 
-        <FluentGrid Spacing="3" Justify="JustifyContent.FlexStart">
+        @if (Recipe.Ingredients.Any())
+        {
             <FluentGridItem xs="12" md="6">
                 <IngredientsDisplay Ingredients="@Recipe.Ingredients" />
-            </FluentGridItem>
+            </FluentGridItem>            
+        }
 
+        @if (Recipe.Instructions.Any())
+        {
             <FluentGridItem xs="12" md="6">
                 <InstructionsDisplay Instructions="@Recipe.Instructions" />
+            </FluentGridItem>  
+        }
+
+        @if (!Recipe.NutritionInfo.IsEmpty())
+        {
+            <FluentGridItem xs="12">
+                <FluentDivider Role="DividerRole.Separator" />
             </FluentGridItem>
-        </FluentGrid>
+            <FluentGridItem xs="12">
+                <NutritionInfoDisplay NutritionInfo="@Recipe.NutritionInfo" />
+            </FluentGridItem>
+        }
 
-        <NutritionInfoDisplay NutritionInfo="@Recipe.NutritionInfo" />
+        @if (!string.IsNullOrEmpty(Recipe.FurtherNotes))
+        {
+            <FluentGridItem xs="12">
+                <FluentDivider Role="DividerRole.Separator" />
+            </FluentGridItem>
+            <FluentGridItem xs="12">
+                <RecipeNotesDisplay Notes="@Recipe.FurtherNotes" />
+            </FluentGridItem>
+        }
 
-        <RecipeNotesDisplay Notes="@Recipe.FurtherNotes" />
-    </div>
+    </FluentGrid>
 }
 
 @code {
