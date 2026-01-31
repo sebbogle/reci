@@ -44,7 +44,7 @@ public class RecipeService(IRecipeRepository recipeRepository, IGroupingReposito
 
         if (result.IsSuccess)
         {
-            _recipeStateNotifier.NotifyRecipesChanged();
+            await _recipeStateNotifier.NotifyRecipesChangedAsync();
         }
 
         return result;
@@ -56,7 +56,7 @@ public class RecipeService(IRecipeRepository recipeRepository, IGroupingReposito
 
         if (result.IsSuccess)
         {
-            _recipeStateNotifier.NotifyRecipesChanged();
+            await _recipeStateNotifier.NotifyRecipesChangedAsync();
         }
 
         return result;

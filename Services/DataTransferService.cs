@@ -43,7 +43,7 @@ public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRe
             await _settingsRepository.SaveSettingsAsync(reciFile.Settings, cancellationToken);
         }
 
-        _recipeStateNotifier.NotifyRecipesChanged();
+        await _recipeStateNotifier.NotifyRecipesChangedAsync();
 
         return Result.Success();
     }
