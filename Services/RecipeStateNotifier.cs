@@ -2,10 +2,19 @@ namespace Reci.Services;
 
 public class RecipeStateNotifier : IRecipeStateNotifier
 {
-    public event Action? OnRecipesChanged;
+    public event Func<Task>? OnRecipesChanged;
 
-    public void NotifyRecipesChanged()
+    public async Task NotifyRecipesChangedAsync()
     {
-        OnRecipesChanged?.Invoke();
+        Func<Task>? handler = OnRecipesChanged;
+        if (handler is not null)
+        {
+            Delegate[] delegates = handler.GetInvocationList();
+            foreach (Delegate del in delegates)
+            {
+                Func<Task> func = (Func<Task>)del;
+                await func().ConfigureAwait(false);
+            }
+        }
     }
 }

@@ -79,10 +79,12 @@ else
     private List<GroupVM<RecipeSummaryVM>>? filteredGroups;
     private string? selectedGroupName;
     private bool isLoading = true;
+    private CancellationTokenSource? _cts;
 
     protected override async Task OnInitializedAsync()
     {
-        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+        _cts = new CancellationTokenSource();
+        RecipeStateNotifier.OnRecipesChanged += OnRecipesChangedAsync;
         await LoadRecipes();
     }
 
@@ -93,9 +95,12 @@ else
 
     private async Task LoadRecipes()
     {
+        if (_cts?.Token.IsCancellationRequested == true)
+            return;
+
         try
         {
-            recipeGroups = await RecipeService.GetRecipeSummariesAsync();
+            recipeGroups = await RecipeService.GetRecipeSummariesAsync(_cts?.Token ?? default);
             FilterRecipes();
         }
         finally
@@ -104,15 +109,20 @@ else
         }
     }
 
-    private async void OnRecipesChanged()
+    private async Task OnRecipesChangedAsync()
     {
+        if (_cts?.Token.IsCancellationRequested == true)
+            return;
+
         await LoadRecipes();
         await InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
     {
-        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
+        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChangedAsync;
+        _cts?.Cancel();
+        _cts?.Dispose();
     }
 
     private void FilterRecipes()

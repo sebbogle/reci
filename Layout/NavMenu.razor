@@ -42,34 +42,44 @@
 @code {
     private bool expanded = true;
     private IDialogReference? _dialog;
+    private CancellationTokenSource? _cts;
 
     private List<GroupVM<RecipeSummaryVM>> RecipeSummaryVMs = new();
 
     protected override async Task OnInitializedAsync()
     {
-        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+        _cts = new CancellationTokenSource();
+        RecipeStateNotifier.OnRecipesChanged += OnRecipesChangedAsync;
         await LoadRecipesAsync();
     }
 
     private async Task LoadRecipesAsync()
     {
-        RecipeSummaryVMs = await RecipeService.GetRecipeSummariesAsync();
+        if (_cts?.Token.IsCancellationRequested == true)
+            return;
+
+        RecipeSummaryVMs = await RecipeService.GetRecipeSummariesAsync(_cts?.Token ?? default);
     }
 
-    private async void OnRecipesChanged()
+    private async Task OnRecipesChangedAsync()
     {
+        if (_cts?.Token.IsCancellationRequested == true)
+            return;
+
         await LoadRecipesAsync();
         await InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
     {
-        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
+        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChangedAsync;
+        _cts?.Cancel();
+        _cts?.Dispose();
     }
 
     private RenderFragment RenderRecipes(GroupVM<RecipeSummaryVM> recipeGroup) => __builder =>
     {
-        @foreach (var recipe in recipeGroup)
+        @foreach (RecipeSummaryVM recipe in recipeGroup)
         {
             <FluentNavLink Href="@($"/recipe/{recipe.Id}")"
                            Icon="@(new Icons.Regular.Size20.Food())">

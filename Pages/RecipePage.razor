@@ -74,10 +74,12 @@ else
     private RecipeVM? Recipe { get; set; }
     private bool isLoading = true;
     private IDialogReference? _dialog;
+    private CancellationTokenSource? _cts;
 
     protected override async Task OnInitializedAsync()
     {
-        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+        _cts = new CancellationTokenSource();
+        RecipeStateNotifier.OnRecipesChanged += OnRecipesChangedAsync;
     }
 
     protected override async Task OnParametersSetAsync()
@@ -87,28 +89,36 @@ else
 
     private async Task LoadRecipeAsync()
     {
+        if (_cts?.Token.IsCancellationRequested == true)
+            return;
+
         isLoading = true;
         
         bool success = Guid.TryParse(RecipeSlug, out Guid recipeId);
-        Recipe = success ? await RecipeService.GetRecipeAsync(recipeId) : null;
+        Recipe = success ? await RecipeService.GetRecipeAsync(recipeId, _cts?.Token ?? default) : null;
         
         isLoading = false;
     }
 
-    private async void OnRecipesChanged()
+    private async Task OnRecipesChangedAsync()
     {
+        if (_cts?.Token.IsCancellationRequested == true)
+            return;
+
         await LoadRecipeAsync();
         await InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
     {
-        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
+        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChangedAsync;
+        _cts?.Cancel();
+        _cts?.Dispose();
     }
 
     private void NavigateToHome()
     {
-        var currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        string currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         if (!string.IsNullOrEmpty(currentPath))
         {
             NavigationManager.NavigateTo("/");
