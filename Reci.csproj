@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Blazored.LocalStorage" />
     <Using Include="Reci.Core" />
     <Using Include="Reci.Data.Models" />
     <Using Include="Reci.Data.Repositories" />

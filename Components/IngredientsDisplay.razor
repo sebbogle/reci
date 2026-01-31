@@ -1,41 +1,31 @@
-@if (Ingredients.Any())
-{
-    <div class="recipe-section">
-        <h2>
-            <FluentIcon Value="@(new Icons.Regular.Size20.List())" />
-            Ingredients
-        </h2>
+<FluentStack Orientation="Orientation.Vertical">
+    <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="5">
+        <FluentIcon Value="@(new Icons.Regular.Size20.List())" />
+        <FluentLabel Typo="Typography.H3">Ingredients</FluentLabel>
+    </FluentStack>
 
-        @foreach(GroupVM<Ingredient> ingredientGroup in Ingredients)
-        {
-            <div class="ingredient-group">
-                @if (ingredientGroup.Name is not null)
+    @foreach (GroupVM<Ingredient> ingredientGroup in Ingredients)
+    {
+        <FluentCard MinimalStyle="true">
+            <FluentStack Orientation="Orientation.Vertical">
+                @if (!string.IsNullOrWhiteSpace(ingredientGroup.Name))
                 {
-                    <h3 class="ingredient-group-name">@ingredientGroup.Name</h3>
+                    <FluentLabel Typo="Typography.H6" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">@ingredientGroup.Name</FluentLabel>
                 }
-
-                <ul class="ingredient-list">
-                    @foreach (Ingredient ingredient in ingredientGroup)
-                    {
-                        <li class="ingredient-item">
-                            <strong>@FormatQuantity(ingredient.QuantityAmount) @ingredient.QuantityUnit</strong> @ingredient.Name
-                        </li>
-                    }
-                </ul>
-            </div>
-        }
-    </div>
-}
-else
-{
-    <div class="recipe-section">
-        <h2>
-            <FluentIcon Value="@(new Icons.Regular.Size20.List())" />
-            Ingredients
-        </h2>
-        <p class="empty-message">No ingredients listed.</p>
-    </div>
-}
+                <FluentLabel>
+                    <ul class="ingredient-list">
+                        @foreach (Ingredient ingredient in ingredientGroup)
+                        {
+                            <li class="ingredient-item">
+                                <strong>@FormatQuantity(ingredient.QuantityAmount) @ingredient.QuantityUnit</strong> @ingredient.Name
+                            </li>
+                        }
+                    </ul>
+                </FluentLabel>
+            </FluentStack>
+        </FluentCard>
+    }
+</FluentStack>
 
 @code {
     [Parameter]

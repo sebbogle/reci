@@ -1,10 +1,5 @@
 namespace Reci.Data.Repositories;
 
-using Blazored.LocalStorage;
-using Microsoft.Extensions.Logging;
-using Reci.Data.Models;
-using Reci.Data.Repositories.Interfaces;
-
 public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILogger<LocalStorageRecipeRepository> logger) : IRecipeRepository
 {
     private const string RecipesStorageKey = "recipes";

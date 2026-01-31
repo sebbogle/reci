@@ -1,42 +1,32 @@
-@if (Instructions.Any())
-{
-    <div class="recipe-section">
-        <h2>
-            <FluentIcon Value="@(new Icons.Regular.Size20.NumberSymbol())" />
-            Instructions
-        </h2>
-        
-        @foreach (GroupVM<Instruction> instructionGroup in Instructions)
-        {
-            int stepNumber = 1;
-            <div class="instruction-group">
-                @if (instructionGroup.Name is not null)
+
+<FluentStack Orientation="Orientation.Vertical">
+    <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="5">
+        <FluentIcon Value="@(new Icons.Regular.Size20.NumberSymbol())" />
+        <FluentLabel Typo="Typography.H3">Instructions</FluentLabel>
+    </FluentStack>
+
+    @foreach (GroupVM<Instruction> instructionGroup in Instructions)
+    {
+        int stepNumber = 1;
+        <FluentCard MinimalStyle="true">
+            <FluentStack Orientation="Orientation.Vertical">
+                @if (!string.IsNullOrWhiteSpace(instructionGroup.Name))
                 {
-                    <h3 class="instruction-group-name">@instructionGroup.Name</h3>
+                    <FluentLabel Typo="Typography.H6" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">@instructionGroup.Name</FluentLabel>
                 }
-
-                <ol class="instruction-list" start="@stepNumber">
-                    @foreach (Instruction instruction in instructionGroup)
-                    {
-                        <li class="instruction-item">@instruction.Text</li>
-                        stepNumber++;
-                    }
-                </ol>
-            </div>
-
-        }
-    </div>
-}
-else
-{
-    <div class="recipe-section">
-        <h2>
-            <FluentIcon Value="@(new Icons.Regular.Size20.NumberSymbol())" />
-            Instructions
-        </h2>
-        <p class="empty-message">No instructions provided.</p>
-    </div>
-}
+                <FluentLabel>
+                    <ol class="instruction-list" start="@stepNumber">
+                        @foreach (Instruction instruction in instructionGroup)
+                        {
+                            <li class="instruction-item">@instruction.Text</li>
+                            stepNumber++;
+                        }
+                    </ol>
+                </FluentLabel>
+            </FluentStack>
+        </FluentCard>
+    }
+</FluentStack>
 
 @code {
     [Parameter]

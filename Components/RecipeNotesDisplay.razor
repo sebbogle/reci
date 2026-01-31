@@ -1,17 +1,14 @@
-@if (!string.IsNullOrWhiteSpace(Notes))
-{
-    <div class="recipe-section notes-section">
-        <h2>
-            <FluentIcon Value="@(new Icons.Regular.Size20.NoteEdit())" />
-            Notes
-        </h2>
-        <div class="notes-card">
-            <p style="white-space: pre-wrap; margin: 0;">@Notes</p>
-        </div>
-    </div>
-}
+<FluentStack Orientation="Orientation.Vertical">
+    <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="5">
+        <FluentIcon Value="@(new Icons.Regular.Size20.NoteEdit())" />
+        <FluentLabel Typo="Typography.H3">Notes</FluentLabel>
+    </FluentStack>
+    <FluentCard MinimalStyle="true">
+        <FluentLabel>@Notes</FluentLabel>
+    </FluentCard>
+</FluentStack>
 
 @code {
     [Parameter]
-    public string? Notes { get; set; }
+    public required string Notes { get; set; }
 }
