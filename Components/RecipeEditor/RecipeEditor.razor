@@ -164,6 +164,25 @@
             </FluentGrid>
         </FluentStack>
 
+        @* Recipe Source Section *@
+        <FluentStack Orientation="Orientation.Vertical" VerticalGap="2" Style="margin-bottom: 12px">
+            <FluentLabel Typo="Typography.Subject">Recipe Source</FluentLabel>
+            <FluentGrid Spacing="1">
+                <FluentGridItem xs="12" sm="6">
+                    <FluentTextField @bind-Value="sourceText"
+                                     Label="Source"
+                                     Placeholder="e.g., Grandma's cookbook, BBC Good Food..."
+                                     Style="width: 100%;" />
+                </FluentGridItem>
+                <FluentGridItem xs="12" sm="6">
+                    <FluentTextField @bind-Value="sourceUrl"
+                                     Label="URL"
+                                     Placeholder="https://..."
+                                     Style="width: 100%;" />
+                </FluentGridItem>
+            </FluentGrid>
+        </FluentStack>
+
         @* Further Notes Section *@
         <FluentTextArea @bind-Value="Content.FurtherNotes"
                         Placeholder="Any additional notes or comments..."
@@ -376,6 +395,27 @@
         }
     }
 
+    // Nullable helpers for RecipeSource binding
+    private string? sourceText
+    {
+        get => Content.Source?.Text;
+        set
+        {
+            EnsureSource();
+            Content.Source!.Text = value;
+        }
+    }
+
+    private string? sourceUrl
+    {
+        get => Content.Source?.Url;
+        set
+        {
+            EnsureSource();
+            Content.Source!.Url = value;
+        }
+    }
+
     protected override async Task OnInitializedAsync()
     {
         RecipeGroups = await GroupingService.GetGroupingsAsync(GroupType.Recipe);
@@ -384,6 +424,11 @@
     private void EnsureNutritionInfo()
     {
         Content.NutritionInfo ??= new NutritionInfo();
+    }
+
+    private void EnsureSource()
+    {
+        Content.Source ??= new RecipeSource();
     }
 
     private void AddTag()

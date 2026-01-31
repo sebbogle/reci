@@ -23,6 +23,18 @@ else
             <FluentStack Orientation="Orientation.Horizontal">
                 <FluentLabel Typo="Typography.H1">@Recipe.Name</FluentLabel>
                 <FluentSpacer />
+                @if (!Recipe.Source.IsEmpty())
+                {
+                    <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="4">
+                        <FluentLabel>@Recipe.Source?.Text</FluentLabel>
+                        @if (!string.IsNullOrWhiteSpace(Recipe.Source?.Url))
+                        {
+                            <FluentAnchor Href="@Recipe.Source.Url" Target="_blank" Title="Open source">
+                                <FluentIcon Value="@(new Icons.Regular.Size20.Open())" />
+                            </FluentAnchor>
+                        }
+                    </FluentStack>
+                }
                 <FluentButton Appearance="Appearance.Accent"
                               IconEnd="@(new Icons.Regular.Size20.Edit())"
                               OnClick="OpenRecipeEditor"
