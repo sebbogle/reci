@@ -402,7 +402,7 @@
         set
         {
             EnsureSource();
-            Content.Source!.Text = value;
+            Content.Source!.Text = value ?? string.Empty;
         }
     }
 
@@ -428,7 +428,7 @@
 
     private void EnsureSource()
     {
-        Content.Source ??= new RecipeSource();
+        Content.Source ??= new RecipeSource { Text = string.Empty };
     }
 
     private void AddTag()

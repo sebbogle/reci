@@ -24,19 +24,23 @@ else
                 <FluentLabel Typo="Typography.H1">@Recipe.Name</FluentLabel>
                 <FluentSpacer />
 
-                @if (Recipe.Source is not null && Recipe.Source.Url is not null)
+                @if (!string.IsNullOrWhiteSpace(Recipe.Source?.Text))
                 {
-                    <FluentAnchor Href="@Recipe.Source.Url"
-                                  Title="@Recipe.Source.Url"
-                                  Target="_blank"
-                                  Appearance="Appearance.Neutral"
-                                  IconEnd="@(new Icons.Regular.Size16.Open())">
-                        @Recipe.Source.Text
-                    </FluentAnchor>
-                }
-                else if (Recipe.Source is not null)
-                {
-                    <FluentLabel Typo="Typography.H6">@Recipe.Source.Text</FluentLabel>
+                    @if (!string.IsNullOrWhiteSpace(Recipe.Source.Url))
+                    {
+                        <FluentAnchor Href="@Recipe.Source.Url"
+                                      Title="@Recipe.Source.Url"
+                                      Target="_blank"
+                                      Rel="noopener noreferrer"
+                                      Appearance="Appearance.Neutral"
+                                      IconEnd="@(new Icons.Regular.Size16.Open())">
+                            @Recipe.Source.Text
+                        </FluentAnchor>
+                    }
+                    else
+                    {
+                        <FluentLabel Typo="Typography.H6">@Recipe.Source.Text</FluentLabel>
+                    }
                 }
                 <FluentButton Appearance="Appearance.Accent"
                               IconEnd="@(new Icons.Regular.Size20.Edit())"
