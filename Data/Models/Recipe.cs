@@ -16,6 +16,8 @@ public class Recipe
 
     public NutritionInfo? NutritionInfo { get; set; }
 
+    public RecipeSource? Source { get; set; }
+
     public List<string> Tags { get; set; } = [];
 
     public string? FurtherNotes { get; set; }
@@ -36,6 +38,7 @@ public static class RecipeExtensions
             && !recipe.Ingredients.Any(ingredient => !ingredient.IsEmpty())
             && !recipe.Instructions.Any(instruction => !instruction.IsEmpty())
             && recipe.NutritionInfo.IsEmpty()
+            && recipe.Source.IsEmpty()
             && recipe.Tags.Count == 0
             && string.IsNullOrEmpty(recipe.FurtherNotes);
     }
@@ -57,6 +60,7 @@ public static class RecipeExtensions
             && first.Ingredients.IsEqualTo(second.Ingredients)
             && first.Instructions.IsEqualTo(second.Instructions)
             && first.NutritionInfo.IsEqualTo(second.NutritionInfo)
+            && first.Source.IsEqualTo(second.Source)
             && first.Tags.SequenceEqual(second.Tags)
             && first.FurtherNotes == second.FurtherNotes;
     }
