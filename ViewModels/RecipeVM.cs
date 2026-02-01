@@ -16,6 +16,8 @@ public class RecipeVM
 
     public NutritionInfo? NutritionInfo { get; set; }
 
+    public RecipeSource? Source { get; set; }
+
     public List<string> Tags { get; set; } = [];
 
     public string? FurtherNotes { get; set; }
