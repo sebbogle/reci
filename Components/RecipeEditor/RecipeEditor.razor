@@ -133,7 +133,7 @@
         @* Nutrition Information Section *@
         <FluentStack Orientation="Orientation.Vertical" VerticalGap="2" Style="margin-bottom: 12px">
             <FluentLabel Typo="Typography.Subject">Nutrition Information</FluentLabel>
-            <FluentGrid Spacing="1">
+            <FluentGrid Spacing="1" Style="width: 100%">
                 <FluentGridItem xs="6" sm="6" md="3">
                     <FluentNumberField @bind-Value="nutritionCalories"
                                        Label="Calories (kcal)"
@@ -167,16 +167,16 @@
         @* Recipe Source Section *@
         <FluentStack Orientation="Orientation.Vertical" VerticalGap="2" Style="margin-bottom: 12px">
             <FluentLabel Typo="Typography.Subject">Recipe Source</FluentLabel>
-            <FluentGrid Spacing="1">
-                <FluentGridItem xs="12" sm="6">
+            <FluentGrid Spacing="1" Style="width: 100%">
+                <FluentGridItem xs="12" sm="6" md="6">
                     <FluentTextField @bind-Value="sourceText"
                                      Label="Source"
                                      Placeholder="e.g., Grandma's cookbook, BBC Good Food..."
                                      Style="width: 100%;" />
                 </FluentGridItem>
-                <FluentGridItem xs="12" sm="6">
+                <FluentGridItem xs="12" sm="6" md="6">
                     <FluentTextField @bind-Value="sourceUrl"
-                                     Label="URL"
+                                     Label="Link"
                                      Placeholder="https://..."
                                      Style="width: 100%;" />
                 </FluentGridItem>

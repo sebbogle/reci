@@ -20,20 +20,23 @@ else
 {
     <FluentGrid Spacing="1" Justify="JustifyContent.FlexStart">
         <FluentGridItem xs="12">
-            <FluentStack Orientation="Orientation.Horizontal">
+            <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center">
                 <FluentLabel Typo="Typography.H1">@Recipe.Name</FluentLabel>
                 <FluentSpacer />
-                @if (!Recipe.Source.IsEmpty())
+
+                @if (Recipe.Source is not null && Recipe.Source.Url is not null)
                 {
-                    <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="4">
-                        <FluentLabel>@Recipe.Source?.Text</FluentLabel>
-                        @if (!string.IsNullOrWhiteSpace(Recipe.Source?.Url))
-                        {
-                            <FluentAnchor Href="@Recipe.Source.Url" Target="_blank" Title="Open source">
-                                <FluentIcon Value="@(new Icons.Regular.Size20.Open())" />
-                            </FluentAnchor>
-                        }
-                    </FluentStack>
+                    <FluentAnchor Href="@Recipe.Source.Url"
+                                  Title="@Recipe.Source.Url"
+                                  Target="_blank"
+                                  Appearance="Appearance.Neutral"
+                                  IconEnd="@(new Icons.Regular.Size16.Open())">
+                        @Recipe.Source.Text
+                    </FluentAnchor>
+                }
+                else if (Recipe.Source is not null)
+                {
+                    <FluentLabel Typo="Typography.H6">@Recipe.Source.Text</FluentLabel>
                 }
                 <FluentButton Appearance="Appearance.Accent"
                               IconEnd="@(new Icons.Regular.Size20.Edit())"
