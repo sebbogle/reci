@@ -114,8 +114,10 @@
             using var stream = file.OpenReadStream(maxAllowedSize: 10 * 1024 * 1024); // 10MB limit
             using var reader = new StreamReader(stream);
             string jsonContent = await reader.ReadToEndAsync();
+
+            string mendedJsonContent = DataTransferService.MendGuidsFromImportedData(jsonContent);
             
-            ReciFile? reciFile = System.Text.Json.JsonSerializer.Deserialize<ReciFile>(jsonContent);
+            ReciFile? reciFile = System.Text.Json.JsonSerializer.Deserialize<ReciFile>(mendedJsonContent);
             
             if (reciFile == null)
             {

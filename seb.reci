@@ -1,0 +1,2643 @@
+{
+  "Version": "0.1.0",
+  "Settings": {},
+  "Recipes": [
+    {
+      "Id": "1b3254fb-b250-465e-b755-0b6a268b04cf",
+      "Name": "Korean Beef Bowl Meal Prep",
+      "Description": "Korean BBQ in meal prep form that provides a full meal without getting you to overeat, or lead you to a food coma mid-afternoon.",
+      "GroupId": "30b87ae1-8b58-433e-b5dc-da0cfb325ba6",
+      "Ingredients": [
+        {
+          "Name": "brown rice",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": "64fee697-05e0-48e9-b35d-a2f42273f46e"
+        },
+        {
+          "Name": "large eggs",
+          "QuantityAmount": 4,
+          "QuantityUnit": "whole",
+          "GroupId": "64fee697-05e0-48e9-b35d-a2f42273f46e"
+        },
+        {
+          "Name": "olive oil",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "64fee697-05e0-48e9-b35d-a2f42273f46e"
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 2,
+          "QuantityUnit": "cloves",
+          "GroupId": "64fee697-05e0-48e9-b35d-a2f42273f46e"
+        },
+        {
+          "Name": "chopped spinach",
+          "QuantityAmount": 4,
+          "QuantityUnit": "cups",
+          "GroupId": "64fee697-05e0-48e9-b35d-a2f42273f46e"
+        },
+        {
+          "Name": "brown sugar, packed",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "reduced sodium soy sauce",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "freshly grated ginger",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "sesame oil",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tsp",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "Sriracha",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "olive oil",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 2,
+          "QuantityUnit": "cloves",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "ground beef",
+          "QuantityAmount": 1,
+          "QuantityUnit": "lb",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "green onions, thinly sliced",
+          "QuantityAmount": 2,
+          "QuantityUnit": "whole",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        },
+        {
+          "Name": "sesame seeds",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "tsp",
+          "GroupId": "472b1646-73c1-4e1c-8c3d-9c5434c22e11"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Cook rice in 2 cups water per package directions; set aside",
+          "GroupId": "bd870250-8a92-4a8e-af6b-375e167c2051"
+        },
+        {
+          "Text": "Boil eggs for 1 minute, cover, rest 8-10 minutes off heat, cool in ice bath, peel, and halve",
+          "GroupId": "bd870250-8a92-4a8e-af6b-375e167c2051"
+        },
+        {
+          "Text": "Saut\u00C3\u00A9 2 cloves garlic in 2 tbsp olive oil until fragrant (1-2 minutes), add spinach until wilted (2-3 minutes); set aside",
+          "GroupId": "bd870250-8a92-4a8e-af6b-375e167c2051"
+        },
+        {
+          "Text": "Whisk together brown sugar, soy sauce, grated ginger, sesame oil, and Sriracha in a small bowl",
+          "GroupId": "799d4e7d-e0a7-42fa-b587-229a1db1d4a5"
+        },
+        {
+          "Text": "Heat 1 tbsp olive oil in a large skillet over medium high heat. Add garlic and ground beef, and cook until beef has browned (3-5 minutes), crumbling the beef as it cooks. Drain excess fat.",
+          "GroupId": "799d4e7d-e0a7-42fa-b587-229a1db1d4a5"
+        },
+        {
+          "Text": "Add sauce mixture and green onions to the beef; simmer for 2 minutes",
+          "GroupId": "799d4e7d-e0a7-42fa-b587-229a1db1d4a5"
+        },
+        {
+          "Text": "Assemble meal prep containers with rice, halved eggs, spinach, and Korean beef. Garnish with green onions and sesame seeds.",
+          "GroupId": "5218f8e5-6652-4ae0-b59d-101ac8fa2bb7"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Damn Delicious",
+        "Url": "https://damndelicious.net/2017/04/21/korean-beef-bowl-meal-prep/"
+      },
+      "Tags": [
+        "korean",
+        "beef",
+        "meal-prep",
+        "asian",
+        "dinner",
+        "lunch",
+        "rice-bowl"
+      ],
+      "FurtherNotes": "Makes 4 servings. Prep time: 20 minutes, Cook time: 20 minutes. You can substitute ground beef with pork, chicken, or tofu. Consider adding vegetables like carrots, peppers, or zucchini for extra nutrition. Recipe rated 4.97/5 stars."
+    },
+    {
+      "Id": "5da309c4-f5f0-406a-bcc4-0ae1d484e1f3",
+      "Name": "Cheeseburger Wraps",
+      "Description": "High protein cheeseburger wraps that taste amazing and reheat perfectly. Easy, affordable meal prep for muscle gain, weight loss, or healthy lunches.",
+      "GroupId": "fc42ff6a-2554-440e-8156-5ca45c26673a",
+      "Ingredients": [
+        {
+          "Name": "lean beef mince (5-10% fat)",
+          "QuantityAmount": 750,
+          "QuantityUnit": "g",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "brown onion, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "tomato paste",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "smoked paprika",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tsp",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "garlic powder",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tsp",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "chilli flakes (optional)",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "beef stock",
+          "QuantityAmount": 0.75,
+          "QuantityUnit": "cup",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "high protein yogurt",
+          "QuantityAmount": 0.33,
+          "QuantityUnit": "cup",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "tomato ketchup",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "yellow mustard",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "diced pickles",
+          "QuantityAmount": 100,
+          "QuantityUnit": "g",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "salt and pepper",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": "34373860-9621-4abb-b694-576c458b6859"
+        },
+        {
+          "Name": "wraps",
+          "QuantityAmount": 6,
+          "QuantityUnit": "whole",
+          "GroupId": "19bcbe5e-9ee9-4547-95d7-2964423ed8f5"
+        },
+        {
+          "Name": "grated cheddar cheese",
+          "QuantityAmount": 180,
+          "QuantityUnit": "g",
+          "GroupId": "19bcbe5e-9ee9-4547-95d7-2964423ed8f5"
+        },
+        {
+          "Name": "sauce of choice",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": "19bcbe5e-9ee9-4547-95d7-2964423ed8f5"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Build flavour base: Saut\u00C3\u00A9 diced onion for 2-3 minutes, then stir in tomato paste for 1 minute",
+          "GroupId": null
+        },
+        {
+          "Text": "Cook the beef: Add beef, breaking it apart; season with smoked paprika, garlic powder, chilli flakes, salt and pepper and cook until browned",
+          "GroupId": null
+        },
+        {
+          "Text": "Build the sauce: Deglaze with beef stock, simmer 3-4 minutes, add ketchup and mustard, fold in yogurt and pickles",
+          "GroupId": null
+        },
+        {
+          "Text": "Assemble the wraps: Fill tortillas with beef mixture and cheese, roll tightly, toast seam-side down until golden",
+          "GroupId": null
+        },
+        {
+          "Text": "Serve or store: Slice diagonally and serve with sauce of choice",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": {
+        "Calories": 430,
+        "Fat": 10.8,
+        "Carbohydrates": 43,
+        "Protein": 43
+      },
+      "Source": {
+        "Text": "Chef Jack Ovens",
+        "Url": "https://chefjackovens.com/cheeseburger-wraps-meal-prep/"
+      },
+      "Tags": [
+        "cheeseburger",
+        "wraps",
+        "meal-prep",
+        "high-protein",
+        "lunch",
+        "dinner"
+      ],
+      "FurtherNotes": "Makes 6 wraps. Prep time: 10 minutes, Cook time: 25 minutes. Storage: Refrigerate 3 days or freeze up to 4 months. Reheating: Sandwich press/skillet 2-3 minutes per side. Nutrition per wrap: 430 calories, 43g protein, 43g carbs, 10.8g fat, 5.7g fiber, 771mg sodium."
+    },
+    {
+      "Id": "6861353c-c2cf-45ff-acfb-40e694ee0aa5",
+      "Name": "Chorizo \u0026 Egg Breakfast Wrap",
+      "Description": "Smoky chorizo, soft scrambled eggs, cheese, and spinach wrapped in tortillas. Prep five wraps in twenty minutes for convenient, flavour-packed breakfast that stores beautifully.",
+      "GroupId": "fc42ff6a-2554-440e-8156-5ca45c26673a",
+      "Ingredients": [
+        {
+          "Name": "Spanish chorizo, diced",
+          "QuantityAmount": 250,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "baby spinach",
+          "QuantityAmount": 280,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "eggs, beaten",
+          "QuantityAmount": 10,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "flour tortillas",
+          "QuantityAmount": 5,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "smoked or regular cheddar cheese, grated",
+          "QuantityAmount": 100,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "salt and pepper",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": null
+        },
+        {
+          "Name": "spray oil (optional)",
+          "QuantityAmount": 1,
+          "QuantityUnit": "as needed",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Render the chorizo: Cook diced chorizo 4-5 minutes until crisp. Transfer to bowl, leaving fat in pan. Wilt spinach in remaining oil for 2 minutes.",
+          "GroupId": null
+        },
+        {
+          "Text": "Scramble the eggs: Pour beaten eggs into hot chorizo oil, season lightly with salt and pepper, fold gently 2-3 minutes until softly set.",
+          "GroupId": null
+        },
+        {
+          "Text": "Build the wraps: Divide scrambled eggs among tortillas, add chorizo and grated cheese to each.",
+          "GroupId": null
+        },
+        {
+          "Text": "Roll and seal: Fold sides in, roll tightly. Toast in dry pan 1-2 minutes per side until golden.",
+          "GroupId": null
+        },
+        {
+          "Text": "Cool before wrapping individually in foil or parchment for storage.",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": {
+        "Calories": 450,
+        "Fat": 22,
+        "Carbohydrates": 25,
+        "Protein": 30
+      },
+      "Source": {
+        "Text": "Chef Jack Ovens",
+        "Url": "https://chefjackovens.com/chorizo-egg-breakfast-wrap-meal-prep/"
+      },
+      "Tags": [
+        "breakfast",
+        "chorizo",
+        "eggs",
+        "wraps",
+        "meal-prep",
+        "high-protein"
+      ],
+      "FurtherNotes": "Makes 5 wraps. Prep time: 5 minutes, Cook time: 15 minutes. Storage: Fridge 4 days wrapped in foil or parchment, Freezer 3 months individually wrapped. Reheating: Microwave or reheat in pan/air fryer to restore crispness. Nutrition per wrap: 450 calories, 30g protein, 25g carbs, 22g fat, 3.2g fiber, 888mg sodium, 332mg cholesterol."
+    },
+    {
+      "Id": "89d4a839-02e0-4966-83c1-d6a43b14e2a3",
+      "Name": "Chicken Teriyaki Bowl",
+      "Description": "Sweet and savory teriyaki chicken over fluffy rice with steamed broccoli and edamame. A balanced meal prep staple that reheats beautifully.",
+      "GroupId": "caaa3392-bcc9-42ac-99d4-55cf208229e8",
+      "Ingredients": [
+        {
+          "Name": "jasmine rice",
+          "QuantityAmount": 2,
+          "QuantityUnit": "cups",
+          "GroupId": "5288f232-5f6a-40c7-bd52-7f543f5a12ac"
+        },
+        {
+          "Name": "broccoli florets",
+          "QuantityAmount": 3,
+          "QuantityUnit": "cups",
+          "GroupId": "5288f232-5f6a-40c7-bd52-7f543f5a12ac"
+        },
+        {
+          "Name": "shelled edamame",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": "5288f232-5f6a-40c7-bd52-7f543f5a12ac"
+        },
+        {
+          "Name": "boneless skinless chicken thighs",
+          "QuantityAmount": 800,
+          "QuantityUnit": "g",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "soy sauce",
+          "QuantityAmount": 0.33,
+          "QuantityUnit": "cup",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "mirin",
+          "QuantityAmount": 3,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "honey",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "rice vinegar",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 3,
+          "QuantityUnit": "cloves",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "fresh ginger, grated",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "cornstarch",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "sesame seeds",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        },
+        {
+          "Name": "vegetable oil",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e70cdd91-f966-4278-8c99-8cc89ea9458b"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Cook jasmine rice according to package directions; let cool slightly",
+          "GroupId": "f869c799-4a4c-4a1e-b4bb-370cc439e7e9"
+        },
+        {
+          "Text": "Steam broccoli for 3-4 minutes until tender-crisp; blanch edamame for 2 minutes",
+          "GroupId": "f869c799-4a4c-4a1e-b4bb-370cc439e7e9"
+        },
+        {
+          "Text": "Whisk together soy sauce, mirin, honey, rice vinegar, garlic, ginger, and cornstarch in a bowl",
+          "GroupId": "f869c799-4a4c-4a1e-b4bb-370cc439e7e9"
+        },
+        {
+          "Text": "Cut chicken thighs into bite-sized pieces, pat dry with paper towels",
+          "GroupId": "e14805aa-a690-4936-992a-a1f77efe4f54"
+        },
+        {
+          "Text": "Heat oil in a large skillet over medium-high heat. Cook chicken 5-6 minutes until golden and cooked through",
+          "GroupId": "e14805aa-a690-4936-992a-a1f77efe4f54"
+        },
+        {
+          "Text": "Pour teriyaki sauce over chicken, simmer 2-3 minutes until thickened and glossy",
+          "GroupId": "e14805aa-a690-4936-992a-a1f77efe4f54"
+        },
+        {
+          "Text": "Divide rice, broccoli, edamame, and teriyaki chicken among 4 containers. Garnish with sesame seeds",
+          "GroupId": "e14805aa-a690-4936-992a-a1f77efe4f54"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Fit Meal Ideas",
+        "Url": "https://www.fitmealideas.com/chicken-teriyaki-bowl/"
+      },
+      "Tags": [
+        "chicken",
+        "teriyaki",
+        "meal-prep",
+        "asian",
+        "rice-bowl",
+        "lunch",
+        "dinner"
+      ],
+      "FurtherNotes": "Makes 4 servings. Prep time: 15 minutes, Cook time: 25 minutes. Storage: Refrigerate up to 4 days. Keep sauce in a small separate container if you prefer crispier chicken when reheating."
+    },
+    {
+      "Id": "2685ea18-92d8-4d5b-a16c-0af42d40787e",
+      "Name": "Mediterranean Quinoa Salad",
+      "Description": "A bright, refreshing quinoa salad loaded with crunchy vegetables, feta, and a zesty lemon-herb dressing. Perfect cold or at room temperature.",
+      "GroupId": "1c56f246-b8fa-4f47-be38-45e9a02f6f0c",
+      "Ingredients": [
+        {
+          "Name": "quinoa, rinsed",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "cups",
+          "GroupId": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257"
+        },
+        {
+          "Name": "English cucumber, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257"
+        },
+        {
+          "Name": "cherry tomatoes, halved",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "cups",
+          "GroupId": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257"
+        },
+        {
+          "Name": "red bell pepper, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257"
+        },
+        {
+          "Name": "Kalamata olives, halved",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257"
+        },
+        {
+          "Name": "red onion, finely diced",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257"
+        },
+        {
+          "Name": "crumbled feta cheese",
+          "QuantityAmount": 150,
+          "QuantityUnit": "g",
+          "GroupId": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257"
+        },
+        {
+          "Name": "fresh parsley, chopped",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257"
+        },
+        {
+          "Name": "extra virgin olive oil",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "ee648039-a261-45ab-8b2e-258111b2d75c"
+        },
+        {
+          "Name": "lemon juice",
+          "QuantityAmount": 3,
+          "QuantityUnit": "tbsp",
+          "GroupId": "ee648039-a261-45ab-8b2e-258111b2d75c"
+        },
+        {
+          "Name": "red wine vinegar",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "ee648039-a261-45ab-8b2e-258111b2d75c"
+        },
+        {
+          "Name": "dried oregano",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "ee648039-a261-45ab-8b2e-258111b2d75c"
+        },
+        {
+          "Name": "salt and pepper",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": "ee648039-a261-45ab-8b2e-258111b2d75c"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Cook quinoa in 3 cups water, bring to a boil, reduce heat, cover, and simmer 15 minutes. Fluff with a fork and let cool completely",
+          "GroupId": "1510ecea-9dee-4ac1-9d57-7838fb4b6060"
+        },
+        {
+          "Text": "While quinoa cools, dice cucumber, halve tomatoes, dice bell pepper and onion, and halve olives",
+          "GroupId": "1510ecea-9dee-4ac1-9d57-7838fb4b6060"
+        },
+        {
+          "Text": "Whisk together olive oil, lemon juice, red wine vinegar, oregano, salt, and pepper",
+          "GroupId": "1510ecea-9dee-4ac1-9d57-7838fb4b6060"
+        },
+        {
+          "Text": "Combine cooled quinoa with all chopped vegetables and olives in a large bowl",
+          "GroupId": "e98ade69-8ecb-4e29-ba48-2268fb8728f8"
+        },
+        {
+          "Text": "Pour dressing over salad and toss to combine. Fold in feta and parsley",
+          "GroupId": "e98ade69-8ecb-4e29-ba48-2268fb8728f8"
+        },
+        {
+          "Text": "Divide into 5 meal prep containers. Store dressing separately if preferred",
+          "GroupId": "e98ade69-8ecb-4e29-ba48-2268fb8728f8"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Cookie and Kate",
+        "Url": "https://cookieandkate.com/best-quinoa-salad-recipe/"
+      },
+      "Tags": [
+        "salad",
+        "quinoa",
+        "mediterranean",
+        "vegetarian",
+        "meal-prep",
+        "lunch",
+        "healthy"
+      ],
+      "FurtherNotes": "Makes 5 servings. Prep time: 20 minutes, Cook time: 15 minutes. Storage: Refrigerate up to 5 days. Flavors improve after a few hours. Add chickpeas or grilled chicken for extra protein."
+    },
+    {
+      "Id": "4104b900-390c-41d5-b82e-876a82bd2a2f",
+      "Name": "Honey Garlic Shrimp",
+      "Description": "Plump shrimp glazed in a sticky, sweet-savory honey garlic sauce. Ready in under 15 minutes for the fastest weeknight dinner.",
+      "GroupId": "800818ac-3fc8-4d36-92ff-a9f723396bbd",
+      "Ingredients": [
+        {
+          "Name": "large shrimp, peeled and deveined",
+          "QuantityAmount": 500,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "butter",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 4,
+          "QuantityUnit": "cloves",
+          "GroupId": null
+        },
+        {
+          "Name": "honey",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "soy sauce",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "lime juice",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "red pepper flakes",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "fresh cilantro, chopped",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "salt and pepper",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Pat shrimp dry and season with salt, pepper, and red pepper flakes",
+          "GroupId": null
+        },
+        {
+          "Text": "Melt butter in a large skillet over medium-high heat. Cook shrimp 1-2 minutes per side until pink; remove from pan",
+          "GroupId": null
+        },
+        {
+          "Text": "Add garlic to the same pan and saut\u00C3\u00A9 30 seconds until fragrant",
+          "GroupId": null
+        },
+        {
+          "Text": "Stir in honey, soy sauce, and lime juice. Simmer 1-2 minutes until slightly thickened",
+          "GroupId": null
+        },
+        {
+          "Text": "Return shrimp to the pan and toss to coat in sauce. Garnish with cilantro and serve immediately",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Damn Delicious",
+        "Url": "https://damndelicious.net/2019/01/18/honey-garlic-shrimp/"
+      },
+      "Tags": [
+        "shrimp",
+        "seafood",
+        "quick",
+        "weeknight",
+        "dinner",
+        "15-minute"
+      ],
+      "FurtherNotes": "Makes 4 servings. Prep time: 5 minutes, Cook time: 10 minutes. Serve over rice, with noodles, or alongside roasted vegetables. Do not overcook shrimp or they become rubbery."
+    },
+    {
+      "Id": "e1bd8fd5-338e-48bb-bd0b-6375d4815e40",
+      "Name": "Beef Enchiladas",
+      "Description": "Slow-simmered seasoned beef rolled in tortillas, smothered in enchilada sauce and melted cheese. Freezer-friendly for batch cooking.",
+      "GroupId": "1c56f246-b8fa-4f47-be38-45e9a02f6f0c",
+      "Ingredients": [
+        {
+          "Name": "ground beef",
+          "QuantityAmount": 750,
+          "QuantityUnit": "g",
+          "GroupId": "53eaa7ab-c894-44ee-bff3-c52e03264262"
+        },
+        {
+          "Name": "yellow onion, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "53eaa7ab-c894-44ee-bff3-c52e03264262"
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 3,
+          "QuantityUnit": "cloves",
+          "GroupId": "53eaa7ab-c894-44ee-bff3-c52e03264262"
+        },
+        {
+          "Name": "cumin",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "53eaa7ab-c894-44ee-bff3-c52e03264262"
+        },
+        {
+          "Name": "chilli powder",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "53eaa7ab-c894-44ee-bff3-c52e03264262"
+        },
+        {
+          "Name": "smoked paprika",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "53eaa7ab-c894-44ee-bff3-c52e03264262"
+        },
+        {
+          "Name": "black beans, drained",
+          "QuantityAmount": 400,
+          "QuantityUnit": "g",
+          "GroupId": "53eaa7ab-c894-44ee-bff3-c52e03264262"
+        },
+        {
+          "Name": "salt and pepper",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": "53eaa7ab-c894-44ee-bff3-c52e03264262"
+        },
+        {
+          "Name": "crushed tomatoes",
+          "QuantityAmount": 400,
+          "QuantityUnit": "g",
+          "GroupId": "e9aaeab3-005a-4549-90d6-307b3f149a58"
+        },
+        {
+          "Name": "tomato paste",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e9aaeab3-005a-4549-90d6-307b3f149a58"
+        },
+        {
+          "Name": "chicken broth",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": "e9aaeab3-005a-4549-90d6-307b3f149a58"
+        },
+        {
+          "Name": "cumin",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": "e9aaeab3-005a-4549-90d6-307b3f149a58"
+        },
+        {
+          "Name": "oregano",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": "e9aaeab3-005a-4549-90d6-307b3f149a58"
+        },
+        {
+          "Name": "flour tortillas (8-inch)",
+          "QuantityAmount": 10,
+          "QuantityUnit": "whole",
+          "GroupId": "e0216c05-8dc6-43bb-b609-d07b7db60eba"
+        },
+        {
+          "Name": "shredded cheddar cheese",
+          "QuantityAmount": 250,
+          "QuantityUnit": "g",
+          "GroupId": "e0216c05-8dc6-43bb-b609-d07b7db60eba"
+        },
+        {
+          "Name": "sour cream",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": "e0216c05-8dc6-43bb-b609-d07b7db60eba"
+        },
+        {
+          "Name": "fresh cilantro",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "e0216c05-8dc6-43bb-b609-d07b7db60eba"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Preheat oven to 190\u00C2\u00B0C (375\u00C2\u00B0F). Grease a large baking dish",
+          "GroupId": "59d3d55c-24fa-4d23-adec-7a05da1979c3"
+        },
+        {
+          "Text": "Brown beef with onion and garlic in a large skillet over medium-high heat, 6-8 minutes. Drain excess fat",
+          "GroupId": "59d3d55c-24fa-4d23-adec-7a05da1979c3"
+        },
+        {
+          "Text": "Add cumin, chilli powder, paprika, salt and pepper. Stir in black beans and cook 2 minutes",
+          "GroupId": "59d3d55c-24fa-4d23-adec-7a05da1979c3"
+        },
+        {
+          "Text": "Make enchilada sauce: combine crushed tomatoes, tomato paste, broth, cumin, and oregano in a saucepan. Simmer 10 minutes",
+          "GroupId": "59d3d55c-24fa-4d23-adec-7a05da1979c3"
+        },
+        {
+          "Text": "Spread a thin layer of sauce on the bottom of the baking dish",
+          "GroupId": "4d8a0d88-3ea0-426b-9888-b8fa9bffd2f0"
+        },
+        {
+          "Text": "Fill each tortilla with beef mixture and a sprinkle of cheese, roll tightly, and place seam-side down in the dish",
+          "GroupId": "4d8a0d88-3ea0-426b-9888-b8fa9bffd2f0"
+        },
+        {
+          "Text": "Pour remaining sauce over enchiladas and top with remaining cheese",
+          "GroupId": "4d8a0d88-3ea0-426b-9888-b8fa9bffd2f0"
+        },
+        {
+          "Text": "Bake 20-25 minutes until cheese is melted and bubbly. Top with sour cream and cilantro",
+          "GroupId": "4d8a0d88-3ea0-426b-9888-b8fa9bffd2f0"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "RecipeTin Eats",
+        "Url": "https://www.recipetineats.com/beef-enchiladas/"
+      },
+      "Tags": [
+        "beef",
+        "mexican",
+        "enchiladas",
+        "meal-prep",
+        "dinner",
+        "freezer-friendly",
+        "batch-cooking"
+      ],
+      "FurtherNotes": "Makes 10 enchiladas (5 servings). Prep time: 20 minutes, Cook time: 40 minutes. Storage: Refrigerate 4 days, freeze assembled but unbaked up to 3 months. Bake from frozen adding 15 minutes to cook time."
+    },
+    {
+      "Id": "391875be-2fc9-46e5-a5e6-c007d741c435",
+      "Name": "Thai Peanut Noodles",
+      "Description": "Chewy noodles tossed in a creamy, spicy peanut sauce with crunchy vegetables and fresh herbs. Equally delicious hot or cold.",
+      "GroupId": "800818ac-3fc8-4d36-92ff-a9f723396bbd",
+      "Ingredients": [
+        {
+          "Name": "rice noodles or spaghetti",
+          "QuantityAmount": 400,
+          "QuantityUnit": "g",
+          "GroupId": "f1854752-a4e7-4416-8aae-aede3d61c074"
+        },
+        {
+          "Name": "red bell pepper, julienned",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "f1854752-a4e7-4416-8aae-aede3d61c074"
+        },
+        {
+          "Name": "carrots, julienned",
+          "QuantityAmount": 2,
+          "QuantityUnit": "whole",
+          "GroupId": "f1854752-a4e7-4416-8aae-aede3d61c074"
+        },
+        {
+          "Name": "purple cabbage, thinly sliced",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "cups",
+          "GroupId": "f1854752-a4e7-4416-8aae-aede3d61c074"
+        },
+        {
+          "Name": "green onions, sliced",
+          "QuantityAmount": 3,
+          "QuantityUnit": "whole",
+          "GroupId": "f1854752-a4e7-4416-8aae-aede3d61c074"
+        },
+        {
+          "Name": "fresh cilantro",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "f1854752-a4e7-4416-8aae-aede3d61c074"
+        },
+        {
+          "Name": "crushed peanuts",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "f1854752-a4e7-4416-8aae-aede3d61c074"
+        },
+        {
+          "Name": "creamy peanut butter",
+          "QuantityAmount": 0.33,
+          "QuantityUnit": "cup",
+          "GroupId": "ac369860-eab8-4a89-bf76-3b0c6ca94490"
+        },
+        {
+          "Name": "soy sauce",
+          "QuantityAmount": 3,
+          "QuantityUnit": "tbsp",
+          "GroupId": "ac369860-eab8-4a89-bf76-3b0c6ca94490"
+        },
+        {
+          "Name": "rice vinegar",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "ac369860-eab8-4a89-bf76-3b0c6ca94490"
+        },
+        {
+          "Name": "sesame oil",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "ac369860-eab8-4a89-bf76-3b0c6ca94490"
+        },
+        {
+          "Name": "honey",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "ac369860-eab8-4a89-bf76-3b0c6ca94490"
+        },
+        {
+          "Name": "Sriracha",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "ac369860-eab8-4a89-bf76-3b0c6ca94490"
+        },
+        {
+          "Name": "lime juice",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "ac369860-eab8-4a89-bf76-3b0c6ca94490"
+        },
+        {
+          "Name": "warm water",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "ac369860-eab8-4a89-bf76-3b0c6ca94490"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Whisk peanut butter, soy sauce, rice vinegar, sesame oil, honey, Sriracha, lime juice, and warm water until smooth",
+          "GroupId": "17fc3aee-90af-4e46-adc5-815bd6f103ac"
+        },
+        {
+          "Text": "Taste and adjust: more Sriracha for heat, more honey for sweetness, more lime for tang",
+          "GroupId": "17fc3aee-90af-4e46-adc5-815bd6f103ac"
+        },
+        {
+          "Text": "Cook noodles according to package directions, drain, and rinse under cold water",
+          "GroupId": "ae18d717-09e5-4300-a701-bab1f7ab7d7c"
+        },
+        {
+          "Text": "Toss noodles with peanut sauce until evenly coated",
+          "GroupId": "ae18d717-09e5-4300-a701-bab1f7ab7d7c"
+        },
+        {
+          "Text": "Add bell pepper, carrots, cabbage, and green onions; toss to combine",
+          "GroupId": "ae18d717-09e5-4300-a701-bab1f7ab7d7c"
+        },
+        {
+          "Text": "Serve topped with crushed peanuts and fresh cilantro",
+          "GroupId": "ae18d717-09e5-4300-a701-bab1f7ab7d7c"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Minimalist Baker",
+        "Url": "https://minimalistbaker.com/thai-peanut-noodles/"
+      },
+      "Tags": [
+        "thai",
+        "noodles",
+        "peanut",
+        "vegetarian",
+        "quick",
+        "weeknight",
+        "dinner"
+      ],
+      "FurtherNotes": "Makes 4 servings. Prep time: 15 minutes, Cook time: 10 minutes. Add chicken, shrimp, or tofu for protein. Stores well for 3 days; noodles may absorb sauce, so toss with a splash of water when reheating."
+    },
+    {
+      "Id": "134296aa-de40-4900-9d9f-1f7c9639b052",
+      "Name": "Shakshuka",
+      "Description": "Eggs poached in a spiced, chunky tomato-pepper sauce with crumbled feta. A one-pan North African breakfast that works at any time of day.",
+      "GroupId": "f0682c7f-349f-4948-9277-58c677a2e2f3",
+      "Ingredients": [
+        {
+          "Name": "olive oil",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "yellow onion, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "red bell pepper, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 3,
+          "QuantityUnit": "cloves",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "crushed tomatoes",
+          "QuantityAmount": 800,
+          "QuantityUnit": "g",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "cumin",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "smoked paprika",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "cayenne pepper",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "tsp",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "sugar",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "salt and pepper",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": "55ec2073-a72c-4234-9750-c954f714d8dc"
+        },
+        {
+          "Name": "large eggs",
+          "QuantityAmount": 6,
+          "QuantityUnit": "whole",
+          "GroupId": "6ef76223-407e-45ab-b849-9b82004dc2ca"
+        },
+        {
+          "Name": "crumbled feta cheese",
+          "QuantityAmount": 75,
+          "QuantityUnit": "g",
+          "GroupId": "6ef76223-407e-45ab-b849-9b82004dc2ca"
+        },
+        {
+          "Name": "fresh parsley or cilantro",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "6ef76223-407e-45ab-b849-9b82004dc2ca"
+        },
+        {
+          "Name": "crusty bread, for serving",
+          "QuantityAmount": 1,
+          "QuantityUnit": "loaf",
+          "GroupId": "6ef76223-407e-45ab-b849-9b82004dc2ca"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Heat olive oil in a large deep skillet over medium heat. Saut\u00C3\u00A9 onion and bell pepper 5-6 minutes until softened",
+          "GroupId": "b34cf90c-bc80-4446-b66d-84a84c599b58"
+        },
+        {
+          "Text": "Add garlic, cumin, paprika, and cayenne; cook 1 minute until fragrant",
+          "GroupId": "b34cf90c-bc80-4446-b66d-84a84c599b58"
+        },
+        {
+          "Text": "Pour in crushed tomatoes, add sugar, season with salt and pepper. Simmer 10-15 minutes until sauce thickens",
+          "GroupId": "b34cf90c-bc80-4446-b66d-84a84c599b58"
+        },
+        {
+          "Text": "Make 6 wells in the sauce with the back of a spoon. Crack an egg into each well",
+          "GroupId": "421eb440-bdd1-493f-9376-f978ea99a85a"
+        },
+        {
+          "Text": "Cover and cook 5-8 minutes until egg whites are set but yolks are still runny",
+          "GroupId": "421eb440-bdd1-493f-9376-f978ea99a85a"
+        },
+        {
+          "Text": "Scatter feta and herbs over the top. Serve immediately with crusty bread for dipping",
+          "GroupId": "421eb440-bdd1-493f-9376-f978ea99a85a"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Serious Eats",
+        "Url": "https://www.seriouseats.com/shakshuka-recipe"
+      },
+      "Tags": [
+        "breakfast",
+        "eggs",
+        "north-african",
+        "one-pan",
+        "vegetarian",
+        "brunch"
+      ],
+      "FurtherNotes": "Makes 3 servings. Prep time: 10 minutes, Cook time: 25 minutes. The tomato base can be made ahead and refrigerated for 3 days; reheat and add eggs fresh. Add harissa for extra heat."
+    },
+    {
+      "Id": "8b528edb-6d14-4a81-802f-618d477f37a5",
+      "Name": "Black Bean Tacos",
+      "Description": "Smoky, seasoned black beans piled into warm tortillas with fresh toppings. A quick vegetarian dinner that rivals any taco truck.",
+      "GroupId": "800818ac-3fc8-4d36-92ff-a9f723396bbd",
+      "Ingredients": [
+        {
+          "Name": "black beans, drained and rinsed",
+          "QuantityAmount": 800,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "olive oil",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "cumin",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "chilli powder",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "smoked paprika",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "garlic powder",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "lime juice",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "small corn or flour tortillas",
+          "QuantityAmount": 8,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "avocado, sliced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "red cabbage, shredded",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "fresh cilantro",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "crumbled cotija or feta cheese",
+          "QuantityAmount": 60,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "hot sauce",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Heat olive oil in a skillet over medium heat. Add black beans, cumin, chilli powder, paprika, and garlic powder",
+          "GroupId": null
+        },
+        {
+          "Text": "Cook 4-5 minutes, gently mashing about half the beans with a fork to create a creamy texture",
+          "GroupId": null
+        },
+        {
+          "Text": "Squeeze lime juice over beans and season with salt to taste",
+          "GroupId": null
+        },
+        {
+          "Text": "Warm tortillas in a dry pan or directly over a gas flame for 20-30 seconds per side",
+          "GroupId": null
+        },
+        {
+          "Text": "Fill tortillas with seasoned beans, top with avocado, shredded cabbage, cilantro, cheese, and hot sauce",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Budget Bytes",
+        "Url": "https://www.budgetbytes.com/smoky-black-bean-tacos/"
+      },
+      "Tags": [
+        "tacos",
+        "black-beans",
+        "vegetarian",
+        "quick",
+        "weeknight",
+        "mexican",
+        "budget"
+      ],
+      "FurtherNotes": "Makes 4 servings (8 tacos). Prep time: 5 minutes, Cook time: 10 minutes. Seasoned beans keep refrigerated for 5 days. Double the beans for easy burrito bowls throughout the week."
+    },
+    {
+      "Id": "aa6aed4d-2496-4ec8-b936-915b9ceff204",
+      "Name": "Chicken Tikka Masala",
+      "Description": "Tender marinated chicken pieces swimming in a rich, creamy spiced tomato sauce. Better than takeaway and perfect for batch cooking.",
+      "GroupId": "caaa3392-bcc9-42ac-99d4-55cf208229e8",
+      "Ingredients": [
+        {
+          "Name": "boneless skinless chicken thighs, cubed",
+          "QuantityAmount": 1,
+          "QuantityUnit": "kg",
+          "GroupId": "5f10d5b0-e77c-4a01-b662-1fa179f9ed19"
+        },
+        {
+          "Name": "plain yogurt",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": "5f10d5b0-e77c-4a01-b662-1fa179f9ed19"
+        },
+        {
+          "Name": "lemon juice",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "5f10d5b0-e77c-4a01-b662-1fa179f9ed19"
+        },
+        {
+          "Name": "garam masala",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tsp",
+          "GroupId": "5f10d5b0-e77c-4a01-b662-1fa179f9ed19"
+        },
+        {
+          "Name": "turmeric",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "5f10d5b0-e77c-4a01-b662-1fa179f9ed19"
+        },
+        {
+          "Name": "chilli powder",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "5f10d5b0-e77c-4a01-b662-1fa179f9ed19"
+        },
+        {
+          "Name": "salt",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "5f10d5b0-e77c-4a01-b662-1fa179f9ed19"
+        },
+        {
+          "Name": "vegetable oil",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "butter",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "yellow onion, finely diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 4,
+          "QuantityUnit": "cloves",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "fresh ginger, grated",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "crushed tomatoes",
+          "QuantityAmount": 400,
+          "QuantityUnit": "g",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "heavy cream",
+          "QuantityAmount": 0.75,
+          "QuantityUnit": "cup",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "garam masala",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "sugar",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "fresh cilantro",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        },
+        {
+          "Name": "basmati rice, for serving",
+          "QuantityAmount": 2,
+          "QuantityUnit": "cups",
+          "GroupId": "4f7ece28-d488-4162-a674-1eed7e1394e9"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Combine chicken with yogurt, lemon juice, garam masala, turmeric, chilli powder, and salt. Marinate at least 30 minutes (overnight is best)",
+          "GroupId": "4f4c5d4a-b06f-4dad-b886-f2564c0018a8"
+        },
+        {
+          "Text": "Heat oil in a large pan over high heat. Cook marinated chicken in batches 3-4 minutes per side until charred. Set aside",
+          "GroupId": "4f4c5d4a-b06f-4dad-b886-f2564c0018a8"
+        },
+        {
+          "Text": "In the same pan, melt butter over medium heat. Saut\u00C3\u00A9 onion 5 minutes until softened",
+          "GroupId": "7ea54e46-844b-48f0-9902-7428e6a05763"
+        },
+        {
+          "Text": "Add garlic and ginger, cook 1 minute. Stir in garam masala and cook 30 seconds",
+          "GroupId": "7ea54e46-844b-48f0-9902-7428e6a05763"
+        },
+        {
+          "Text": "Add crushed tomatoes and sugar. Simmer 15 minutes, stirring occasionally, until sauce thickens",
+          "GroupId": "7ea54e46-844b-48f0-9902-7428e6a05763"
+        },
+        {
+          "Text": "Stir in heavy cream and return chicken to the sauce. Simmer 5-8 minutes until chicken is cooked through",
+          "GroupId": "7ea54e46-844b-48f0-9902-7428e6a05763"
+        },
+        {
+          "Text": "Garnish with cilantro and serve over basmati rice",
+          "GroupId": "7ea54e46-844b-48f0-9902-7428e6a05763"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "RecipeTin Eats",
+        "Url": "https://www.recipetineats.com/chicken-tikka-masala/"
+      },
+      "Tags": [
+        "chicken",
+        "indian",
+        "curry",
+        "meal-prep",
+        "dinner",
+        "comfort-food",
+        "batch-cooking"
+      ],
+      "FurtherNotes": "Makes 5 servings. Prep time: 15 minutes (plus marinating), Cook time: 35 minutes. Storage: Refrigerate 4 days, freezes well for up to 3 months. Sauce improves overnight. Use coconut cream for dairy-free version."
+    },
+    {
+      "Id": "6376364f-9e9b-40a0-b956-973fb414ec8a",
+      "Name": "Greek Chicken Bowl",
+      "Description": "Juicy lemon-herb grilled chicken over rice with cucumber, tomatoes, red onion, and a cool creamy tzatziki. A fresh, satisfying meal prep bowl.",
+      "GroupId": "caaa3392-bcc9-42ac-99d4-55cf208229e8",
+      "Ingredients": [
+        {
+          "Name": "boneless skinless chicken breasts",
+          "QuantityAmount": 800,
+          "QuantityUnit": "g",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "olive oil",
+          "QuantityAmount": 3,
+          "QuantityUnit": "tbsp",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "lemon juice",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "dried oregano",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "tsp",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 3,
+          "QuantityUnit": "cloves",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "basmati rice",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "cups",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "cucumber, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "cherry tomatoes, halved",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "red onion, thinly sliced",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "whole",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "Kalamata olives",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "crumbled feta cheese",
+          "QuantityAmount": 100,
+          "QuantityUnit": "g",
+          "GroupId": "f6393b2d-7828-4db7-8a77-731588ce5cbf"
+        },
+        {
+          "Name": "Greek yogurt",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": "54889718-2ed5-4157-9504-7fbc79ac2ca7"
+        },
+        {
+          "Name": "cucumber, grated and squeezed dry",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": "54889718-2ed5-4157-9504-7fbc79ac2ca7"
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "clove",
+          "GroupId": "54889718-2ed5-4157-9504-7fbc79ac2ca7"
+        },
+        {
+          "Name": "lemon juice",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "54889718-2ed5-4157-9504-7fbc79ac2ca7"
+        },
+        {
+          "Name": "fresh dill, chopped",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": "54889718-2ed5-4157-9504-7fbc79ac2ca7"
+        },
+        {
+          "Name": "salt",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": "54889718-2ed5-4157-9504-7fbc79ac2ca7"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Marinate chicken in olive oil, lemon juice, oregano, garlic, and salt for at least 20 minutes",
+          "GroupId": "20dab97f-dc9c-403f-a3b9-f704816eccc1"
+        },
+        {
+          "Text": "Cook rice according to package directions. Let cool slightly",
+          "GroupId": "20dab97f-dc9c-403f-a3b9-f704816eccc1"
+        },
+        {
+          "Text": "Grill or pan-sear chicken over medium-high heat, 5-6 minutes per side until internal temp reaches 74\u00C2\u00B0C (165\u00C2\u00B0F). Let rest 5 minutes, then slice",
+          "GroupId": "20dab97f-dc9c-403f-a3b9-f704816eccc1"
+        },
+        {
+          "Text": "Make tzatziki: combine yogurt, grated cucumber, garlic, lemon juice, dill, and salt. Refrigerate until serving",
+          "GroupId": "20dab97f-dc9c-403f-a3b9-f704816eccc1"
+        },
+        {
+          "Text": "Divide rice among 4 containers. Top with sliced chicken, cucumber, tomatoes, red onion, olives, and feta",
+          "GroupId": "4ae8e2dd-7d02-4144-a262-6b19b872a3a4"
+        },
+        {
+          "Text": "Pack tzatziki in small separate containers. Drizzle over bowls when ready to eat",
+          "GroupId": "4ae8e2dd-7d02-4144-a262-6b19b872a3a4"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Gimme Delicious",
+        "Url": "https://gimmedelicious.com/greek-chicken-bowl/"
+      },
+      "Tags": [
+        "greek",
+        "chicken",
+        "bowl",
+        "meal-prep",
+        "mediterranean",
+        "lunch",
+        "high-protein"
+      ],
+      "FurtherNotes": "Makes 4 servings. Prep time: 20 minutes (plus marinating), Cook time: 15 minutes. Storage: Refrigerate 4 days. Keep tzatziki separate to prevent sogginess. Swap rice for cauliflower rice for lower carbs."
+    },
+    {
+      "Id": "0dbd4f50-67d5-444a-8d49-f5435c12788f",
+      "Name": "Overnight Oats",
+      "Description": "Creamy no-cook oats with chia seeds, honey, and vanilla that you prep the night before. Grab-and-go breakfast ready in minutes.",
+      "GroupId": "f0682c7f-349f-4948-9277-58c677a2e2f3",
+      "Ingredients": [
+        {
+          "Name": "rolled oats",
+          "QuantityAmount": 2.5,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        },
+        {
+          "Name": "milk of choice",
+          "QuantityAmount": 2.5,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        },
+        {
+          "Name": "Greek yogurt",
+          "QuantityAmount": 0.75,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "chia seeds",
+          "QuantityAmount": 2.5,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "honey or maple syrup",
+          "QuantityAmount": 2.5,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "vanilla extract",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "pinch of salt",
+          "QuantityAmount": 1,
+          "QuantityUnit": "pinch",
+          "GroupId": null
+        },
+        {
+          "Name": "fresh berries, for topping",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        },
+        {
+          "Name": "sliced almonds or granola, for topping",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "In a large bowl, combine oats, milk, yogurt, chia seeds, honey, vanilla, and salt. Stir well",
+          "GroupId": null
+        },
+        {
+          "Text": "Divide mixture evenly among 5 jars or containers (about 3/4 cup each)",
+          "GroupId": null
+        },
+        {
+          "Text": "Cover tightly and refrigerate for at least 4 hours or overnight",
+          "GroupId": null
+        },
+        {
+          "Text": "In the morning, stir the oats and add a splash more milk if too thick",
+          "GroupId": null
+        },
+        {
+          "Text": "Top with fresh berries, sliced almonds, or granola before serving",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Love and Lemons",
+        "Url": "https://www.loveandlemons.com/overnight-oats-recipe/"
+      },
+      "Tags": [
+        "breakfast",
+        "overnight-oats",
+        "no-cook",
+        "meal-prep",
+        "healthy",
+        "grab-and-go"
+      ],
+      "FurtherNotes": "Makes 5 servings. Prep time: 10 minutes, No cook time. Storage: Refrigerate up to 5 days. Variations: PB \u0026 banana, mango coconut, apple cinnamon. Add protein powder for extra nutrition."
+    },
+    {
+      "Id": "87aa2102-6129-4c57-9706-03cab2895540",
+      "Name": "Lemon Herb Salmon",
+      "Description": "Flaky, buttery salmon fillets baked with lemon, garlic, and fresh herbs. An elegant weeknight dinner that comes together in 20 minutes.",
+      "GroupId": "800818ac-3fc8-4d36-92ff-a9f723396bbd",
+      "Ingredients": [
+        {
+          "Name": "salmon fillets",
+          "QuantityAmount": 4,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "butter, melted",
+          "QuantityAmount": 3,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 3,
+          "QuantityUnit": "cloves",
+          "GroupId": null
+        },
+        {
+          "Name": "lemon juice",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "lemon zest",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "fresh dill, chopped",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "fresh parsley, chopped",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "salt",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "black pepper",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "asparagus spears or green beans",
+          "QuantityAmount": 400,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "olive oil",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Preheat oven to 200\u00C2\u00B0C (400\u00C2\u00B0F). Line a baking sheet with parchment paper",
+          "GroupId": null
+        },
+        {
+          "Text": "Mix melted butter, garlic, lemon juice, lemon zest, dill, parsley, salt, and pepper in a small bowl",
+          "GroupId": null
+        },
+        {
+          "Text": "Toss asparagus with olive oil and a pinch of salt. Arrange on one side of the baking sheet",
+          "GroupId": null
+        },
+        {
+          "Text": "Place salmon fillets on the other side. Spoon the lemon herb butter generously over each fillet",
+          "GroupId": null
+        },
+        {
+          "Text": "Bake 12-15 minutes until salmon flakes easily with a fork and asparagus is tender",
+          "GroupId": null
+        },
+        {
+          "Text": "Squeeze extra lemon over salmon before serving",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Cafe Delites",
+        "Url": "https://cafedelites.com/lemon-herb-butter-salmon/"
+      },
+      "Tags": [
+        "salmon",
+        "seafood",
+        "quick",
+        "weeknight",
+        "healthy",
+        "dinner",
+        "low-carb"
+      ],
+      "FurtherNotes": "Makes 4 servings. Prep time: 5 minutes, Cook time: 15 minutes. Internal temp should reach 63\u00C2\u00B0C (145\u00C2\u00B0F). Do not overcook or salmon will be dry. Leftovers make excellent salmon salad the next day."
+    },
+    {
+      "Id": "d9055a20-ebe4-44a4-9c1a-7204f61a6efb",
+      "Name": "Turkey Meatball Soup",
+      "Description": "Hearty, nourishing soup with tender turkey meatballs, vegetables, and orzo pasta in a savory broth. Comfort in a bowl that freezes perfectly.",
+      "GroupId": "1c56f246-b8fa-4f47-be38-45e9a02f6f0c",
+      "Ingredients": [
+        {
+          "Name": "ground turkey",
+          "QuantityAmount": 500,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "breadcrumbs",
+          "QuantityAmount": 0.33,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "egg",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "garlic, minced",
+          "QuantityAmount": 3,
+          "QuantityUnit": "cloves",
+          "GroupId": null
+        },
+        {
+          "Name": "Italian seasoning",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "salt and pepper",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": null
+        },
+        {
+          "Name": "olive oil",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "yellow onion, diced",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "carrots, diced",
+          "QuantityAmount": 2,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "celery stalks, diced",
+          "QuantityAmount": 2,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "diced tomatoes",
+          "QuantityAmount": 400,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "chicken broth",
+          "QuantityAmount": 6,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        },
+        {
+          "Name": "orzo pasta",
+          "QuantityAmount": 0.75,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "baby spinach",
+          "QuantityAmount": 2,
+          "QuantityUnit": "cups",
+          "GroupId": null
+        },
+        {
+          "Name": "Parmesan rind (optional)",
+          "QuantityAmount": 1,
+          "QuantityUnit": "piece",
+          "GroupId": null
+        },
+        {
+          "Name": "grated Parmesan, for serving",
+          "QuantityAmount": 0.25,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Combine ground turkey, breadcrumbs, egg, 1 clove minced garlic, half the Italian seasoning, salt, and pepper. Roll into 20-24 small meatballs",
+          "GroupId": null
+        },
+        {
+          "Text": "Heat 1 tbsp olive oil in a large pot over medium-high heat. Brown meatballs on all sides, about 4 minutes (they don\u0027t need to cook through). Remove and set aside",
+          "GroupId": null
+        },
+        {
+          "Text": "Add remaining olive oil. Saut\u00C3\u00A9 onion, carrots, and celery for 5 minutes until softened. Add remaining garlic and Italian seasoning, cook 1 minute",
+          "GroupId": null
+        },
+        {
+          "Text": "Add diced tomatoes, chicken broth, and Parmesan rind if using. Bring to a boil",
+          "GroupId": null
+        },
+        {
+          "Text": "Return meatballs to the pot, add orzo, and simmer 10-12 minutes until pasta is tender and meatballs are cooked through",
+          "GroupId": null
+        },
+        {
+          "Text": "Stir in spinach until wilted, about 1 minute. Serve topped with grated Parmesan",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Half Baked Harvest",
+        "Url": "https://www.halfbakedharvest.com/turkey-meatball-soup/"
+      },
+      "Tags": [
+        "soup",
+        "turkey",
+        "meatballs",
+        "meal-prep",
+        "comfort-food",
+        "dinner",
+        "freezer-friendly"
+      ],
+      "FurtherNotes": "Makes 6 servings. Prep time: 15 minutes, Cook time: 30 minutes. Storage: Refrigerate 4 days, freeze up to 3 months (freeze without orzo; cook fresh when reheating). The Parmesan rind adds incredible depth of flavor."
+    },
+    {
+      "Id": "48cdf080-f187-4a53-a916-2b27315062d7",
+      "Name": "Banana Oat Pancakes",
+      "Description": "Fluffy, naturally sweet pancakes made with oats and bananas. Freezer-friendly for quick weekday breakfasts the whole family will love.",
+      "GroupId": "f0682c7f-349f-4948-9277-58c677a2e2f3",
+      "Ingredients": [
+        {
+          "Name": "ripe bananas",
+          "QuantityAmount": 2,
+          "QuantityUnit": "whole",
+          "GroupId": "a71e639e-7329-4a93-9b0b-0e09037eeb60"
+        },
+        {
+          "Name": "rolled oats",
+          "QuantityAmount": 1.5,
+          "QuantityUnit": "cups",
+          "GroupId": "a71e639e-7329-4a93-9b0b-0e09037eeb60"
+        },
+        {
+          "Name": "eggs",
+          "QuantityAmount": 2,
+          "QuantityUnit": "whole",
+          "GroupId": "a71e639e-7329-4a93-9b0b-0e09037eeb60"
+        },
+        {
+          "Name": "milk",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": "a71e639e-7329-4a93-9b0b-0e09037eeb60"
+        },
+        {
+          "Name": "baking powder",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "a71e639e-7329-4a93-9b0b-0e09037eeb60"
+        },
+        {
+          "Name": "cinnamon",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": "a71e639e-7329-4a93-9b0b-0e09037eeb60"
+        },
+        {
+          "Name": "vanilla extract",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": "a71e639e-7329-4a93-9b0b-0e09037eeb60"
+        },
+        {
+          "Name": "pinch of salt",
+          "QuantityAmount": 1,
+          "QuantityUnit": "pinch",
+          "GroupId": "a71e639e-7329-4a93-9b0b-0e09037eeb60"
+        },
+        {
+          "Name": "maple syrup",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": "32682319-0dd0-45b4-8071-f3a3e8ba5d8f"
+        },
+        {
+          "Name": "fresh berries",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": "32682319-0dd0-45b4-8071-f3a3e8ba5d8f"
+        },
+        {
+          "Name": "nut butter",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": "32682319-0dd0-45b4-8071-f3a3e8ba5d8f"
+        },
+        {
+          "Name": "sliced banana",
+          "QuantityAmount": 1,
+          "QuantityUnit": "whole",
+          "GroupId": "32682319-0dd0-45b4-8071-f3a3e8ba5d8f"
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Add oats to a blender and pulse until they form a flour-like consistency",
+          "GroupId": "8922b627-d4f4-42ad-ba75-f192ae363ac8"
+        },
+        {
+          "Text": "Add bananas, eggs, milk, baking powder, cinnamon, vanilla, and salt. Blend until smooth",
+          "GroupId": "8922b627-d4f4-42ad-ba75-f192ae363ac8"
+        },
+        {
+          "Text": "Let batter rest 5 minutes to thicken slightly",
+          "GroupId": "8922b627-d4f4-42ad-ba75-f192ae363ac8"
+        },
+        {
+          "Text": "Heat a non-stick pan or griddle over medium heat with a little butter or oil",
+          "GroupId": "f3036311-31bb-4695-bfbe-cc4bb20c31fb"
+        },
+        {
+          "Text": "Pour 1/4 cup batter per pancake. Cook 2-3 minutes until bubbles form on surface and edges look set",
+          "GroupId": "f3036311-31bb-4695-bfbe-cc4bb20c31fb"
+        },
+        {
+          "Text": "Flip and cook 1-2 minutes more until golden brown. Serve with desired toppings",
+          "GroupId": "f3036311-31bb-4695-bfbe-cc4bb20c31fb"
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Downshiftology",
+        "Url": "https://downshiftology.com/recipes/banana-oat-pancakes/"
+      },
+      "Tags": [
+        "breakfast",
+        "pancakes",
+        "banana",
+        "oats",
+        "healthy",
+        "gluten-free",
+        "meal-prep"
+      ],
+      "FurtherNotes": "Makes about 10 pancakes (3-4 servings). Prep time: 5 minutes, Cook time: 15 minutes. Freeze cooked pancakes in a single layer, then stack in a bag. Reheat in toaster or microwave. Naturally gluten-free if using certified GF oats."
+    },
+    {
+      "Id": "d675762a-45e2-415b-85d5-34d9920c2a95",
+      "Name": "Chocolate Protein Balls",
+      "Description": "Rich, fudgy no-bake energy balls packed with oats, peanut butter, and chocolate chips. The perfect pre-workout or afternoon snack.",
+      "GroupId": "e8d37bad-ff4a-4320-947e-e4fad6968658",
+      "Ingredients": [
+        {
+          "Name": "rolled oats",
+          "QuantityAmount": 1,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "peanut butter",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "honey",
+          "QuantityAmount": 0.33,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "chocolate protein powder",
+          "QuantityAmount": 0.33,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "dark chocolate chips",
+          "QuantityAmount": 0.33,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "flaxseed meal",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "vanilla extract",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "cocoa powder (optional, for rolling)",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Combine oats, peanut butter, honey, protein powder, chocolate chips, flaxseed, and vanilla in a large bowl. Mix until fully combined",
+          "GroupId": null
+        },
+        {
+          "Text": "If mixture is too dry, add a splash of milk. If too sticky, add a tablespoon more oats",
+          "GroupId": null
+        },
+        {
+          "Text": "Refrigerate the mixture for 15-20 minutes to firm up",
+          "GroupId": null
+        },
+        {
+          "Text": "Roll into 20 balls (about 1 tablespoon each). Optionally roll in cocoa powder for coating",
+          "GroupId": null
+        },
+        {
+          "Text": "Store in an airtight container in the fridge. Enjoy cold or at room temperature",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Ambitious Kitchen",
+        "Url": "https://www.ambitiouskitchen.com/no-bake-chocolate-energy-bites/"
+      },
+      "Tags": [
+        "snack",
+        "no-bake",
+        "protein",
+        "chocolate",
+        "energy-balls",
+        "healthy",
+        "meal-prep"
+      ],
+      "FurtherNotes": "Makes 20 balls. Prep time: 10 minutes, No cook time (requires 15 min chilling). Storage: Refrigerate up to 2 weeks, freeze up to 3 months. Swap peanut butter for almond butter if preferred. Each ball is roughly 95 calories with 4g protein."
+    },
+    {
+      "Id": "e320505b-b744-4217-b11a-c79cb299b32e",
+      "Name": "Caprese Stuffed Chicken",
+      "Description": "Juicy chicken breasts stuffed with fresh mozzarella, sun-dried tomatoes, and basil, wrapped in prosciutto. An impressive weeknight dinner in under 30 minutes.",
+      "GroupId": "800818ac-3fc8-4d36-92ff-a9f723396bbd",
+      "Ingredients": [
+        {
+          "Name": "boneless skinless chicken breasts",
+          "QuantityAmount": 4,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "fresh mozzarella, sliced",
+          "QuantityAmount": 125,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "sun-dried tomatoes, chopped",
+          "QuantityAmount": 0.33,
+          "QuantityUnit": "cup",
+          "GroupId": null
+        },
+        {
+          "Name": "fresh basil leaves",
+          "QuantityAmount": 8,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "prosciutto slices",
+          "QuantityAmount": 8,
+          "QuantityUnit": "whole",
+          "GroupId": null
+        },
+        {
+          "Name": "olive oil",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "garlic powder",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Italian seasoning",
+          "QuantityAmount": 0.5,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "salt and pepper",
+          "QuantityAmount": 1,
+          "QuantityUnit": "to taste",
+          "GroupId": null
+        },
+        {
+          "Name": "balsamic glaze, for drizzling",
+          "QuantityAmount": 2,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Preheat oven to 200\u00C2\u00B0C (400\u00C2\u00B0F). Cut a deep pocket horizontally into each chicken breast, being careful not to slice all the way through",
+          "GroupId": null
+        },
+        {
+          "Text": "Season chicken inside and out with garlic powder, Italian seasoning, salt, and pepper",
+          "GroupId": null
+        },
+        {
+          "Text": "Stuff each breast with mozzarella slices, sun-dried tomatoes, and 2 basil leaves",
+          "GroupId": null
+        },
+        {
+          "Text": "Wrap each stuffed breast with 2 slices of prosciutto to seal the opening",
+          "GroupId": null
+        },
+        {
+          "Text": "Heat olive oil in an oven-safe skillet over medium-high heat. Sear chicken 2-3 minutes per side until prosciutto is crispy",
+          "GroupId": null
+        },
+        {
+          "Text": "Transfer skillet to oven and bake 15-18 minutes until chicken reaches 74\u00C2\u00B0C (165\u00C2\u00B0F) internally",
+          "GroupId": null
+        },
+        {
+          "Text": "Let rest 5 minutes, then drizzle with balsamic glaze before serving",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": {
+        "Text": "Cafe Delites",
+        "Url": "https://cafedelites.com/caprese-stuffed-chicken/"
+      },
+      "Tags": [
+        "chicken",
+        "italian",
+        "caprese",
+        "weeknight",
+        "dinner",
+        "low-carb",
+        "impressive"
+      ],
+      "FurtherNotes": "Makes 4 servings. Prep time: 10 minutes, Cook time: 20 minutes. Serve with roasted vegetables, salad, or garlic bread. Leftover chicken slices well for next-day sandwiches or salads. Secure prosciutto with toothpicks if needed."
+    },
+    {
+      "Id": "93145c3e-c94a-471e-89ef-c9885980e228",
+      "Name": "Protein Waffles",
+      "Description": "Crispy, golden waffles packed with protein from eggs and protein powder, naturally sweetened with banana. A quick, healthy breakfast or snack that doubles as pancake batter.",
+      "GroupId": "e8d37bad-ff4a-4320-947e-e4fad6968658",
+      "Ingredients": [
+        {
+          "Name": "Oats",
+          "QuantityAmount": 150,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "Eggs",
+          "QuantityAmount": 6,
+          "QuantityUnit": "",
+          "GroupId": null
+        },
+        {
+          "Name": "Bananas",
+          "QuantityAmount": 2,
+          "QuantityUnit": "",
+          "GroupId": null
+        },
+        {
+          "Name": "Protein Powder",
+          "QuantityAmount": 60,
+          "QuantityUnit": "g",
+          "GroupId": null
+        },
+        {
+          "Name": "Milk",
+          "QuantityAmount": 4,
+          "QuantityUnit": "tbsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Baking Powder",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        },
+        {
+          "Name": "Cinnamon",
+          "QuantityAmount": 1,
+          "QuantityUnit": "tsp",
+          "GroupId": null
+        }
+      ],
+      "Instructions": [
+        {
+          "Text": "Blend the oats into oat flour.",
+          "GroupId": null
+        },
+        {
+          "Text": "Add in the eggs, bananas, protein powder, milk, baking powder and cinnamon and blend until smooth.",
+          "GroupId": null
+        },
+        {
+          "Text": "Cook the mixture with a waffle maker until firm and golden brown.",
+          "GroupId": null
+        },
+        {
+          "Text": "Optionally, serve with berries.",
+          "GroupId": null
+        }
+      ],
+      "NutritionInfo": null,
+      "Source": null,
+      "Tags": [
+        "Protein"
+      ],
+      "FurtherNotes": "The mix can also be used for Protein Pancakes!"
+    }
+  ],
+  "Groups": [
+    {
+      "Id": "64fee697-05e0-48e9-b35d-a2f42273f46e",
+      "Name": "Base Components",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "472b1646-73c1-4e1c-8c3d-9c5434c22e11",
+      "Name": "Korean Beef Sauce",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "bd870250-8a92-4a8e-af6b-375e167c2051",
+      "Name": "Preparation",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "799d4e7d-e0a7-42fa-b587-229a1db1d4a5",
+      "Name": "Korean Beef",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "5218f8e5-6652-4ae0-b59d-101ac8fa2bb7",
+      "Name": "Assembly",
+      "SortOrder": 2,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "34373860-9621-4abb-b694-576c458b6859",
+      "Name": "Beef Filling",
+      "SortOrder": 2,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "19bcbe5e-9ee9-4547-95d7-2964423ed8f5",
+      "Name": "Assembly",
+      "SortOrder": 3,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "1c56f246-b8fa-4f47-be38-45e9a02f6f0c",
+      "Name": "Meal Prep",
+      "SortOrder": 0,
+      "GroupType": "Recipe"
+    },
+    {
+      "Id": "800818ac-3fc8-4d36-92ff-a9f723396bbd",
+      "Name": "Quick Weeknight",
+      "SortOrder": 4,
+      "GroupType": "Recipe"
+    },
+    {
+      "Id": "f0682c7f-349f-4948-9277-58c677a2e2f3",
+      "Name": "Breakfast",
+      "SortOrder": 5,
+      "GroupType": "Recipe"
+    },
+    {
+      "Id": "e8d37bad-ff4a-4320-947e-e4fad6968658",
+      "Name": "Snacks \u0026 Desserts",
+      "SortOrder": 6,
+      "GroupType": "Recipe"
+    },
+    {
+      "Id": "5288f232-5f6a-40c7-bd52-7f543f5a12ac",
+      "Name": "Bowl Base",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "e70cdd91-f966-4278-8c99-8cc89ea9458b",
+      "Name": "Teriyaki Chicken",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "f869c799-4a4c-4a1e-b4bb-370cc439e7e9",
+      "Name": "Prep",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "e14805aa-a690-4936-992a-a1f77efe4f54",
+      "Name": "Cooking",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "fda4ab58-cd45-4f5a-a9cc-e5d1f8f2b257",
+      "Name": "Salad",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "ee648039-a261-45ab-8b2e-258111b2d75c",
+      "Name": "Dressing",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "1510ecea-9dee-4ac1-9d57-7838fb4b6060",
+      "Name": "Preparation",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "e98ade69-8ecb-4e29-ba48-2268fb8728f8",
+      "Name": "Assembly",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "53eaa7ab-c894-44ee-bff3-c52e03264262",
+      "Name": "Filling",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "e9aaeab3-005a-4549-90d6-307b3f149a58",
+      "Name": "Enchilada Sauce",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "e0216c05-8dc6-43bb-b609-d07b7db60eba",
+      "Name": "Assembly",
+      "SortOrder": 2,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "59d3d55c-24fa-4d23-adec-7a05da1979c3",
+      "Name": "Make Filling",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "4d8a0d88-3ea0-426b-9888-b8fa9bffd2f0",
+      "Name": "Assemble \u0026 Bake",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "f1854752-a4e7-4416-8aae-aede3d61c074",
+      "Name": "Noodles \u0026 Veg",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "ac369860-eab8-4a89-bf76-3b0c6ca94490",
+      "Name": "Peanut Sauce",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "17fc3aee-90af-4e46-adc5-815bd6f103ac",
+      "Name": "Sauce",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "ae18d717-09e5-4300-a701-bab1f7ab7d7c",
+      "Name": "Cook \u0026 Toss",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "55ec2073-a72c-4234-9750-c954f714d8dc",
+      "Name": "Tomato Base",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "6ef76223-407e-45ab-b849-9b82004dc2ca",
+      "Name": "Toppings",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "b34cf90c-bc80-4446-b66d-84a84c599b58",
+      "Name": "Build the Base",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "421eb440-bdd1-493f-9376-f978ea99a85a",
+      "Name": "Cook Eggs",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "5f10d5b0-e77c-4a01-b662-1fa179f9ed19",
+      "Name": "Marinated Chicken",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "4f7ece28-d488-4162-a674-1eed7e1394e9",
+      "Name": "Masala Sauce",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "4f4c5d4a-b06f-4dad-b886-f2564c0018a8",
+      "Name": "Marinate \u0026 Cook Chicken",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "7ea54e46-844b-48f0-9902-7428e6a05763",
+      "Name": "Make Sauce",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "f6393b2d-7828-4db7-8a77-731588ce5cbf",
+      "Name": "Bowl",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "54889718-2ed5-4157-9504-7fbc79ac2ca7",
+      "Name": "Tzatziki",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "20dab97f-dc9c-403f-a3b9-f704816eccc1",
+      "Name": "Chicken \u0026 Veg",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "4ae8e2dd-7d02-4144-a262-6b19b872a3a4",
+      "Name": "Assembly",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "a71e639e-7329-4a93-9b0b-0e09037eeb60",
+      "Name": "Batter",
+      "SortOrder": 0,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "32682319-0dd0-45b4-8071-f3a3e8ba5d8f",
+      "Name": "Toppings",
+      "SortOrder": 1,
+      "GroupType": "Ingredient"
+    },
+    {
+      "Id": "8922b627-d4f4-42ad-ba75-f192ae363ac8",
+      "Name": "Make Batter",
+      "SortOrder": 0,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "f3036311-31bb-4695-bfbe-cc4bb20c31fb",
+      "Name": "Cook",
+      "SortOrder": 1,
+      "GroupType": "Instruction"
+    },
+    {
+      "Id": "fc42ff6a-2554-440e-8156-5ca45c26673a",
+      "Name": "Wraps",
+      "SortOrder": 3,
+      "GroupType": "Recipe"
+    },
+    {
+      "Id": "30b87ae1-8b58-433e-b5dc-da0cfb325ba6",
+      "Name": "Meal Prep - Beef",
+      "SortOrder": 1,
+      "GroupType": "Recipe"
+    },
+    {
+      "Id": "caaa3392-bcc9-42ac-99d4-55cf208229e8",
+      "Name": "Meal Prep - Chicken",
+      "SortOrder": 2,
+      "GroupType": "Recipe"
+    }
+  ]
+}
