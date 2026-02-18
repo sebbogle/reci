@@ -2,7 +2,7 @@ namespace Reci.Services;
 
 public class RecipeStateNotifier(ILogger<RecipeStateNotifier> logger) : IRecipeStateNotifier
 {
-    private readonly ILogger<RecipeStateNotifier> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly ILogger<RecipeStateNotifier> _logger = logger.ThrowIfNull();
     private readonly List<Func<Task>> _callbacks = new();
 
     public void Subscribe(Func<Task> callback)

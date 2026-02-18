@@ -6,7 +6,7 @@ public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRe
     private readonly IGroupingRepository _groupingRepository = groupingRepository.ThrowIfNull();
     private readonly ISettingsRepository _settingsRepository = settingsRepository.ThrowIfNull();
     private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier.ThrowIfNull();
-    private readonly ILogger<DataTransferService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly ILogger<DataTransferService> _logger = logger.ThrowIfNull();
 
     public async Task<ReciFile?> ExportReciDefinitionAsync(CancellationToken cancellationToken = default)
     {

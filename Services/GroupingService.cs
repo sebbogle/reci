@@ -2,8 +2,8 @@ namespace Reci.Services;
 
 public class GroupingService(IGroupingRepository groupingRepository, ILogger<GroupingService> logger) : IGroupingService
 {
-    private readonly IGroupingRepository _groupingRepository = groupingRepository ?? throw new ArgumentNullException(nameof(groupingRepository));
-    private readonly ILogger<GroupingService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly IGroupingRepository _groupingRepository = groupingRepository.ThrowIfNull();
+    private readonly ILogger<GroupingService> _logger = logger.ThrowIfNull();
 
     public async Task<List<Group>> GetGroupingsAsync(GroupType? groupType = null, CancellationToken cancellationToken = default)
     {

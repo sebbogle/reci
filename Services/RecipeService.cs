@@ -2,10 +2,10 @@
 
 public class RecipeService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository, IRecipeStateNotifier recipeStateNotifier, ILogger<RecipeService> logger) : IRecipeService
 {
-    private readonly IRecipeRepository _recipeRepository = recipeRepository ?? throw new ArgumentNullException(nameof(recipeRepository));
-    private readonly IGroupingRepository _groupingRepository = groupingRepository ?? throw new ArgumentNullException(nameof(groupingRepository));
-    private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier ?? throw new ArgumentNullException(nameof(recipeStateNotifier));
-    private readonly ILogger<RecipeService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly IRecipeRepository _recipeRepository = recipeRepository.ThrowIfNull();
+    private readonly IGroupingRepository _groupingRepository = groupingRepository.ThrowIfNull();
+    private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier.ThrowIfNull();
+    private readonly ILogger<RecipeService> _logger = logger.ThrowIfNull();
 
     public async Task<List<GroupVM<RecipeSummaryVM>>> GetRecipeSummariesAsync(CancellationToken cancellationToken = default)
     {

@@ -8,8 +8,8 @@ namespace Reci.Services;
 
 public class SettingsService(ISettingsRepository settingsRepository, ILogger<SettingsService> logger) : ISettingsService
 {
-    private readonly ISettingsRepository _settingsRepository = settingsRepository ?? throw new ArgumentNullException(nameof(settingsRepository));
-    private readonly ILogger<SettingsService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly ISettingsRepository _settingsRepository = settingsRepository.ThrowIfNull();
+    private readonly ILogger<SettingsService> _logger = logger.ThrowIfNull();
 
     private SettingsVM? _cachedsettingsVM = null;
 
