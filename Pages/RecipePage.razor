@@ -1,5 +1,5 @@
 ﻿@page "/Recipe/{RecipeSlug?}"
-@implements IDisposable
+@implements IAsyncDisposable
 @inject IRecipeService RecipeService
 @inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
@@ -123,10 +123,11 @@ else
     private RecipeVM? Recipe { get; set; }
     private bool isLoading = true;
     private IDialogReference? _dialog;
+    private CancellationTokenSource _cts = new();
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+        RecipeStateNotifier.Subscribe(OnRecipesChanged);
     }
 
     protected override async Task OnParametersSetAsync()
@@ -137,27 +138,42 @@ else
     private async Task LoadRecipeAsync()
     {
         isLoading = true;
-        
+
         bool success = Guid.TryParse(RecipeSlug, out Guid recipeId);
-        Recipe = success ? await RecipeService.GetRecipeAsync(recipeId) : null;
-        
+        Recipe = success ? await RecipeService.GetRecipeAsync(recipeId, _cts.Token) : null;
+
         isLoading = false;
     }
 
-    private async void OnRecipesChanged()
+    private async Task OnRecipesChanged()
     {
-        await LoadRecipeAsync();
-        await InvokeAsync(StateHasChanged);
+        try
+        {
+            if (_cts.Token.IsCancellationRequested) return;
+            await LoadRecipeAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            // Component is being disposed, ignore.
+        }
+        catch (ObjectDisposedException)
+        {
+            // Component already disposed, ignore.
+        }
     }
 
-    public void Dispose()
+    public ValueTask DisposeAsync()
     {
-        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
+        RecipeStateNotifier.Unsubscribe(OnRecipesChanged);
+        _cts.Cancel();
+        _cts.Dispose();
+        return ValueTask.CompletedTask;
     }
 
     private void NavigateToHome()
     {
-        var currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        string currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         if (!string.IsNullOrEmpty(currentPath))
         {
             NavigationManager.NavigateTo("/");
