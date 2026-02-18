@@ -30,10 +30,16 @@ public class SettingsService(ISettingsRepository settingsRepository) : ISettings
     public async Task<Result> SaveSettingsAsync(SettingsVM settingsVM, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(settingsVM);
-        ClearCache(); // maybe should only be on the success code path
 
         Settings settings = settingsVM.ToModel();
-        return await _settingsRepository.SaveSettingsAsync(settings, cancellationToken);
+        Result result = await _settingsRepository.SaveSettingsAsync(settings, cancellationToken);
+
+        if (result.IsSuccess)
+        {
+            ClearCache();
+        }
+
+        return result;
     }
     
     public void ClearCache()

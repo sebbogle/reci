@@ -8,6 +8,7 @@ public class LocalStorageGroupingRepository(ILocalStorageService localStorage, I
     private const string _localStorageKey = "groups";
 
     private List<Group>? _cachedGroups = null;
+    private readonly SemaphoreSlim _cacheLock = new(1, 1);
 
     public async Task<List<Group>> GetGroupsAsync(CancellationToken cancellationToken = default)
     {
@@ -61,24 +62,24 @@ public class LocalStorageGroupingRepository(ILocalStorageService localStorage, I
         {
             if (id == Guid.Empty) return Result.Failure("Group ID is required");
 
-            var recipes = await LoadGroupsAsync(cancellationToken);
-            if (recipes is null || !recipes.Any()) return Result.Failure("No recipes found");
-            
-            var recipeToRemove = recipes.FirstOrDefault(r => r.Id == id);
+            List<Group>? groups = await LoadGroupsAsync(cancellationToken);
+            if (groups is null || !groups.Any()) return Result.Failure("No groups found");
 
-            if (recipeToRemove == null)
-                return Result.Failure($"Recipe with ID {id} not found");
+            Group? groupToRemove = groups.FirstOrDefault(r => r.Id == id);
 
-            recipes.Remove(recipeToRemove);
-            await SaveGroupsAsync(recipes, cancellationToken);
+            if (groupToRemove == null)
+                return Result.Failure($"Group with ID {id} not found");
 
-            _logger.LogInformation("Successfully deleted recipe with ID {RecipeId}", id);
+            groups.Remove(groupToRemove);
+            await SaveGroupsAsync(groups, cancellationToken);
+
+            _logger.LogInformation("Successfully deleted group with ID {GroupId}", id);
             return Result.Success();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error deleting recipe with ID {RecipeId}", id);
-            return Result.Failure($"Failed to delete recipe: {ex.Message}");
+            _logger.LogError(ex, "Error deleting group with ID {GroupId}", id);
+            return Result.Failure($"Failed to delete group: {ex.Message}");
         }
     }
 
@@ -97,17 +98,38 @@ public class LocalStorageGroupingRepository(ILocalStorageService localStorage, I
 
     private async Task<List<Group>?> LoadGroupsAsync(CancellationToken cancellationToken)
     {
+        // Fast path: cache already loaded
         if (_cachedGroups is not null) return _cachedGroups;
-        
-        List<Group>? groups = await _localStorage.GetItemAsync<List<Group>?>(_localStorageKey, cancellationToken);
-        _cachedGroups = groups;
-        
-        return groups;
+
+        // Slow path: load from storage with lock to prevent multiple loads
+        await _cacheLock.WaitAsync(cancellationToken);
+        try
+        {
+            // Double-check: another caller may have loaded while we waited
+            if (_cachedGroups is not null) return _cachedGroups;
+
+            List<Group>? groups = await _localStorage.GetItemAsync<List<Group>?>(_localStorageKey, cancellationToken);
+            _cachedGroups = groups;
+            return groups;
+        }
+        finally
+        {
+            _cacheLock.Release();
+        }
     }
 
     private async Task SaveGroupsAsync(List<Group> groups, CancellationToken cancellationToken)
     {
         await _localStorage.SetItemAsync<List<Group>>(_localStorageKey, groups, cancellationToken);
-        _cachedGroups = groups;
+
+        await _cacheLock.WaitAsync(cancellationToken);
+        try
+        {
+            _cachedGroups = groups;
+        }
+        finally
+        {
+            _cacheLock.Release();
+        }
     }
 }
