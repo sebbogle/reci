@@ -8,6 +8,9 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
+// Logging
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
 // Dependencies
 builder.Services.AddFluentUIComponents();
 builder.Services.AddBlazoredLocalStorage();
