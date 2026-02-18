@@ -1,5 +1,5 @@
 ﻿
-@implements IDisposable
+@implements IAsyncDisposable
 @inject IDialogService DialogService
 @inject IRecipeService RecipeService
 @inject IRecipeStateNotifier RecipeStateNotifier
@@ -44,32 +44,48 @@
     private IDialogReference? _dialog;
 
     private List<GroupVM<RecipeSummaryVM>> RecipeSummaryVMs = new();
+    private CancellationTokenSource _cts = new();
 
     protected override async Task OnInitializedAsync()
     {
-        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+        RecipeStateNotifier.Subscribe(OnRecipesChanged);
         await LoadRecipesAsync();
     }
 
     private async Task LoadRecipesAsync()
     {
-        RecipeSummaryVMs = await RecipeService.GetRecipeSummariesAsync();
+        RecipeSummaryVMs = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
     }
 
-    private async void OnRecipesChanged()
+    private async Task OnRecipesChanged()
     {
-        await LoadRecipesAsync();
-        await InvokeAsync(StateHasChanged);
+        try
+        {
+            if (_cts.Token.IsCancellationRequested) return;
+            await LoadRecipesAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            // Component is being disposed, ignore.
+        }
+        catch (ObjectDisposedException)
+        {
+            // Component already disposed, ignore.
+        }
     }
 
-    public void Dispose()
+    public ValueTask DisposeAsync()
     {
-        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
+        RecipeStateNotifier.Unsubscribe(OnRecipesChanged);
+        _cts.Cancel();
+        _cts.Dispose();
+        return ValueTask.CompletedTask;
     }
 
     private RenderFragment RenderRecipes(GroupVM<RecipeSummaryVM> recipeGroup) => __builder =>
     {
-        @foreach (var recipe in recipeGroup)
+        @foreach (RecipeSummaryVM recipe in recipeGroup)
         {
             <FluentNavLink Href="@($"/recipe/{recipe.Id}")"
                            Icon="@(new Icons.Regular.Size20.Food())">

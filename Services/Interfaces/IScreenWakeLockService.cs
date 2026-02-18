@@ -1,6 +1,6 @@
 ﻿namespace Reci.Services.Interfaces;
 
-public interface IScreenWakeLockService
+public interface IScreenWakeLockService : IAsyncDisposable
 {
     Task<WakeLockSentinel?> RequestWakeLockAsync();
 
