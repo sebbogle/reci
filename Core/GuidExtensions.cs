@@ -2,8 +2,13 @@
 
 public static class GuidExtensions
 {
-    public static Guid PopulateIfEmpty(this Guid guid)
+    public static bool PopulateIfEmpty(this Guid guid)
     {
-        return guid == Guid.Empty ? Guid.NewGuid() : guid;
+        if (guid == Guid.Empty)
+        {
+            guid = Guid.NewGuid();
+            return true;
+        }
+        return false;
     }
 }
