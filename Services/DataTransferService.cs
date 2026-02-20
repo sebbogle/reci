@@ -13,7 +13,7 @@ public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRe
         _logger.LogDebug("Starting export of Reci definition");
         string version = Core.Version.GetVersionString();
 
-        List<Recipe> recipes = await _recipeRepository.GetRecipesAsync(cancellationToken); 
+        List<Recipe> recipes = await _recipeRepository.GetRecipesAsync(cancellationToken);
         List<Group> groups = await _groupingRepository.GetGroupsAsync(cancellationToken);
         Settings settings = await _settingsRepository.GetSettingsAsync(cancellationToken);
 
@@ -33,6 +33,8 @@ public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRe
         ArgumentNullException.ThrowIfNull(reciFile);
 
         _logger.LogDebug("Starting import of Reci definition (version {Version})", reciFile.Version);
+
+        PopulateEmptyGuids(reciFile);
 
         if (reciFile.Recipes is not null)
         {
@@ -56,5 +58,11 @@ public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRe
 
         _logger.LogInformation("Successfully imported Reci definition (version {Version})", reciFile.Version);
         return Result.Success();
+    }
+
+    private static void PopulateEmptyGuids(ReciFile reciFile)
+    {
+        reciFile.Recipes?.ForEach(r => r.Id.PopulateIfEmpty());
+        reciFile.Groups?.ForEach(g => g.Id.PopulateIfEmpty());
     }
 }
