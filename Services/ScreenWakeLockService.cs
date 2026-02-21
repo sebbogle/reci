@@ -1,4 +1,4 @@
-﻿using Microsoft.JSInterop;
+using Microsoft.JSInterop;
 using Reci.Services.Interfaces;
 using System.Collections.Concurrent;
 
@@ -9,7 +9,7 @@ public class ScreenWakeLockService(IJSRuntime jsRuntime, ILogger<ScreenWakeLockS
     private readonly ILogger<ScreenWakeLockService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     private readonly IJSRuntime _jsRuntime = jsRuntime ?? throw new ArgumentNullException(nameof(jsRuntime));
     private readonly ConcurrentDictionary<int, WakeLockSentinel> _wakeLocks = new ConcurrentDictionary<int, WakeLockSentinel>();
-    
+
     private int _nextId = 0;
 
     public async Task<WakeLockSentinel?> RequestWakeLockAsync()
@@ -24,10 +24,10 @@ public class ScreenWakeLockService(IJSRuntime jsRuntime, ILogger<ScreenWakeLockS
         IJSObjectReference jsObjectReference = await _jsRuntime.InvokeAsync<IJSObjectReference>("navigator.wakeLock.request", "screen");
 
         int id = Interlocked.Increment(ref _nextId);
-        WakeLockSentinel sentinel = new ()
+        WakeLockSentinel sentinel = new()
         {
             Id = id,
-            JsObjectReference= jsObjectReference 
+            JsObjectReference = jsObjectReference
         };
         _wakeLocks.TryAdd(id, sentinel);
 
@@ -38,13 +38,26 @@ public class ScreenWakeLockService(IJSRuntime jsRuntime, ILogger<ScreenWakeLockS
     {
         ArgumentNullException.ThrowIfNull(sentinel);
 
-        await sentinel.JsObjectReference.InvokeVoidAsync("release");
-        await sentinel.JsObjectReference.DisposeAsync();
-
+        await sentinel.DisposeAsync();
         _wakeLocks.TryRemove(sentinel.Id, out _);
     }
 
-    public async Task<bool> IsSupportedAsync() 
+    public async Task<bool> IsSupportedAsync()
         => await _jsRuntime.InvokeAsync<bool>("eval", "typeof navigator.wakeLock !== 'undefined'");
-    
+
+    public async ValueTask DisposeAsync()
+    {
+        foreach (KeyValuePair<int, WakeLockSentinel> kvp in _wakeLocks)
+        {
+            try
+            {
+                await kvp.Value.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+                // JS runtime already disconnected.
+            }
+        }
+        _wakeLocks.Clear();
+    }
 }

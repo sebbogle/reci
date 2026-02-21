@@ -1,6 +1,6 @@
 ﻿@page "/"
 @page "/group/{groupId:guid}"
-@implements IDisposable
+@implements IAsyncDisposable
 @inject IRecipeService RecipeService
 @inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
@@ -79,10 +79,11 @@ else
     private List<GroupVM<RecipeSummaryVM>>? filteredGroups;
     private string? selectedGroupName;
     private bool isLoading = true;
+    private CancellationTokenSource _cts = new();
 
     protected override async Task OnInitializedAsync()
     {
-        RecipeStateNotifier.OnRecipesChanged += OnRecipesChanged;
+        RecipeStateNotifier.Subscribe(OnRecipesChanged);
         await LoadRecipes();
     }
 
@@ -95,7 +96,7 @@ else
     {
         try
         {
-            recipeGroups = await RecipeService.GetRecipeSummariesAsync();
+            recipeGroups = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
             FilterRecipes();
         }
         finally
@@ -104,15 +105,30 @@ else
         }
     }
 
-    private async void OnRecipesChanged()
+    private async Task OnRecipesChanged()
     {
-        await LoadRecipes();
-        await InvokeAsync(StateHasChanged);
+        try
+        {
+            if (_cts.Token.IsCancellationRequested) return;
+            await LoadRecipes();
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            // Component is being disposed, ignore.
+        }
+        catch (ObjectDisposedException)
+        {
+            // Component already disposed, ignore.
+        }
     }
 
-    public void Dispose()
+    public ValueTask DisposeAsync()
     {
-        RecipeStateNotifier.OnRecipesChanged -= OnRecipesChanged;
+        RecipeStateNotifier.Unsubscribe(OnRecipesChanged);
+        _cts.Cancel();
+        _cts.Dispose();
+        return ValueTask.CompletedTask;
     }
 
     private void FilterRecipes()

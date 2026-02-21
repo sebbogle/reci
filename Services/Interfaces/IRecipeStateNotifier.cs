@@ -2,7 +2,9 @@ namespace Reci.Services.Interfaces;
 
 public interface IRecipeStateNotifier
 {
-    event Action? OnRecipesChanged;
+    void Subscribe(Func<Task> callback);
 
-    void NotifyRecipesChanged();
+    void Unsubscribe(Func<Task> callback);
+
+    Task NotifyRecipesChangedAsync();
 }
