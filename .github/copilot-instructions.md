@@ -19,6 +19,7 @@
 
 ## Project Conventions (Important)
 - **C# style**: Never use `var`; always use explicit types.
+- Do not add comments to the code unless it is absolutely necessary to explain complex logic. Strive for self-explanatory code through clear naming and structure.
 - Use null guards consistently (`ArgumentNullException.ThrowIfNull(...)` or `ThrowIfNull()` from `Core/GenericExtensions.cs`).
 - Prefer returning `Result`/`Result<T>` (`Core/Result.cs`) from service/repository operations rather than throwing for expected failures.
 - Keep mapping logic in mapper extensions, not pages/components.

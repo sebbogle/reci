@@ -39,5 +39,6 @@
     <Using Include="Reci.Services" />
     <Using Include="Reci.Services.Interfaces" />
     <Using Include="Reci.ViewModels" />
+    <Using Include="System.Text.Json.Serialization" />
   </ItemGroup>
 </Project>

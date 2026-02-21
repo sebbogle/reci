@@ -1,4 +1,6 @@
-﻿namespace Reci.Data.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Reci.Data.Models;
 
 public class Group
 {
@@ -8,9 +10,11 @@ public class Group
 
     public required int SortOrder { get; set; }
 
+
     public required GroupType GroupType { get; set; }
 }
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum GroupType
 {
     Recipe,

@@ -1,12 +1,18 @@
-﻿namespace Reci.Services;
+﻿using System.Text.RegularExpressions;
+using Group = Reci.Data.Models.Group;
 
-public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository, ISettingsRepository settingsRepository, IRecipeStateNotifier recipeStateNotifier, ILogger<DataTransferService> logger) : IDataTransferService
+namespace Reci.Services;
+
+public partial class DataTransferService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository, ISettingsRepository settingsRepository, IRecipeStateNotifier recipeStateNotifier, ILogger<DataTransferService> logger) : IDataTransferService
 {
     private readonly IRecipeRepository _recipeRepository = recipeRepository.ThrowIfNull();
     private readonly IGroupingRepository _groupingRepository = groupingRepository.ThrowIfNull();
     private readonly ISettingsRepository _settingsRepository = settingsRepository.ThrowIfNull();
     private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier.ThrowIfNull();
     private readonly ILogger<DataTransferService> _logger = logger.ThrowIfNull();
+
+    [GeneratedRegex(@"""Id""\s*:\s*""([^""]+)""")] 
+    private static partial Regex IdPropertyRegex();
 
     public async Task<ReciFile?> ExportReciDefinitionAsync(CancellationToken cancellationToken = default)
     {
@@ -34,8 +40,6 @@ public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRe
 
         _logger.LogDebug("Starting import of Reci definition (version {Version})", reciFile.Version);
 
-        PopulateEmptyGuids(reciFile);
-
         if (reciFile.Recipes is not null)
         {
             _logger.LogDebug("Importing {RecipeCount} recipes", reciFile.Recipes.Count);
@@ -60,9 +64,19 @@ public class DataTransferService(IRecipeRepository recipeRepository, IGroupingRe
         return Result.Success();
     }
 
-    private static void PopulateEmptyGuids(ReciFile reciFile)
+
+    public string MendGuidsFromImportedData(string data)
     {
-        reciFile.Recipes?.ForEach(r => r.Id.PopulateIfEmpty());
-        reciFile.Groups?.ForEach(g => g.Id.PopulateIfEmpty());
+        foreach (Match match in IdPropertyRegex().Matches(data))
+        {
+            string idValue = match.Groups[1].Value;
+
+            if (!Guid.TryParse(idValue, out Guid _))
+            {
+                data = data.Replace(idValue, Guid.NewGuid().ToString());
+            }
+        }
+        
+        return data;
     }
 }
