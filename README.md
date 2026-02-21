@@ -1,7 +1,7 @@
-# Reci - [Try it Out](reci.sebastianbogle.com)
+# Reci - [Try it Out](https://reci.sebastianbogle.com)
 Reci is a minimalist recipe management application designed to help you organize and access your favorite recipes with ease.
 
-Try it out at [reci.sebastianbogle.com](reci.sebastianbogle.com) and use the '[seb.reci](https://github.com/sebbogle/reci/blob/dev/seb.reci)' file to get started!
+Try it out at [reci.sebastianbogle.com](https://reci.sebastianbogle.com) and use the '[seb.reci](https://github.com/sebbogle/reci/blob/dev/seb.reci)' file to get started!
 
 ## Current State
 The project is still in early development.
@@ -27,7 +27,7 @@ You can use AI tools (like ChatGPT or Claude) to generate recipe data in the `.r
 
 ### AI Prompt Template
 
-Reci doesn't have any native AI features due to cost and complexity constraints, however recipes in a 'reci' formatted can be generated off platfrom and can then be imported into the app.
+Reci doesn't have any native AI features due to cost and complexity constraints, however recipes in a 'reci' formatted can be generated off platform and can then be imported into the app.
 
 Copy and paste the following prompt into your AI assistant, replacing `[INSERT SPECIFIC RECIPE REQUEST HERE]` with your desired recipe request:
 
