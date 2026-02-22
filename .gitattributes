@@ -61,3 +61,8 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# Git LFS - Track golden screenshots used for visual regression tests
+###############################################################################
+Tests/Resources/Golden\ Screenshots/**/*.png filter=lfs diff=lfs merge=lfs -text
