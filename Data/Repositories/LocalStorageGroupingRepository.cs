@@ -1,6 +1,6 @@
 ﻿namespace Reci.Data.Repositories;
 
-public class LocalStorageGroupingRepository(ILocalStorageService localStorage, ILogger<LocalStorageSettingsRepository> logger) : IGroupingRepository
+public class LocalStorageGroupingRepository(ILocalStorageService localStorage, ILogger<LocalStorageSettingsRepository> logger) : IGroupingRepository, IDisposable
 {
     private readonly ILocalStorageService _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
     private readonly ILogger<LocalStorageSettingsRepository> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -94,6 +94,11 @@ public class LocalStorageGroupingRepository(ILocalStorageService localStorage, I
         {
             return Result.Failure($"Failed to save groups: {ex.Message}");
         }
+    }
+
+    public void Dispose()
+    {
+        _cacheLock.Dispose();
     }
 
     private async Task<List<Group>?> LoadGroupsAsync(CancellationToken cancellationToken)

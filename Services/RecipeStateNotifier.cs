@@ -22,7 +22,7 @@ public class RecipeStateNotifier(ILogger<RecipeStateNotifier> logger) : IRecipeS
     public async Task NotifyRecipesChangedAsync()
     {
         _logger.LogDebug("Notifying {SubscriberCount} subscribers of recipe changes", _callbacks.Count);
-        foreach (Func<Task> callback in _callbacks)
+        foreach (Func<Task> callback in _callbacks.ToList())
         {
             try
             {

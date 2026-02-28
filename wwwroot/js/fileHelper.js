@@ -1,3 +1,7 @@
+window.triggerFileUpload = function (id) {
+    document.getElementById(id).click();
+};
+
 window.downloadFile = async function (filename, content) {
     const blob = new Blob([content], { type: 'application/json' });
 

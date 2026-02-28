@@ -269,17 +269,12 @@
     {
         if (Content.Group is not null && Content.Group.Id == Guid.Empty)
         {
-            Group? existingGroup = await GroupingService.GetGroupingAsync(Content.Group.Id);
+            Result groupResult = await GroupingService.SaveGroupingAsync(Content.Group);
             
-            if (existingGroup is null)
+            if (!groupResult.IsSuccess)
             {
-                Result groupResult = await GroupingService.SaveGroupingAsync(Content.Group);
-                
-                if (!groupResult.IsSuccess)
-                {
-                    ToastService.ShowError("Error saving group: " + groupResult.ErrorMessage);
-                    return;
-                }
+                ToastService.ShowError("Error saving group: " + groupResult.ErrorMessage);
+                return;
             }
         }
 
