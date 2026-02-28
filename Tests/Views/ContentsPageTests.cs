@@ -47,10 +47,10 @@ public class ContentsPageTests(AppFixture app) : ReciPage(app)
     [ReciPageState]
     public async Task PageTitle_ViewingGroup()
     {
-        const string GroupIDGuid = "10000000-0000-0000-0000-000000000002";
+        const string GroupId = "10000000-0000-0000-0000-000000000002";
         const string GroupPageTitle = "Dinner";
 
-        await GotoGroupAsync(new Guid(GroupIDGuid));
+        await GotoGroupAsync(new Guid(GroupId));
 
         await Expect(Page).ToHaveTitleAsync(GroupPageTitle);
     }
