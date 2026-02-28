@@ -185,3 +185,27 @@ This choice of technology also enables cross-platform compatibility, making Reci
 ### Fluent UI
 The user interface of Reci is designed using Fluent UI, a modern design system developed by Microsoft.
 Fluent UI provides a consistent and visually appealing experience across different platforms and devices.
+
+## Testing
+Reci uses Playwright-based integration tests that launch the real app and drive a browser.
+
+### Prerequisites
+Install Playwright browsers (one-time after building the test project):
+```
+dotnet build Tests/Tests.csproj
+pwsh Tests/bin/Debug/net10.0/playwright.ps1 install
+```
+
+### Running Tests
+```
+dotnet test Tests/Tests.csproj
+```
+
+### Updating Golden Screenshots
+When UI changes are intentional, update the baseline images:
+```powershell
+$env:UPDATE_SNAPSHOTS="true"; dotnet test Tests/Tests.csproj
+```
+Review the updated PNGs in `Tests/Resources/Golden Screenshots/` before committing.
+
+On failure, the actual screenshot is saved to `Tests/bin/.../Temp Test Screenshots/` for comparison.
