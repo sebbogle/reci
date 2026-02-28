@@ -225,7 +225,7 @@ dotnet format Reci.slnx
 ```
 
 ### CI Enforcement
-A GitHub Actions workflow (`.github/workflows/format-check.yml`) runs `dotnet format --verify-no-changes` on every push and PR to `main`. The build will fail if formatting drifts.
+A GitHub Actions workflow (`.github/workflows/format-check.yml`) runs `dotnet format --verify-no-changes` on every push and PR to `dev`. The build will fail if formatting drifts.
 
 ### Limitations
 - `dotnet format` does **not** support `.razor` files. Razor formatting relies on IDE settings only.
