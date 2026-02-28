@@ -209,3 +209,24 @@ $env:UPDATE_SNAPSHOTS="true"; dotnet test Tests/Tests.csproj
 Review the updated PNGs in `Tests/Resources/Golden Screenshots/` before committing.
 
 On failure, the actual screenshot is saved to `Tests/bin/.../Temp Test Screenshots/` for comparison.
+
+## Code Formatting
+The project uses `dotnet format` with an `.editorconfig` at the repository root to enforce consistent C# code style.
+
+### Running Locally
+Check for violations without modifying files:
+```
+dotnet format Reci.slnx --verify-no-changes
+```
+
+Auto-fix formatting issues:
+```
+dotnet format Reci.slnx
+```
+
+### CI Enforcement
+A GitHub Actions workflow (`.github/workflows/format-check.yml`) runs `dotnet format --verify-no-changes` on every push and PR to `main`. The build will fail if formatting drifts.
+
+### Limitations
+- `dotnet format` does **not** support `.razor` files. Razor formatting relies on IDE settings only.
+- `var` usage is flagged as a **warning** (not a build-breaking error) to allow gradual migration to explicit types.
