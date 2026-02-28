@@ -1,6 +1,6 @@
 namespace Reci.Data.Repositories;
 
-public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILogger<LocalStorageRecipeRepository> logger) : IRecipeRepository
+public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILogger<LocalStorageRecipeRepository> logger) : IRecipeRepository, IDisposable
 {
     private const string RecipesStorageKey = "recipes";
     private readonly ILocalStorageService _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
@@ -170,6 +170,11 @@ public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILo
         {
             _cacheLock.Release();
         }
+    }
+
+    public void Dispose()
+    {
+        _cacheLock.Dispose();
     }
 
     public async Task<Result> SetRecipesAsync(List<Recipe> recipes, CancellationToken cancellationToken = default)
