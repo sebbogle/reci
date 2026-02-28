@@ -67,19 +67,16 @@ public partial class DataTransferService(IRecipeRepository recipeRepository, IGr
 
     public string MendGuidsFromImportedData(string data)
     {
-        return IdPropertyRegex().Replace(data, match =>
+        foreach (Match match in IdPropertyRegex().Matches(data))
         {
             string idValue = match.Groups[1].Value;
 
             if (!Guid.TryParse(idValue, out Guid _))
             {
-                int groupStart = match.Groups[1].Index - match.Index;
-                int groupLength = match.Groups[1].Length;
-                string fullMatch = match.Value;
-                return fullMatch[..groupStart] + Guid.NewGuid().ToString() + fullMatch[(groupStart + groupLength)..];
+                data = data.Replace(idValue, Guid.NewGuid().ToString());
             }
-
-            return match.Value;
-        });
+        }
+        
+        return data;
     }
 }
