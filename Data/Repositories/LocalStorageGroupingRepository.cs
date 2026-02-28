@@ -1,9 +1,9 @@
 ﻿namespace Reci.Data.Repositories;
 
-public class LocalStorageGroupingRepository(ILocalStorageService localStorage, ILogger<LocalStorageSettingsRepository> logger) : IGroupingRepository, IDisposable
+public class LocalStorageGroupingRepository(ILocalStorageService localStorage, ILogger<LocalStorageGroupingRepository> logger) : IGroupingRepository, IDisposable
 {
     private readonly ILocalStorageService _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
-    private readonly ILogger<LocalStorageSettingsRepository> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly ILogger<LocalStorageGroupingRepository> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
     private const string _localStorageKey = "groups";
 
