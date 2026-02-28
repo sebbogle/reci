@@ -39,7 +39,18 @@
 - Build app: `dotnet build`
 - Run app locally: `dotnet run`
 - Run tests: `dotnet test Tests/Tests.csproj`
+- Update golden screenshots: `$env:UPDATE_SNAPSHOTS="true"; dotnet test Tests/Tests.csproj`
+- Install Playwright browsers (one-time): `pwsh Tests/bin/Debug/net10.0/playwright.ps1 install`
 - Target framework is `net10.0` (`Reci.csproj`, `Tests/Tests.csproj`).
+
+## Test Architecture
+- Tests are **Playwright integration tests** (not unit tests). They launch the real app and drive a real browser.
+- `AppFixture` (`Tests/Fixtures/AppFixture.cs`) starts the app via `dotnet run` and waits for it to respond. It is shared across all test classes via the `[Collection("App")]` xUnit collection.
+- `ReciPage` (`Tests/Utilities/ReciPage.cs`) is the page-object helper. It seeds localStorage with JSON from `Tests/Resources/BaseState.json` using `AddInitScriptAsync`, navigates to pages, and waits for Blazor to finish rendering.
+- **State seeding**: Tests inject data into browser localStorage before navigation. Each test gets an isolated browser context (from `PageTest`), so state does not leak between tests.
+- **Visual regression**: `ScreenshotAssert` (`Tests/Utilities/ScreenshotAssert.cs`) compares page screenshots against golden PNGs stored in `Tests/Resources/Golden Screenshots/`. On mismatch, the actual screenshot is written to `bin/.../Temp Test Screenshots/` for review. Set `UPDATE_SNAPSHOTS=true` to regenerate baselines.
+- Golden screenshots are tracked via **Git LFS** (see `.gitattributes`).
+- When adding new pages or visually significant changes, add corresponding screenshot tests in `Tests/Views/` and update golden files.
 
 ## Change Scope Guidance for Agents
 - Prefer focused, minimal edits in existing service/repository/page structure.
