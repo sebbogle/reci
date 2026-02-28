@@ -10,7 +10,7 @@ public class RecipePageTests(AppFixture app) : ReciPage(app)
         await GotoRecipeAsync(pancakesId);
         await Expect(Page).ToHaveTitleAsync("Classic Pancakes");
 
-        await ScreenshotAssert.MatchesAsync(Page, "RecipePage-SimpleReecipe", fullPage: true);
+        await ScreenshotAssert.MatchesAsync(Page, "RecipePage-SimpleRecipe", fullPage: true);
     }
 
     [Fact]
