@@ -1,4 +1,4 @@
-﻿namespace Reci.Core;
+namespace Reci.Core;
 
 public static class IListExtensions
 {
@@ -20,10 +20,12 @@ public static class IListExtensions
 
     public static bool DeepAny<T>(this IList<GroupVM<T>> groups, Func<T, bool>? predicate = null)
     {
-        if (groups is null || !groups.Any()) return false;
+        if (groups is null || !groups.Any())
+            return false;
 
-        if (predicate is null) predicate = _ => true;
-        
+        if (predicate is null)
+            predicate = _ => true;
+
         return groups.Any(g => g.Any(predicate));
     }
 }

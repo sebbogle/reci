@@ -1,7 +1,7 @@
-﻿namespace Tests.Utilities;
 
 using System.Reflection;
-using Tests.Fixtures;
+
+namespace Tests.Utilities;
 
 [Collection(AppCollection.Name)]
 public abstract class ReciPage : PageTest

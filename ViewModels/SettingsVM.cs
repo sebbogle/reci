@@ -1,3 +1,3 @@
-﻿namespace Reci.ViewModels;
+namespace Reci.ViewModels;
 
-public class SettingsVM {}
+public class SettingsVM { }

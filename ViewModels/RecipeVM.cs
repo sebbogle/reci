@@ -1,4 +1,4 @@
-﻿namespace Reci.ViewModels;
+namespace Reci.ViewModels;
 
 public class RecipeVM
 {

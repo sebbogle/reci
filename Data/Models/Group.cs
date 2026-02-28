@@ -1,5 +1,3 @@
-﻿using System.Text.Json.Serialization;
-
 namespace Reci.Data.Models;
 
 public class Group
