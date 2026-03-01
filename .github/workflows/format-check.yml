@@ -1,0 +1,29 @@
+name: Format Check
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore workloads
+        run: dotnet workload restore Reci.csproj
+
+      - name: Restore dependencies
+        run: dotnet restore Reci.slnx
+
+      - name: Verify code formatting
+        run: dotnet format Reci.slnx --verify-no-changes --verbosity normal

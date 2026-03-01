@@ -1,10 +1,10 @@
-﻿namespace Reci.Services.Interfaces;
+namespace Reci.Services.Interfaces;
 
 public interface IDataTransferService
 {
-    public Task<Result> ImportReciDefinitionAsync(ReciFile reciFile, CancellationToken cancellationToken = default);
+    Task<Result> ImportReciDefinitionAsync(ReciFile reciFile, CancellationToken cancellationToken = default);
 
-    public Task<ReciFile?> ExportReciDefinitionAsync(CancellationToken cancellationToken = default);
+    Task<ReciFile?> ExportReciDefinitionAsync(CancellationToken cancellationToken = default);
 
-    public string MendGuidsFromImportedData(string data);
+    string MendGuidsFromImportedData(string data);
 }

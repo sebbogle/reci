@@ -1,4 +1,4 @@
-﻿namespace Tests.UserActions;
+namespace Tests.UserActions;
 
 public class ExportToReciFile(AppFixture app) : ReciPage(app)
 {

@@ -1,6 +1,7 @@
-﻿namespace Reci.Data.Models;
 
 using Reci.Interfaces;
+
+namespace Reci.Data.Models;
 
 public class Ingredient : IGroupable
 {

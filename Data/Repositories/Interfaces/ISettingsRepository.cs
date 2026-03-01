@@ -1,5 +1,3 @@
-﻿using Reci.Data.Models;
-
 namespace Reci.Data.Repositories.Interfaces;
 
 public interface ISettingsRepository

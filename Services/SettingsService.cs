@@ -1,9 +1,3 @@
-﻿using Reci.Data.Models;
-using Reci.Data.Repositories.Interfaces;
-using Reci.Services.Interfaces;
-using Reci.ViewModels;
-using Reci.Mappers;
-
 namespace Reci.Services;
 
 public class SettingsService(ISettingsRepository settingsRepository, ILogger<SettingsService> logger) : ISettingsService
@@ -24,7 +18,7 @@ public class SettingsService(ISettingsRepository settingsRepository, ILogger<Set
         _logger.LogDebug("Loading settings from repository");
         Settings settings = await _settingsRepository.GetSettingsAsync(cancellationToken);
         SettingsVM settingsVM = settings.ToViewModel();
-        
+
         _cachedsettingsVM = settingsVM;
 
         return settingsVM;
@@ -50,7 +44,7 @@ public class SettingsService(ISettingsRepository settingsRepository, ILogger<Set
 
         return result;
     }
-    
+
     public void ClearCache()
     {
         _logger.LogDebug("Settings cache cleared");

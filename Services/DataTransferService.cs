@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using Group = Reci.Data.Models.Group;
 
 namespace Reci.Services;
@@ -11,7 +11,7 @@ public partial class DataTransferService(IRecipeRepository recipeRepository, IGr
     private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier.ThrowIfNull();
     private readonly ILogger<DataTransferService> _logger = logger.ThrowIfNull();
 
-    [GeneratedRegex(@"""Id""\s*:\s*""([^""]+)""")] 
+    [GeneratedRegex(@"""Id""\s*:\s*""([^""]+)""")]
     private static partial Regex IdPropertyRegex();
 
     public async Task<ReciFile?> ExportReciDefinitionAsync(CancellationToken cancellationToken = default)
@@ -76,7 +76,7 @@ public partial class DataTransferService(IRecipeRepository recipeRepository, IGr
                 data = data.Replace(idValue, Guid.NewGuid().ToString());
             }
         }
-        
+
         return data;
     }
 }

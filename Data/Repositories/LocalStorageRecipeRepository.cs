@@ -5,7 +5,7 @@ public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILo
     private const string RecipesStorageKey = "recipes";
     private readonly ILocalStorageService _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
     private readonly ILogger<LocalStorageRecipeRepository> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    
+
     private List<Recipe>? _cachedRecipes;
     private readonly SemaphoreSlim _cacheLock = new(1, 1);
 
@@ -13,7 +13,7 @@ public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILo
     {
         try
         {
-            var recipes = await GetOrLoadCachedRecipesAsync(cancellationToken);
+            List<Recipe> recipes = await GetOrLoadCachedRecipesAsync(cancellationToken);
             return recipes.FirstOrDefault(r => r.Id == id);
         }
         catch (Exception ex)
@@ -46,7 +46,7 @@ public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILo
             if (string.IsNullOrWhiteSpace(recipe.Name))
                 return Result.Failure("Recipe name is required");
 
-            var recipes = await GetOrLoadCachedRecipesAsync(cancellationToken);
+            List<Recipe> recipes = await GetOrLoadCachedRecipesAsync(cancellationToken);
 
             // Ensure the recipe has a unique ID
             if (recipe.Id == Guid.Empty)
@@ -82,8 +82,8 @@ public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILo
             if (string.IsNullOrWhiteSpace(recipe.Name))
                 return Result.Failure("Recipe name is required");
 
-            var recipes = await GetOrLoadCachedRecipesAsync(cancellationToken);
-            var existingRecipeIndex = recipes.FindIndex(r => r.Id == recipe.Id);
+            List<Recipe> recipes = await GetOrLoadCachedRecipesAsync(cancellationToken);
+            int existingRecipeIndex = recipes.FindIndex(r => r.Id == recipe.Id);
 
             if (existingRecipeIndex == -1)
                 return Result.Failure($"Recipe with ID {recipe.Id} not found");
@@ -108,8 +108,8 @@ public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILo
             if (id == Guid.Empty)
                 return Result.Failure("Recipe ID is required");
 
-            var recipes = await GetOrLoadCachedRecipesAsync(cancellationToken);
-            var recipeToRemove = recipes.FirstOrDefault(r => r.Id == id);
+            List<Recipe> recipes = await GetOrLoadCachedRecipesAsync(cancellationToken);
+            Recipe? recipeToRemove = recipes.FirstOrDefault(r => r.Id == id);
 
             if (recipeToRemove == null)
                 return Result.Failure($"Recipe with ID {id} not found");
@@ -146,9 +146,9 @@ public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILo
                 return _cachedRecipes;
 
             _logger.LogDebug("Loading recipes from LocalStorage into cache");
-            var recipes = await _localStorage.GetItemAsync<List<Recipe>>(RecipesStorageKey);
+            List<Recipe>? recipes = await _localStorage.GetItemAsync<List<Recipe>>(RecipesStorageKey);
             _cachedRecipes = recipes ?? new List<Recipe>();
-            
+
             return _cachedRecipes;
         }
         finally
@@ -160,7 +160,7 @@ public class LocalStorageRecipeRepository(ILocalStorageService localStorage, ILo
     private async Task SaveAndUpdateCacheAsync(List<Recipe> recipes, CancellationToken cancellationToken = default)
     {
         await _localStorage.SetItemAsync(RecipesStorageKey, recipes);
-        
+
         await _cacheLock.WaitAsync(cancellationToken);
         try
         {

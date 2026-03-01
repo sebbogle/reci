@@ -23,7 +23,7 @@ public class GroupingService(IGroupingRepository groupingRepository, ILogger<Gro
     {
         _logger.LogDebug("Retrieving grouping with ID {GroupId}", id);
         List<Group> groups = await _groupingRepository.GetGroupsAsync(cancellationToken);
-        
+
         Group? group = groups.FirstOrDefault(g => g.Id == id);
 
         if (group is null)
@@ -37,7 +37,7 @@ public class GroupingService(IGroupingRepository groupingRepository, ILogger<Gro
     public async Task<Result> SaveGroupingAsync(Group group, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(group);
-        
+
         if (group.Id == Guid.Empty)
         {
             group.Id = Guid.NewGuid();

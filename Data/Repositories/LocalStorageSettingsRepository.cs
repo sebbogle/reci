@@ -1,4 +1,4 @@
-﻿namespace Reci.Data.Repositories;
+namespace Reci.Data.Repositories;
 
 public class LocalStorageSettingsRepository(ILocalStorageService localStorage, ILogger<LocalStorageSettingsRepository> logger) : ISettingsRepository
 {
@@ -25,13 +25,13 @@ public class LocalStorageSettingsRepository(ILocalStorageService localStorage, I
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error saving settings to local storage.");
-            
+
             return Result.Failure($"Failed to save settings to local storage: {ex.Message}");
-        }        
+        }
     }
 
     private static Settings BuildDefaultSettings()
     {
-        return new Settings {};
+        return new Settings { };
     }
 }

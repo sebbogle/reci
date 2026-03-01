@@ -1,4 +1,4 @@
-﻿namespace Reci.ViewModels;
+namespace Reci.ViewModels;
 
 public class GroupVM<T> : List<T>
 {
@@ -9,9 +9,9 @@ public class GroupVM<T> : List<T>
     public int SortOrder { get; set; }
 
 
-    public static GroupVM<T> Empty() => new() 
+    public static GroupVM<T> Empty() => new()
     {
-        Id = null ,
+        Id = null,
         Name = null,
         SortOrder = 0
     };
