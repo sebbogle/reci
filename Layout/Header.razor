@@ -3,15 +3,15 @@
 @inject IToastService ToastService
 @inject NavigationManager NavigationManager
 
-<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-    <div style="display: flex; align-items: center; cursor: pointer;" @onclick="NavigateToHome">
-        <img src="icon-192-no-background.png" alt="Reci Unicorn" style="width: 40px; height: 40px;" />
+<div class="header-container">
+    <div class="header-brand" @onclick="NavigateToHome">
+        <img src="icon-192-no-background.png" alt="Reci Unicorn" class="header-logo" />
         <FluentLabel Typo="Typography.Header" Color="Color.Lightweight" Weight="FontWeight.Bold">
             Reci
         </FluentLabel>
     </div>
 
-    <div style="display: flex; gap: 8px; align-items: center;">
+    <div class="header-actions">
         @if (PendingChanges)
         {
             <FluentLabel>Unsaved changes</FluentLabel>

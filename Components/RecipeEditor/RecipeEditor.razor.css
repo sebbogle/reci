@@ -1,0 +1,8 @@
+.group-selector {
+    display: flex;
+    gap: 8px;
+}
+
+.group-selector-input {
+    flex: 1;
+}
