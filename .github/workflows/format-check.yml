@@ -19,6 +19,9 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Restore workloads
+        run: dotnet workload restore Reci.csproj
+
       - name: Restore dependencies
         run: dotnet restore Reci.slnx
 
