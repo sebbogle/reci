@@ -1,0 +1,30 @@
+.instruction-list {
+    list-style-position: outside;
+    padding-left: 1.5rem;
+    margin: 0;
+}
+
+.instruction-item {
+    line-height: 1.6;
+    color: var(--neutral-foreground-rest);
+}
+
+.instruction-item:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
+
+.instruction-item::marker {
+    font-weight: var(--font-weight-semibold);
+}
+
+@media (max-width: 768px) {
+    .instruction-list {
+        padding-left: 1.25rem;
+    }
+}
+
+@media print {
+    .instruction-item {
+        page-break-inside: avoid;
+    }
+}
