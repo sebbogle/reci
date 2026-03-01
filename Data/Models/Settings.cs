@@ -1,3 +1,3 @@
-﻿namespace Reci.Data.Models;
+namespace Reci.Data.Models;
 
-public class Settings {}
+public class Settings { }

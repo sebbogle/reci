@@ -1,4 +1,4 @@
-﻿namespace Reci.Core;
+namespace Reci.Core;
 
 public static class GuidExtensions
 {

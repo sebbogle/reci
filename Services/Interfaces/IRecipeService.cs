@@ -1,4 +1,4 @@
-﻿namespace Reci.Services.Interfaces;
+namespace Reci.Services.Interfaces;
 
 public interface IRecipeService
 {

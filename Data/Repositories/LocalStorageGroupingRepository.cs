@@ -1,4 +1,4 @@
-﻿namespace Reci.Data.Repositories;
+namespace Reci.Data.Repositories;
 
 public class LocalStorageGroupingRepository(ILocalStorageService localStorage, ILogger<LocalStorageGroupingRepository> logger) : IGroupingRepository, IDisposable
 {
@@ -50,7 +50,7 @@ public class LocalStorageGroupingRepository(ILocalStorageService localStorage, I
         {
             return Result.Failure("Group not updated");
         }
-        
+
         await SaveGroupsAsync(groups, cancellationToken);
 
         return Result.Success();
@@ -60,10 +60,12 @@ public class LocalStorageGroupingRepository(ILocalStorageService localStorage, I
     {
         try
         {
-            if (id == Guid.Empty) return Result.Failure("Group ID is required");
+            if (id == Guid.Empty)
+                return Result.Failure("Group ID is required");
 
             List<Group>? groups = await LoadGroupsAsync(cancellationToken);
-            if (groups is null || !groups.Any()) return Result.Failure("No groups found");
+            if (groups is null || !groups.Any())
+                return Result.Failure("No groups found");
 
             Group? groupToRemove = groups.FirstOrDefault(r => r.Id == id);
 
@@ -104,14 +106,16 @@ public class LocalStorageGroupingRepository(ILocalStorageService localStorage, I
     private async Task<List<Group>?> LoadGroupsAsync(CancellationToken cancellationToken)
     {
         // Fast path: cache already loaded
-        if (_cachedGroups is not null) return _cachedGroups;
+        if (_cachedGroups is not null)
+            return _cachedGroups;
 
         // Slow path: load from storage with lock to prevent multiple loads
         await _cacheLock.WaitAsync(cancellationToken);
         try
         {
             // Double-check: another caller may have loaded while we waited
-            if (_cachedGroups is not null) return _cachedGroups;
+            if (_cachedGroups is not null)
+                return _cachedGroups;
 
             List<Group>? groups = await _localStorage.GetItemAsync<List<Group>?>(_localStorageKey, cancellationToken);
             _cachedGroups = groups;

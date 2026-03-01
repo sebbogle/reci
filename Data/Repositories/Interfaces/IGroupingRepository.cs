@@ -1,4 +1,4 @@
-﻿namespace Reci.Data.Repositories.Interfaces;
+namespace Reci.Data.Repositories.Interfaces;
 
 public interface IGroupingRepository
 {

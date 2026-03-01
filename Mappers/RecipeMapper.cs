@@ -1,4 +1,4 @@
-﻿namespace Reci.Mappers;
+namespace Reci.Mappers;
 
 public static class RecipeMapper
 {

@@ -1,4 +1,4 @@
-﻿namespace Reci.Services;
+namespace Reci.Services;
 
 public class RecipeService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository, IRecipeStateNotifier recipeStateNotifier, ILogger<RecipeService> logger) : IRecipeService
 {
@@ -38,9 +38,9 @@ public class RecipeService(IRecipeRepository recipeRepository, IGroupingReposito
     public async Task<Result> SaveRecipeAsync(RecipeVM recipeVM, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(recipeVM);
-        
+
         Recipe recipe = recipeVM.ToModel();
-        
+
         Result result;
         if (recipe.Id == Guid.Empty)
         {

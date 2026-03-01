@@ -1,4 +1,4 @@
-﻿namespace Reci.Core;
+namespace Reci.Core;
 
 public class Result<T>
 {
@@ -198,7 +198,7 @@ public class Result
     // Combine multiple results
     public static Result Combine(params Result[] results)
     {
-        foreach (var result in results)
+        foreach (Result result in results)
         {
             if (result.IsFailure)
                 return result;
@@ -208,7 +208,7 @@ public class Result
 
     public static Result Combine(IEnumerable<Result> results)
     {
-        foreach (var result in results)
+        foreach (Result result in results)
         {
             if (result.IsFailure)
                 return result;

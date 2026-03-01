@@ -1,4 +1,4 @@
-﻿namespace Tests.Views;
+namespace Tests.Views;
 
 public class ContentsPageTests(AppFixture app) : ReciPage(app)
 {

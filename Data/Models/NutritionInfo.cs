@@ -1,11 +1,11 @@
-﻿namespace Reci.Data.Models;
+namespace Reci.Data.Models;
 
 public class NutritionInfo
 {
     public int? Calories { get; set; }
-    
+
     public decimal? Fat { get; set; }
-    
+
     public decimal? Carbohydrates { get; set; }
 
     public decimal? Protein { get; set; }
