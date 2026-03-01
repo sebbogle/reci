@@ -28,7 +28,8 @@ else if (filteredGroups is null || !filteredGroups.Any())
     </FluentStack>
 }
 else
-{            
+{
+    <div>
     <FluentGrid Spacing="2" Justify="JustifyContent.FlexStart">
         @foreach (GroupVM<RecipeSummaryVM> group in filteredGroups.OrderBy(g => g.SortOrder))
         {
@@ -69,6 +70,7 @@ else
             <FluentGridItem xs="12" Style="margin-bottom: 10px;"></FluentGridItem>
         }
     </FluentGrid>
+    </div>
 }
 
 @code {
