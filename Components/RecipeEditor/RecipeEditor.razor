@@ -1,4 +1,5 @@
 ﻿@implements IDialogContentComponent<RecipeVM>
+@implements IAsyncDisposable
 @inject IGroupingService GroupingService
 @inject IRecipeService RecipeService
 @inject IDialogService DialogService
@@ -269,7 +270,7 @@
     {
         if (Content.Group is not null && Content.Group.Id == Guid.Empty)
         {
-            Result groupResult = await GroupingService.SaveGroupingAsync(Content.Group);
+            Result groupResult = await GroupingService.SaveGroupingAsync(Content.Group, _cts.Token);
             
             if (!groupResult.IsSuccess)
             {
@@ -278,7 +279,7 @@
             }
         }
 
-        Result saveResult = await RecipeService.SaveRecipeAsync(Content);
+        Result saveResult = await RecipeService.SaveRecipeAsync(Content, _cts.Token);
 
         if (saveResult.IsSuccess)
         {
@@ -312,7 +313,7 @@
         }
         else
         {
-            bool recipeModified = await RecipeService.IsRecipeModifiedAsync(Content);
+            bool recipeModified = await RecipeService.IsRecipeModifiedAsync(Content, _cts.Token);
 
             if (!recipeModified && Dialog is not null)
             {
@@ -337,7 +338,7 @@
 
         if (!result.Cancelled && Dialog is not null)
         {
-            await RecipeService.DeleteRecipeAsync(Content.Id ?? Guid.Empty);
+            await RecipeService.DeleteRecipeAsync(Content.Id ?? Guid.Empty, _cts.Token);
             await Dialog.CloseAsync();
         }
     }
@@ -348,6 +349,7 @@
     private string? newGroupName;
 
     private List<Group> RecipeGroups = [];
+    private CancellationTokenSource _cts = new();
 
     // Nullable helpers for NutritionInfo binding
     private int? nutritionCalories
@@ -413,7 +415,14 @@
 
     protected override async Task OnInitializedAsync()
     {
-        RecipeGroups = await GroupingService.GetGroupingsAsync(GroupType.Recipe);
+        RecipeGroups = await GroupingService.GetGroupingsAsync(GroupType.Recipe, _cts.Token);
+    }
+
+    public ValueTask DisposeAsync()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        return ValueTask.CompletedTask;
     }
 
     private void EnsureNutritionInfo()
