@@ -139,10 +139,15 @@ else
     {
         isLoading = true;
 
-        bool success = Guid.TryParse(RecipeSlug, out Guid recipeId);
-        Recipe = success ? await RecipeService.GetRecipeAsync(recipeId, _cts.Token) : null;
-
-        isLoading = false;
+        try
+        {
+            bool success = Guid.TryParse(RecipeSlug, out Guid recipeId);
+            Recipe = success ? await RecipeService.GetRecipeAsync(recipeId, _cts.Token) : null;
+        }
+        finally
+        {
+            isLoading = false;
+        }
     }
 
     private async Task OnRecipesChanged()

@@ -16,52 +16,68 @@ public partial class DataTransferService(IRecipeRepository recipeRepository, IGr
 
     public async Task<ReciFile?> ExportReciDefinitionAsync(CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Starting export of Reci definition");
-        string version = Core.Version.GetVersionString();
-
-        List<Recipe> recipes = await _recipeRepository.GetRecipesAsync(cancellationToken);
-        List<Group> groups = await _groupingRepository.GetGroupsAsync(cancellationToken);
-        Settings settings = await _settingsRepository.GetSettingsAsync(cancellationToken);
-
-        _logger.LogInformation("Exported Reci definition with {RecipeCount} recipes and {GroupCount} groups (version {Version})", recipes.Count, groups.Count, version);
-
-        return new ReciFile
+        try
         {
-            Version = version,
-            Settings = settings,
-            Recipes = recipes.Any() ? recipes : null,
-            Groups = groups.Any() ? groups : null
-        };
+            _logger.LogDebug("Starting export of Reci definition");
+            string version = Core.Version.GetVersionString();
+
+            List<Recipe> recipes = await _recipeRepository.GetRecipesAsync(cancellationToken);
+            List<Group> groups = await _groupingRepository.GetGroupsAsync(cancellationToken);
+            Settings settings = await _settingsRepository.GetSettingsAsync(cancellationToken);
+
+            _logger.LogInformation("Exported Reci definition with {RecipeCount} recipes and {GroupCount} groups (version {Version})", recipes.Count, groups.Count, version);
+
+            return new ReciFile
+            {
+                Version = version,
+                Settings = settings,
+                Recipes = recipes.Any() ? recipes : null,
+                Groups = groups.Any() ? groups : null
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error exporting Reci definition");
+            return null;
+        }
     }
 
     public async Task<Result> ImportReciDefinitionAsync(ReciFile reciFile, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(reciFile);
 
-        _logger.LogDebug("Starting import of Reci definition (version {Version})", reciFile.Version);
-
-        if (reciFile.Recipes is not null)
+        try
         {
-            _logger.LogDebug("Importing {RecipeCount} recipes", reciFile.Recipes.Count);
-            await _recipeRepository.SetRecipesAsync(reciFile.Recipes, cancellationToken);
-        }
+            _logger.LogDebug("Starting import of Reci definition (version {Version})", reciFile.Version);
 
-        if (reciFile.Groups is not null)
+            if (reciFile.Recipes is not null)
+            {
+                _logger.LogDebug("Importing {RecipeCount} recipes", reciFile.Recipes.Count);
+                await _recipeRepository.SetRecipesAsync(reciFile.Recipes, cancellationToken);
+            }
+
+            if (reciFile.Groups is not null)
+            {
+                _logger.LogDebug("Importing {GroupCount} groups", reciFile.Groups.Count);
+                await _groupingRepository.SetGroups(reciFile.Groups, cancellationToken);
+            }
+
+            if (reciFile.Settings is not null)
+            {
+                _logger.LogDebug("Importing settings");
+                await _settingsRepository.SaveSettingsAsync(reciFile.Settings, cancellationToken);
+            }
+
+            await _recipeStateNotifier.NotifyRecipesChangedAsync();
+
+            _logger.LogInformation("Successfully imported Reci definition (version {Version})", reciFile.Version);
+            return Result.Success();
+        }
+        catch (Exception ex)
         {
-            _logger.LogDebug("Importing {GroupCount} groups", reciFile.Groups.Count);
-            await _groupingRepository.SetGroups(reciFile.Groups, cancellationToken);
+            _logger.LogError(ex, "Error importing Reci definition (version {Version})", reciFile.Version);
+            return Result.Failure($"Failed to import: {ex.Message}");
         }
-
-        if (reciFile.Settings is not null)
-        {
-            _logger.LogDebug("Importing settings");
-            await _settingsRepository.SaveSettingsAsync(reciFile.Settings, cancellationToken);
-        }
-
-        await _recipeStateNotifier.NotifyRecipesChangedAsync();
-
-        _logger.LogInformation("Successfully imported Reci definition (version {Version})", reciFile.Version);
-        return Result.Success();
     }
 
 
