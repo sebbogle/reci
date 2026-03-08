@@ -1,0 +1,38 @@
+<FluentStack Orientation="Orientation.Vertical">
+    <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="5">
+        <FluentIcon Value="@(new Icons.Regular.Size20.List())" />
+        <FluentLabel Typo="Typography.H3">Ingredients</FluentLabel>
+    </FluentStack>
+
+    @foreach (IGrouping<string?, Ingredient> ingredientGroup in Ingredients.GroupBy(i => i.Group))
+    {
+        <FluentCard MinimalStyle="true">
+            <FluentStack Orientation="Orientation.Vertical">
+                @if (!string.IsNullOrWhiteSpace(ingredientGroup.Key))
+                {
+                    <FluentLabel Typo="Typography.H6" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">@ingredientGroup.Key</FluentLabel>
+                }
+                <FluentLabel>
+                    <ul class="ingredient-list">
+                        @foreach (Ingredient ingredient in ingredientGroup)
+                        {
+                            <li class="ingredient-item">
+                                <strong>@FormatQuantity(ingredient.QuantityAmount) @ingredient.QuantityUnit</strong> @ingredient.Name
+                            </li>
+                        }
+                    </ul>
+                </FluentLabel>
+            </FluentStack>
+        </FluentCard>
+    }
+</FluentStack>
+
+@code {
+    [Parameter]
+    public List<Ingredient> Ingredients { get; set; } = new();
+
+    private string FormatQuantity(decimal quantity)
+    {
+        return quantity.ToString("0.###");
+    }
+}

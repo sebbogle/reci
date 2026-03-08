@@ -1,0 +1,131 @@
+{
+  "id": "134296aa-de40-4900-9d9f-1f7c9639b052",
+  "name": "Shakshuka",
+  "description": "Eggs poached in a spiced, chunky tomato-pepper sauce with crumbled feta. A one-pan North African breakfast that works at any time of day.",
+  "group": "Breakfast",
+  "ingredients": [
+    {
+      "name": "olive oil",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "yellow onion, diced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "red bell pepper, diced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 3,
+      "quantityUnit": "cloves",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "crushed tomatoes",
+      "quantityAmount": 800,
+      "quantityUnit": "g",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "cumin",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "smoked paprika",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "cayenne pepper",
+      "quantityAmount": 0.25,
+      "quantityUnit": "tsp",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "sugar",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "salt and pepper",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste",
+      "group": "Tomato Base"
+    },
+    {
+      "name": "large eggs",
+      "quantityAmount": 6,
+      "quantityUnit": "whole",
+      "group": "Toppings"
+    },
+    {
+      "name": "crumbled feta cheese",
+      "quantityAmount": 75,
+      "quantityUnit": "g",
+      "group": "Toppings"
+    },
+    {
+      "name": "fresh parsley or cilantro",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Toppings"
+    },
+    {
+      "name": "crusty bread, for serving",
+      "quantityAmount": 1,
+      "quantityUnit": "loaf",
+      "group": "Toppings"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Heat olive oil in a large deep skillet over medium heat. SautÃ© onion and bell pepper 5-6 minutes until softened",
+      "group": "Build the Base"
+    },
+    {
+      "text": "Add garlic, cumin, paprika, and cayenne; cook 1 minute until fragrant",
+      "group": "Build the Base"
+    },
+    {
+      "text": "Pour in crushed tomatoes, add sugar, season with salt and pepper. Simmer 10-15 minutes until sauce thickens",
+      "group": "Build the Base"
+    },
+    {
+      "text": "Make 6 wells in the sauce with the back of a spoon. Crack an egg into each well",
+      "group": "Cook Eggs"
+    },
+    {
+      "text": "Cover and cook 5-8 minutes until egg whites are set but yolks are still runny",
+      "group": "Cook Eggs"
+    },
+    {
+      "text": "Scatter feta and herbs over the top. Serve immediately with crusty bread for dipping",
+      "group": "Cook Eggs"
+    }
+  ],
+  "source": {
+    "text": "Serious Eats",
+    "url": "https://www.seriouseats.com/shakshuka-recipe"
+  },
+  "tags": [
+    "breakfast",
+    "eggs",
+    "north-african",
+    "one-pan",
+    "vegetarian",
+    "brunch"
+  ],
+  "furtherNotes": "Makes 3 servings. Prep time: 10 minutes, Cook time: 25 minutes. The tomato base can be made ahead and refrigerated for 3 days; reheat and add eggs fresh. Add harissa for extra heat."
+}

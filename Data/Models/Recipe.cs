@@ -8,7 +8,7 @@ public class Recipe
 
     public string? Description { get; set; }
 
-    public Guid? GroupId { get; set; }
+    public string? Group { get; set; }
 
     public List<Ingredient> Ingredients { get; set; } = [];
 
@@ -34,7 +34,7 @@ public static class RecipeExtensions
         return recipe.Id == Guid.Empty
             && string.IsNullOrEmpty(recipe.Name)
             && string.IsNullOrEmpty(recipe.Description)
-            && recipe.GroupId is null
+            && recipe.Group is null
             && !recipe.Ingredients.Any(ingredient => !ingredient.IsEmpty())
             && !recipe.Instructions.Any(instruction => !instruction.IsEmpty())
             && recipe.NutritionInfo.IsEmpty()
@@ -56,44 +56,13 @@ public static class RecipeExtensions
         return first.Id == second.Id
             && first.Name == second.Name
             && first.Description == second.Description
-            && first.GroupId == second.GroupId
-            && first.Ingredients.IsEqualTo(second.Ingredients)
-            && first.Instructions.IsEqualTo(second.Instructions)
-            && first.NutritionInfo.IsEqualTo(second.NutritionInfo)
-            && first.Source.IsEqualTo(second.Source)
+            && first.Group == second.Group
+            && first.Ingredients.SequenceEqual(second.Ingredients)
+            && first.Instructions.SequenceEqual(second.Instructions)
+            && first.NutritionInfo == second.NutritionInfo
+            && first.Source == second.Source
             && first.Tags.SequenceEqual(second.Tags)
             && first.FurtherNotes == second.FurtherNotes;
     }
 
-    private static bool IsEqualTo(this List<Ingredient> first, List<Ingredient> second)
-    {
-        if (first.Count != second.Count)
-        {
-            return false;
-        }
-        for (int i = 0; i < first.Count; i++)
-        {
-            if (!first[i].IsEqualTo(second[i]))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static bool IsEqualTo(this List<Instruction> first, List<Instruction> second)
-    {
-        if (first.Count != second.Count)
-        {
-            return false;
-        }
-        for (int i = 0; i < first.Count; i++)
-        {
-            if (!first[i].IsEqualTo(second[i]))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
 }

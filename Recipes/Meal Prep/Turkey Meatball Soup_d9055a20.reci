@@ -1,0 +1,122 @@
+{
+  "id": "d9055a20-ebe4-44a4-9c1a-7204f61a6efb",
+  "name": "Turkey Meatball Soup",
+  "description": "Hearty, nourishing soup with tender turkey meatballs, vegetables, and orzo pasta in a savory broth. Comfort in a bowl that freezes perfectly.",
+  "group": "Meal Prep",
+  "ingredients": [
+    {
+      "name": "ground turkey",
+      "quantityAmount": 500,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "breadcrumbs",
+      "quantityAmount": 0.33,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "egg",
+      "quantityAmount": 1,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 3,
+      "quantityUnit": "cloves"
+    },
+    {
+      "name": "Italian seasoning",
+      "quantityAmount": 1.5,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "salt and pepper",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste"
+    },
+    {
+      "name": "olive oil",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "yellow onion, diced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "carrots, diced",
+      "quantityAmount": 2,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "celery stalks, diced",
+      "quantityAmount": 2,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "diced tomatoes",
+      "quantityAmount": 400,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "chicken broth",
+      "quantityAmount": 6,
+      "quantityUnit": "cups"
+    },
+    {
+      "name": "orzo pasta",
+      "quantityAmount": 0.75,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "baby spinach",
+      "quantityAmount": 2,
+      "quantityUnit": "cups"
+    },
+    {
+      "name": "Parmesan rind (optional)",
+      "quantityAmount": 1,
+      "quantityUnit": "piece"
+    },
+    {
+      "name": "grated Parmesan, for serving",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Combine ground turkey, breadcrumbs, egg, 1 clove minced garlic, half the Italian seasoning, salt, and pepper. Roll into 20-24 small meatballs"
+    },
+    {
+      "text": "Heat 1 tbsp olive oil in a large pot over medium-high heat. Brown meatballs on all sides, about 4 minutes (they don't need to cook through). Remove and set aside"
+    },
+    {
+      "text": "Add remaining olive oil. SautÃ© onion, carrots, and celery for 5 minutes until softened. Add remaining garlic and Italian seasoning, cook 1 minute"
+    },
+    {
+      "text": "Add diced tomatoes, chicken broth, and Parmesan rind if using. Bring to a boil"
+    },
+    {
+      "text": "Return meatballs to the pot, add orzo, and simmer 10-12 minutes until pasta is tender and meatballs are cooked through"
+    },
+    {
+      "text": "Stir in spinach until wilted, about 1 minute. Serve topped with grated Parmesan"
+    }
+  ],
+  "source": {
+    "text": "Half Baked Harvest",
+    "url": "https://www.halfbakedharvest.com/turkey-meatball-soup/"
+  },
+  "tags": [
+    "soup",
+    "turkey",
+    "meatballs",
+    "meal-prep",
+    "comfort-food",
+    "dinner",
+    "freezer-friendly"
+  ],
+  "furtherNotes": "Makes 6 servings. Prep time: 15 minutes, Cook time: 30 minutes. Storage: Refrigerate 4 days, freeze up to 3 months (freeze without orzo; cook fresh when reheating). The Parmesan rind adds incredible depth of flavor."
+}

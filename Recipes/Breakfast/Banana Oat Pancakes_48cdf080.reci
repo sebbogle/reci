@@ -1,0 +1,120 @@
+{
+  "id": "48cdf080-f187-4a53-a916-2b27315062d7",
+  "name": "Banana Oat Pancakes",
+  "description": "Fluffy, naturally sweet pancakes made with oats and bananas. Freezer-friendly for quick weekday breakfasts the whole family will love.",
+  "group": "Breakfast",
+  "ingredients": [
+    {
+      "name": "ripe bananas",
+      "quantityAmount": 2,
+      "quantityUnit": "whole",
+      "group": "Batter"
+    },
+    {
+      "name": "rolled oats",
+      "quantityAmount": 1.5,
+      "quantityUnit": "cups",
+      "group": "Batter"
+    },
+    {
+      "name": "eggs",
+      "quantityAmount": 2,
+      "quantityUnit": "whole",
+      "group": "Batter"
+    },
+    {
+      "name": "milk",
+      "quantityAmount": 0.5,
+      "quantityUnit": "cup",
+      "group": "Batter"
+    },
+    {
+      "name": "baking powder",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Batter"
+    },
+    {
+      "name": "cinnamon",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp",
+      "group": "Batter"
+    },
+    {
+      "name": "vanilla extract",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Batter"
+    },
+    {
+      "name": "pinch of salt",
+      "quantityAmount": 1,
+      "quantityUnit": "pinch",
+      "group": "Batter"
+    },
+    {
+      "name": "maple syrup",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste",
+      "group": "Toppings"
+    },
+    {
+      "name": "fresh berries",
+      "quantityAmount": 1,
+      "quantityUnit": "cup",
+      "group": "Toppings"
+    },
+    {
+      "name": "nut butter",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Toppings"
+    },
+    {
+      "name": "sliced banana",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Toppings"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Add oats to a blender and pulse until they form a flour-like consistency",
+      "group": "Make Batter"
+    },
+    {
+      "text": "Add bananas, eggs, milk, baking powder, cinnamon, vanilla, and salt. Blend until smooth",
+      "group": "Make Batter"
+    },
+    {
+      "text": "Let batter rest 5 minutes to thicken slightly",
+      "group": "Make Batter"
+    },
+    {
+      "text": "Heat a non-stick pan or griddle over medium heat with a little butter or oil",
+      "group": "Cook"
+    },
+    {
+      "text": "Pour 1/4 cup batter per pancake. Cook 2-3 minutes until bubbles form on surface and edges look set",
+      "group": "Cook"
+    },
+    {
+      "text": "Flip and cook 1-2 minutes more until golden brown. Serve with desired toppings",
+      "group": "Cook"
+    }
+  ],
+  "source": {
+    "text": "Downshiftology",
+    "url": "https://downshiftology.com/recipes/banana-oat-pancakes/"
+  },
+  "tags": [
+    "breakfast",
+    "pancakes",
+    "banana",
+    "oats",
+    "healthy",
+    "gluten-free",
+    "meal-prep"
+  ],
+  "furtherNotes": "Makes about 10 pancakes (3-4 servings). Prep time: 5 minutes, Cook time: 15 minutes. Freeze cooked pancakes in a single layer, then stack in a bag. Reheat in toaster or microwave. Naturally gluten-free if using certified GF oats."
+}

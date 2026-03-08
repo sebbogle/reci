@@ -1,0 +1,83 @@
+{
+  "id": "0dbd4f50-67d5-444a-8d49-f5435c12788f",
+  "name": "Overnight Oats",
+  "description": "Creamy no-cook oats with chia seeds, honey, and vanilla that you prep the night before. Grab-and-go breakfast ready in minutes.",
+  "group": "Breakfast",
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantityAmount": 2.5,
+      "quantityUnit": "cups"
+    },
+    {
+      "name": "milk of choice",
+      "quantityAmount": 2.5,
+      "quantityUnit": "cups"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantityAmount": 0.75,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "chia seeds",
+      "quantityAmount": 2.5,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "honey or maple syrup",
+      "quantityAmount": 2.5,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "vanilla extract",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "pinch of salt",
+      "quantityAmount": 1,
+      "quantityUnit": "pinch"
+    },
+    {
+      "name": "fresh berries, for topping",
+      "quantityAmount": 1.5,
+      "quantityUnit": "cups"
+    },
+    {
+      "name": "sliced almonds or granola, for topping",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "In a large bowl, combine oats, milk, yogurt, chia seeds, honey, vanilla, and salt. Stir well"
+    },
+    {
+      "text": "Divide mixture evenly among 5 jars or containers (about 3/4 cup each)"
+    },
+    {
+      "text": "Cover tightly and refrigerate for at least 4 hours or overnight"
+    },
+    {
+      "text": "In the morning, stir the oats and add a splash more milk if too thick"
+    },
+    {
+      "text": "Top with fresh berries, sliced almonds, or granola before serving"
+    }
+  ],
+  "source": {
+    "text": "Love and Lemons",
+    "url": "https://www.loveandlemons.com/overnight-oats-recipe/"
+  },
+  "tags": [
+    "breakfast",
+    "overnight-oats",
+    "no-cook",
+    "meal-prep",
+    "healthy",
+    "grab-and-go"
+  ],
+  "furtherNotes": "Makes 5 servings. Prep time: 10 minutes, No cook time. Storage: Refrigerate up to 5 days. Variations: PB & banana, mango coconut, apple cinnamon. Add protein powder for extra nutrition."
+}

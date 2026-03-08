@@ -1,0 +1,126 @@
+{
+  "id": "2685ea18-92d8-4d5b-a16c-0af42d40787e",
+  "name": "Mediterranean Quinoa Salad",
+  "description": "A bright, refreshing quinoa salad loaded with crunchy vegetables, feta, and a zesty lemon-herb dressing. Perfect cold or at room temperature.",
+  "group": "Meal Prep",
+  "ingredients": [
+    {
+      "name": "quinoa, rinsed",
+      "quantityAmount": 1.5,
+      "quantityUnit": "cups",
+      "group": "Salad"
+    },
+    {
+      "name": "English cucumber, diced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Salad"
+    },
+    {
+      "name": "cherry tomatoes, halved",
+      "quantityAmount": 1.5,
+      "quantityUnit": "cups",
+      "group": "Salad"
+    },
+    {
+      "name": "red bell pepper, diced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Salad"
+    },
+    {
+      "name": "Kalamata olives, halved",
+      "quantityAmount": 0.5,
+      "quantityUnit": "cup",
+      "group": "Salad"
+    },
+    {
+      "name": "red onion, finely diced",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Salad"
+    },
+    {
+      "name": "crumbled feta cheese",
+      "quantityAmount": 150,
+      "quantityUnit": "g",
+      "group": "Salad"
+    },
+    {
+      "name": "fresh parsley, chopped",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Salad"
+    },
+    {
+      "name": "extra virgin olive oil",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Dressing"
+    },
+    {
+      "name": "lemon juice",
+      "quantityAmount": 3,
+      "quantityUnit": "tbsp",
+      "group": "Dressing"
+    },
+    {
+      "name": "red wine vinegar",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Dressing"
+    },
+    {
+      "name": "dried oregano",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Dressing"
+    },
+    {
+      "name": "salt and pepper",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste",
+      "group": "Dressing"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Cook quinoa in 3 cups water, bring to a boil, reduce heat, cover, and simmer 15 minutes. Fluff with a fork and let cool completely",
+      "group": "Preparation"
+    },
+    {
+      "text": "While quinoa cools, dice cucumber, halve tomatoes, dice bell pepper and onion, and halve olives",
+      "group": "Preparation"
+    },
+    {
+      "text": "Whisk together olive oil, lemon juice, red wine vinegar, oregano, salt, and pepper",
+      "group": "Preparation"
+    },
+    {
+      "text": "Combine cooled quinoa with all chopped vegetables and olives in a large bowl",
+      "group": "Assembly"
+    },
+    {
+      "text": "Pour dressing over salad and toss to combine. Fold in feta and parsley",
+      "group": "Assembly"
+    },
+    {
+      "text": "Divide into 5 meal prep containers. Store dressing separately if preferred",
+      "group": "Assembly"
+    }
+  ],
+  "source": {
+    "text": "Cookie and Kate",
+    "url": "https://cookieandkate.com/best-quinoa-salad-recipe/"
+  },
+  "tags": [
+    "salad",
+    "quinoa",
+    "mediterranean",
+    "vegetarian",
+    "meal-prep",
+    "lunch",
+    "healthy"
+  ],
+  "furtherNotes": "Makes 5 servings. Prep time: 20 minutes, Cook time: 15 minutes. Storage: Refrigerate up to 5 days. Flavors improve after a few hours. Add chickpeas or grilled chicken for extra protein."
+}

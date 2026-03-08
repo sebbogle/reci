@@ -52,7 +52,7 @@ else
         @if (Recipe.Group is not null)
         {
             <FluentGridItem xs="12">
-                <FluentLabel Typo="Typography.H5" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">@Recipe.Group.Name</FluentLabel>
+                <FluentLabel Typo="Typography.H5" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">@Recipe.Group</FluentLabel>
             </FluentGridItem>
         }
 
@@ -120,7 +120,7 @@ else
     [Parameter]
     public string? RecipeSlug { get; set; }
 
-    private RecipeVM? Recipe { get; set; }
+    private Recipe? Recipe { get; set; }
     private bool isLoading = true;
     private IDialogReference? _dialog;
     private CancellationTokenSource _cts = new();

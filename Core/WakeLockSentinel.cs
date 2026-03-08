@@ -1,5 +1,3 @@
-using Microsoft.JSInterop;
-
 namespace Reci.Core;
 
 public class WakeLockSentinel : IAsyncDisposable
