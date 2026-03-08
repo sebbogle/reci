@@ -42,18 +42,26 @@ public class LocalStorageGroupingRepository(ILocalStorageService localStorage, I
 
     public async Task<Result> UpdateGroup(Group group, CancellationToken cancellationToken = default)
     {
-        List<Group> groups = await LoadGroupsAsync(cancellationToken) ?? [];
-
-        bool updated = groups.Replace(group, g => g.Id == group.Id);
-
-        if (!updated)
+        try
         {
-            return Result.Failure("Group not updated");
+            List<Group> groups = await LoadGroupsAsync(cancellationToken) ?? [];
+
+            bool updated = groups.Replace(group, g => g.Id == group.Id);
+
+            if (!updated)
+            {
+                return Result.Failure("Group not updated");
+            }
+
+            await SaveGroupsAsync(groups, cancellationToken);
+
+            return Result.Success();
         }
-
-        await SaveGroupsAsync(groups, cancellationToken);
-
-        return Result.Success();
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating group with ID {GroupId}", group.Id);
+            return Result.Failure($"Failed to update group: {ex.Message}");
+        }
     }
 
     public async Task<Result> DeleteGroup(Guid id, CancellationToken cancellationToken = default)
