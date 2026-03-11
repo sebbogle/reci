@@ -1,6 +1,6 @@
 namespace Reci.Data.Models;
 
-public class NutritionInfo
+public record NutritionInfo
 {
     public int? Calories { get; set; }
 
@@ -25,19 +25,4 @@ public static class NutritionInfoExtensions
             && info.Protein is null;
     }
 
-    public static bool IsEqualTo(this NutritionInfo? first, NutritionInfo? second)
-    {
-        if (first is null && second is null)
-        {
-            return true;
-        }
-        if (first is null || second is null)
-        {
-            return false;
-        }
-        return first.Calories == second.Calories
-            && first.Fat == second.Fat
-            && first.Carbohydrates == second.Carbohydrates
-            && first.Protein == second.Protein;
-    }
 }

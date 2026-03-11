@@ -25,6 +25,9 @@
   <ItemGroup>
     <Using Include="Microsoft.Playwright" />
     <Using Include="Microsoft.Playwright.Xunit.v3" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Net" />
+    <Using Include="System.Reflection" />
     <Using Include="System.Text.RegularExpressions" />
     <Using Include="Tests.Fixtures" />
     <Using Include="Tests.Utilities" />

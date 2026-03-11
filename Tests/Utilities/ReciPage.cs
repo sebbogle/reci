@@ -1,6 +1,4 @@
 
-using System.Reflection;
-
 namespace Tests.Utilities;
 
 [Collection(AppCollection.Name)]

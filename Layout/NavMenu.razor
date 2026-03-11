@@ -12,13 +12,13 @@
         <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
              <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.BookOpen())" IconColor="Color.Accent">Contents</FluentNavLink>
             
-             @foreach (GroupVM<RecipeSummaryVM> recipeGroup in RecipeSummaryVMs)
+             @foreach (IGrouping<string?, RecipeSummary> recipeGroup in recipeSummaries.GroupBy(r => r.Group).OrderBy(g => g.Key ?? string.Empty))
             {
-                @if (recipeGroup.Id != null)
+                @if (!string.IsNullOrEmpty(recipeGroup.Key))
                 {
-                    <FluentNavGroup Title="@recipeGroup.Name"
+                    <FluentNavGroup Title="@recipeGroup.Key"
                                     Icon="@(new Icons.Regular.Size20.FolderOpen())"
-                                    Href="@($"/group/{recipeGroup.Id}")">
+                                    Href="@($"/group/{Uri.EscapeDataString(recipeGroup.Key)}")">
                         @RenderRecipes(recipeGroup)
                     </FluentNavGroup>
                 }
@@ -43,7 +43,7 @@
     private bool expanded = true;
     private IDialogReference? _dialog;
 
-    private List<GroupVM<RecipeSummaryVM>> RecipeSummaryVMs = new();
+    private List<RecipeSummary> recipeSummaries = new();
     private CancellationTokenSource _cts = new();
 
     protected override async Task OnInitializedAsync()
@@ -54,7 +54,7 @@
 
     private async Task LoadRecipesAsync()
     {
-        RecipeSummaryVMs = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
+        recipeSummaries = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
     }
 
     private async Task OnRecipesChanged()
@@ -83,9 +83,9 @@
         return ValueTask.CompletedTask;
     }
 
-    private RenderFragment RenderRecipes(GroupVM<RecipeSummaryVM> recipeGroup) => __builder =>
+    private RenderFragment RenderRecipes(IGrouping<string?, RecipeSummary> recipeGroup) => __builder =>
     {
-        @foreach (RecipeSummaryVM recipe in recipeGroup)
+        @foreach (RecipeSummary recipe in recipeGroup)
         {
             <FluentNavLink Href="@($"/recipe/{recipe.Id}")"
                            Icon="@(new Icons.Regular.Size20.Food())">

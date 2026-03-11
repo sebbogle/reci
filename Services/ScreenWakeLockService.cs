@@ -1,12 +1,9 @@
-using System.Collections.Concurrent;
-using Microsoft.JSInterop;
-
 namespace Reci.Services;
 
 public class ScreenWakeLockService(IJSRuntime jsRuntime, ILogger<ScreenWakeLockService> logger) : IScreenWakeLockService
 {
-    private readonly ILogger<ScreenWakeLockService> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    private readonly IJSRuntime _jsRuntime = jsRuntime ?? throw new ArgumentNullException(nameof(jsRuntime));
+    private readonly ILogger<ScreenWakeLockService> _logger = logger.ThrowIfNull();
+    private readonly IJSRuntime _jsRuntime = jsRuntime.ThrowIfNull();
     private readonly ConcurrentDictionary<int, WakeLockSentinel> _wakeLocks = new ConcurrentDictionary<int, WakeLockSentinel>();
 
     private int _nextId = 0;

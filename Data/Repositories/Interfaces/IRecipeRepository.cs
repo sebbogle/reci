@@ -6,11 +6,13 @@ public interface IRecipeRepository
 
     Task<List<Recipe>> GetRecipesAsync(CancellationToken cancellationToken = default);
 
+    Task<List<RecipeSummary>> GetRecipeSummariesAsync(CancellationToken cancellationToken = default);
+
     Task<Result> CreateRecipeAsync(Recipe recipe, CancellationToken cancellationToken = default);
 
     Task<Result> UpdateRecipeAsync(Recipe recipe, CancellationToken cancellationToken = default);
 
     Task<Result> DeleteRecipeAsync(Guid id, CancellationToken cancellationToken = default);
 
-    Task<Result> SetRecipesAsync(List<Recipe> recipes, CancellationToken cancellationToken = default);
+    Task RefreshCacheAsync(CancellationToken cancellationToken = default);
 }

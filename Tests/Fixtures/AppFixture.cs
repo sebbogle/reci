@@ -1,7 +1,4 @@
 
-using System.Diagnostics;
-using System.Net;
-
 namespace Tests.Fixtures;
 
 public class AppFixture : IAsyncLifetime

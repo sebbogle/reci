@@ -1,0 +1,83 @@
+{
+  "id": "4104b900-390c-41d5-b82e-876a82bd2a2f",
+  "name": "Honey Garlic Shrimp",
+  "description": "Plump shrimp glazed in a sticky, sweet-savory honey garlic sauce. Ready in under 15 minutes for the fastest weeknight dinner.",
+  "group": "Quick Weeknight",
+  "ingredients": [
+    {
+      "name": "large shrimp, peeled and deveined",
+      "quantityAmount": 500,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "butter",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 4,
+      "quantityUnit": "cloves"
+    },
+    {
+      "name": "honey",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "soy sauce",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "lime juice",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "red pepper flakes",
+      "quantityAmount": 0.25,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "fresh cilantro, chopped",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "salt and pepper",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Pat shrimp dry and season with salt, pepper, and red pepper flakes"
+    },
+    {
+      "text": "Melt butter in a large skillet over medium-high heat. Cook shrimp 1-2 minutes per side until pink; remove from pan"
+    },
+    {
+      "text": "Add garlic to the same pan and sautÃ© 30 seconds until fragrant"
+    },
+    {
+      "text": "Stir in honey, soy sauce, and lime juice. Simmer 1-2 minutes until slightly thickened"
+    },
+    {
+      "text": "Return shrimp to the pan and toss to coat in sauce. Garnish with cilantro and serve immediately"
+    }
+  ],
+  "source": {
+    "text": "Damn Delicious",
+    "url": "https://damndelicious.net/2019/01/18/honey-garlic-shrimp/"
+  },
+  "tags": [
+    "shrimp",
+    "seafood",
+    "quick",
+    "weeknight",
+    "dinner",
+    "15-minute"
+  ],
+  "furtherNotes": "Makes 4 servings. Prep time: 5 minutes, Cook time: 10 minutes. Serve over rice, with noodles, or alongside roasted vegetables. Do not overcook shrimp or they become rubbery."
+}

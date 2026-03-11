@@ -1,13 +1,10 @@
-
-using Reci.Interfaces;
-
 namespace Reci.Data.Models;
 
-public class Instruction : IGroupable
+public record Instruction : IGroupable
 {
     public required string Text { get; set; }
 
-    public Guid? GroupId { get; set; }
+    public string? Group { get; set; }
 }
 
 public static class InstructionExtensions
@@ -19,20 +16,6 @@ public static class InstructionExtensions
             return true;
         }
         return string.IsNullOrEmpty(instruction.Text)
-            && instruction.GroupId is null;
-    }
-
-    public static bool IsEqualTo(this Instruction? first, Instruction? second)
-    {
-        if (first is null && second is null)
-        {
-            return true;
-        }
-        if (first is null || second is null)
-        {
-            return false;
-        }
-        return first.Text == second.Text
-            && first.GroupId == second.GroupId;
+            && instruction.Group is null;
     }
 }

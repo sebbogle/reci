@@ -1,0 +1,138 @@
+{
+  "id": "391875be-2fc9-46e5-a5e6-c007d741c435",
+  "name": "Thai Peanut Noodles",
+  "description": "Chewy noodles tossed in a creamy, spicy peanut sauce with crunchy vegetables and fresh herbs. Equally delicious hot or cold.",
+  "group": "Quick Weeknight",
+  "ingredients": [
+    {
+      "name": "rice noodles or spaghetti",
+      "quantityAmount": 400,
+      "quantityUnit": "g",
+      "group": "Noodles & Veg"
+    },
+    {
+      "name": "red bell pepper, julienned",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Noodles & Veg"
+    },
+    {
+      "name": "carrots, julienned",
+      "quantityAmount": 2,
+      "quantityUnit": "whole",
+      "group": "Noodles & Veg"
+    },
+    {
+      "name": "purple cabbage, thinly sliced",
+      "quantityAmount": 1.5,
+      "quantityUnit": "cups",
+      "group": "Noodles & Veg"
+    },
+    {
+      "name": "green onions, sliced",
+      "quantityAmount": 3,
+      "quantityUnit": "whole",
+      "group": "Noodles & Veg"
+    },
+    {
+      "name": "fresh cilantro",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Noodles & Veg"
+    },
+    {
+      "name": "crushed peanuts",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Noodles & Veg"
+    },
+    {
+      "name": "creamy peanut butter",
+      "quantityAmount": 0.33,
+      "quantityUnit": "cup",
+      "group": "Peanut Sauce"
+    },
+    {
+      "name": "soy sauce",
+      "quantityAmount": 3,
+      "quantityUnit": "tbsp",
+      "group": "Peanut Sauce"
+    },
+    {
+      "name": "rice vinegar",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Peanut Sauce"
+    },
+    {
+      "name": "sesame oil",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Peanut Sauce"
+    },
+    {
+      "name": "honey",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Peanut Sauce"
+    },
+    {
+      "name": "Sriracha",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Peanut Sauce"
+    },
+    {
+      "name": "lime juice",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Peanut Sauce"
+    },
+    {
+      "name": "warm water",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Peanut Sauce"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Whisk peanut butter, soy sauce, rice vinegar, sesame oil, honey, Sriracha, lime juice, and warm water until smooth",
+      "group": "Sauce"
+    },
+    {
+      "text": "Taste and adjust: more Sriracha for heat, more honey for sweetness, more lime for tang",
+      "group": "Sauce"
+    },
+    {
+      "text": "Cook noodles according to package directions, drain, and rinse under cold water",
+      "group": "Cook & Toss"
+    },
+    {
+      "text": "Toss noodles with peanut sauce until evenly coated",
+      "group": "Cook & Toss"
+    },
+    {
+      "text": "Add bell pepper, carrots, cabbage, and green onions; toss to combine",
+      "group": "Cook & Toss"
+    },
+    {
+      "text": "Serve topped with crushed peanuts and fresh cilantro",
+      "group": "Cook & Toss"
+    }
+  ],
+  "source": {
+    "text": "Minimalist Baker",
+    "url": "https://minimalistbaker.com/thai-peanut-noodles/"
+  },
+  "tags": [
+    "thai",
+    "noodles",
+    "peanut",
+    "vegetarian",
+    "quick",
+    "weeknight",
+    "dinner"
+  ],
+  "furtherNotes": "Makes 4 servings. Prep time: 15 minutes, Cook time: 10 minutes. Add chicken, shrimp, or tofu for protein. Stores well for 3 days; noodles may absorb sauce, so toss with a splash of water when reheating."
+}

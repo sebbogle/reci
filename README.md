@@ -1,7 +1,7 @@
 # Reci - [Try it Out](https://reci.sebastianbogle.com)
 Reci is a minimalist recipe management application designed to help you organize and access your favorite recipes with ease.
 
-Try it out at [reci.sebastianbogle.com](https://reci.sebastianbogle.com) and use the '[seb.reci](https://github.com/sebbogle/reci/blob/dev/seb.reci)' file to get started!
+Try it out at [reci.sebastianbogle.com](https://reci.sebastianbogle.com) and use the sample [`Recipes/`](https://github.com/sebbogle/reci/tree/dev/Recipes) folder to get started!
 
 ## Current State
 The project is still in early development.
@@ -23,148 +23,120 @@ The project is still in early development.
 
 ## Generating `.reci` Files with AI
 
-You can use AI tools (like ChatGPT or Claude) to generate recipe data in the `.reci` format for easy import into the application.
+You can use AI tools (like ChatGPT or Claude) to generate recipe data in the `.reci` format for easy import into the application. Each `.reci` file contains a single recipe as a JSON object.
 
 ### AI Prompt Template
 
-Reci doesn't have any native AI features due to cost and complexity constraints, however recipes in a 'reci' formatted can be generated off platform and can then be imported into the app.
+Reci doesn't have any native AI features due to cost and complexity constraints, however recipes in a 'reci' format can be generated off platform and can then be imported into the app.
 
 Copy and paste the following prompt into your AI assistant, replacing `[INSERT SPECIFIC RECIPE REQUEST HERE]` with your desired recipe request:
 
 ````markdown
-You are a recipe data generator. Generate a JSON file in the .reci format with the following structure:
+You are a recipe data generator. Generate one or more JSON files in the .reci format. Each .reci file contains a single recipe as the root JSON object (no wrapper).
 
 ## Schema Requirements:
 
-**ReciFile** (root object):
-- `Version` (string, required): Use "1.0.0"
-- `Settings` (object, optional): Can be null or empty object {}
-- `Recipes` (array, optional): List of recipe objects
-- `Groups` (array, optional): List of group objects for organizing recipes, ingredients, and instructions
-
-**Recipe** object:
-- `Id` (string, UUID format): Generate a unique GUID for each recipe
-- `Name` (string, required): Recipe name
-- `Description` (string, optional): Brief description
-- `GroupId` (string, UUID format, optional): Reference to a Group Id if categorizing recipes
-- `Ingredients` (array): List of ingredient objects
-- `Instructions` (array): List of instruction objects
-- `NutritionInfo` (object, optional): Nutrition information
-- `Source` (object, optional): Recipe source information
-- `Tags` (array of strings): Relevant tags (e.g., "dinner", "vegetarian", "quick")
-- `FurtherNotes` (string, optional): Additional notes
+**Recipe** (root object — one per `.reci` file):
+- `id` (string, UUID format): Generate a unique GUID for each recipe
+- `name` (string, required): Recipe name
+- `description` (string, optional): Brief description
+- `group` (string, optional): Category name for grouping recipes (e.g., "Meal Prep", "Quick Weeknight")
+- `ingredients` (array): List of ingredient objects
+- `instructions` (array): List of instruction objects
+- `nutritionInfo` (object, optional): Nutrition information
+- `source` (object, optional): Recipe source information
+- `tags` (array of strings): Relevant tags (e.g., "dinner", "vegetarian", "quick")
+- `furtherNotes` (string, optional): Additional notes
 
 **Ingredient** object:
-- `Name` (string, required): Ingredient name
-- `QuantityAmount` (decimal, required): Numeric quantity
-- `QuantityUnit` (string, required): Unit of measurement (e.g., "cup", "tbsp", "g")
-- `GroupId` (string, UUID format, optional): For grouping ingredients (e.g., "For the sauce")
+- `name` (string, required): Ingredient name
+- `quantityAmount` (decimal, required): Numeric quantity
+- `quantityUnit` (string, required): Unit of measurement (e.g., "cup", "tbsp", "g")
+- `group` (string, optional): For grouping ingredients (e.g., "For the sauce", "Base Components")
 
 **Instruction** object:
-- `Text` (string, required): Step instruction
-- `GroupId` (string, UUID format, optional): For grouping instructions (e.g., "Preparation", "Cooking")
+- `text` (string, required): Step instruction
+- `group` (string, optional): For grouping instructions (e.g., "Preparation", "Cooking")
 
 **NutritionInfo** object (all optional):
-- `Calories` (integer, optional): Calorie count
-- `Fat` (decimal, optional): Fat in grams
-- `Carbohydrates` (decimal, optional): Carbs in grams
-- `Protein` (decimal, optional): Protein in grams
+- `calories` (integer, optional): Calorie count
+- `fat` (decimal, optional): Fat in grams
+- `carbohydrates` (decimal, optional): Carbs in grams
+- `protein` (decimal, optional): Protein in grams
 
 **RecipeSource** object:
-- `Text` (string, required): Source name (e.g., "Grandma's cookbook", "AllRecipes")
-- `Url` (string, optional): Source URL if available
+- `text` (string, required): Source name (e.g., "Grandma's cookbook", "AllRecipes")
+- `url` (string, optional): Source URL if available
 
-**Group** object:
-- `Id` (string, UUID format, required): Unique GUID
-- `Name` (string, required): Group name
-- `SortOrder` (integer, required): Display order (0-indexed)
-- `GroupType` (string, required): One of "Recipe", "Ingredient", or "Instruction"
 
 ## Example Output:
 
 ```json
 {
-  "Version": "1.0.0",
-  "Settings": {},
-  "Recipes": [
+  "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "name": "Classic Spaghetti Carbonara",
+  "description": "A creamy Italian pasta dish with bacon and eggs",
+  "group": "Italian Dishes",
+  "ingredients": [
     {
-      "Id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "Name": "Classic Spaghetti Carbonara",
-      "Description": "A creamy Italian pasta dish with bacon and eggs",
-      "GroupId": "11111111-1111-1111-1111-111111111111",
-      "Ingredients": [
-        {
-          "Name": "spaghetti",
-          "QuantityAmount": 400,
-          "QuantityUnit": "g",
-          "GroupId": null
-        },
-        {
-          "Name": "pancetta or bacon",
-          "QuantityAmount": 200,
-          "QuantityUnit": "g",
-          "GroupId": null
-        },
-        {
-          "Name": "eggs",
-          "QuantityAmount": 4,
-          "QuantityUnit": "whole",
-          "GroupId": null
-        },
-        {
-          "Name": "Parmesan cheese",
-          "QuantityAmount": 100,
-          "QuantityUnit": "g",
-          "GroupId": null
-        }
-      ],
-      "Instructions": [
-        {
-          "Text": "Cook spaghetti in salted boiling water until al dente",
-          "GroupId": null
-        },
-        {
-          "Text": "Fry pancetta until crispy",
-          "GroupId": null
-        },
-        {
-          "Text": "Beat eggs with grated Parmesan cheese",
-          "GroupId": null
-        },
-        {
-          "Text": "Drain pasta, mix with pancetta, remove from heat and stir in egg mixture",
-          "GroupId": null
-        }
-      ],
-      "NutritionInfo": {
-        "Calories": 650,
-        "Fat": 28.5,
-        "Carbohydrates": 72.0,
-        "Protein": 32.0
-      },
-      "Source": {
-        "Text": "Traditional Italian Recipe",
-        "Url": null
-      },
-      "Tags": ["pasta", "italian", "dinner", "comfort-food"],
-      "FurtherNotes": "Reserve some pasta water to adjust consistency if needed"
+      "name": "spaghetti",
+      "quantityAmount": 400,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "pancetta or bacon",
+      "quantityAmount": 200,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "eggs",
+      "quantityAmount": 4,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "Parmesan cheese",
+      "quantityAmount": 100,
+      "quantityUnit": "g"
     }
   ],
-  "Groups": [
+  "instructions": [
     {
-      "Id": "11111111-1111-1111-1111-111111111111",
-      "Name": "Italian Dishes",
-      "SortOrder": 0,
-      "GroupType": "Recipe"
+      "text": "Cook spaghetti in salted boiling water until al dente"
+    },
+    {
+      "text": "Fry pancetta until crispy"
+    },
+    {
+      "text": "Beat eggs with grated Parmesan cheese"
+    },
+    {
+      "text": "Drain pasta, mix with pancetta, remove from heat and stir in egg mixture"
     }
-  ]
+  ],
+  "nutritionInfo": {
+    "calories": 650,
+    "fat": 28.5,
+    "carbohydrates": 72.0,
+    "protein": 32.0
+  },
+  "source": {
+    "text": "Traditional Italian Recipe"
+  },
+  "tags": ["pasta", "italian", "dinner", "comfort-food"],
+  "furtherNotes": "Reserve some pasta water to adjust consistency if needed"
 }
 ```
+
+## File Naming:
+Name each file as: `{RecipeName}_{first8charsOfGuid}.reci`
+For example: `Classic Spaghetti Carbonara_a1b2c3d4.reci`
+
+If generating multiple recipes with the same group, place them in a folder named after the group.
 
 ## User Request:
 [INSERT SPECIFIC RECIPE REQUEST HERE]
 
-Please generate a complete .reci file with the recipe(s) requested.
+Please generate the recipe(s) as `.reci` files.
 ````
 
 ### Usage Examples

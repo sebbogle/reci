@@ -1,25 +1,82 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
+@implements IDisposable
+@inject IConnectionStateService ConnectionState
 
-<FluentLayout>
-    <FluentHeader>
-        <Header />
-    </FluentHeader>
-    <FluentStack Class="main" Orientation="Orientation.Horizontal" Width="100%">
-        <NavMenu />
-        <FluentBodyContent Class="body-content">
-            <ErrorBoundary>
-                <ChildContent>
-                    <div class="content">
-                        @Body
-                    </div>
-                </ChildContent>
-                <ErrorContent Context="ex">
-                    <div class="blazor-error-boundary">@ex.Message</div>
-                </ErrorContent>
-            </ErrorBoundary>
-        </FluentBodyContent>
-    </FluentStack>
-</FluentLayout>
+@if (isInitializing)
+{
+    <div class="loading">
+        <div class="loading-progress lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div style="font-size: 16px;">Loading...</div>
+    </div>
+}
+else if (ConnectionState.IsBrowserSupported == false)
+{
+    <FluentLayout>
+        <FluentStack Orientation="Orientation.Vertical"
+                     VerticalGap="20"
+                     HorizontalAlignment="HorizontalAlignment.Center"
+                     Style="margin-top: 15vh; padding: 2rem;">
+            <FluentIcon Value="@(new Icons.Regular.Size48.Warning())" Color="Color.Custom" CustomColor="var(--warning)" />
+            <FluentLabel Typo="Typography.H2">Browser Not Supported</FluentLabel>
+            <FluentLabel Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Style="text-align: center; max-width: 550px;">
+                Reci uses the File System Access API to store recipes directly on your device. This API is not available in your current browser.
+            </FluentLabel>
+            <FluentLabel Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Style="text-align: center; max-width: 550px;">
+                Please use Chrome or a Chromium based browser.
+            </FluentLabel>
+        </FluentStack>
+    </FluentLayout>
+}
+else if (!ConnectionState.IsConnected)
+{
+    <FluentLayout>
+        <FluentStack Orientation="Orientation.Vertical"
+                     VerticalGap="20"
+                     HorizontalAlignment="HorizontalAlignment.Center"
+                     Style="margin-top: 15vh; padding: 2rem;">
+            <FluentLabel Typo="Typography.H2">Welcome to Reci</FluentLabel>
+            <FluentLabel Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Style="text-align: center; max-width: 500px;">
+                Choose a folder on your device to store your recipes. Each recipe is saved as its own file, giving you full ownership of your data.
+            </FluentLabel>
+            @if (hasStoredDirectory)
+            {
+                <FluentButton Appearance="Appearance.Accent"
+                              OnClick="ReconnectFolder"
+                              Style="min-width: 200px;">
+                    Reconnect Folder
+                </FluentButton>
+            }
+            <FluentButton Appearance="@(hasStoredDirectory ? Appearance.Outline : Appearance.Accent)"
+                          OnClick="ConnectFolder"
+                          Style="min-width: 200px;">
+                @(hasStoredDirectory ? "Choose Different Folder" : "Connect Folder")
+            </FluentButton>
+        </FluentStack>
+    </FluentLayout>
+}
+else
+{
+    <FluentLayout>
+        <FluentHeader>
+            <Header />
+        </FluentHeader>
+        <FluentStack Class="main" Orientation="Orientation.Horizontal" Width="100%">
+            <NavMenu />
+            <FluentBodyContent Class="body-content">
+                <ErrorBoundary>
+                    <ChildContent>
+                        <div class="content">
+                            @Body
+                        </div>
+                    </ChildContent>
+                    <ErrorContent Context="ex">
+                        <div class="blazor-error-boundary">@ex.Message</div>
+                    </ErrorContent>
+                </ErrorBoundary>
+            </FluentBodyContent>
+        </FluentStack>
+    </FluentLayout>
+}
 
 <FluentDesignTheme Mode="DesignThemeModes.Light" CustomColor="#391C0B" />
 <FluentToastProvider Position="ToastPosition.BottomRight"/>
@@ -27,3 +84,39 @@
 <FluentTooltipProvider />
 <FluentMessageBarProvider />
 <FluentMenuProvider />
+
+@code {
+    private bool isInitializing = true;
+    private bool hasStoredDirectory;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ConnectionState.ConnectionStateChanged += OnConnectionStateChanged;
+        hasStoredDirectory = await ConnectionState.InitializeAndCheckAsync();
+        isInitializing = false;
+    }
+
+    private async Task ConnectFolder()
+    {
+        await ConnectionState.ConnectAsync();
+    }
+
+    private async Task ReconnectFolder()
+    {
+        bool success = await ConnectionState.ReconnectAsync();
+        if (!success)
+        {
+            await ConnectionState.ConnectAsync();
+        }
+    }
+
+    private async Task OnConnectionStateChanged()
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        ConnectionState.ConnectionStateChanged -= OnConnectionStateChanged;
+    }
+}

@@ -1,45 +1,36 @@
 namespace Reci.Services;
 
-public class RecipeService(IRecipeRepository recipeRepository, IGroupingRepository groupingRepository, IRecipeStateNotifier recipeStateNotifier, ILogger<RecipeService> logger) : IRecipeService
+public class RecipeService(IRecipeRepository recipeRepository, IRecipeStateNotifier recipeStateNotifier, ILogger<RecipeService> logger) : IRecipeService
 {
     private readonly IRecipeRepository _recipeRepository = recipeRepository.ThrowIfNull();
-    private readonly IGroupingRepository _groupingRepository = groupingRepository.ThrowIfNull();
     private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier.ThrowIfNull();
     private readonly ILogger<RecipeService> _logger = logger.ThrowIfNull();
 
-    public async Task<List<GroupVM<RecipeSummaryVM>>> GetRecipeSummariesAsync(CancellationToken cancellationToken = default)
+    public async Task<List<RecipeSummary>> GetRecipeSummariesAsync(CancellationToken cancellationToken = default)
     {
         _logger.LogDebug("Retrieving recipe summaries");
-        List<Recipe> recipes = await _recipeRepository.GetRecipesAsync(cancellationToken);
-        List<Group> groups = await _groupingRepository.GetGroupsAsync(cancellationToken);
+        List<RecipeSummary> summaries = await _recipeRepository.GetRecipeSummariesAsync(cancellationToken);
 
-        List<GroupVM<RecipeSummaryVM>> recipeSummariesVM = recipes.ToViewModelGroups(groups);
-
-        _logger.LogInformation("Retrieved {RecipeCount} recipe summaries across {GroupCount} groups", recipeSummariesVM.Sum(g => g.Count), recipeSummariesVM.Count);
-        return recipeSummariesVM;
+        _logger.LogInformation("Retrieved {RecipeCount} recipe summaries", summaries.Count);
+        return summaries;
     }
 
-    public async Task<RecipeVM?> GetRecipeAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Recipe?> GetRecipeAsync(Guid id, CancellationToken cancellationToken = default)
     {
         _logger.LogDebug("Retrieving recipe with ID {RecipeId}", id);
         Recipe? recipe = await _recipeRepository.GetRecipeAsync(id, cancellationToken);
-        List<Group> groups = await _groupingRepository.GetGroupsAsync(cancellationToken);
 
-        RecipeVM? recipeVM = recipe?.ToViewModel(groups);
-
-        if (recipeVM is null)
+        if (recipe is null)
         {
             _logger.LogWarning("Recipe with ID {RecipeId} not found", id);
         }
 
-        return recipeVM;
+        return recipe;
     }
 
-    public async Task<Result> SaveRecipeAsync(RecipeVM recipeVM, CancellationToken cancellationToken = default)
+    public async Task<Result> SaveRecipeAsync(Recipe recipe, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(recipeVM);
-
-        Recipe recipe = recipeVM.ToModel();
+        ArgumentNullException.ThrowIfNull(recipe);
 
         Result result;
         if (recipe.Id == Guid.Empty)
@@ -84,32 +75,28 @@ public class RecipeService(IRecipeRepository recipeRepository, IGroupingReposito
         return result;
     }
 
-    public async Task<bool> IsRecipeModifiedAsync(RecipeVM recipeVM, CancellationToken cancellationToken = default)
+    public async Task<bool> IsRecipeModifiedAsync(Recipe recipe, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(recipeVM);
+        ArgumentNullException.ThrowIfNull(recipe);
 
-        if (recipeVM.Id == null || recipeVM.Id == Guid.Empty)
+        if (recipe.Id == Guid.Empty)
         {
             return true;
         }
 
-        Recipe? originalRecipe = await _recipeRepository.GetRecipeAsync(recipeVM.Id.Value, cancellationToken);
+        Recipe? originalRecipe = await _recipeRepository.GetRecipeAsync(recipe.Id, cancellationToken);
 
         if (originalRecipe == null)
         {
             return true;
         }
 
-        Recipe currentRecipe = recipeVM.ToModel();
-
-        return !currentRecipe.IsEqualTo(originalRecipe);
+        return !recipe.IsEqualTo(originalRecipe);
     }
 
-    public bool IsRecipeEmpty(RecipeVM recipeVM)
+    public bool IsRecipeEmpty(Recipe recipe)
     {
-        ArgumentNullException.ThrowIfNull(recipeVM);
-
-        Recipe recipe = recipeVM.ToModel();
+        ArgumentNullException.ThrowIfNull(recipe);
 
         return recipe.IsEmpty();
     }

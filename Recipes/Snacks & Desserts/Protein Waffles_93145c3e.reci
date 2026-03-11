@@ -1,0 +1,61 @@
+{
+  "id": "93145c3e-c94a-471e-89ef-c9885980e228",
+  "name": "Protein Waffles",
+  "description": "Crispy, golden waffles packed with protein from eggs and protein powder, naturally sweetened with banana. A quick, healthy breakfast or snack that doubles as pancake batter.",
+  "group": "Snacks & Desserts",
+  "ingredients": [
+    {
+      "name": "Oats",
+      "quantityAmount": 150,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "Eggs",
+      "quantityAmount": 6,
+      "quantityUnit": ""
+    },
+    {
+      "name": "Bananas",
+      "quantityAmount": 2,
+      "quantityUnit": ""
+    },
+    {
+      "name": "Protein Powder",
+      "quantityAmount": 60,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "Milk",
+      "quantityAmount": 4,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "Baking Powder",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "Cinnamon",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Blend the oats into oat flour."
+    },
+    {
+      "text": "Add in the eggs, bananas, protein powder, milk, baking powder and cinnamon and blend until smooth."
+    },
+    {
+      "text": "Cook the mixture with a waffle maker until firm and golden brown."
+    },
+    {
+      "text": "Optionally, serve with berries."
+    }
+  ],
+  "tags": [
+    "Protein"
+  ],
+  "furtherNotes": "The mix can also be used for Protein Pancakes!"
+}
