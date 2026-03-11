@@ -1,0 +1,97 @@
+{
+  "id": "87aa2102-6129-4c57-9706-03cab2895540",
+  "name": "Lemon Herb Salmon",
+  "description": "Flaky, buttery salmon fillets baked with lemon, garlic, and fresh herbs. An elegant weeknight dinner that comes together in 20 minutes.",
+  "group": "Quick Weeknight",
+  "ingredients": [
+    {
+      "name": "salmon fillets",
+      "quantityAmount": 4,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "butter, melted",
+      "quantityAmount": 3,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 3,
+      "quantityUnit": "cloves"
+    },
+    {
+      "name": "lemon juice",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "lemon zest",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "fresh dill, chopped",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "fresh parsley, chopped",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "salt",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "black pepper",
+      "quantityAmount": 0.25,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "asparagus spears or green beans",
+      "quantityAmount": 400,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "olive oil",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Preheat oven to 200Â°C (400Â°F). Line a baking sheet with parchment paper"
+    },
+    {
+      "text": "Mix melted butter, garlic, lemon juice, lemon zest, dill, parsley, salt, and pepper in a small bowl"
+    },
+    {
+      "text": "Toss asparagus with olive oil and a pinch of salt. Arrange on one side of the baking sheet"
+    },
+    {
+      "text": "Place salmon fillets on the other side. Spoon the lemon herb butter generously over each fillet"
+    },
+    {
+      "text": "Bake 12-15 minutes until salmon flakes easily with a fork and asparagus is tender"
+    },
+    {
+      "text": "Squeeze extra lemon over salmon before serving"
+    }
+  ],
+  "source": {
+    "text": "Cafe Delites",
+    "url": "https://cafedelites.com/lemon-herb-butter-salmon/"
+  },
+  "tags": [
+    "salmon",
+    "seafood",
+    "quick",
+    "weeknight",
+    "healthy",
+    "dinner",
+    "low-carb"
+  ],
+  "furtherNotes": "Makes 4 servings. Prep time: 5 minutes, Cook time: 15 minutes. Internal temp should reach 63Â°C (145Â°F). Do not overcook or salmon will be dry. Leftovers make excellent salmon salad the next day."
+}

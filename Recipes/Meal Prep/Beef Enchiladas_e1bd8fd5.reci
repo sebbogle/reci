@@ -1,0 +1,158 @@
+{
+  "id": "e1bd8fd5-338e-48bb-bd0b-6375d4815e40",
+  "name": "Beef Enchiladas",
+  "description": "Slow-simmered seasoned beef rolled in tortillas, smothered in enchilada sauce and melted cheese. Freezer-friendly for batch cooking.",
+  "group": "Meal Prep",
+  "ingredients": [
+    {
+      "name": "ground beef",
+      "quantityAmount": 750,
+      "quantityUnit": "g",
+      "group": "Filling"
+    },
+    {
+      "name": "yellow onion, diced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Filling"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 3,
+      "quantityUnit": "cloves",
+      "group": "Filling"
+    },
+    {
+      "name": "cumin",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Filling"
+    },
+    {
+      "name": "chilli powder",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Filling"
+    },
+    {
+      "name": "smoked paprika",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Filling"
+    },
+    {
+      "name": "black beans, drained",
+      "quantityAmount": 400,
+      "quantityUnit": "g",
+      "group": "Filling"
+    },
+    {
+      "name": "salt and pepper",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste",
+      "group": "Filling"
+    },
+    {
+      "name": "crushed tomatoes",
+      "quantityAmount": 400,
+      "quantityUnit": "g",
+      "group": "Enchilada Sauce"
+    },
+    {
+      "name": "tomato paste",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Enchilada Sauce"
+    },
+    {
+      "name": "chicken broth",
+      "quantityAmount": 0.5,
+      "quantityUnit": "cup",
+      "group": "Enchilada Sauce"
+    },
+    {
+      "name": "cumin",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp",
+      "group": "Enchilada Sauce"
+    },
+    {
+      "name": "oregano",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp",
+      "group": "Enchilada Sauce"
+    },
+    {
+      "name": "flour tortillas (8-inch)",
+      "quantityAmount": 10,
+      "quantityUnit": "whole",
+      "group": "Assembly"
+    },
+    {
+      "name": "shredded cheddar cheese",
+      "quantityAmount": 250,
+      "quantityUnit": "g",
+      "group": "Assembly"
+    },
+    {
+      "name": "sour cream",
+      "quantityAmount": 0.5,
+      "quantityUnit": "cup",
+      "group": "Assembly"
+    },
+    {
+      "name": "fresh cilantro",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Assembly"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Preheat oven to 190Â°C (375Â°F). Grease a large baking dish",
+      "group": "Make Filling"
+    },
+    {
+      "text": "Brown beef with onion and garlic in a large skillet over medium-high heat, 6-8 minutes. Drain excess fat",
+      "group": "Make Filling"
+    },
+    {
+      "text": "Add cumin, chilli powder, paprika, salt and pepper. Stir in black beans and cook 2 minutes",
+      "group": "Make Filling"
+    },
+    {
+      "text": "Make enchilada sauce: combine crushed tomatoes, tomato paste, broth, cumin, and oregano in a saucepan. Simmer 10 minutes",
+      "group": "Make Filling"
+    },
+    {
+      "text": "Spread a thin layer of sauce on the bottom of the baking dish",
+      "group": "Assemble & Bake"
+    },
+    {
+      "text": "Fill each tortilla with beef mixture and a sprinkle of cheese, roll tightly, and place seam-side down in the dish",
+      "group": "Assemble & Bake"
+    },
+    {
+      "text": "Pour remaining sauce over enchiladas and top with remaining cheese",
+      "group": "Assemble & Bake"
+    },
+    {
+      "text": "Bake 20-25 minutes until cheese is melted and bubbly. Top with sour cream and cilantro",
+      "group": "Assemble & Bake"
+    }
+  ],
+  "source": {
+    "text": "RecipeTin Eats",
+    "url": "https://www.recipetineats.com/beef-enchiladas/"
+  },
+  "tags": [
+    "beef",
+    "mexican",
+    "enchiladas",
+    "meal-prep",
+    "dinner",
+    "freezer-friendly",
+    "batch-cooking"
+  ],
+  "furtherNotes": "Makes 10 enchiladas (5 servings). Prep time: 20 minutes, Cook time: 40 minutes. Storage: Refrigerate 4 days, freeze assembled but unbaked up to 3 months. Bake from frozen adding 15 minutes to cook time."
+}

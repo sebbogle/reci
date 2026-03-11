@@ -1,0 +1,79 @@
+{
+  "id": "6861353c-c2cf-45ff-acfb-40e694ee0aa5",
+  "name": "Chorizo & Egg Breakfast Wrap",
+  "description": "Smoky chorizo, soft scrambled eggs, cheese, and spinach wrapped in tortillas. Prep five wraps in twenty minutes for convenient, flavour-packed breakfast that stores beautifully.",
+  "group": "Wraps",
+  "ingredients": [
+    {
+      "name": "Spanish chorizo, diced",
+      "quantityAmount": 250,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "baby spinach",
+      "quantityAmount": 280,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "eggs, beaten",
+      "quantityAmount": 10,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "flour tortillas",
+      "quantityAmount": 5,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "smoked or regular cheddar cheese, grated",
+      "quantityAmount": 100,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "salt and pepper",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste"
+    },
+    {
+      "name": "spray oil (optional)",
+      "quantityAmount": 1,
+      "quantityUnit": "as needed"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Render the chorizo: Cook diced chorizo 4-5 minutes until crisp. Transfer to bowl, leaving fat in pan. Wilt spinach in remaining oil for 2 minutes."
+    },
+    {
+      "text": "Scramble the eggs: Pour beaten eggs into hot chorizo oil, season lightly with salt and pepper, fold gently 2-3 minutes until softly set."
+    },
+    {
+      "text": "Build the wraps: Divide scrambled eggs among tortillas, add chorizo and grated cheese to each."
+    },
+    {
+      "text": "Roll and seal: Fold sides in, roll tightly. Toast in dry pan 1-2 minutes per side until golden."
+    },
+    {
+      "text": "Cool before wrapping individually in foil or parchment for storage."
+    }
+  ],
+  "nutritionInfo": {
+    "calories": 450,
+    "fat": 22,
+    "carbohydrates": 25,
+    "protein": 30
+  },
+  "source": {
+    "text": "Chef Jack Ovens",
+    "url": "https://chefjackovens.com/chorizo-egg-breakfast-wrap-meal-prep/"
+  },
+  "tags": [
+    "breakfast",
+    "chorizo",
+    "eggs",
+    "wraps",
+    "meal-prep",
+    "high-protein"
+  ],
+  "furtherNotes": "Makes 5 wraps. Prep time: 5 minutes, Cook time: 15 minutes. Storage: Fridge 4 days wrapped in foil or parchment, Freezer 3 months individually wrapped. Reheating: Microwave or reheat in pan/air fryer to restore crispness. Nutrition per wrap: 450 calories, 30g protein, 25g carbs, 22g fat, 3.2g fiber, 888mg sodium, 332mg cholesterol."
+}

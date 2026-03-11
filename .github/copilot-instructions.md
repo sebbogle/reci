@@ -1,58 +1,60 @@
-# Reci AI Coding Instructions
+# Project Guidelines
 
-## Big Picture Architecture
-- `Reci` is a **Blazor WebAssembly-only** app (no backend API). App setup and DI live in `Program.cs`.
-- UI flow is route/page-driven (`Pages/Contents.razor`, `Pages/RecipePage.razor`) and relies on services for all business operations.
-- Data is persisted locally via Blazored LocalStorage repositories:
-	- `LocalStorageRecipeRepository` (`recipes` key)
-	- `LocalStorageGroupingRepository` (`groups` key)
-	- `LocalStorageSettingsRepository` (`settings` key)
-- Service boundary pattern:
-	- Pages/components call services (`IRecipeService`, `IGroupingService`, etc.)
-	- Services map between Models and ViewModels (`Mappers/RecipeMapper.cs`, `Mappers/SettingsMapper.cs`)
-	- Repositories persist/retrieve raw models.
+## Architecture
 
-## Cross-Component Data Flow
-- Recipe updates propagate through `IRecipeStateNotifier` (`Services/RecipeStateNotifier.cs`).
-- Pages subscribe/unsubscribe in lifecycle methods and refresh on notification (see `Contents.razor` and `RecipePage.razor` implementing `IAsyncDisposable` + `CancellationTokenSource`).
-- When adding write paths that affect recipes/imports, notify via `NotifyRecipesChangedAsync()` after successful persistence.
+Blazor WebAssembly (.NET 10) client-side recipe manager using Fluent UI. All data is stored locally on the user's device via the File System Access API — there is no backend server.
 
-## Project Conventions (Important)
-- **C# style**: Never use `var`; always use explicit types.
-- Do not add comments to the code unless it is absolutely necessary to explain complex logic. Strive for self-explanatory code through clear naming and structure.
-- Use null guards consistently (`ArgumentNullException.ThrowIfNull(...)` or `ThrowIfNull()` from `Core/GenericExtensions.cs`).
-- Prefer returning `Result`/`Result<T>` (`Core/Result.cs`) from service/repository operations rather than throwing for expected failures.
-- Keep mapping logic in mapper extensions, not pages/components.
-- Grouped recipe content uses `GroupVM<T>` where ungrouped items have `Id == null` (see `GroupVM<T>.Empty()` and `Components/RecipeEditor/GroupedEditor.razor`).
+**Layered structure:**
+- `Data/Models/` — Record types (`Recipe`, `Ingredient`, `Instruction`, etc.)
+- `Data/Repositories/` — `FileSystemRecipeRepository` with in-memory cache + semaphore locking
+- `Services/` — Business logic (`RecipeService`, `RecipeExportService`, `ConnectionStateService`, etc.)
+- `Components/` — Reusable Razor components (display + editor)
+- `Pages/` — Routable pages (`Contents.razor` at `/`, `RecipePage.razor` at `/recipe/{slug}`)
+- `Core/` — Utilities (`Result<T>`, extension methods, `FileNameHelper`)
+- `Layout/` — App shell (`MainLayout`, `NavMenu`, `Header`)
 
-## UI and Component Patterns
-- Use Fluent UI components (`Microsoft.FluentUI.AspNetCore.Components`) throughout; match existing usage in `RecipeEditor.razor` and pages.
-- Editing recipes is done in a dialog panel (`DialogService.ShowPanelAsync<RecipeEditor>` in `RecipePage.razor`).
-- The app currently emphasizes simple, local-first UX (see `README.md` scope and MVP notes). Avoid adding server assumptions.
+**Key patterns:**
+- All services are registered as **Scoped** in `Program.cs` and coded to interfaces in `Services/Interfaces/`
+- Each recipe is stored as an individual `.reci` JSON file; files are organized in subdirectories by recipe group
+- Sample recipes live in the `Recipes/` folder at the repository root, mirroring the on-device folder structure
+- Cross-component state sync via `IRecipeStateNotifier` (pub-sub)
+- Error handling uses `Result<T>` (railway-oriented) — prefer `Result.Success()`/`Result.Failure()` over exceptions for expected failures
+- JS interop via `wwwroot/js/fileSystemHelper.js` bridged through `FileSystemAccessService`
 
-## Integration Points
-- Import/export is handled in `Layout/Header.razor` using `IDataTransferService` + JS interop.
-- JS helper lives in `wwwroot/js/fileHelper.js` (`downloadFile`) and is loaded by `wwwroot/index.html`.
-- Wake lock integration is encapsulated in `Services/ScreenWakeLockService.cs` via `IJSRuntime`; keep JS access inside services when extending this area.
+## Code Style
 
-## Build/Test Workflow
-- Build app: `dotnet build`
-- Run app locally: `dotnet run`
-- Run tests: `dotnet test Tests/Tests.csproj`
-- Update golden screenshots: `$env:UPDATE_SNAPSHOTS="true"; dotnet test Tests/Tests.csproj`
-- Install Playwright browsers (one-time): `pwsh Tests/bin/Debug/net10.0/playwright.ps1 install`
-- Target framework is `net10.0` (`Reci.csproj`, `Tests/Tests.csproj`).
+- C# nullable reference types enabled; implicit usings enabled
+- Models use **records** for immutability (`Ingredient`, `Instruction`, `RecipeSummary`)
+- PascalCase for C#, camelCase for JSON serialization, kebab-case for CSS classes
+- Component-scoped CSS via `.razor.css` files; global styles in `wwwroot/css/`
+- Extension methods for validation (`.IsEmpty()`, `.IsEqualTo()`) and null checks (`.ThrowIfNull()`)
+- `IGroupable` interface for items that support grouping (ingredients, instructions)
+- Async throughout with `CancellationToken` support
+- Components implement `IAsyncDisposable` to unsubscribe from notifiers
 
-## Test Architecture
-- Tests are **Playwright integration tests** (not unit tests). They launch the real app and drive a real browser.
-- `AppFixture` (`Tests/Fixtures/AppFixture.cs`) starts the app via `dotnet run` and waits for it to respond. It is shared across all test classes via the `[Collection("App")]` xUnit collection.
-- `ReciPage` (`Tests/Utilities/ReciPage.cs`) is the page-object helper. It seeds localStorage with JSON from `Tests/Resources/BaseState.json` using `AddInitScriptAsync`, navigates to pages, and waits for Blazor to finish rendering.
-- **State seeding**: Tests inject data into browser localStorage before navigation. Each test gets an isolated browser context (from `PageTest`), so state does not leak between tests.
-- **Visual regression**: `ScreenshotAssert` (`Tests/Utilities/ScreenshotAssert.cs`) compares page screenshots against golden PNGs stored in `Tests/Resources/Golden Screenshots/`. On mismatch, the actual screenshot is written to `bin/.../Temp Test Screenshots/` for review. Set `UPDATE_SNAPSHOTS=true` to regenerate baselines.
-- Golden screenshots are tracked via **Git LFS** (see `.gitattributes`).
-- When adding new pages or visually significant changes, add corresponding screenshot tests in `Tests/Views/` and update golden files.
+## Build and Test
 
-## Change Scope Guidance for Agents
-- Prefer focused, minimal edits in existing service/repository/page structure.
-- If adding new persisted data, define repository behavior first, then service mapping, then UI wiring.
-- Preserve route + state-notifier refresh behavior when modifying recipe CRUD, import/export, or grouping logic.
+```bash
+# Run the app (dev server at http://localhost:5265)
+dotnet run
+
+# Build release
+dotnet build -c Release
+
+# Run E2E tests (Playwright — requires app to be running or fixture starts it)
+dotnet test --project Tests/Tests.csproj
+```
+
+- **Testing framework**: xunit.v3 + Microsoft.Playwright for E2E browser automation
+- `AppFixture` (shared via `AppCollection`) starts the app process automatically
+- `ReciPage` base class provides Playwright page helpers
+- `[ReciPageState]` attribute injects JSON state into localStorage before tests
+- `ScreenshotAssert` does golden-image visual regression against `Tests/Resources/Golden Screenshots/`
+- Playwright must be installed: `pwsh Tests/bin/Debug/net10.0/playwright.ps1 install`
+
+## Conventions
+
+- File names are sanitized via `FileNameHelper` with an 8-char GUID prefix for uniqueness
+- JSON config: camelCase property names, null values omitted, indented formatting
+- UI components use Microsoft Fluent UI (`FluentButton`, `FluentDialog`, etc.)
+- Global usings are declared in `Reci.csproj` `<Using>` items — no need for repeated `using` statements in most files

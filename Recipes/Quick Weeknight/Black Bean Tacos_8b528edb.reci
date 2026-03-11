@@ -1,0 +1,104 @@
+{
+  "id": "8b528edb-6d14-4a81-802f-618d477f37a5",
+  "name": "Black Bean Tacos",
+  "description": "Smoky, seasoned black beans piled into warm tortillas with fresh toppings. A quick vegetarian dinner that rivals any taco truck.",
+  "group": "Quick Weeknight",
+  "ingredients": [
+    {
+      "name": "black beans, drained and rinsed",
+      "quantityAmount": 800,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "olive oil",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "cumin",
+      "quantityAmount": 1.5,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "chilli powder",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "smoked paprika",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "garlic powder",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "lime juice",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "small corn or flour tortillas",
+      "quantityAmount": 8,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "avocado, sliced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "red cabbage, shredded",
+      "quantityAmount": 1,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "fresh cilantro",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "crumbled cotija or feta cheese",
+      "quantityAmount": 60,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "hot sauce",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Heat olive oil in a skillet over medium heat. Add black beans, cumin, chilli powder, paprika, and garlic powder"
+    },
+    {
+      "text": "Cook 4-5 minutes, gently mashing about half the beans with a fork to create a creamy texture"
+    },
+    {
+      "text": "Squeeze lime juice over beans and season with salt to taste"
+    },
+    {
+      "text": "Warm tortillas in a dry pan or directly over a gas flame for 20-30 seconds per side"
+    },
+    {
+      "text": "Fill tortillas with seasoned beans, top with avocado, shredded cabbage, cilantro, cheese, and hot sauce"
+    }
+  ],
+  "source": {
+    "text": "Budget Bytes",
+    "url": "https://www.budgetbytes.com/smoky-black-bean-tacos/"
+  },
+  "tags": [
+    "tacos",
+    "black-beans",
+    "vegetarian",
+    "quick",
+    "weeknight",
+    "mexican",
+    "budget"
+  ],
+  "furtherNotes": "Makes 4 servings (8 tacos). Prep time: 5 minutes, Cook time: 10 minutes. Seasoned beans keep refrigerated for 5 days. Double the beans for easy burrito bowls throughout the week."
+}

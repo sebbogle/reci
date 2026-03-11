@@ -1,5 +1,7 @@
-﻿@inject IDataTransferService DataTransferService
-@inject IJSRuntime JSRuntime
+﻿@implements IDisposable
+@inject IRecipeExportService RecipeExportService
+@inject IFileSystemAccessService FileSystemAccess
+@inject IConnectionStateService ConnectionState
 @inject IToastService ToastService
 @inject NavigationManager NavigationManager
 
@@ -12,80 +14,120 @@
     </div>
 
     <div class="header-actions">
-        @if (PendingChanges)
+        @if (ConnectionState.IsConnected)
         {
-            <FluentLabel>Unsaved changes</FluentLabel>
+            <FluentLabel Color="Color.Lightweight" Typo="Typography.Body" Style="opacity: 0.7; margin-right: 8px;">
+                @ConnectionState.FolderName
+            </FluentLabel>
         }
 
         <FluentButton Appearance="Appearance.Lightweight"
                       IconEnd="@(new Icons.Regular.Size20.ArrowDownload())" 
-                      OnClick="OnDownloadClick"
-                      Title="Download"
-                      Loading="@isDownloading">
+                      OnClick="OnExportClick"
+                      Title="@exportTooltip"
+                      Loading="@isExporting">
         </FluentButton>
-        
-        <FluentButton Appearance="Appearance.Lightweight" 
-                      IconEnd="@(new Icons.Regular.Size20.ArrowUpload())" 
-                      OnClick="OnUploadClick"
-                      Title="Upload"
-                      Loading="@isUploading">
+
+        <FluentButton Appearance="Appearance.Lightweight"
+                      IconEnd="@(new Icons.Regular.Size20.PlugDisconnected())"
+                      OnClick="OnDisconnectClick"
+                      Title="Disconnect folder">
         </FluentButton>
-        
-        <FluentButton Appearance="Appearance.Lightweight" 
-                      IconEnd="@(new Icons.Regular.Size20.Settings())" 
-                      OnClick="OnSettingsClick"
-                      Title="Settings"
-                      Disabled="true">
-        </FluentButton>
-        
-        <InputFile OnChange="OnFileSelected" @ref="fileInput" id="fileUploadInput" style="display: none;" accept=".reci" />
     </div>
 </div>
 
 @code {
-    public bool PendingChanges { get; set; } = false;
+    private bool isExporting;
+    private string exportTooltip = "Export all recipes";
 
-    private InputFile? fileInput;
-    private bool isDownloading = false;
-    private bool isUploading = false;
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += OnLocationChanged;
+        UpdateExportTooltip();
+    }
+
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        UpdateExportTooltip();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void UpdateExportTooltip()
+    {
+        ExportContext context = GetExportContext();
+        exportTooltip = context.Kind switch
+        {
+            ExportKind.Recipe => "Export recipe",
+            ExportKind.Group => $"Export {context.Value} group",
+            _ => "Export all recipes"
+        };
+    }
 
     private void NavigateToHome()
     {
-        var currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        string currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         if (!string.IsNullOrEmpty(currentPath))
         {
             NavigationManager.NavigateTo("/");
         }
     }
 
-    private async Task OnDownloadClick()
+    private async Task OnExportClick()
     {
         try
         {
-            isDownloading = true;
-            
-            ReciFile? reciFile = await DataTransferService.ExportReciDefinitionAsync();
-            
-            if (reciFile == null)
+            isExporting = true;
+
+            ExportContext context = GetExportContext();
+
+            switch (context.Kind)
             {
-                ToastService.ShowError("Failed to export data");
-                return;
+                case ExportKind.Recipe:
+                {
+                    Guid recipeId = Guid.Parse(context.Value!);
+                    RecipeExportResult? result = await RecipeExportService.ExportRecipeAsync(recipeId);
+
+                    if (result is null)
+                    {
+                        ToastService.ShowError("Failed to export recipe");
+                        return;
+                    }
+
+                    await FileSystemAccess.DownloadBlobAsync(result.FileName, result.Content, "application/json");
+                    ToastService.ShowSuccess("Recipe exported");
+                    break;
+                }
+                case ExportKind.Group:
+                {
+                    byte[]? zipBytes = await RecipeExportService.ExportGroupAsZipAsync(context.Value!);
+
+                    if (zipBytes is null)
+                    {
+                        ToastService.ShowError("Failed to export group");
+                        return;
+                    }
+
+                    string fileName = $"{context.Value}.zip";
+                    await FileSystemAccess.DownloadBlobAsync(fileName, zipBytes, "application/zip");
+                    ToastService.ShowSuccess("Group exported");
+                    break;
+                }
+                default:
+                {
+                    byte[]? zipBytes = await RecipeExportService.ExportAllAsZipAsync();
+
+                    if (zipBytes is null)
+                    {
+                        ToastService.ShowError("Failed to export recipes");
+                        return;
+                    }
+
+                    string fileName = $"reci-export-{DateTime.Now:yyyy-MM-dd-HHmmss}.zip";
+                    await FileSystemAccess.DownloadBlobAsync(fileName, zipBytes, "application/zip");
+                    ToastService.ShowSuccess("All recipes exported");
+                    break;
+                }
             }
-
-            string jsonContent = System.Text.Json.JsonSerializer.Serialize(reciFile, new System.Text.Json.JsonSerializerOptions 
-            { 
-                WriteIndented = true 
-            });
-            
-            string fileName = $"reci-export-{DateTime.Now:yyyy-MM-dd-HHmmss}.reci";
-            
-            await JSRuntime.InvokeVoidAsync("downloadFile", fileName, jsonContent);
-
-            ToastService.ShowSuccess("Data exported successfully");
-        }
-        catch (JSException ex) when (ex.Message.Contains("AbortError"))
-        {
-            // User cancelled the save dialog
         }
         catch (Exception ex)
         {
@@ -93,65 +135,40 @@
         }
         finally
         {
-            isDownloading = false;
+            isExporting = false;
         }
     }
 
-    private async Task OnUploadClick()
+    private async Task OnDisconnectClick()
     {
-        await JSRuntime.InvokeVoidAsync("triggerFileUpload", "fileUploadInput");
+        await ConnectionState.DisconnectAsync();
     }
 
-    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    private ExportContext GetExportContext()
     {
-        try
-        {
-            isUploading = true;
-            
-            var file = e.File;
-            
-            if (file == null)
-            {
-                return;
-            }
+        string relativePath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 
-            using var stream = file.OpenReadStream(maxAllowedSize: 10 * 1024 * 1024); // 10MB limit
-            using var reader = new StreamReader(stream);
-            string jsonContent = await reader.ReadToEndAsync();
-
-            string mendedJsonContent = DataTransferService.MendGuidsFromImportedData(jsonContent);
-            
-            ReciFile? reciFile = System.Text.Json.JsonSerializer.Deserialize<ReciFile>(mendedJsonContent);
-            
-            if (reciFile == null)
-            {
-                ToastService.ShowError("Invalid file format");
-                return;
-            }
-
-            Result result = await DataTransferService.ImportReciDefinitionAsync(reciFile);
-            
-            if (result.IsSuccess)
-            {
-                ToastService.ShowSuccess("Data imported successfully");
-            }
-            else
-            {
-                ToastService.ShowError($"Import failed: {result.ErrorMessage}");
-            }
-        }
-        catch (Exception ex)
+        if (relativePath.StartsWith("Recipe/", StringComparison.OrdinalIgnoreCase)
+            && Guid.TryParse(relativePath.AsSpan("Recipe/".Length), out Guid _))
         {
-            ToastService.ShowError($"Upload failed: {ex.Message}");
+            return new ExportContext(ExportKind.Recipe, relativePath["Recipe/".Length..]);
         }
-        finally
+
+        if (relativePath.StartsWith("group/", StringComparison.OrdinalIgnoreCase)
+            && relativePath.Length > "group/".Length)
         {
-            isUploading = false;
+            string groupName = Uri.UnescapeDataString(relativePath["group/".Length..]);
+            return new ExportContext(ExportKind.Group, groupName);
         }
+
+        return new ExportContext(ExportKind.All, null);
     }
 
-    private void OnSettingsClick()
+    public void Dispose()
     {
-        // TODO: Implement settings functionality
+        NavigationManager.LocationChanged -= OnLocationChanged;
     }
+
+    private enum ExportKind { All, Group, Recipe }
+    private readonly record struct ExportContext(ExportKind Kind, string? Value);
 }

@@ -1,22 +1,22 @@
 ﻿@page "/"
-@page "/group/{groupId:guid}"
+@page "/group/{GroupName}"
 @implements IAsyncDisposable
 @inject IRecipeService RecipeService
 @inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
 
-<PageTitle>@(selectedGroupName ?? "Contents")</PageTitle>
+<PageTitle>@(GroupName ?? "Contents")</PageTitle>
 
 @if (isLoading)
 {
     <FluentProgressRing />
     <p>Loading recipes...</p>
 }
-else if (GroupId.HasValue && (filteredGroups is null || !filteredGroups.Any()))
+else if (GroupName is not null && (filteredSummaries is null || !filteredSummaries.Any()))
 {
     <ItemNotFound ItemTypeLabel="group" />
 }
-else if (filteredGroups is null || !filteredGroups.Any())
+else if (filteredSummaries is null || !filteredSummaries.Any())
 {
     <FluentStack Orientation="Orientation.Vertical"
                  VerticalGap="15"
@@ -31,16 +31,16 @@ else
 {
     <div>
     <FluentGrid Spacing="2" Justify="JustifyContent.FlexStart">
-        @foreach (GroupVM<RecipeSummaryVM> group in filteredGroups.OrderBy(g => g.SortOrder))
+        @foreach (IGrouping<string?, RecipeSummary> group in filteredSummaries.GroupBy(r => r.Group).OrderBy(g => g.Key ?? string.Empty))
         {
-            @if (!string.IsNullOrEmpty(group.Name) && GroupId == null)
+            @if (!string.IsNullOrEmpty(group.Key) && GroupName == null)
             {
                 <FluentGridItem xs="12">
-                    <FluentLabel Typo="Typography.H3">@group.Name</FluentLabel>
+                    <FluentLabel Typo="Typography.H3">@group.Key</FluentLabel>
                 </FluentGridItem>
             }
 
-            @foreach (RecipeSummaryVM recipe in group)
+            @foreach (RecipeSummary recipe in group)
             {
                 <FluentGridItem xs="12" sm="6" md="4" lg="3" @key="recipe.Id">
                     <FluentCard class="recipe-card" MinimalStyle="true" @onclick="() => NavigateToRecipe(recipe.Id)">
@@ -75,11 +75,10 @@ else
 
 @code {
     [Parameter]
-    public Guid? GroupId { get; set; }
+    public string? GroupName { get; set; }
 
-    private List<GroupVM<RecipeSummaryVM>>? recipeGroups;
-    private List<GroupVM<RecipeSummaryVM>>? filteredGroups;
-    private string? selectedGroupName;
+    private List<RecipeSummary>? allSummaries;
+    private List<RecipeSummary>? filteredSummaries;
     private bool isLoading = true;
     private CancellationTokenSource _cts = new();
 
@@ -98,7 +97,7 @@ else
     {
         try
         {
-            recipeGroups = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
+            allSummaries = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
             FilterRecipes();
         }
         finally
@@ -135,24 +134,21 @@ else
 
     private void FilterRecipes()
     {
-        if (recipeGroups == null)
+        if (allSummaries == null)
         {
-            filteredGroups = null;
+            filteredSummaries = null;
             return;
         }
 
-        if (GroupId.HasValue)
+        if (GroupName is not null)
         {
-            filteredGroups = recipeGroups
-                .Where(g => g.Id == GroupId.Value)
+            filteredSummaries = allSummaries
+                .Where(r => string.Equals(r.Group, GroupName, StringComparison.OrdinalIgnoreCase))
                 .ToList();
-            
-            selectedGroupName = filteredGroups.FirstOrDefault()?.Name;
         }
         else
         {
-            filteredGroups = recipeGroups;
-            selectedGroupName = null;
+            filteredSummaries = allSummaries;
         }
     }
 

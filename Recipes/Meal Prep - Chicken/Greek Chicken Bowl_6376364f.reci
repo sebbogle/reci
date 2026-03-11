@@ -1,0 +1,150 @@
+{
+  "id": "6376364f-9e9b-40a0-b956-973fb414ec8a",
+  "name": "Greek Chicken Bowl",
+  "description": "Juicy lemon-herb grilled chicken over rice with cucumber, tomatoes, red onion, and a cool creamy tzatziki. A fresh, satisfying meal prep bowl.",
+  "group": "Meal Prep - Chicken",
+  "ingredients": [
+    {
+      "name": "boneless skinless chicken breasts",
+      "quantityAmount": 800,
+      "quantityUnit": "g",
+      "group": "Bowl"
+    },
+    {
+      "name": "olive oil",
+      "quantityAmount": 3,
+      "quantityUnit": "tbsp",
+      "group": "Bowl"
+    },
+    {
+      "name": "lemon juice",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Bowl"
+    },
+    {
+      "name": "dried oregano",
+      "quantityAmount": 1.5,
+      "quantityUnit": "tsp",
+      "group": "Bowl"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 3,
+      "quantityUnit": "cloves",
+      "group": "Bowl"
+    },
+    {
+      "name": "basmati rice",
+      "quantityAmount": 1.5,
+      "quantityUnit": "cups",
+      "group": "Bowl"
+    },
+    {
+      "name": "cucumber, diced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Bowl"
+    },
+    {
+      "name": "cherry tomatoes, halved",
+      "quantityAmount": 1,
+      "quantityUnit": "cup",
+      "group": "Bowl"
+    },
+    {
+      "name": "red onion, thinly sliced",
+      "quantityAmount": 0.5,
+      "quantityUnit": "whole",
+      "group": "Bowl"
+    },
+    {
+      "name": "Kalamata olives",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Bowl"
+    },
+    {
+      "name": "crumbled feta cheese",
+      "quantityAmount": 100,
+      "quantityUnit": "g",
+      "group": "Bowl"
+    },
+    {
+      "name": "Greek yogurt",
+      "quantityAmount": 1,
+      "quantityUnit": "cup",
+      "group": "Tzatziki"
+    },
+    {
+      "name": "cucumber, grated and squeezed dry",
+      "quantityAmount": 0.5,
+      "quantityUnit": "cup",
+      "group": "Tzatziki"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 1,
+      "quantityUnit": "clove",
+      "group": "Tzatziki"
+    },
+    {
+      "name": "lemon juice",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Tzatziki"
+    },
+    {
+      "name": "fresh dill, chopped",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Tzatziki"
+    },
+    {
+      "name": "salt",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp",
+      "group": "Tzatziki"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Marinate chicken in olive oil, lemon juice, oregano, garlic, and salt for at least 20 minutes",
+      "group": "Chicken & Veg"
+    },
+    {
+      "text": "Cook rice according to package directions. Let cool slightly",
+      "group": "Chicken & Veg"
+    },
+    {
+      "text": "Grill or pan-sear chicken over medium-high heat, 5-6 minutes per side until internal temp reaches 74Â°C (165Â°F). Let rest 5 minutes, then slice",
+      "group": "Chicken & Veg"
+    },
+    {
+      "text": "Make tzatziki: combine yogurt, grated cucumber, garlic, lemon juice, dill, and salt. Refrigerate until serving",
+      "group": "Chicken & Veg"
+    },
+    {
+      "text": "Divide rice among 4 containers. Top with sliced chicken, cucumber, tomatoes, red onion, olives, and feta",
+      "group": "Assembly"
+    },
+    {
+      "text": "Pack tzatziki in small separate containers. Drizzle over bowls when ready to eat",
+      "group": "Assembly"
+    }
+  ],
+  "source": {
+    "text": "Gimme Delicious",
+    "url": "https://gimmedelicious.com/greek-chicken-bowl/"
+  },
+  "tags": [
+    "greek",
+    "chicken",
+    "bowl",
+    "meal-prep",
+    "mediterranean",
+    "lunch",
+    "high-protein"
+  ],
+  "furtherNotes": "Makes 4 servings. Prep time: 20 minutes (plus marinating), Cook time: 15 minutes. Storage: Refrigerate 4 days. Keep tzatziki separate to prevent sogginess. Swap rice for cauliflower rice for lower carbs."
+}

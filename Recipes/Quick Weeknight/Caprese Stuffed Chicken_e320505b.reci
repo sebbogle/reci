@@ -1,0 +1,95 @@
+{
+  "id": "e320505b-b744-4217-b11a-c79cb299b32e",
+  "name": "Caprese Stuffed Chicken",
+  "description": "Juicy chicken breasts stuffed with fresh mozzarella, sun-dried tomatoes, and basil, wrapped in prosciutto. An impressive weeknight dinner in under 30 minutes.",
+  "group": "Quick Weeknight",
+  "ingredients": [
+    {
+      "name": "boneless skinless chicken breasts",
+      "quantityAmount": 4,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "fresh mozzarella, sliced",
+      "quantityAmount": 125,
+      "quantityUnit": "g"
+    },
+    {
+      "name": "sun-dried tomatoes, chopped",
+      "quantityAmount": 0.33,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "fresh basil leaves",
+      "quantityAmount": 8,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "prosciutto slices",
+      "quantityAmount": 8,
+      "quantityUnit": "whole"
+    },
+    {
+      "name": "olive oil",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "garlic powder",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "Italian seasoning",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "salt and pepper",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste"
+    },
+    {
+      "name": "balsamic glaze, for drizzling",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Preheat oven to 200Â°C (400Â°F). Cut a deep pocket horizontally into each chicken breast, being careful not to slice all the way through"
+    },
+    {
+      "text": "Season chicken inside and out with garlic powder, Italian seasoning, salt, and pepper"
+    },
+    {
+      "text": "Stuff each breast with mozzarella slices, sun-dried tomatoes, and 2 basil leaves"
+    },
+    {
+      "text": "Wrap each stuffed breast with 2 slices of prosciutto to seal the opening"
+    },
+    {
+      "text": "Heat olive oil in an oven-safe skillet over medium-high heat. Sear chicken 2-3 minutes per side until prosciutto is crispy"
+    },
+    {
+      "text": "Transfer skillet to oven and bake 15-18 minutes until chicken reaches 74Â°C (165Â°F) internally"
+    },
+    {
+      "text": "Let rest 5 minutes, then drizzle with balsamic glaze before serving"
+    }
+  ],
+  "source": {
+    "text": "Cafe Delites",
+    "url": "https://cafedelites.com/caprese-stuffed-chicken/"
+  },
+  "tags": [
+    "chicken",
+    "italian",
+    "caprese",
+    "weeknight",
+    "dinner",
+    "low-carb",
+    "impressive"
+  ],
+  "furtherNotes": "Makes 4 servings. Prep time: 10 minutes, Cook time: 20 minutes. Serve with roasted vegetables, salad, or garlic bread. Leftover chicken slices well for next-day sandwiches or salads. Secure prosciutto with toothpicks if needed."
+}

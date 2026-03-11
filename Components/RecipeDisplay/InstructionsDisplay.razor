@@ -1,0 +1,34 @@
+
+<FluentStack Orientation="Orientation.Vertical">
+    <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="5">
+        <FluentIcon Value="@(new Icons.Regular.Size20.NumberSymbol())" />
+        <FluentLabel Typo="Typography.H3">Instructions</FluentLabel>
+    </FluentStack>
+
+    @foreach (IGrouping<string?, Instruction> instructionGroup in Instructions.GroupBy(i => i.Group))
+    {
+        int stepNumber = 1;
+        <FluentCard MinimalStyle="true">
+            <FluentStack Orientation="Orientation.Vertical">
+                @if (!string.IsNullOrWhiteSpace(instructionGroup.Key))
+                {
+                    <FluentLabel Typo="Typography.H6" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)">@instructionGroup.Key</FluentLabel>
+                }
+                <FluentLabel>
+                    <ol class="instruction-list" start="@stepNumber">
+                        @foreach (Instruction instruction in instructionGroup)
+                        {
+                            <li class="instruction-item">@instruction.Text</li>
+                            stepNumber++;
+                        }
+                    </ol>
+                </FluentLabel>
+            </FluentStack>
+        </FluentCard>
+    }
+</FluentStack>
+
+@code {
+    [Parameter]
+    public List<Instruction> Instructions { get; set; } = new();
+}

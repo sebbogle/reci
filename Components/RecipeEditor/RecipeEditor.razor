@@ -1,6 +1,5 @@
-﻿@implements IDialogContentComponent<RecipeVM>
+﻿@implements IDialogContentComponent<Recipe>
 @implements IAsyncDisposable
-@inject IGroupingService GroupingService
 @inject IRecipeService RecipeService
 @inject IDialogService DialogService
 @inject IToastService ToastService
@@ -24,11 +23,10 @@
             <FluentGridItem xs="12" sm="6" md="6" lg="6">
                 <div class="group-selector">
                     <div class="group-selector-input">
-                        <FluentCombobox TOption="Group"
-                                    @bind-Value="newGroupName"
-                                    @bind-SelectedOption="Content.Group"
-                                    Items="@RecipeGroups"
-                                    OptionText="@(g => g?.Name ?? "Ungrouped")"
+                        <FluentCombobox TOption="string"
+                                    @bind-Value="Content.Group"
+                                    Items="@existingGroupNames"
+                                    OptionText="@(g => g ?? "Ungrouped")"
                                     Placeholder="Select or type to create..."
                                     Style="width: 100%; min-width: 0"> 
                             <LabelTemplate>
@@ -36,13 +34,6 @@
                             </LabelTemplate>
                         </FluentCombobox>
                     </div>
-                    <FluentButton Appearance="Appearance.Outline"
-                              OnClick="AddNewGroup"
-                              Title="Add new group"
-                              Disabled="Content.Group is not null"
-                              Style="align-self: flex-end;">
-                        Add
-                    </FluentButton>
                 </div>
             </FluentGridItem>
         </FluentGrid>
@@ -58,8 +49,7 @@
 
         @* Ingredients Section *@
         <GroupedEditor TItem="Ingredient"
-                       Groups="@Content.Ingredients"
-                       UngroupedItems="@UngroupedIngredients"
+                       Items="@Content.Ingredients"
                        Title="Ingredients"
                        DefaultGroupName="Ingredients"
                        AddItemButtonText="Add Ingredient"
@@ -86,8 +76,7 @@
 
         @* Instructions Section *@
         <GroupedEditor TItem="Instruction"
-                       Groups="@Content.Instructions"
-                       UngroupedItems="@UngroupedInstructions"
+                       Items="@Content.Instructions"
                        Title="Instructions"
                        DefaultGroupName="Steps"
                        AddItemButtonText="Add Step"
@@ -197,7 +186,7 @@
 </FluentDialogBody>
 
 <FluentDialogFooter>
-    @if (Content.Id is not null && Content.Id != Guid.Empty)
+    @if (Content.Id != Guid.Empty)
     {
         <FluentButton Appearance="Appearance.Accent"
                       OnClick="OnDeleteClick">
@@ -227,58 +216,15 @@
     #endregion
 
     [Parameter]
-    public RecipeVM Content { get; set; } = new();
+    public Recipe Content { get; set; } = new() { Name = string.Empty };
 
     [CascadingParameter]
     public FluentDialog? Dialog { get; set; }
-
-    #region Ungrouped Items Helpers
-
-    private GroupVM<Ingredient> UngroupedIngredients
-    {
-        get
-        {
-            GroupVM<Ingredient>? ungrouped = Content.Ingredients.FirstOrDefault(g => g.Id == null);
-            if (ungrouped == null)
-            {
-                ungrouped = GroupVM<Ingredient>.Empty();
-                Content.Ingredients.Insert(0, ungrouped);
-            }
-            return ungrouped;
-        }
-    }
-
-    private GroupVM<Instruction> UngroupedInstructions
-    {
-        get
-        {
-            GroupVM<Instruction>? ungrouped = Content.Instructions.FirstOrDefault(g => g.Id == null);
-            if (ungrouped == null)
-            {
-                ungrouped = GroupVM<Instruction>.Empty();
-                Content.Instructions.Insert(0, ungrouped);
-            }
-            return ungrouped;
-        }
-    }
-
-    #endregion
 
     #region Event Handlers
 
     private async Task OnSaveClick()
     {
-        if (Content.Group is not null && Content.Group.Id == Guid.Empty)
-        {
-            Result groupResult = await GroupingService.SaveGroupingAsync(Content.Group, _cts.Token);
-            
-            if (!groupResult.IsSuccess)
-            {
-                ToastService.ShowError("Error saving group: " + groupResult.ErrorMessage);
-                return;
-            }
-        }
-
         Result saveResult = await RecipeService.SaveRecipeAsync(Content, _cts.Token);
 
         if (saveResult.IsSuccess)
@@ -288,7 +234,6 @@
         else
         {
             ToastService.ShowError("Error: " + saveResult.ErrorMessage);
-
         }
 
         if (Dialog is not null)
@@ -299,7 +244,7 @@
 
     private async Task OnCancelClick()
     {
-        bool isNewRecipe = Content.Id == null || Content.Id == Guid.Empty;
+        bool isNewRecipe = Content.Id == Guid.Empty;
 
         if (isNewRecipe)
         {
@@ -333,12 +278,12 @@
 
     private async Task OnDeleteClick()
     {
-        var dialog = await DialogService.ShowConfirmationAsync(DeleteConfirmationText, title: "Delete Recipe");
-        var result = await dialog.Result;
+        IDialogReference dialog = await DialogService.ShowConfirmationAsync(DeleteConfirmationText, title: "Delete Recipe");
+        DialogResult result = await dialog.Result;
 
         if (!result.Cancelled && Dialog is not null)
         {
-            await RecipeService.DeleteRecipeAsync(Content.Id ?? Guid.Empty, _cts.Token);
+            await RecipeService.DeleteRecipeAsync(Content.Id, _cts.Token);
             await Dialog.CloseAsync();
         }
     }
@@ -346,9 +291,8 @@
     #endregion
 
     private string? newTag;
-    private string? newGroupName;
 
-    private List<Group> RecipeGroups = [];
+    private List<string> existingGroupNames = [];
     private CancellationTokenSource _cts = new();
 
     // Nullable helpers for NutritionInfo binding
@@ -415,7 +359,13 @@
 
     protected override async Task OnInitializedAsync()
     {
-        RecipeGroups = await GroupingService.GetGroupingsAsync(GroupType.Recipe, _cts.Token);
+        List<RecipeSummary> summaries = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
+        existingGroupNames = summaries
+            .Where(s => !string.IsNullOrEmpty(s.Group))
+            .Select(s => s.Group!)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(g => g)
+            .ToList();
     }
 
     public ValueTask DisposeAsync()
@@ -447,35 +397,5 @@
     private void RemoveTag(string tag)
     {
         Content.Tags.Remove(tag);
-    }
-
-    private void AddNewGroup()
-    {
-        if (string.IsNullOrWhiteSpace(newGroupName))
-        {
-            return;
-        }
-
-        Group? existingGroup = RecipeGroups.FirstOrDefault(g => 
-            g.Name.Equals(newGroupName.Trim(), StringComparison.OrdinalIgnoreCase));
-
-        if (existingGroup is not null)
-        {
-            Content.Group = existingGroup;
-            newGroupName = string.Empty;
-            return;
-        }
-
-        Group newGroup = new Group
-        {
-            Id = Guid.Empty,
-            Name = newGroupName.Trim(),
-            SortOrder = RecipeGroups.Count,
-            GroupType = GroupType.Recipe
-        };
-
-        RecipeGroups.Add(newGroup);
-        Content.Group = newGroup;
-        newGroupName = string.Empty;
     }
 }

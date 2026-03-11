@@ -1,9 +1,6 @@
-
-using Reci.Interfaces;
-
 namespace Reci.Data.Models;
 
-public class Ingredient : IGroupable
+public record Ingredient : IGroupable
 {
     public required string Name { get; set; }
 
@@ -11,7 +8,7 @@ public class Ingredient : IGroupable
 
     public required string QuantityUnit { get; set; }
 
-    public Guid? GroupId { get; set; }
+    public string? Group { get; set; }
 }
 
 public static class IngredientExtensions
@@ -25,22 +22,7 @@ public static class IngredientExtensions
         return string.IsNullOrEmpty(ingredient.Name)
             && ingredient.QuantityAmount == 0
             && string.IsNullOrEmpty(ingredient.QuantityUnit)
-            && ingredient.GroupId is null;
+            && ingredient.Group is null;
     }
 
-    public static bool IsEqualTo(this Ingredient? first, Ingredient? second)
-    {
-        if (first is null && second is null)
-        {
-            return true;
-        }
-        if (first is null || second is null)
-        {
-            return false;
-        }
-        return first.Name == second.Name
-            && first.QuantityAmount == second.QuantityAmount
-            && first.QuantityUnit == second.QuantityUnit
-            && first.GroupId == second.GroupId;
-    }
 }

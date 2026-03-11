@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.13.2" />
@@ -30,15 +30,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Blazored.LocalStorage" />
+    <Using Include="Microsoft.AspNetCore.Components.Web" />
+    <Using Include="Microsoft.AspNetCore.Components.WebAssembly.Hosting" />
+    <Using Include="Microsoft.FluentUI.AspNetCore.Components" />
+    <Using Include="Microsoft.JSInterop" />
+    <Using Include="Reci" />
     <Using Include="Reci.Core" />
     <Using Include="Reci.Data.Models" />
     <Using Include="Reci.Data.Repositories" />
     <Using Include="Reci.Data.Repositories.Interfaces" />
-    <Using Include="Reci.Mappers" />
+    <Using Include="Reci.Interfaces" />
     <Using Include="Reci.Services" />
     <Using Include="Reci.Services.Interfaces" />
-    <Using Include="Reci.ViewModels" />
+    <Using Include="System.Collections.Concurrent" />
+    <Using Include="System.IO.Compression" />
+    <Using Include="System.Runtime.CompilerServices" />
+    <Using Include="System.Text" />
+    <Using Include="System.Text.Json" />
     <Using Include="System.Text.Json.Serialization" />
+    <Using Include="System.Text.RegularExpressions" />
   </ItemGroup>
 </Project>

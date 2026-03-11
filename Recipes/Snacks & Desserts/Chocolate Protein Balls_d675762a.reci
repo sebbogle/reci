@@ -1,0 +1,79 @@
+{
+  "id": "d675762a-45e2-415b-85d5-34d9920c2a95",
+  "name": "Chocolate Protein Balls",
+  "description": "Rich, fudgy no-bake energy balls packed with oats, peanut butter, and chocolate chips. The perfect pre-workout or afternoon snack.",
+  "group": "Snacks & Desserts",
+  "ingredients": [
+    {
+      "name": "rolled oats",
+      "quantityAmount": 1,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "peanut butter",
+      "quantityAmount": 0.5,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "honey",
+      "quantityAmount": 0.33,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "chocolate protein powder",
+      "quantityAmount": 0.33,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "dark chocolate chips",
+      "quantityAmount": 0.33,
+      "quantityUnit": "cup"
+    },
+    {
+      "name": "flaxseed meal",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    },
+    {
+      "name": "vanilla extract",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp"
+    },
+    {
+      "name": "cocoa powder (optional, for rolling)",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Combine oats, peanut butter, honey, protein powder, chocolate chips, flaxseed, and vanilla in a large bowl. Mix until fully combined"
+    },
+    {
+      "text": "If mixture is too dry, add a splash of milk. If too sticky, add a tablespoon more oats"
+    },
+    {
+      "text": "Refrigerate the mixture for 15-20 minutes to firm up"
+    },
+    {
+      "text": "Roll into 20 balls (about 1 tablespoon each). Optionally roll in cocoa powder for coating"
+    },
+    {
+      "text": "Store in an airtight container in the fridge. Enjoy cold or at room temperature"
+    }
+  ],
+  "source": {
+    "text": "Ambitious Kitchen",
+    "url": "https://www.ambitiouskitchen.com/no-bake-chocolate-energy-bites/"
+  },
+  "tags": [
+    "snack",
+    "no-bake",
+    "protein",
+    "chocolate",
+    "energy-balls",
+    "healthy",
+    "meal-prep"
+  ],
+  "furtherNotes": "Makes 20 balls. Prep time: 10 minutes, No cook time (requires 15 min chilling). Storage: Refrigerate up to 2 weeks, freeze up to 3 months. Swap peanut butter for almond butter if preferred. Each ball is roughly 95 calories with 4g protein."
+}

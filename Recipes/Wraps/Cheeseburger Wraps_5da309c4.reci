@@ -1,0 +1,134 @@
+{
+  "id": "5da309c4-f5f0-406a-bcc4-0ae1d484e1f3",
+  "name": "Cheeseburger Wraps",
+  "description": "High protein cheeseburger wraps that taste amazing and reheat perfectly. Easy, affordable meal prep for muscle gain, weight loss, or healthy lunches.",
+  "group": "Wraps",
+  "ingredients": [
+    {
+      "name": "lean beef mince (5-10% fat)",
+      "quantityAmount": 750,
+      "quantityUnit": "g",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "brown onion, diced",
+      "quantityAmount": 1,
+      "quantityUnit": "whole",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "tomato paste",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "smoked paprika",
+      "quantityAmount": 2,
+      "quantityUnit": "tsp",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "garlic powder",
+      "quantityAmount": 2,
+      "quantityUnit": "tsp",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "chilli flakes (optional)",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "beef stock",
+      "quantityAmount": 0.75,
+      "quantityUnit": "cup",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "high protein yogurt",
+      "quantityAmount": 0.33,
+      "quantityUnit": "cup",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "tomato ketchup",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "yellow mustard",
+      "quantityAmount": 1,
+      "quantityUnit": "tsp",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "diced pickles",
+      "quantityAmount": 100,
+      "quantityUnit": "g",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "salt and pepper",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste",
+      "group": "Beef Filling"
+    },
+    {
+      "name": "wraps",
+      "quantityAmount": 6,
+      "quantityUnit": "whole",
+      "group": "Assembly"
+    },
+    {
+      "name": "grated cheddar cheese",
+      "quantityAmount": 180,
+      "quantityUnit": "g",
+      "group": "Assembly"
+    },
+    {
+      "name": "sauce of choice",
+      "quantityAmount": 1,
+      "quantityUnit": "to taste",
+      "group": "Assembly"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Build flavour base: SautÃ© diced onion for 2-3 minutes, then stir in tomato paste for 1 minute"
+    },
+    {
+      "text": "Cook the beef: Add beef, breaking it apart; season with smoked paprika, garlic powder, chilli flakes, salt and pepper and cook until browned"
+    },
+    {
+      "text": "Build the sauce: Deglaze with beef stock, simmer 3-4 minutes, add ketchup and mustard, fold in yogurt and pickles"
+    },
+    {
+      "text": "Assemble the wraps: Fill tortillas with beef mixture and cheese, roll tightly, toast seam-side down until golden"
+    },
+    {
+      "text": "Serve or store: Slice diagonally and serve with sauce of choice"
+    }
+  ],
+  "nutritionInfo": {
+    "calories": 430,
+    "fat": 10.8,
+    "carbohydrates": 43,
+    "protein": 43
+  },
+  "source": {
+    "text": "Chef Jack Ovens",
+    "url": "https://chefjackovens.com/cheeseburger-wraps-meal-prep/"
+  },
+  "tags": [
+    "cheeseburger",
+    "wraps",
+    "meal-prep",
+    "high-protein",
+    "lunch",
+    "dinner"
+  ],
+  "furtherNotes": "Makes 6 wraps. Prep time: 10 minutes, Cook time: 25 minutes. Storage: Refrigerate 3 days or freeze up to 4 months. Reheating: Sandwich press/skillet 2-3 minutes per side. Nutrition per wrap: 430 calories, 43g protein, 43g carbs, 10.8g fat, 5.7g fiber, 771mg sodium."
+}

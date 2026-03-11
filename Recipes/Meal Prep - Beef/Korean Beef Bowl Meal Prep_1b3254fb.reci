@@ -1,0 +1,142 @@
+{
+  "id": "1b3254fb-b250-465e-b755-0b6a268b04cf",
+  "name": "Korean Beef Bowl Meal Prep",
+  "description": "Korean BBQ in meal prep form that provides a full meal without getting you to overeat, or lead you to a food coma mid-afternoon.",
+  "group": "Meal Prep - Beef",
+  "ingredients": [
+    {
+      "name": "brown rice",
+      "quantityAmount": 1,
+      "quantityUnit": "cup",
+      "group": "Base Components"
+    },
+    {
+      "name": "large eggs",
+      "quantityAmount": 4,
+      "quantityUnit": "whole",
+      "group": "Base Components"
+    },
+    {
+      "name": "olive oil",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Base Components"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 2,
+      "quantityUnit": "cloves",
+      "group": "Base Components"
+    },
+    {
+      "name": "chopped spinach",
+      "quantityAmount": 4,
+      "quantityUnit": "cups",
+      "group": "Base Components"
+    },
+    {
+      "name": "brown sugar, packed",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "reduced sodium soy sauce",
+      "quantityAmount": 0.25,
+      "quantityUnit": "cup",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "freshly grated ginger",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "sesame oil",
+      "quantityAmount": 2,
+      "quantityUnit": "tsp",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "Sriracha",
+      "quantityAmount": 0.5,
+      "quantityUnit": "tsp",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "olive oil",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 2,
+      "quantityUnit": "cloves",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "ground beef",
+      "quantityAmount": 1,
+      "quantityUnit": "lb",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "green onions, thinly sliced",
+      "quantityAmount": 2,
+      "quantityUnit": "whole",
+      "group": "Korean Beef Sauce"
+    },
+    {
+      "name": "sesame seeds",
+      "quantityAmount": 0.25,
+      "quantityUnit": "tsp",
+      "group": "Korean Beef Sauce"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Cook rice in 2 cups water per package directions; set aside",
+      "group": "Preparation"
+    },
+    {
+      "text": "Boil eggs for 1 minute, cover, rest 8-10 minutes off heat, cool in ice bath, peel, and halve",
+      "group": "Preparation"
+    },
+    {
+      "text": "SautÃ© 2 cloves garlic in 2 tbsp olive oil until fragrant (1-2 minutes), add spinach until wilted (2-3 minutes); set aside",
+      "group": "Preparation"
+    },
+    {
+      "text": "Whisk together brown sugar, soy sauce, grated ginger, sesame oil, and Sriracha in a small bowl",
+      "group": "Korean Beef"
+    },
+    {
+      "text": "Heat 1 tbsp olive oil in a large skillet over medium high heat. Add garlic and ground beef, and cook until beef has browned (3-5 minutes), crumbling the beef as it cooks. Drain excess fat.",
+      "group": "Korean Beef"
+    },
+    {
+      "text": "Add sauce mixture and green onions to the beef; simmer for 2 minutes",
+      "group": "Korean Beef"
+    },
+    {
+      "text": "Assemble meal prep containers with rice, halved eggs, spinach, and Korean beef. Garnish with green onions and sesame seeds.",
+      "group": "Assembly"
+    }
+  ],
+  "source": {
+    "text": "Damn Delicious",
+    "url": "https://damndelicious.net/2017/04/21/korean-beef-bowl-meal-prep/"
+  },
+  "tags": [
+    "korean",
+    "beef",
+    "meal-prep",
+    "asian",
+    "dinner",
+    "lunch",
+    "rice-bowl"
+  ],
+  "furtherNotes": "Makes 4 servings. Prep time: 20 minutes, Cook time: 20 minutes. You can substitute ground beef with pork, chicken, or tofu. Consider adding vegetables like carrots, peppers, or zucchini for extra nutrition. Recipe rated 4.97/5 stars."
+}

@@ -1,8 +1,3 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.FluentUI.AspNetCore.Components;
-using Reci;
-
 WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
@@ -10,21 +5,28 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 // Logging
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
+// Serialization
+builder.Services.AddSingleton(new JsonSerializerOptions
+{
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    WriteIndented = true,
+    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+});
+
 // Dependencies
 builder.Services.AddFluentUIComponents();
-builder.Services.AddBlazoredLocalStorage();
+
+// Infrastructure
+builder.Services.AddScoped<IFileSystemAccessService, FileSystemAccessService>();
+builder.Services.AddScoped<IConnectionStateService, ConnectionStateService>();
 
 // Data
-builder.Services.AddScoped<ISettingsRepository, LocalStorageSettingsRepository>();
-builder.Services.AddScoped<IGroupingRepository, LocalStorageGroupingRepository>();
-builder.Services.AddScoped<IRecipeRepository, LocalStorageRecipeRepository>();
+builder.Services.AddScoped<IRecipeRepository, FileSystemRecipeRepository>();
 
 // Services
-builder.Services.AddScoped<ISettingsService, SettingsService>();
 builder.Services.AddScoped<IScreenWakeLockService, ScreenWakeLockService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
-builder.Services.AddScoped<IGroupingService, GroupingService>();
-builder.Services.AddScoped<IDataTransferService, DataTransferService>();
+builder.Services.AddScoped<IRecipeExportService, RecipeExportService>();
 builder.Services.AddScoped<IRecipeStateNotifier, RecipeStateNotifier>();
 
 await builder.Build().RunAsync();

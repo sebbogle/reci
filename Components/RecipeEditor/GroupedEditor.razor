@@ -1,17 +1,22 @@
-﻿@typeparam TItem
+@typeparam TItem where TItem : IGroupable
 
 <FluentStack Orientation="Orientation.Vertical" VerticalGap="12" Style="margin-bottom: 12px">
     <FluentLabel Typo="Typography.Subject">@Title</FluentLabel>
 
-    @foreach (TItem item in UngroupedItems)
+    @{
+        List<TItem> ungroupedItems = Items.Where(i => string.IsNullOrEmpty(i.Group)).ToList();
+        int ungroupedIndex = 0;
+    }
+    @foreach (TItem item in ungroupedItems)
     {
-        int itemIndex = UngroupedItems.IndexOf(item);
+        ungroupedIndex++;
+        int displayIndex = ungroupedIndex;
         <FluentStack Orientation="Orientation.Horizontal"
                      HorizontalGap="8"
                      VerticalAlignment="VerticalAlignment.Top">
 
             <FluentLabel Style="min-width: 15px; font-weight: bold; padding-top: 8px;">
-                @(itemIndex + 1).
+                @displayIndex.
             </FluentLabel>
 
             @if (ItemTemplate != null)
@@ -21,18 +26,25 @@
 
             <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
                           Appearance="Appearance.Lightweight"
-                          OnClick="@(() => RemoveItemFromGroup(UngroupedItems, item))"
+                          OnClick="@(() => RemoveItem(item))"
                           Title="@RemoveItemTitle" />
         </FluentStack>
-
     }
 
-    @if (ActualGroups.Any())
+    @{
+        List<IGrouping<string, TItem>> actualGroups = Items
+            .Where(i => !string.IsNullOrEmpty(i.Group))
+            .GroupBy(i => i.Group!)
+            .ToList();
+    }
+
+    @if (actualGroups.Any())
     {
         <FluentAccordion ExpandMode="AccordionExpandMode.Multi" Style="width: 100%">
-            @foreach (GroupVM<TItem> group in ActualGroups)
+            @foreach (IGrouping<string, TItem> group in actualGroups)
             {
-                groupedViewState.TryGetValue(group.Id ?? Guid.Empty, out GroupedViewState? state);
+                string groupName = group.Key;
+                groupedViewState.TryGetValue(groupName, out GroupedViewState? state);
                 if (state is null) state = GroupedViewState.Default;
 
                 int itemNumber = 1;
@@ -52,13 +64,13 @@
                                 }
                                 else
                                 {
-                                    <div>@group.Name</div>
+                                    <div>@groupName</div>
                                 }
                                 
                                 @if (!state.IsExpanded)
                                 {
                                     <FluentBadge Appearance="Appearance.Neutral">
-                                        @group.Count
+                                        @group.Count()
                                     </FluentBadge>                                
                                 }
                             </FluentStack>
@@ -72,11 +84,11 @@
                                     <FluentButton IconEnd="@(new Icons.Regular.Size16.Checkmark())"
                                                   Appearance="Appearance.Lightweight"
                                                   Title="Rename group"
-                                                  OnClick="@(() => OnConfirmGroupNameEditClick(state, group))" />
+                                                  OnClick="@(() => OnConfirmGroupNameEditClick(state, groupName))" />
                                     <FluentButton IconEnd="@(new Icons.Regular.Size16.Dismiss())"
                                                   Appearance="Appearance.Lightweight"
                                                   Title="Rename group"
-                                                  OnClick="@(() => OnCancelGroupNameEditClick(state, group))" />
+                                                  OnClick="@(() => OnCancelGroupNameEditClick(state, groupName))" />
                                 }
                                 else
                                 {
@@ -87,7 +99,7 @@
                                     <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
                                                   Appearance="Appearance.Lightweight"
                                                   Title="Delete group"
-                                                  OnClick="@(() => RemoveGroup(group))" />
+                                                  OnClick="@(() => RemoveGroup(groupName))" />
                                 }
                             </FluentStack>
                             </FluentStack>
@@ -114,13 +126,13 @@
                                 <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
                                               Appearance="Appearance.Lightweight"
                                               Title="@RemoveItemTitle"
-                                              OnClick="@(() => RemoveItemFromGroup(group, item))" />
+                                              OnClick="@(() => RemoveItem(item))" />
                             </FluentStack>
                         }
 
                         <FluentButton Appearance="Appearance.Stealth"
                                       IconStart="@(new Icons.Regular.Size16.Add())"
-                                      OnClick="@(() => AddItemToGroup(group))">
+                                      OnClick="@(() => AddItemToGroup(groupName))">
                             @AddItemButtonText
                         </FluentButton>
                         </FluentStack>
@@ -149,10 +161,7 @@
     #region Component Parameters
 
     [Parameter]
-    public List<GroupVM<TItem>> Groups { get; set; } = new();
-
-    [Parameter]
-    public GroupVM<TItem> UngroupedItems { get; set; } = GroupVM<TItem>.Empty();
+    public List<TItem> Items { get; set; } = new();
 
     [Parameter]
     public RenderFragment<TItem>? ItemTemplate { get; set; }
@@ -182,7 +191,6 @@
 
     #region Event Handlers
 
-
     private void OnAccordionExpandChange(GroupedViewState groupedViewState)
     {
         groupedViewState.IsExpanded = !groupedViewState.IsExpanded;
@@ -193,132 +201,108 @@
         state.IsEditingName = true;
     }
 
-    private void OnConfirmGroupNameEditClick(GroupedViewState state, GroupVM<TItem> group)
+    private void OnConfirmGroupNameEditClick(GroupedViewState state, string oldGroupName)
     {
-        group.Name = state.NewName;
+        string? newName = state.NewName?.Trim();
+        if (!string.IsNullOrEmpty(newName) && newName != oldGroupName)
+        {
+            foreach (TItem item in Items.Where(i => i.Group == oldGroupName))
+            {
+                item.Group = newName;
+            }
+
+            groupedViewState.Remove(oldGroupName);
+            groupedViewState[newName] = state;
+        }
         state.IsEditingName = false;
     }
 
-    private void OnCancelGroupNameEditClick(GroupedViewState state, GroupVM<TItem> group)
+    private void OnCancelGroupNameEditClick(GroupedViewState state, string groupName)
     {
-        state.NewName = group.Name;
+        state.NewName = groupName;
         state.IsEditingName = false;
     }
-
-
-    
 
     #endregion
 
-
-
-
-    private Dictionary<Guid, GroupedViewState> groupedViewState = new();
-
-
-    private GroupVM<TItem>? groupBeingRenamed;
-
-    private string? renameGroupValue;
+    private Dictionary<string, GroupedViewState> groupedViewState = new();
 
     protected override void OnInitialized()
     {
-        if (!ContainsAnyItems())
+        if (!Items.Any())
         {
             AddUngroupedItem();
         }
 
-        groupedViewState = Groups.Where(g => g.Id.HasValue).ToDictionary(
-            group => group.Id!.Value,
-            group => new GroupedViewState
+        List<string> existingGroups = Items
+            .Where(i => !string.IsNullOrEmpty(i.Group))
+            .Select(i => i.Group!)
+            .Distinct()
+            .ToList();
+
+        foreach (string groupName in existingGroups)
+        {
+            groupedViewState[groupName] = new GroupedViewState
             {
                 IsExpanded = false,
                 IsEditingName = false,
-                NewName = group.Name
-            }
-        );
+                NewName = groupName
+            };
+        }
     }
-
-    // Filter to only show actual groups (not ungrouped items) in the accordion
-    private IEnumerable<GroupVM<TItem>> ActualGroups => Groups.Where(g => g.Id != null);
 
     #region Private Methods
 
     private void AddNewGroup()
     {
-        GroupVM<TItem> newGroup = new()
-        {
-            Id = Guid.NewGuid(),
-            Name = $"{DefaultGroupName} {ActualGroups.Count() + 1}",
-            SortOrder = ActualGroups.Count()
-        };
+        int groupCount = Items.Where(i => !string.IsNullOrEmpty(i.Group)).Select(i => i.Group).Distinct().Count();
+        string newGroupName = $"{DefaultGroupName} {groupCount + 1}";
 
         TItem newItem = CreateNewItem();
-        newGroup.Add(newItem);
+        newItem.Group = newGroupName;
+        Items.Add(newItem);
 
-        groupedViewState.Add(newGroup.Id.Value, new GroupedViewState
+        groupedViewState[newGroupName] = new GroupedViewState
         {
             IsExpanded = true,
             IsEditingName = false,
-            NewName = newGroup.Name
-        });
-
-        Groups.Add(newGroup);
+            NewName = newGroupName
+        };
     }
 
-    private void AddItemToGroup(GroupVM<TItem> group)
+    private void AddItemToGroup(string groupName)
     {
         TItem newItem = CreateNewItem();
-
-        if (newItem is IGroupable groupable)
-        {
-            groupable.GroupId = group.Id;
-        }
-
-        group.Add(newItem);
+        newItem.Group = groupName;
+        Items.Add(newItem);
     }
 
     private void AddUngroupedItem()
     {
-        AddItemToGroup(UngroupedItems);
+        TItem newItem = CreateNewItem();
+        Items.Add(newItem);
     }
 
-    private void RemoveItemFromGroup(GroupVM<TItem> group, TItem item)
+    private void RemoveItem(TItem item)
     {
-        group.Remove(item);
+        Items.Remove(item);
     }
 
-    private void RemoveGroup(GroupVM<TItem> group)
+    private void RemoveGroup(string groupName)
     {
-        List<TItem> nonEmptyGroupItems = group.Where(HasContent)
-                                              .ToList();
-
-        if (nonEmptyGroupItems.Any())
+        foreach (TItem item in Items.Where(i => i.Group == groupName).ToList())
         {
-            UngroupedItems.AddRange(nonEmptyGroupItems);
+            if (HasContent(item))
+            {
+                item.Group = null;
+            }
+            else
+            {
+                Items.Remove(item);
+            }
         }
 
-        Groups.Remove(group);
-    }
-
-    private void RenameGroup(GroupVM<TItem> group)
-    {
-        groupBeingRenamed = group;
-        renameGroupValue = group.Name;
-    }
-
-    private void ConfirmRenameGroup()
-    {
-        if (groupBeingRenamed != null)
-        {
-            groupBeingRenamed.Name = renameGroupValue;
-            groupBeingRenamed = null;
-            renameGroupValue = null;
-        }
-    }
-
-    private bool ContainsAnyItems()
-    {
-        return UngroupedItems.Any() || ActualGroups.Any(g => g.Any());
+        groupedViewState.Remove(groupName);
     }
 
     #endregion

@@ -1,0 +1,130 @@
+{
+  "id": "89d4a839-02e0-4966-83c1-d6a43b14e2a3",
+  "name": "Chicken Teriyaki Bowl",
+  "description": "Sweet and savory teriyaki chicken over fluffy rice with steamed broccoli and edamame. A balanced meal prep staple that reheats beautifully.",
+  "group": "Meal Prep - Chicken",
+  "ingredients": [
+    {
+      "name": "jasmine rice",
+      "quantityAmount": 2,
+      "quantityUnit": "cups",
+      "group": "Bowl Base"
+    },
+    {
+      "name": "broccoli florets",
+      "quantityAmount": 3,
+      "quantityUnit": "cups",
+      "group": "Bowl Base"
+    },
+    {
+      "name": "shelled edamame",
+      "quantityAmount": 1,
+      "quantityUnit": "cup",
+      "group": "Bowl Base"
+    },
+    {
+      "name": "boneless skinless chicken thighs",
+      "quantityAmount": 800,
+      "quantityUnit": "g",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "soy sauce",
+      "quantityAmount": 0.33,
+      "quantityUnit": "cup",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "mirin",
+      "quantityAmount": 3,
+      "quantityUnit": "tbsp",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "honey",
+      "quantityAmount": 2,
+      "quantityUnit": "tbsp",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "rice vinegar",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "garlic, minced",
+      "quantityAmount": 3,
+      "quantityUnit": "cloves",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "fresh ginger, grated",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "cornstarch",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "sesame seeds",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Teriyaki Chicken"
+    },
+    {
+      "name": "vegetable oil",
+      "quantityAmount": 1,
+      "quantityUnit": "tbsp",
+      "group": "Teriyaki Chicken"
+    }
+  ],
+  "instructions": [
+    {
+      "text": "Cook jasmine rice according to package directions; let cool slightly",
+      "group": "Prep"
+    },
+    {
+      "text": "Steam broccoli for 3-4 minutes until tender-crisp; blanch edamame for 2 minutes",
+      "group": "Prep"
+    },
+    {
+      "text": "Whisk together soy sauce, mirin, honey, rice vinegar, garlic, ginger, and cornstarch in a bowl",
+      "group": "Prep"
+    },
+    {
+      "text": "Cut chicken thighs into bite-sized pieces, pat dry with paper towels",
+      "group": "Cooking"
+    },
+    {
+      "text": "Heat oil in a large skillet over medium-high heat. Cook chicken 5-6 minutes until golden and cooked through",
+      "group": "Cooking"
+    },
+    {
+      "text": "Pour teriyaki sauce over chicken, simmer 2-3 minutes until thickened and glossy",
+      "group": "Cooking"
+    },
+    {
+      "text": "Divide rice, broccoli, edamame, and teriyaki chicken among 4 containers. Garnish with sesame seeds",
+      "group": "Cooking"
+    }
+  ],
+  "source": {
+    "text": "Fit Meal Ideas",
+    "url": "https://www.fitmealideas.com/chicken-teriyaki-bowl/"
+  },
+  "tags": [
+    "chicken",
+    "teriyaki",
+    "meal-prep",
+    "asian",
+    "rice-bowl",
+    "lunch",
+    "dinner"
+  ],
+  "furtherNotes": "Makes 4 servings. Prep time: 15 minutes, Cook time: 25 minutes. Storage: Refrigerate up to 4 days. Keep sauce in a small separate container if you prefer crispier chicken when reheating."
+}
