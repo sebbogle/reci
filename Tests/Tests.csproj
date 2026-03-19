@@ -29,6 +29,7 @@
     <Using Include="System.Net" />
     <Using Include="System.Reflection" />
     <Using Include="System.Text.RegularExpressions" />
+    <Using Include="System.Text.Json" />
     <Using Include="Tests.Fixtures" />
     <Using Include="Tests.Utilities" />
     <Using Include="Xunit" />

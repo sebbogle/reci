@@ -23,8 +23,7 @@ public class ContentsPageTests(AppFixture app) : ReciPage(app)
     [ReciPageState]
     public async Task GroupFilter_ShowsOnlyGroupRecipes()
     {
-        Guid breakfastGroupId = new("10000000-0000-0000-0000-000000000001");
-        await GotoGroupAsync(breakfastGroupId);
+        await GotoGroupAsync("Breakfast");
         await Expect(Page).ToHaveTitleAsync("Breakfast");
 
         await ScreenshotAssert.MatchesAsync(Page, "ContentsPage-GroupFilter");
@@ -47,13 +46,21 @@ public class ContentsPageTests(AppFixture app) : ReciPage(app)
     [ReciPageState]
     public async Task PageTitle_ViewingGroup()
     {
-        const string GroupId = "10000000-0000-0000-0000-000000000002";
-        const string GroupPageTitle = "Dinner";
+        const string GroupName = "Dinner";
 
-        await GotoGroupAsync(new Guid(GroupId));
+        await GotoGroupAsync(GroupName);
 
-        await Expect(Page).ToHaveTitleAsync(GroupPageTitle);
+        await Expect(Page).ToHaveTitleAsync(GroupName);
     }
 
     #endregion
+
+    [Fact]
+    [ReciPageState]
+    public async Task NonExistentGroup_ShowsNotFound()
+    {
+        await GotoGroupAsync("NonExistentGroup");
+
+        await ScreenshotAssert.MatchesAsync(Page, "ContentsPage-GroupNotFound");
+    }
 }

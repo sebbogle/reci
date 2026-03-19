@@ -34,4 +34,15 @@ public class RecipePageTests(AppFixture app) : ReciPage(app)
 
         await ScreenshotAssert.MatchesAsync(Page, "RecipePage-NotFound");
     }
+
+    [Fact]
+    [ReciPageState("FullRecipeState")]
+    public async Task RecipeWithAllFields_ShowsCompletely()
+    {
+        Guid shakshuka = new("30000000-0000-0000-0000-000000000001");
+        await GotoRecipeAsync(shakshuka);
+        await Expect(Page).ToHaveTitleAsync("Shakshuka");
+
+        await ScreenshotAssert.MatchesAsync(Page, "RecipePage-AllFields", fullPage: true);
+    }
 }

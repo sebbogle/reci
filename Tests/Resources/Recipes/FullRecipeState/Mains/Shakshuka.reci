@@ -1,0 +1,43 @@
+{
+  "id": "30000000-0000-0000-0000-000000000001",
+  "name": "Shakshuka",
+  "description": "Eggs poached in a spiced tomato and pepper sauce, perfect for a hearty brunch or light dinner.",
+  "group": "Mains",
+  "ingredients": [
+    { "name": "Olive oil", "quantityAmount": 2, "quantityUnit": "tbsp", "group": "Tomato Base" },
+    { "name": "Onion (diced)", "quantityAmount": 1, "quantityUnit": "", "group": "Tomato Base" },
+    { "name": "Red bell pepper (diced)", "quantityAmount": 1, "quantityUnit": "", "group": "Tomato Base" },
+    { "name": "Garlic cloves (minced)", "quantityAmount": 3, "quantityUnit": "", "group": "Tomato Base" },
+    { "name": "Crushed tomatoes", "quantityAmount": 400, "quantityUnit": "g", "group": "Tomato Base" },
+    { "name": "Tomato paste", "quantityAmount": 1, "quantityUnit": "tbsp", "group": "Tomato Base" },
+    { "name": "Cumin", "quantityAmount": 1, "quantityUnit": "tsp", "group": "Spices" },
+    { "name": "Paprika", "quantityAmount": 1, "quantityUnit": "tsp", "group": "Spices" },
+    { "name": "Chili flakes", "quantityAmount": 0.5, "quantityUnit": "tsp", "group": "Spices" },
+    { "name": "Eggs", "quantityAmount": 4, "quantityUnit": "", "group": "Finish" },
+    { "name": "Fresh parsley (chopped)", "quantityAmount": 2, "quantityUnit": "tbsp", "group": "Finish" },
+    { "name": "Feta cheese (crumbled)", "quantityAmount": 50, "quantityUnit": "g", "group": "Finish" }
+  ],
+  "instructions": [
+    { "text": "Heat olive oil in a large skillet over medium heat.", "group": "Build the Base" },
+    { "text": "Saute onion and bell pepper until softened, about 5 minutes.", "group": "Build the Base" },
+    { "text": "Add garlic and cook for 1 minute until fragrant.", "group": "Build the Base" },
+    { "text": "Stir in cumin, paprika, and chili flakes. Cook for 30 seconds.", "group": "Build the Base" },
+    { "text": "Add crushed tomatoes and tomato paste. Simmer for 10 minutes until slightly thickened.", "group": "Build the Base" },
+    { "text": "Make small wells in the sauce and crack eggs into them.", "group": "Cook Eggs" },
+    { "text": "Cover and cook for 5-8 minutes until egg whites are set but yolks are still runny.", "group": "Cook Eggs" },
+    { "text": "Top with crumbled feta and fresh parsley.", "group": "Serve" },
+    { "text": "Serve immediately with crusty bread for dipping.", "group": "Serve" }
+  ],
+  "nutritionInfo": {
+    "calories": 285,
+    "protein": 16.5,
+    "carbohydrates": 18.2,
+    "fat": 17.3
+  },
+  "source": {
+    "text": "Serious Eats",
+    "url": "https://www.seriouseats.com/shakshuka-recipe"
+  },
+  "tags": ["breakfast", "brunch", "eggs", "vegetarian", "one-pan"],
+  "furtherNotes": "Makes 2-3 servings. For a spicier version, add a diced jalapeno with the bell pepper. The dish pairs wonderfully with warm pita bread or crusty sourdough."
+}

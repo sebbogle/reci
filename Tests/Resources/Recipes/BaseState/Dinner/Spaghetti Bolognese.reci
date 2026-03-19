@@ -1,0 +1,35 @@
+{
+  "id": "20000000-0000-0000-0000-000000000002",
+  "name": "Spaghetti Bolognese",
+  "description": "A rich and hearty Italian meat sauce served over spaghetti",
+  "group": "Dinner",
+  "ingredients": [
+    { "name": "Spaghetti", "quantityAmount": 400, "quantityUnit": "g", "group": "Pasta" },
+    { "name": "Ground beef", "quantityAmount": 500, "quantityUnit": "g", "group": "Sauce" },
+    { "name": "Onion (diced)", "quantityAmount": 1, "quantityUnit": "", "group": "Sauce" },
+    { "name": "Garlic cloves (minced)", "quantityAmount": 3, "quantityUnit": "", "group": "Sauce" },
+    { "name": "Crushed tomatoes", "quantityAmount": 400, "quantityUnit": "g", "group": "Sauce" },
+    { "name": "Tomato paste", "quantityAmount": 2, "quantityUnit": "tbsp", "group": "Sauce" },
+    { "name": "Olive oil", "quantityAmount": 2, "quantityUnit": "tbsp", "group": "Sauce" },
+    { "name": "Salt and pepper", "quantityAmount": 1, "quantityUnit": "to taste" }
+  ],
+  "instructions": [
+    { "text": "Heat olive oil in a large pan over medium heat. Saute onion until translucent.", "group": "Sauce" },
+    { "text": "Add garlic and cook for 1 minute.", "group": "Sauce" },
+    { "text": "Add ground beef and cook until browned, breaking it apart.", "group": "Sauce" },
+    { "text": "Stir in crushed tomatoes and tomato paste. Simmer for 20 minutes.", "group": "Sauce" },
+    { "text": "Cook spaghetti according to package directions. Drain.", "group": "Assembly" },
+    { "text": "Serve sauce over spaghetti.", "group": "Assembly" }
+  ],
+  "nutritionInfo": {
+    "calories": 620,
+    "fat": 22.0,
+    "carbohydrates": 65.0,
+    "protein": 35.0
+  },
+  "source": {
+    "text": "Italian Cooking Basics",
+    "url": "https://example.com/bolognese"
+  },
+  "tags": [ "dinner", "italian", "pasta" ]
+}

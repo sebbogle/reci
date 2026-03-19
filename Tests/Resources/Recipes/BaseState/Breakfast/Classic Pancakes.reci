@@ -1,0 +1,34 @@
+{
+  "id": "20000000-0000-0000-0000-000000000001",
+  "name": "Classic Pancakes",
+  "description": "Fluffy golden pancakes perfect for weekend mornings",
+  "group": "Breakfast",
+  "ingredients": [
+    { "name": "All-purpose flour", "quantityAmount": 1.5, "quantityUnit": "cups" },
+    { "name": "Milk", "quantityAmount": 1.25, "quantityUnit": "cups" },
+    { "name": "Egg", "quantityAmount": 1, "quantityUnit": "" },
+    { "name": "Butter (melted)", "quantityAmount": 3, "quantityUnit": "tbsp" },
+    { "name": "Sugar", "quantityAmount": 2, "quantityUnit": "tbsp" },
+    { "name": "Baking powder", "quantityAmount": 1, "quantityUnit": "tbsp" },
+    { "name": "Salt", "quantityAmount": 0.25, "quantityUnit": "tsp" }
+  ],
+  "instructions": [
+    { "text": "Whisk together flour, sugar, baking powder, and salt in a large bowl." },
+    { "text": "In a separate bowl, beat the egg and add milk and melted butter." },
+    { "text": "Pour wet ingredients into dry and stir until just combined." },
+    { "text": "Heat a lightly oiled griddle over medium-high heat." },
+    { "text": "Pour batter onto griddle using approximately 1/4 cup per pancake." },
+    { "text": "Cook until bubbles form on the surface, then flip and cook until golden brown." }
+  ],
+  "nutritionInfo": {
+    "calories": 350,
+    "fat": 12.5,
+    "carbohydrates": 48.0,
+    "protein": 9.0
+  },
+  "source": {
+    "text": "Family Recipe"
+  },
+  "tags": [ "breakfast", "quick" ],
+  "furtherNotes": "For extra fluffy pancakes, let the batter rest for 5 minutes before cooking."
+}

@@ -1,0 +1,27 @@
+{
+  "id": "20000000-0000-0000-0000-000000000003",
+  "name": "Chocolate Chip Cookies",
+  "description": "Crispy on the outside, chewy on the inside",
+  "ingredients": [
+    { "name": "All-purpose flour", "quantityAmount": 2.25, "quantityUnit": "cups" },
+    { "name": "Butter (softened)", "quantityAmount": 1, "quantityUnit": "cup" },
+    { "name": "Brown sugar", "quantityAmount": 0.75, "quantityUnit": "cups" },
+    { "name": "Granulated sugar", "quantityAmount": 0.75, "quantityUnit": "cups" },
+    { "name": "Eggs", "quantityAmount": 2, "quantityUnit": "" },
+    { "name": "Vanilla extract", "quantityAmount": 1, "quantityUnit": "tsp" },
+    { "name": "Baking soda", "quantityAmount": 1, "quantityUnit": "tsp" },
+    { "name": "Salt", "quantityAmount": 1, "quantityUnit": "tsp" },
+    { "name": "Chocolate chips", "quantityAmount": 2, "quantityUnit": "cups" }
+  ],
+  "instructions": [
+    { "text": "Preheat oven to 375 F (190 C)." },
+    { "text": "Cream together butter, brown sugar, and granulated sugar until fluffy." },
+    { "text": "Beat in eggs and vanilla extract." },
+    { "text": "Mix in flour, baking soda, and salt until just combined." },
+    { "text": "Fold in chocolate chips." },
+    { "text": "Drop rounded tablespoons of dough onto baking sheets." },
+    { "text": "Bake for 9 to 11 minutes or until golden brown." }
+  ],
+  "tags": [ "dessert", "baking", "cookies" ],
+  "furtherNotes": "For softer cookies, remove from oven when edges are set but centers still look slightly underdone."
+}
