@@ -2,13 +2,13 @@ namespace Tests.UserActions;
 
 public class DeleteRecipe(AppFixture app) : ReciPage(app)
 {
-    private static readonly Guid PancakesId = new("20000000-0000-0000-0000-000000000001");
+    private static readonly Guid _pancakesId = new("20000000-0000-0000-0000-000000000001");
 
     [Fact]
     [ReciPageState]
     public async Task ConfirmDelete_RemovesRecipeFromUI()
     {
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
         await Expect(Page).ToHaveTitleAsync("Classic Pancakes");
 
         ILocator dialog = await OpenRecipeEditorAsync();
@@ -34,7 +34,7 @@ public class DeleteRecipe(AppFixture app) : ReciPage(app)
     [ReciPageState]
     public async Task ConfirmDelete_RemovesFromFilesystem()
     {
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
 
         ILocator dialog = await OpenRecipeEditorAsync();
         await dialog.GetByRole(AriaRole.Button, new() { Name = "Delete Recipe" }).ClickAsync();
@@ -51,7 +51,7 @@ public class DeleteRecipe(AppFixture app) : ReciPage(app)
     [ReciPageState]
     public async Task CancelDelete_RecipeRemains()
     {
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
 
         ILocator dialog = await OpenRecipeEditorAsync();
         await dialog.GetByRole(AriaRole.Button, new() { Name = "Delete Recipe" }).ClickAsync();

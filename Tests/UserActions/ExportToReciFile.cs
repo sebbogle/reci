@@ -7,7 +7,7 @@ public class ExportToReciFile(AppFixture app) : ReciPage(app)
     public async Task Export_SingleRecipe_TriggersDownload()
     {
         Guid _pancakesId = new("20000000-0000-0000-0000-000000000001");
-        
+
         await GotoRecipeAsync(_pancakesId);
         await Expect(Page).ToHaveTitleAsync("Classic Pancakes");
 

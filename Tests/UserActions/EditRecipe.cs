@@ -2,7 +2,7 @@ namespace Tests.UserActions;
 
 public class EditRecipe(AppFixture app) : ReciPage(app)
 {
-    private static readonly Guid PancakesId = new("20000000-0000-0000-0000-000000000001");
+    private static readonly Guid _pancakesId = new("20000000-0000-0000-0000-000000000001");
 
     [Fact]
     [ReciPageState]
@@ -10,7 +10,7 @@ public class EditRecipe(AppFixture app) : ReciPage(app)
     {
         const string newName = "Updated Pancakes";
 
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
         await Expect(Page).ToHaveTitleAsync("Classic Pancakes");
 
         ILocator dialog = await OpenRecipeEditorAsync();
@@ -37,7 +37,7 @@ public class EditRecipe(AppFixture app) : ReciPage(app)
     {
         const string newGroup = "Brunch";
 
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
         ILocator dialog = await OpenRecipeEditorAsync();
 
         await FillCombobox(dialog, "Group", newGroup);
@@ -69,7 +69,7 @@ public class EditRecipe(AppFixture app) : ReciPage(app)
     [ReciPageState]
     public async Task AddIngredient_AppearsInSavedRecipe()
     {
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
         ILocator dialog = await OpenRecipeEditorAsync();
 
         // Click "Add Ingredient" to add a new row
@@ -92,7 +92,7 @@ public class EditRecipe(AppFixture app) : ReciPage(app)
     [ReciPageState]
     public async Task AddInstruction_AppearsInSavedRecipe()
     {
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
         ILocator dialog = await OpenRecipeEditorAsync();
 
         // Click "Add Step" to add a new instruction
@@ -115,7 +115,7 @@ public class EditRecipe(AppFixture app) : ReciPage(app)
     {
         const string newTag = "fluffy";
 
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
         ILocator dialog = await OpenRecipeEditorAsync();
 
         await dialog.Locator("fluent-text-field[placeholder='Add a tag...']").Locator("input").FillAsync(newTag);
@@ -136,7 +136,7 @@ public class EditRecipe(AppFixture app) : ReciPage(app)
     [ReciPageState]
     public async Task Cancel_NoChanges_ClosesWithoutConfirmation()
     {
-        await GotoRecipeAsync(PancakesId);
+        await GotoRecipeAsync(_pancakesId);
         ILocator dialog = await OpenRecipeEditorAsync();
 
         await dialog.GetByRole(AriaRole.Button, new() { Name = "Cancel" }).ClickAsync();
