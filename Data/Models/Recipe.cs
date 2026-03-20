@@ -1,9 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Reci.Data.Models;
 
 public class Recipe
 {
     public Guid Id { get; set; }
 
+    [Required(ErrorMessage = "Recipe name is required.")]
     public required string Name { get; set; }
 
     public string? Description { get; set; }

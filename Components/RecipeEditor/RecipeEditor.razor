@@ -5,8 +5,8 @@
 @inject IToastService ToastService
 
 <FluentDialogBody>
-<EditForm Model="@Content" Context="editContext" style="overflow-x: hidden; padding-right: 12px;">
-        <FluentValidationSummary />
+<EditForm EditContext="@_editContext" Context="editContext" style="overflow-x: hidden; padding-inline: 2px; padding-right: 12px;">
+        <DataAnnotationsValidator />
 
         @* Basic Information Section *@
         <FluentGrid Spacing="1" Style="margin-bottom: 12px">
@@ -19,6 +19,7 @@
                         <FluentLabel Typo="Typography.Subject">Name</FluentLabel>
                     </LabelTemplate>
                 </FluentTextField>
+                <FluentValidationMessage For="@(() => Content.Name)" />
              </FluentGridItem>
             <FluentGridItem xs="12" sm="6" md="6" lg="6">
                 <div class="group-selector">
@@ -201,6 +202,7 @@
     </FluentButton>
 
     <FluentButton Appearance="Appearance.Accent"
+                  Disabled="@_hasValidationErrors"
                   OnClick="OnSaveClick">
         Save
     </FluentButton>
@@ -225,6 +227,11 @@
 
     private async Task OnSaveClick()
     {
+        if (_editContext?.Validate() != true)
+        {
+            return;
+        }
+
         Result saveResult = await RecipeService.SaveRecipeAsync(Content, _cts.Token);
 
         if (saveResult.IsSuccess)
@@ -292,6 +299,8 @@
 
     private string? newTag;
 
+    private EditContext? _editContext;
+    private bool _hasValidationErrors;
     private List<string> existingGroupNames = [];
     private CancellationTokenSource _cts = new();
 
@@ -359,6 +368,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        _editContext = new EditContext(Content);
+        _editContext.OnValidationStateChanged += OnValidationStateChanged;
         List<RecipeSummary> summaries = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
         existingGroupNames = summaries
             .Where(s => !string.IsNullOrEmpty(s.Group))
@@ -370,9 +381,19 @@
 
     public ValueTask DisposeAsync()
     {
+        if (_editContext is not null)
+        {
+            _editContext.OnValidationStateChanged -= OnValidationStateChanged;
+        }
         _cts.Cancel();
         _cts.Dispose();
         return ValueTask.CompletedTask;
+    }
+
+    private void OnValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)
+    {
+        _hasValidationErrors = _editContext?.GetValidationMessages().Any() == true;
+        StateHasChanged();
     }
 
     private void EnsureNutritionInfo()
