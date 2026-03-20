@@ -48,6 +48,7 @@ public static class RecipeExtensions
 
     public static Recipe DeepClone(this Recipe recipe)
     {
+        ArgumentNullException.ThrowIfNull(recipe);
         return new Recipe
         {
             Id = recipe.Id,
