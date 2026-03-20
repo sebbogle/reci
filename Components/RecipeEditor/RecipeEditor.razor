@@ -368,6 +368,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Content = Content.DeepClone();
         _editContext = new EditContext(Content);
         _editContext.OnValidationStateChanged += OnValidationStateChanged;
         List<RecipeSummary> summaries = await RecipeService.GetRecipeSummariesAsync(_cts.Token);

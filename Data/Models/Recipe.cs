@@ -46,6 +46,24 @@ public static class RecipeExtensions
             && string.IsNullOrEmpty(recipe.FurtherNotes);
     }
 
+    public static Recipe DeepClone(this Recipe recipe)
+    {
+        ArgumentNullException.ThrowIfNull(recipe);
+        return new Recipe
+        {
+            Id = recipe.Id,
+            Name = recipe.Name,
+            Description = recipe.Description,
+            Group = recipe.Group,
+            Ingredients = recipe.Ingredients.Select(i => i with { }).ToList(),
+            Instructions = recipe.Instructions.Select(i => i with { }).ToList(),
+            NutritionInfo = recipe.NutritionInfo is not null ? recipe.NutritionInfo with { } : null,
+            Source = recipe.Source is not null ? recipe.Source with { } : null,
+            Tags = [.. recipe.Tags],
+            FurtherNotes = recipe.FurtherNotes
+        };
+    }
+
     public static bool IsEqualTo(this Recipe? first, Recipe? second)
     {
         if (first is null && second is null)
