@@ -1,153 +1,80 @@
 @implements IAsyncDisposable
 @inject ISearchService SearchService
+@inject IRecipeService RecipeService
 @inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
-<div class="search-bar" @onfocusout="OnFocusOut">
-    <FluentSearch @bind-Value="searchText"
-                  @bind-Value:after="OnSearchInput"
-                  Immediate="true"
-                  @onfocusin="OnFocusIn"
-                  @onkeydown="OnKeyDown"
-                  Placeholder="Search recipes..."
-                  Style="width: 100%;" />
+@inject IJSRuntime JsRuntime
 
-    @if (showDropdown)
-    {
-        <div class="search-results-dropdown" @onmousedown:preventDefault>
-            @if (searchResults.Count > 0)
-            {
-                <FluentListbox TOption="SearchResult"
-                               Items="@searchResults"
-                               OptionValue="@(r => r.NavigationUrl)"
-                               OptionText="@(r => r.Name)"
-                               SelectedOptionChanged="OnResultClick">
-                    <OptionTemplate>
-                        <FluentIcon Value="@(context.Kind switch { SearchResultKind.Recipe => (Icon)new Icons.Regular.Size16.Food(), SearchResultKind.Group => new Icons.Regular.Size16.Folder() })" Slot="start" />
-                        <FluentIcon Value="@(context.MatchMethod switch { MatchMethod.Tag => (Icon)new Icons.Regular.Size16.Tag(), MatchMethod.Description => new Icons.Regular.Size16.TextDescription(), MatchMethod.Name => new Icons.Regular.Size16.TextCaseTitle() })" Slot="end" />
-                        <FluentLabel Typo="Typography.Body" Color="Color.Custom" CustomColor="#1a1a1a">@context.Name</FluentLabel>
-                    </OptionTemplate>
-                </FluentListbox>
-            }
-            else
-            {
-                <div class="search-result-empty">
-                    <FluentLabel Typo="Typography.Body" Color="Color.Custom" CustomColor="#717171">No results found</FluentLabel>
-                </div>
-            }
-        </div>
-    }
+<div class="search-bar">
+    <FluentAutocomplete TOption="SearchResult"
+                        AutoComplete="off"
+                        Placeholder="Search recipes..."
+                        Width="100%"
+                        MaximumSelectedOptions="1"
+                        OptionText="@(r => r.Name)"
+                        OnOptionsSearch="OnSearch"
+                        ShowOverlayOnEmptyResults="false"
+                        @bind-SelectedOptions="selectedResults"
+                        @bind-SelectedOptions:after="OnResultSelected">
+        <OptionTemplate>
+            <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" Width="100%">
+                <FluentIcon Value="@GetKindIcon(context.Kind)" />
+                <span class="search-result-name">@context.Name</span>
+                <FluentSpacer />
+                <FluentIcon Value="@GetMatchMethodIcon(context.MatchMethod)" />
+            </FluentStack>
+        </OptionTemplate>
+    </FluentAutocomplete>
 </div>
 
 @code {
-    private string? searchText;
-    private List<SearchResult> searchResults = [];
-    private bool showDropdown;
-    private CancellationTokenSource? debounceCts;
+    private List<RecipeSummary> cachedSummaries = [];
+    private IEnumerable<SearchResult> selectedResults = [];
     private Func<Task>? notifierCallback;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         notifierCallback = OnRecipesChanged;
         RecipeStateNotifier.Subscribe(notifierCallback);
         NavigationManager.LocationChanged += OnLocationChanged;
+        cachedSummaries = await RecipeService.GetRecipeSummariesAsync();
     }
 
-    private void CancelDebounce()
+    private void OnSearch(OptionsSearchEventArgs<SearchResult> e)
     {
-        debounceCts?.Cancel();
-        debounceCts?.Dispose();
-        debounceCts = null;
-    }
-
-    private async Task OnSearchInput()
-    {
-        CancelDebounce();
-
-        if (string.IsNullOrWhiteSpace(searchText))
+        if (string.IsNullOrWhiteSpace(e.Text))
         {
-            searchResults = [];
-            showDropdown = false;
+            e.Items = Enumerable.Empty<SearchResult>();
             return;
         }
 
-        debounceCts = new CancellationTokenSource();
-        CancellationToken token = debounceCts.Token;
-
-        try
-        {
-            await Task.Delay(millisecondsDelay: 300, token);
-            searchResults = await SearchService.SearchAsync(searchText, token);
-            showDropdown = true;
-        }
-        catch (TaskCanceledException)
-        {
-            // Debounce cancelled, ignore
-        }
+        e.Items = SearchService.Search(e.Text, cachedSummaries);
     }
 
-    private async Task OnResultClick(SearchResult? result)
+    private async Task OnResultSelected()
     {
+        SearchResult? result = selectedResults.FirstOrDefault();
+        selectedResults = [];
+
         if (result is null)
         {
             return;
         }
 
-        CancelDebounce();
-        searchText = string.Empty;
-        searchResults = [];
-        showDropdown = false;
-
+        await JsRuntime.InvokeVoidAsync("eval", "document.activeElement.blur()");
         NavigationManager.NavigateTo(result.NavigationUrl);
-    }
-
-    private void OnFocusIn()
-    {
-        if (searchResults.Count > 0)
-        {
-            showDropdown = true;
-        }
-    }
-
-    private void OnFocusOut()
-    {
-        showDropdown = false;
-    }
-
-    private void OnKeyDown(KeyboardEventArgs e)
-    {
-        if (e.Key == "Escape")
-        {
-            showDropdown = false;
-        }
-    }
-
-    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
-    {
-        CancelDebounce();
-        searchText = string.Empty;
-        searchResults = [];
-        showDropdown = false;
-        InvokeAsync(StateHasChanged);
     }
 
     private async Task OnRecipesChanged()
     {
-        if (!string.IsNullOrWhiteSpace(searchText))
-        {
-            CancelDebounce();
-            debounceCts = new CancellationTokenSource();
+        cachedSummaries = await RecipeService.GetRecipeSummariesAsync();
+        await InvokeAsync(StateHasChanged);
+    }
 
-            try
-            {
-                searchResults = await SearchService.SearchAsync(searchText, debounceCts.Token);
-                showDropdown = searchResults.Count > 0;
-                await InvokeAsync(StateHasChanged);
-            }
-            catch (TaskCanceledException)
-            {
-                // Ignore
-            }
-        }
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        selectedResults = [];
+        InvokeAsync(StateHasChanged);
     }
 
     public async ValueTask DisposeAsync()
@@ -159,8 +86,21 @@
             RecipeStateNotifier.Unsubscribe(notifierCallback);
         }
 
-        CancelDebounce();
-
         await ValueTask.CompletedTask;
     }
+
+    private static Icon GetKindIcon(SearchResultKind kind) => kind switch
+    {
+        SearchResultKind.Recipe => new Icons.Regular.Size16.Food(),
+        SearchResultKind.Group => new Icons.Regular.Size16.Folder(),
+        _ => new Icons.Regular.Size16.QuestionCircle()
+    };
+
+    private static Icon GetMatchMethodIcon(MatchMethod matchMethod) => matchMethod switch
+    {
+        MatchMethod.Name => new Icons.Regular.Size16.TextCaseTitle(),
+        MatchMethod.Tag => new Icons.Regular.Size16.Tag(),
+        MatchMethod.Description => new Icons.Regular.Size16.TextDescription(),
+        _ => new Icons.Regular.Size16.QuestionCircle()
+    };
 }
