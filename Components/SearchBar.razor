@@ -10,12 +10,12 @@
                         AutoComplete="off"
                         Placeholder="Search recipes..."
                         Width="100%"
-                        MaximumSelectedOptions="1"
+                        Multiple="false"
                         OptionText="@(r => r.Name)"
                         OnOptionsSearch="OnSearch"
                         ShowOverlayOnEmptyResults="false"
-                        @bind-SelectedOptions="selectedResults"
-                        @bind-SelectedOptions:after="OnResultSelected">
+                        @bind-SelectedOption="selectedResult"
+                        @bind-SelectedOption:after="OnResultSelected">
         <OptionTemplate>
             <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" Width="100%">
                 <FluentIcon Value="@GetKindIcon(context.Kind)" />
@@ -29,7 +29,7 @@
 
 @code {
     private List<RecipeSummary> cachedSummaries = [];
-    private IEnumerable<SearchResult> selectedResults = [];
+    private SearchResult? selectedResult = null;
     private Func<Task>? notifierCallback;
 
     protected override async Task OnInitializedAsync()
@@ -53,16 +53,13 @@
 
     private async Task OnResultSelected()
     {
-        SearchResult? result = selectedResults.FirstOrDefault();
-        selectedResults = [];
-
-        if (result is null)
+        if (selectedResult is null)
         {
             return;
         }
 
         await JsRuntime.InvokeVoidAsync("eval", "document.activeElement.blur()");
-        NavigationManager.NavigateTo(result.NavigationUrl);
+        NavigationManager.NavigateTo(selectedResult.NavigationUrl);
     }
 
     private async Task OnRecipesChanged()
@@ -73,7 +70,7 @@
 
     private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        selectedResults = [];
+        selectedResult = null;
         InvokeAsync(StateHasChanged);
     }
 
