@@ -2,7 +2,7 @@
 @inject ISearchService SearchService
 @inject IRecipeStateNotifier RecipeStateNotifier
 @inject NavigationManager NavigationManager
-<div class="search-bar" @ref="containerRef" tabindex="-1" @onfocusout="OnFocusOut">
+<div class="search-bar" @onfocusout="OnFocusOut">
     <FluentSearch @bind-Value="searchText"
                   @bind-Value:after="OnSearchInput"
                   Immediate="true"
@@ -39,7 +39,6 @@
 </div>
 
 @code {
-    private ElementReference containerRef;
     private string? searchText;
     private List<SearchResult> searchResults = [];
     private bool showDropdown;
@@ -50,13 +49,19 @@
     {
         notifierCallback = OnRecipesChanged;
         RecipeStateNotifier.Subscribe(notifierCallback);
+        NavigationManager.LocationChanged += OnLocationChanged;
     }
 
-    private async Task OnSearchInput()
+    private void CancelDebounce()
     {
         debounceCts?.Cancel();
         debounceCts?.Dispose();
         debounceCts = null;
+    }
+
+    private async Task OnSearchInput()
+    {
+        CancelDebounce();
 
         if (string.IsNullOrWhiteSpace(searchText))
         {
@@ -87,10 +92,11 @@
             return;
         }
 
-        searchText = null;
+        CancelDebounce();
+        searchText = string.Empty;
         searchResults = [];
         showDropdown = false;
-        await containerRef.FocusAsync();
+
         NavigationManager.NavigateTo(result.NavigationUrl);
     }
 
@@ -115,12 +121,20 @@
         }
     }
 
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        CancelDebounce();
+        searchText = string.Empty;
+        searchResults = [];
+        showDropdown = false;
+        InvokeAsync(StateHasChanged);
+    }
+
     private async Task OnRecipesChanged()
     {
         if (!string.IsNullOrWhiteSpace(searchText))
         {
-            debounceCts?.Cancel();
-            debounceCts?.Dispose();
+            CancelDebounce();
             debounceCts = new CancellationTokenSource();
 
             try
@@ -138,14 +152,14 @@
 
     public async ValueTask DisposeAsync()
     {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+
         if (notifierCallback is not null)
         {
             RecipeStateNotifier.Unsubscribe(notifierCallback);
         }
 
-        debounceCts?.Cancel();
-        debounceCts?.Dispose();
-        debounceCts = null;
+        CancelDebounce();
 
         await ValueTask.CompletedTask;
     }
