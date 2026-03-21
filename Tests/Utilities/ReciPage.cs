@@ -30,17 +30,20 @@ public abstract class ReciPage : PageTest
         await WaitForAppReadyAsync();
     }
 
-    public async Task GotoRecipeAsync(Guid recipeId)
+    public async Task GotoRecipeAsync(string recipeName, string? group = null)
     {
         await EnsureStateInitializedAsync();
-        await Page.GotoAsync($"{_app.BaseUrl}/recipe/{recipeId}");
+        string slug = group is not null
+            ? $"{Uri.EscapeDataString(group)}/{Uri.EscapeDataString(recipeName)}"
+            : Uri.EscapeDataString(recipeName);
+        await Page.GotoAsync($"{_app.BaseUrl}/recipe/{slug}");
         await WaitForAppReadyAsync();
     }
 
-    public async Task GotoGroupAsync(Guid groupId)
+    public async Task GotoGroupAsync(string groupName)
     {
         await EnsureStateInitializedAsync();
-        await Page.GotoAsync($"{_app.BaseUrl}/group/{groupId}");
+        await Page.GotoAsync($"{_app.BaseUrl}/group/{Uri.EscapeDataString(groupName)}");
         await WaitForAppReadyAsync();
     }
 

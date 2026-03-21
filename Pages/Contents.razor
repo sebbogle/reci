@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 @page "/group/{GroupName}"
 @implements IAsyncDisposable
 @inject IRecipeService RecipeService
@@ -42,15 +42,16 @@ else
 
             @foreach (RecipeSummary recipe in group)
             {
-                <FluentGridItem xs="12" sm="6" md="4" lg="3" @key="recipe.Id">
-                    <FluentCard class="recipe-card" MinimalStyle="true" @onclick="() => NavigateToRecipe(recipe.Id)">
+                string anchorId = $"description-{recipe.Slug.GetHashCode():x}";
+                <FluentGridItem xs="12" sm="6" md="4" lg="3" @key="recipe.Slug">
+                    <FluentCard class="recipe-card" MinimalStyle="true" @onclick="() => NavigateToRecipe(recipe)">
                         <FluentStack Orientation="Orientation.Vertical">
                             <FluentLabel Typo="Typography.H5">@recipe.Name</FluentLabel>
 
                             @if (!string.IsNullOrEmpty(recipe.Description))
                             {
-                                <FluentLabel Id="@($"description-{recipe.Id}")" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Class="recipe-description">@recipe.Description</FluentLabel>
-                                <FluentTooltip Anchor="@($"description-{recipe.Id}")" Position="TooltipPosition.Bottom" Delay="500" MaxWidth="300px">
+                                <FluentLabel Id="@anchorId" Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Class="recipe-description">@recipe.Description</FluentLabel>
+                                <FluentTooltip Anchor="@anchorId" Position="TooltipPosition.Bottom" Delay="500" MaxWidth="300px">
                                     @recipe.Description
                                 </FluentTooltip>
                             }
@@ -152,8 +153,8 @@ else
         }
     }
 
-    private void NavigateToRecipe(Guid recipeId)
+    private void NavigateToRecipe(RecipeSummary recipe)
     {
-        NavigationManager.NavigateTo($"/recipe/{recipeId}");
+        NavigationManager.NavigateTo($"/recipe/{recipe.Slug}");
     }
 }

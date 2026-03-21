@@ -1,4 +1,4 @@
-﻿@page "/Recipe/{RecipeSlug?}"
+@page "/Recipe/{*RecipeSlug}"
 @implements IAsyncDisposable
 @inject IRecipeService RecipeService
 @inject IRecipeStateNotifier RecipeStateNotifier
@@ -74,7 +74,7 @@ else
                 <FluentLabel>@Recipe.Description</FluentLabel>
             </FluentGridItem>
         }
-        
+
         <FluentGridItem xs="12">
             <FluentDivider Role="DividerRole.Separator" />
         </FluentGridItem>
@@ -83,14 +83,14 @@ else
         {
             <FluentGridItem xs="12" md="6">
                 <IngredientsDisplay Ingredients="@Recipe.Ingredients" />
-            </FluentGridItem>            
+            </FluentGridItem>
         }
 
         @if (Recipe.Instructions.Any())
         {
             <FluentGridItem xs="12" md="6">
                 <InstructionsDisplay Instructions="@Recipe.Instructions" />
-            </FluentGridItem>  
+            </FluentGridItem>
         }
 
         @if (!Recipe.NutritionInfo.IsEmpty())
@@ -141,8 +141,15 @@ else
 
         try
         {
-            bool success = Guid.TryParse(RecipeSlug, out Guid recipeId);
-            Recipe = success ? await RecipeService.GetRecipeAsync(recipeId, _cts.Token) : null;
+            if (!string.IsNullOrEmpty(RecipeSlug))
+            {
+                RecipeKey key = RecipeKey.FromSlug(RecipeSlug);
+                Recipe = await RecipeService.GetRecipeAsync(key, _cts.Token);
+            }
+            else
+            {
+                Recipe = null;
+            }
         }
         finally
         {
@@ -201,5 +208,15 @@ else
         });
 
         DialogResult result = await _dialog.Result;
+
+        if (!result.Cancelled && Recipe is not null)
+        {
+            RecipeKey newKey = new(Recipe.Name, Recipe.Group);
+            string newSlug = newKey.ToSlug();
+            if (!string.Equals(RecipeSlug, newSlug, StringComparison.Ordinal))
+            {
+                NavigationManager.NavigateTo($"/recipe/{newSlug}");
+            }
+        }
     }
 }

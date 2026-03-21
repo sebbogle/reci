@@ -86,8 +86,8 @@
             {
                 case ExportKind.Recipe:
                 {
-                    Guid recipeId = Guid.Parse(context.Value!);
-                    RecipeExportResult? result = await RecipeExportService.ExportRecipeAsync(recipeId);
+                    RecipeKey key = RecipeKey.FromSlug(context.Value!);
+                    RecipeExportResult? result = await RecipeExportService.ExportRecipeAsync(key);
 
                     if (result is null)
                     {
@@ -151,9 +151,10 @@
         string relativePath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 
         if (relativePath.StartsWith("Recipe/", StringComparison.OrdinalIgnoreCase)
-            && Guid.TryParse(relativePath.AsSpan("Recipe/".Length), out Guid _))
+            && relativePath.Length > "Recipe/".Length)
         {
-            return new ExportContext(ExportKind.Recipe, relativePath["Recipe/".Length..]);
+            string slug = relativePath["Recipe/".Length..];
+            return new ExportContext(ExportKind.Recipe, slug);
         }
 
         if (relativePath.StartsWith("group/", StringComparison.OrdinalIgnoreCase)

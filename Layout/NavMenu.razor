@@ -1,4 +1,4 @@
-﻿
+
 @implements IAsyncDisposable
 @inject IDialogService DialogService
 @inject IRecipeService RecipeService
@@ -11,7 +11,7 @@
     <nav class="sitenav" aria-labelledby="main-menu">
         <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
              <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.BookOpen())" IconColor="Color.Accent">Contents</FluentNavLink>
-            
+
              @foreach (IGrouping<string?, RecipeSummary> recipeGroup in recipeSummaries.GroupBy(r => r.Group).OrderBy(g => g.Key ?? string.Empty))
             {
                 @if (!string.IsNullOrEmpty(recipeGroup.Key))
@@ -27,14 +27,14 @@
                     @RenderRecipes(recipeGroup)
                 }
             }
-         
+
             <FluentDivider Style="margin: 10px 0;"></FluentDivider>
 
             <FluentNavLink Icon="@(new Icons.Regular.Size20.Add())"
                            OnClick="AddNewRecipe">
                 Add New Recipe
             </FluentNavLink>
-         
+
          </FluentNavMenu>
     </nav>
 </div>
@@ -87,7 +87,7 @@
     {
         @foreach (RecipeSummary recipe in recipeGroup)
         {
-            <FluentNavLink Href="@($"/recipe/{recipe.Id}")"
+            <FluentNavLink Href="@($"/recipe/{recipe.Slug}")"
                            Icon="@(new Icons.Regular.Size20.Food())">
                 @recipe.Name
             </FluentNavLink>
