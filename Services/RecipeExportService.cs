@@ -57,30 +57,30 @@ public class RecipeExportService(IRecipeRepository recipeRepository, ILogger<Rec
         }
     }
 
-    public async Task<RecipeExportResult?> ExportRecipeAsync(Guid recipeId, CancellationToken cancellationToken = default)
+    public async Task<RecipeExportResult?> ExportRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default)
     {
         try
         {
-            _logger.LogDebug("Starting single recipe export for ID {RecipeId}", recipeId);
+            _logger.LogDebug("Starting single recipe export for '{RecipeName}'", key.Name);
 
-            Recipe? recipe = await _recipeRepository.GetRecipeAsync(recipeId, cancellationToken);
+            Recipe? recipe = await _recipeRepository.GetRecipeAsync(key, cancellationToken);
 
             if (recipe is null)
             {
-                _logger.LogWarning("Recipe with ID {RecipeId} not found for export", recipeId);
+                _logger.LogWarning("Recipe '{RecipeName}' not found for export", key.Name);
                 return null;
             }
 
             string json = JsonSerializer.Serialize(recipe, _jsonOptions);
             byte[] content = Encoding.UTF8.GetBytes(json);
-            string fileName = FileNameHelper.ToFileName(recipe.Name, recipe.Id);
+            string fileName = FileNameHelper.ToFileName(recipe.Name);
 
             _logger.LogInformation("Exported recipe '{RecipeName}'", recipe.Name);
             return new RecipeExportResult(content, fileName);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error exporting recipe with ID {RecipeId}", recipeId);
+            _logger.LogError(ex, "Error exporting recipe '{RecipeName}'", key.Name);
             return null;
         }
     }
@@ -92,7 +92,7 @@ public class RecipeExportService(IRecipeRepository recipeRepository, ILogger<Rec
         {
             foreach (Recipe recipe in recipes)
             {
-                string fileName = FileNameHelper.ToFileName(recipe.Name, recipe.Id);
+                string fileName = FileNameHelper.ToFileName(recipe.Name);
                 string entryPath = string.IsNullOrEmpty(recipe.Group) ? fileName : $"{recipe.Group}/{fileName}";
 
                 ZipArchiveEntry entry = archive.CreateEntry(entryPath);

@@ -13,7 +13,7 @@ public class SearchService(IRecipeService recipeService) : ISearchService
 
         List<RecipeSummary> summaries = await recipeService.GetRecipeSummariesAsync(cancellationToken);
         List<SearchResult> results = new(MaxResults);
-        HashSet<Guid> matchedRecipeIds = [];
+        HashSet<string> matchedSlugs = [];
 
         foreach (RecipeSummary summary in summaries)
         {
@@ -24,7 +24,7 @@ public class SearchService(IRecipeService recipeService) : ISearchService
 
             if (summary.Name.Contains(query, StringComparison.OrdinalIgnoreCase))
             {
-                matchedRecipeIds.Add(summary.Id);
+                matchedSlugs.Add(summary.Slug);
                 results.Add(CreateRecipeResult(summary, MatchMethod.Name));
             }
         }
@@ -62,14 +62,14 @@ public class SearchService(IRecipeService recipeService) : ISearchService
                     break;
                 }
 
-                if (matchedRecipeIds.Contains(summary.Id))
+                if (matchedSlugs.Contains(summary.Slug))
                 {
                     continue;
                 }
 
                 if (summary.Tags.Any(tag => tag.Contains(query, StringComparison.OrdinalIgnoreCase)))
                 {
-                    matchedRecipeIds.Add(summary.Id);
+                    matchedSlugs.Add(summary.Slug);
                     results.Add(CreateRecipeResult(summary, MatchMethod.Tag));
                 }
             }
@@ -84,7 +84,7 @@ public class SearchService(IRecipeService recipeService) : ISearchService
                     break;
                 }
 
-                if (matchedRecipeIds.Contains(summary.Id))
+                if (matchedSlugs.Contains(summary.Slug))
                 {
                     continue;
                 }
@@ -92,7 +92,7 @@ public class SearchService(IRecipeService recipeService) : ISearchService
                 if (summary.Description is not null
                     && summary.Description.Contains(query, StringComparison.OrdinalIgnoreCase))
                 {
-                    matchedRecipeIds.Add(summary.Id);
+                    matchedSlugs.Add(summary.Slug);
                     results.Add(CreateRecipeResult(summary, MatchMethod.Description));
                 }
             }
@@ -108,7 +108,7 @@ public class SearchService(IRecipeService recipeService) : ISearchService
             Name = summary.Name,
             Kind = SearchResultKind.Recipe,
             MatchMethod = matchMethod,
-            NavigationUrl = $"/Recipe/{summary.Id}"
+            NavigationUrl = $"/Recipe/{summary.Slug}"
         };
     }
 }

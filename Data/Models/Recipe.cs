@@ -4,10 +4,11 @@ namespace Reci.Data.Models;
 
 public class Recipe
 {
-    public Guid Id { get; set; }
-
     [Required(ErrorMessage = "Recipe name is required.")]
     public required string Name { get; set; }
+
+    [JsonIgnore]
+    public bool IsNew { get; set; } = true;
 
     public string? Description { get; set; }
 
@@ -34,8 +35,7 @@ public static class RecipeExtensions
         {
             return true;
         }
-        return recipe.Id == Guid.Empty
-            && string.IsNullOrEmpty(recipe.Name)
+        return string.IsNullOrEmpty(recipe.Name)
             && string.IsNullOrEmpty(recipe.Description)
             && recipe.Group is null
             && !recipe.Ingredients.Any(ingredient => !ingredient.IsEmpty())
@@ -51,8 +51,8 @@ public static class RecipeExtensions
         ArgumentNullException.ThrowIfNull(recipe);
         return new Recipe
         {
-            Id = recipe.Id,
             Name = recipe.Name,
+            IsNew = recipe.IsNew,
             Description = recipe.Description,
             Group = recipe.Group,
             Ingredients = recipe.Ingredients.Select(i => i with { }).ToList(),
@@ -74,8 +74,7 @@ public static class RecipeExtensions
         {
             return false;
         }
-        return first.Id == second.Id
-            && first.Name == second.Name
+        return first.Name == second.Name
             && first.Description == second.Description
             && first.Group == second.Group
             && first.Ingredients.SequenceEqual(second.Ingredients)

@@ -6,19 +6,19 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
     private readonly ILogger<FileSystemRecipeRepository> _logger = logger.ThrowIfNull();
     private readonly JsonSerializerOptions _jsonOptions = jsonOptions.ThrowIfNull();
 
-    private Dictionary<Guid, CachedRecipe>? _cache;
+    private Dictionary<RecipeKey, CachedRecipe>? _cache;
     private readonly SemaphoreSlim _cacheLock = new(1, 1);
 
-    public async Task<Recipe?> GetRecipeAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Recipe?> GetRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default)
     {
         try
         {
-            Dictionary<Guid, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
-            return cache.TryGetValue(id, out CachedRecipe? cached) ? cached.Recipe : null;
+            Dictionary<RecipeKey, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
+            return cache.TryGetValue(key, out CachedRecipe? cached) ? cached.Recipe : null;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error retrieving recipe with ID {RecipeId}", id);
+            _logger.LogError(ex, "Error retrieving recipe '{RecipeName}' in group '{Group}'", key.Name, key.Group);
             return null;
         }
     }
@@ -27,7 +27,7 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
     {
         try
         {
-            Dictionary<Guid, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
+            Dictionary<RecipeKey, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
             return cache.Values.Select(c => c.Recipe).ToList();
         }
         catch (Exception ex)
@@ -41,7 +41,7 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
     {
         try
         {
-            Dictionary<Guid, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
+            Dictionary<RecipeKey, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
             return cache.Values.Select(c => RecipeSummary.FromRecipe(c.Recipe)).ToList();
         }
         catch (Exception ex)
@@ -61,25 +61,25 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
             if (string.IsNullOrWhiteSpace(recipe.Name))
                 return Result.Failure("Recipe name is required");
 
-            Dictionary<Guid, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
+            Dictionary<RecipeKey, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
 
-            if (recipe.Id == Guid.Empty)
-                recipe.Id = Guid.NewGuid();
+            RecipeKey key = new(recipe.Name, recipe.Group);
 
-            if (cache.ContainsKey(recipe.Id))
-                return Result.Failure($"Recipe with ID {recipe.Id} already exists");
+            if (cache.ContainsKey(key))
+                return Result.Failure($"A recipe named '{recipe.Name}' already exists in group '{recipe.Group ?? "ungrouped"}'");
 
             string folderName = recipe.Group ?? string.Empty;
             if (!string.IsNullOrEmpty(folderName))
                 await EnsureFolderExistsAsync(folderName);
 
-            string fileName = FileNameHelper.ToFileName(recipe.Name, recipe.Id);
+            string fileName = FileNameHelper.ToFileName(recipe.Name);
             string filePath = string.IsNullOrEmpty(folderName) ? fileName : $"{folderName}/{fileName}";
 
             string json = JsonSerializer.Serialize(recipe, _jsonOptions);
             await _fileSystemAccess.WriteFileAsync(filePath, json);
 
-            cache[recipe.Id] = new CachedRecipe(recipe, filePath, folderName);
+            recipe.IsNew = false;
+            cache[key] = new CachedRecipe(recipe, filePath, folderName);
 
             _logger.LogInformation("Created recipe '{RecipeName}' at {FilePath}", recipe.Name, filePath);
             return Result.Success();
@@ -91,29 +91,31 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
         }
     }
 
-    public async Task<Result> UpdateRecipeAsync(Recipe recipe, CancellationToken cancellationToken = default)
+    public async Task<Result> UpdateRecipeAsync(Recipe recipe, RecipeKey originalKey, CancellationToken cancellationToken = default)
     {
         try
         {
             if (recipe == null)
                 return Result.Failure("Recipe cannot be null");
 
-            if (recipe.Id == Guid.Empty)
-                return Result.Failure("Recipe ID is required");
-
             if (string.IsNullOrWhiteSpace(recipe.Name))
                 return Result.Failure("Recipe name is required");
 
-            Dictionary<Guid, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
+            Dictionary<RecipeKey, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
 
-            if (!cache.TryGetValue(recipe.Id, out CachedRecipe? existing))
-                return Result.Failure($"Recipe with ID {recipe.Id} not found");
+            if (!cache.TryGetValue(originalKey, out CachedRecipe? existing))
+                return Result.Failure($"Recipe '{originalKey.Name}' not found in group '{originalKey.Group ?? "ungrouped"}'");
+
+            RecipeKey newKey = new(recipe.Name, recipe.Group);
+
+            if (!originalKey.Equals(newKey) && cache.ContainsKey(newKey))
+                return Result.Failure($"A recipe named '{recipe.Name}' already exists in group '{recipe.Group ?? "ungrouped"}'");
 
             string newFolderName = recipe.Group ?? string.Empty;
             if (!string.IsNullOrEmpty(newFolderName))
                 await EnsureFolderExistsAsync(newFolderName);
 
-            string newFileName = FileNameHelper.ToFileName(recipe.Name, recipe.Id);
+            string newFileName = FileNameHelper.ToFileName(recipe.Name);
             string newFilePath = string.IsNullOrEmpty(newFolderName) ? newFileName : $"{newFolderName}/{newFileName}";
 
             string json = JsonSerializer.Serialize(recipe, _jsonOptions);
@@ -135,39 +137,40 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
                 await _fileSystemAccess.WriteFileAsync(newFilePath, json);
             }
 
-            cache[recipe.Id] = new CachedRecipe(recipe, newFilePath, newFolderName);
+            cache.Remove(originalKey);
+            cache[newKey] = new CachedRecipe(recipe, newFilePath, newFolderName);
 
             _logger.LogInformation("Updated recipe '{RecipeName}' at {FilePath}", recipe.Name, newFilePath);
             return Result.Success();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error updating recipe with ID {RecipeId}", recipe?.Id);
+            _logger.LogError(ex, "Error updating recipe '{RecipeName}'", recipe?.Name);
             return Result.Failure($"Failed to update recipe: {ex.Message}");
         }
     }
 
-    public async Task<Result> DeleteRecipeAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Result> DeleteRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default)
     {
         try
         {
-            if (id == Guid.Empty)
-                return Result.Failure("Recipe ID is required");
+            if (string.IsNullOrWhiteSpace(key.Name))
+                return Result.Failure("Recipe name is required");
 
-            Dictionary<Guid, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
+            Dictionary<RecipeKey, CachedRecipe> cache = await GetOrLoadCacheAsync(cancellationToken);
 
-            if (!cache.TryGetValue(id, out CachedRecipe? existing))
-                return Result.Failure($"Recipe with ID {id} not found");
+            if (!cache.TryGetValue(key, out CachedRecipe? existing))
+                return Result.Failure($"Recipe '{key.Name}' not found in group '{key.Group ?? "ungrouped"}'");
 
             await _fileSystemAccess.DeleteFileAsync(existing.FilePath);
-            cache.Remove(id);
+            cache.Remove(key);
 
-            _logger.LogInformation("Deleted recipe with ID {RecipeId} from {FilePath}", id, existing.FilePath);
+            _logger.LogInformation("Deleted recipe '{RecipeName}' from {FilePath}", key.Name, existing.FilePath);
             return Result.Success();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error deleting recipe with ID {RecipeId}", id);
+            _logger.LogError(ex, "Error deleting recipe '{RecipeName}'", key.Name);
             return Result.Failure($"Failed to delete recipe: {ex.Message}");
         }
     }
@@ -186,7 +189,7 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
         await GetOrLoadCacheAsync(cancellationToken);
     }
 
-    private async Task<Dictionary<Guid, CachedRecipe>> GetOrLoadCacheAsync(CancellationToken cancellationToken = default)
+    private async Task<Dictionary<RecipeKey, CachedRecipe>> GetOrLoadCacheAsync(CancellationToken cancellationToken = default)
     {
         if (_cache is not null)
             return _cache;
@@ -207,9 +210,9 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
         }
     }
 
-    private async Task<Dictionary<Guid, CachedRecipe>> ScanAllRecipesAsync()
+    private async Task<Dictionary<RecipeKey, CachedRecipe>> ScanAllRecipesAsync()
     {
-        Dictionary<Guid, CachedRecipe> cache = new();
+        Dictionary<RecipeKey, CachedRecipe> cache = new();
 
         await ScanDirectoryAsync(cache, null, null);
 
@@ -226,7 +229,7 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
         return cache;
     }
 
-    private async Task ScanDirectoryAsync(Dictionary<Guid, CachedRecipe> cache, string? subfolder, string? folderName)
+    private async Task ScanDirectoryAsync(Dictionary<RecipeKey, CachedRecipe> cache, string? subfolder, string? folderName)
     {
         List<FileSystemEntry> entries = await _fileSystemAccess.ListEntriesAsync(subfolder);
 
@@ -244,15 +247,11 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
                     continue;
                 }
 
-                if (recipe.Id == Guid.Empty)
-                {
-                    recipe.Id = Guid.NewGuid();
-                    _logger.LogInformation("Generated new ID for recipe '{RecipeName}' in {FilePath}", recipe.Name, filePath);
-                }
-
                 recipe.Group = folderName;
+                recipe.IsNew = false;
 
-                cache[recipe.Id] = new CachedRecipe(recipe, filePath, folderName);
+                RecipeKey key = new(recipe.Name, folderName);
+                cache[key] = new CachedRecipe(recipe, filePath, folderName);
             }
             catch (Exception ex)
             {

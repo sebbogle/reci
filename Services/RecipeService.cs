@@ -15,38 +15,39 @@ public class RecipeService(IRecipeRepository recipeRepository, IRecipeStateNotif
         return summaries;
     }
 
-    public async Task<Recipe?> GetRecipeAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Recipe?> GetRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Retrieving recipe with ID {RecipeId}", id);
-        Recipe? recipe = await _recipeRepository.GetRecipeAsync(id, cancellationToken);
+        _logger.LogDebug("Retrieving recipe '{RecipeName}' in group '{Group}'", key.Name, key.Group);
+        Recipe? recipe = await _recipeRepository.GetRecipeAsync(key, cancellationToken);
 
         if (recipe is null)
         {
-            _logger.LogWarning("Recipe with ID {RecipeId} not found", id);
+            _logger.LogWarning("Recipe '{RecipeName}' not found in group '{Group}'", key.Name, key.Group);
         }
 
         return recipe;
     }
 
-    public async Task<Result> SaveRecipeAsync(Recipe recipe, CancellationToken cancellationToken = default)
+    public async Task<Result> SaveRecipeAsync(Recipe recipe, RecipeKey? originalKey = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(recipe);
 
         Result result;
-        if (recipe.Id == Guid.Empty)
+        if (recipe.IsNew)
         {
             _logger.LogDebug("Creating new recipe '{RecipeName}'", recipe.Name);
             result = await _recipeRepository.CreateRecipeAsync(recipe, cancellationToken);
         }
         else
         {
-            _logger.LogDebug("Updating recipe with ID {RecipeId}", recipe.Id);
-            result = await _recipeRepository.UpdateRecipeAsync(recipe, cancellationToken);
+            RecipeKey key = originalKey ?? new RecipeKey(recipe.Name, recipe.Group);
+            _logger.LogDebug("Updating recipe '{RecipeName}'", recipe.Name);
+            result = await _recipeRepository.UpdateRecipeAsync(recipe, key, cancellationToken);
         }
 
         if (result.IsSuccess)
         {
-            _logger.LogInformation("Successfully saved recipe '{RecipeName}' with ID {RecipeId}", recipe.Name, recipe.Id);
+            _logger.LogInformation("Successfully saved recipe '{RecipeName}'", recipe.Name);
             await _recipeStateNotifier.NotifyRecipesChangedAsync();
         }
         else
@@ -57,34 +58,35 @@ public class RecipeService(IRecipeRepository recipeRepository, IRecipeStateNotif
         return result;
     }
 
-    public async Task<Result> DeleteRecipeAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Result> DeleteRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default)
     {
-        _logger.LogDebug("Deleting recipe with ID {RecipeId}", id);
-        Result result = await _recipeRepository.DeleteRecipeAsync(id, cancellationToken);
+        _logger.LogDebug("Deleting recipe '{RecipeName}' in group '{Group}'", key.Name, key.Group);
+        Result result = await _recipeRepository.DeleteRecipeAsync(key, cancellationToken);
 
         if (result.IsSuccess)
         {
-            _logger.LogInformation("Successfully deleted recipe with ID {RecipeId}", id);
+            _logger.LogInformation("Successfully deleted recipe '{RecipeName}'", key.Name);
             await _recipeStateNotifier.NotifyRecipesChangedAsync();
         }
         else
         {
-            _logger.LogWarning("Failed to delete recipe with ID {RecipeId}: {Error}", id, result.ErrorMessage);
+            _logger.LogWarning("Failed to delete recipe '{RecipeName}': {Error}", key.Name, result.ErrorMessage);
         }
 
         return result;
     }
 
-    public async Task<bool> IsRecipeModifiedAsync(Recipe recipe, CancellationToken cancellationToken = default)
+    public async Task<bool> IsRecipeModifiedAsync(Recipe recipe, RecipeKey? originalKey = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(recipe);
 
-        if (recipe.Id == Guid.Empty)
+        if (recipe.IsNew)
         {
             return true;
         }
 
-        Recipe? originalRecipe = await _recipeRepository.GetRecipeAsync(recipe.Id, cancellationToken);
+        RecipeKey key = originalKey ?? new RecipeKey(recipe.Name, recipe.Group);
+        Recipe? originalRecipe = await _recipeRepository.GetRecipeAsync(key, cancellationToken);
 
         if (originalRecipe == null)
         {

@@ -8,5 +8,5 @@ public interface IRecipeExportService
 
     Task<byte[]?> ExportGroupAsZipAsync(string groupName, CancellationToken cancellationToken = default);
 
-    Task<RecipeExportResult?> ExportRecipeAsync(Guid recipeId, CancellationToken cancellationToken = default);
+    Task<RecipeExportResult?> ExportRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default);
 }

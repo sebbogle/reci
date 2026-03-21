@@ -187,7 +187,7 @@
 </FluentDialogBody>
 
 <FluentDialogFooter>
-    @if (Content.Id != Guid.Empty)
+    @if (!Content.IsNew)
     {
         <FluentButton Appearance="Appearance.Accent"
                       OnClick="OnDeleteClick">
@@ -232,7 +232,7 @@
             return;
         }
 
-        Result saveResult = await RecipeService.SaveRecipeAsync(Content, _cts.Token);
+        Result saveResult = await RecipeService.SaveRecipeAsync(Content, _originalKey, _cts.Token);
 
         if (saveResult.IsSuccess)
         {
@@ -251,7 +251,7 @@
 
     private async Task OnCancelClick()
     {
-        bool isNewRecipe = Content.Id == Guid.Empty;
+        bool isNewRecipe = Content.IsNew;
 
         if (isNewRecipe)
         {
@@ -265,7 +265,7 @@
         }
         else
         {
-            bool recipeModified = await RecipeService.IsRecipeModifiedAsync(Content, _cts.Token);
+            bool recipeModified = await RecipeService.IsRecipeModifiedAsync(Content, _originalKey, _cts.Token);
 
             if (!recipeModified && Dialog is not null)
             {
@@ -290,7 +290,8 @@
 
         if (!result.Cancelled && Dialog is not null)
         {
-            await RecipeService.DeleteRecipeAsync(Content.Id, _cts.Token);
+            RecipeKey deleteKey = _originalKey ?? new RecipeKey(Content.Name, Content.Group);
+            await RecipeService.DeleteRecipeAsync(deleteKey, _cts.Token);
             await Dialog.CloseAsync();
         }
     }
@@ -298,6 +299,7 @@
     #endregion
 
     private string? newTag;
+    private RecipeKey? _originalKey;
 
     private EditContext? _editContext;
     private bool _hasValidationErrors;
@@ -368,6 +370,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (!Content.IsNew)
+        {
+            _originalKey = new RecipeKey(Content.Name, Content.Group);
+        }
         Content = Content.DeepClone();
         _editContext = new EditContext(Content);
         _editContext.OnValidationStateChanged += OnValidationStateChanged;

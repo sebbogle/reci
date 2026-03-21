@@ -2,7 +2,7 @@ namespace Reci.Data.Repositories.Interfaces;
 
 public interface IRecipeRepository
 {
-    Task<Recipe?> GetRecipeAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<Recipe?> GetRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default);
 
     Task<List<Recipe>> GetRecipesAsync(CancellationToken cancellationToken = default);
 
@@ -10,9 +10,9 @@ public interface IRecipeRepository
 
     Task<Result> CreateRecipeAsync(Recipe recipe, CancellationToken cancellationToken = default);
 
-    Task<Result> UpdateRecipeAsync(Recipe recipe, CancellationToken cancellationToken = default);
+    Task<Result> UpdateRecipeAsync(Recipe recipe, RecipeKey originalKey, CancellationToken cancellationToken = default);
 
-    Task<Result> DeleteRecipeAsync(Guid id, CancellationToken cancellationToken = default);
+    Task<Result> DeleteRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default);
 
     Task RefreshCacheAsync(CancellationToken cancellationToken = default);
 }
