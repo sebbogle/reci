@@ -28,5 +28,6 @@ builder.Services.AddScoped<IScreenWakeLockService, ScreenWakeLockService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IRecipeExportService, RecipeExportService>();
 builder.Services.AddScoped<IRecipeStateNotifier, RecipeStateNotifier>();
+builder.Services.AddScoped<ISearchService, SearchService>();
 
 await builder.Build().RunAsync();

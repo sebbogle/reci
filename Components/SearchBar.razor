@@ -1,0 +1,152 @@
+@implements IAsyncDisposable
+@inject ISearchService SearchService
+@inject IRecipeStateNotifier RecipeStateNotifier
+@inject NavigationManager NavigationManager
+<div class="search-bar" @ref="containerRef" tabindex="-1" @onfocusout="OnFocusOut">
+    <FluentSearch @bind-Value="searchText"
+                  @bind-Value:after="OnSearchInput"
+                  Immediate="true"
+                  @onfocusin="OnFocusIn"
+                  @onkeydown="OnKeyDown"
+                  Placeholder="Search recipes..."
+                  Style="width: 100%;" />
+
+    @if (showDropdown)
+    {
+        <div class="search-results-dropdown" @onmousedown:preventDefault>
+            @if (searchResults.Count > 0)
+            {
+                <FluentListbox TOption="SearchResult"
+                               Items="@searchResults"
+                               OptionValue="@(r => r.NavigationUrl)"
+                               OptionText="@(r => r.Name)"
+                               SelectedOptionChanged="OnResultClick">
+                    <OptionTemplate>
+                        <FluentIcon Value="@(context.Kind switch { SearchResultKind.Recipe => (Icon)new Icons.Regular.Size16.Food(), SearchResultKind.Group => new Icons.Regular.Size16.Folder() })" Slot="start" />
+                        <FluentIcon Value="@(context.MatchMethod switch { MatchMethod.Tag => (Icon)new Icons.Regular.Size16.Tag(), MatchMethod.Description => new Icons.Regular.Size16.TextDescription(), MatchMethod.Name => new Icons.Regular.Size16.TextCaseTitle() })" Slot="end" />
+                        <FluentLabel Typo="Typography.Body" Color="Color.Custom" CustomColor="#1a1a1a">@context.Name</FluentLabel>
+                    </OptionTemplate>
+                </FluentListbox>
+            }
+            else
+            {
+                <div class="search-result-empty">
+                    <FluentLabel Typo="Typography.Body" Color="Color.Custom" CustomColor="#717171">No results found</FluentLabel>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private ElementReference containerRef;
+    private string? searchText;
+    private List<SearchResult> searchResults = [];
+    private bool showDropdown;
+    private CancellationTokenSource? debounceCts;
+    private Func<Task>? notifierCallback;
+
+    protected override void OnInitialized()
+    {
+        notifierCallback = OnRecipesChanged;
+        RecipeStateNotifier.Subscribe(notifierCallback);
+    }
+
+    private async Task OnSearchInput()
+    {
+        debounceCts?.Cancel();
+        debounceCts?.Dispose();
+        debounceCts = null;
+
+        if (string.IsNullOrWhiteSpace(searchText))
+        {
+            searchResults = [];
+            showDropdown = false;
+            return;
+        }
+
+        debounceCts = new CancellationTokenSource();
+        CancellationToken token = debounceCts.Token;
+
+        try
+        {
+            await Task.Delay(millisecondsDelay: 300, token);
+            searchResults = await SearchService.SearchAsync(searchText, token);
+            showDropdown = true;
+        }
+        catch (TaskCanceledException)
+        {
+            // Debounce cancelled, ignore
+        }
+    }
+
+    private async Task OnResultClick(SearchResult? result)
+    {
+        if (result is null)
+        {
+            return;
+        }
+
+        searchText = null;
+        searchResults = [];
+        showDropdown = false;
+        await containerRef.FocusAsync();
+        NavigationManager.NavigateTo(result.NavigationUrl);
+    }
+
+    private void OnFocusIn()
+    {
+        if (searchResults.Count > 0)
+        {
+            showDropdown = true;
+        }
+    }
+
+    private void OnFocusOut()
+    {
+        showDropdown = false;
+    }
+
+    private void OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Escape")
+        {
+            showDropdown = false;
+        }
+    }
+
+    private async Task OnRecipesChanged()
+    {
+        if (!string.IsNullOrWhiteSpace(searchText))
+        {
+            debounceCts?.Cancel();
+            debounceCts?.Dispose();
+            debounceCts = new CancellationTokenSource();
+
+            try
+            {
+                searchResults = await SearchService.SearchAsync(searchText, debounceCts.Token);
+                showDropdown = searchResults.Count > 0;
+                await InvokeAsync(StateHasChanged);
+            }
+            catch (TaskCanceledException)
+            {
+                // Ignore
+            }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (notifierCallback is not null)
+        {
+            RecipeStateNotifier.Unsubscribe(notifierCallback);
+        }
+
+        debounceCts?.Cancel();
+        debounceCts?.Dispose();
+        debounceCts = null;
+
+        await ValueTask.CompletedTask;
+    }
+}

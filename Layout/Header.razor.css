@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
 .header-logo {
@@ -20,4 +21,5 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    flex-shrink: 0;
 }
