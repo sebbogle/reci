@@ -15,7 +15,6 @@ public static class InstructionExtensions
         {
             return true;
         }
-        return string.IsNullOrEmpty(instruction.Text)
-            && instruction.Group is null;
+        return string.IsNullOrEmpty(instruction.Text);
     }
 }

@@ -46,6 +46,27 @@ public static class RecipeExtensions
             && string.IsNullOrEmpty(recipe.FurtherNotes);
     }
 
+    public static void Sanitise(this Recipe? recipe)
+    {
+        if (recipe is null)
+        {
+            return;
+        }
+
+        recipe.Ingredients.RemoveAll(i => i.IsEmpty());
+        recipe.Instructions.RemoveAll(i => i.IsEmpty());
+
+        if (recipe.NutritionInfo.IsEmpty())
+        {
+            recipe.NutritionInfo = null;
+        }
+
+        if (recipe.Source.IsEmpty())
+        {
+            recipe.Source = null;
+        }
+    }
+
     public static Recipe DeepClone(this Recipe recipe)
     {
         ArgumentNullException.ThrowIfNull(recipe);
