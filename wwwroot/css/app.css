@@ -224,6 +224,13 @@ code {
 
 :root {
     --panel-width: 950px;
+    --search-bar-width: 400px;
+}
+
+@media screen and (max-width: 600px) {
+    :root {
+        --search-bar-width: 200px;
+    }
 }
 
 @media screen and (max-width: 950px) {

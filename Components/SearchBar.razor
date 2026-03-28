@@ -5,27 +5,24 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JsRuntime
 
-<div class="search-bar">
-    <FluentAutocomplete TOption="SearchResult"
-                        AutoComplete="off"
-                        Placeholder="Search recipes..."
-                        Width="100%"
-                        Multiple="false"
-                        OptionText="@(r => r.Name)"
-                        OnOptionsSearch="OnSearch"
-                        ShowOverlayOnEmptyResults="false"
-                        @bind-SelectedOption="selectedResult"
-                        @bind-SelectedOption:after="OnResultSelected">
-        <OptionTemplate>
-            <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" Width="100%">
-                <FluentIcon Value="@GetKindIcon(context.Kind)" />
-                <span class="search-result-name">@context.Name</span>
-                <FluentSpacer />
-                <FluentIcon Value="@GetMatchMethodIcon(context.MatchMethod)" />
-            </FluentStack>
-        </OptionTemplate>
-    </FluentAutocomplete>
-</div>
+<FluentAutocomplete TOption="SearchResult"
+                    AutoComplete="off"
+                    Placeholder="Search recipes..."
+                    Width="var(--search-bar-width)"
+                    Multiple="false"
+                    OptionText="@(r => r.Name)"
+                    OnOptionsSearch="OnSearch"
+                    ShowOverlayOnEmptyResults="false"
+                    @bind-SelectedOption="selectedResult"
+                    @bind-SelectedOption:after="OnResultSelected">
+    <OptionTemplate>
+        <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" Width="calc(var(--search-bar-width) - 26px)">
+            <FluentIcon Value="@GetKindIcon(context.Kind)" />
+            <span style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;" title="@context.Name">@context.Name</span>
+            <FluentIcon Value="@GetMatchMethodIcon(context.MatchMethod)" />
+        </FluentStack>
+    </OptionTemplate>
+</FluentAutocomplete>
 
 @code {
     private List<RecipeSummary> cachedSummaries = [];
