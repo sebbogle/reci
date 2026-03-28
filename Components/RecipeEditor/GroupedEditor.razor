@@ -38,75 +38,78 @@
             .ToList();
     }
 
-    @if (actualGroups.Any())
+    @foreach (IGrouping<string, TItem> group in actualGroups)
     {
-        <FluentAccordion ExpandMode="AccordionExpandMode.Multi" Style="width: 100%">
-            @foreach (IGrouping<string, TItem> group in actualGroups)
+        string groupName = group.Key;
+        if (!groupedViewState.TryGetValue(groupName, out GroupedViewState? state))
+        {
+            state = new GroupedViewState
             {
-                string groupName = group.Key;
-                groupedViewState.TryGetValue(groupName, out GroupedViewState? state);
-                if (state is null) state = GroupedViewState.Default;
+                IsExpanded = false,
+                IsEditingName = false,
+                NewName = groupName
+            };
+            groupedViewState[groupName] = state;
+        }
 
-                int itemNumber = 1;
-                <FluentAccordionItem Expanded="state.IsExpanded" ExpandedChanged="@(() => OnAccordionExpandChange(state))">
-                    <HeadingTemplate>
+        int itemNumber = 1;
+
+        <div class="group-section">
+            <div class="group-header" @onclick="@(() => ToggleExpanded(state))">
+                <div class="group-header-left">
+                    <FluentIcon Value="@(state.IsExpanded
+                                      ? new Icons.Regular.Size16.ChevronDown()
+                                      : (Icon)new Icons.Regular.Size16.ChevronRight())" />
+
+                    @if (state.IsEditingName)
+                    {
                         <div @onclick:stopPropagation="true">
-                        <FluentStack Orientation="Orientation.Horizontal" 
-                                     HorizontalAlignment="HorizontalAlignment.Left" 
-                                     VerticalAlignment="VerticalAlignment.Center"
-                                     Style="width: 100%; justify-content: space-between;">
-                            <FluentStack Orientation="Orientation.Horizontal" 
-                                         HorizontalGap="8" 
-                                         VerticalAlignment="VerticalAlignment.Center">
-                                @if (state.IsEditingName)
-                                {
-                                    <FluentTextField @bind-Value="state.NewName" />
-                                }
-                                else
-                                {
-                                    <div>@groupName</div>
-                                }
-                                
-                                @if (!state.IsExpanded)
-                                {
-                                    <FluentBadge Appearance="Appearance.Neutral">
-                                        @group.Count()
-                                    </FluentBadge>                                
-                                }
-                            </FluentStack>
-                            
-                            <FluentStack Orientation="Orientation.Horizontal"
-                                         HorizontalAlignment="HorizontalAlignment.Right" 
-                                         HorizontalGap="4"
-                                         @onclick:stopPropagation="true">
-                                @if (state.IsEditingName)
-                                {
-                                    <FluentButton IconEnd="@(new Icons.Regular.Size16.Checkmark())"
-                                                  Appearance="Appearance.Lightweight"
-                                                  Title="Rename group"
-                                                  OnClick="@(() => OnConfirmGroupNameEditClick(state, groupName))" />
-                                    <FluentButton IconEnd="@(new Icons.Regular.Size16.Dismiss())"
-                                                  Appearance="Appearance.Lightweight"
-                                                  Title="Rename group"
-                                                  OnClick="@(() => OnCancelGroupNameEditClick(state, groupName))" />
-                                }
-                                else
-                                {
-                                    <FluentButton IconEnd="@(new Icons.Regular.Size16.Edit())"
-                                                  Appearance="Appearance.Lightweight"
-                                                  Title="Rename group"
-                                                  OnClick="@(() => OnEditGroupNameClick(state))" />
-                                    <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
-                                                  Appearance="Appearance.Lightweight"
-                                                  Title="Delete group"
-                                                  OnClick="@(() => RemoveGroup(groupName))" />
-                                }
-                            </FluentStack>
-                            </FluentStack>
+                            <FluentTextField @bind-Value="state.NewName" />
                         </div>
-                    </HeadingTemplate>
-                    <ChildContent>
-                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="8" Style="padding: 8px 0;">
+                    }
+                    else
+                    {
+                        <FluentLabel Weight="FontWeight.Bold">@groupName</FluentLabel>
+                    }
+
+                    @if (!state.IsExpanded)
+                    {
+                        <FluentBadge Appearance="Appearance.Neutral">
+                            @group.Count()
+                        </FluentBadge>
+                    }
+                </div>
+
+                <div class="group-header-right" @onclick:stopPropagation="true">
+                    @if (state.IsEditingName)
+                    {
+                        <FluentButton IconEnd="@(new Icons.Regular.Size16.Checkmark())"
+                                      Appearance="Appearance.Lightweight"
+                                      Title="Rename group"
+                                      OnClick="@(() => OnConfirmGroupNameEditClick(state, groupName))" />
+                        <FluentButton IconEnd="@(new Icons.Regular.Size16.Dismiss())"
+                                      Appearance="Appearance.Lightweight"
+                                      Title="Cancel rename"
+                                      OnClick="@(() => OnCancelGroupNameEditClick(state, groupName))" />
+                    }
+                    else
+                    {
+                        <FluentButton IconEnd="@(new Icons.Regular.Size16.Edit())"
+                                      Appearance="Appearance.Lightweight"
+                                      Title="Rename group"
+                                      OnClick="@(() => OnEditGroupNameClick(state))" />
+                        <FluentButton IconEnd="@(new Icons.Regular.Size16.Delete())"
+                                      Appearance="Appearance.Lightweight"
+                                      Title="Delete group"
+                                      OnClick="@(() => RemoveGroup(groupName))" />
+                    }
+                </div>
+            </div>
+
+            @if (state.IsExpanded)
+            {
+                <div class="group-body">
+                    <FluentStack Orientation="Orientation.Vertical" VerticalGap="8">
                         @foreach (TItem item in group)
                         {
                             int currentNumber = itemNumber++;
@@ -135,11 +138,10 @@
                                       OnClick="@(() => AddItemToGroup(groupName))">
                             @AddItemButtonText
                         </FluentButton>
-                        </FluentStack>
-                    </ChildContent>
-                </FluentAccordionItem>
+                    </FluentStack>
+                </div>
             }
-        </FluentAccordion>
+        </div>
     }
 
     <FluentStack Orientation="Orientation.Horizontal" HorizontalGap="8">
@@ -191,9 +193,9 @@
 
     #region Event Handlers
 
-    private void OnAccordionExpandChange(GroupedViewState groupedViewState)
+    private void ToggleExpanded(GroupedViewState state)
     {
-        groupedViewState.IsExpanded = !groupedViewState.IsExpanded;
+        state.IsExpanded = !state.IsExpanded;
     }
 
     private void OnEditGroupNameClick(GroupedViewState state)
@@ -314,12 +316,5 @@
         public bool IsEditingName { get; set; }
 
         public string? NewName { get; set; }
-
-        public static GroupedViewState Default => new GroupedViewState
-        {
-            IsExpanded = false,
-            IsEditingName = false,
-            NewName = null
-        };
     }
 }

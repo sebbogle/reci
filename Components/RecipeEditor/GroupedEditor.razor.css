@@ -1,0 +1,33 @@
+.group-section {
+    border: 1px solid var(--neutral-stroke-rest);
+    border-radius: calc(var(--control-corner-radius) * 2px);
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 8px;
+    gap: 8px;
+    min-height: 40px;
+    cursor: pointer;
+}
+
+.group-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.group-header-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.group-body {
+    border-top: 1px solid var(--neutral-stroke-rest);
+    padding: 8px 8px 8px 32px;
+}
