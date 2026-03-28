@@ -3,7 +3,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 // Logging
-builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Logging.SetMinimumLevel(LogLevel.Warning);
 
 // Serialization
 builder.Services.AddSingleton(new JsonSerializerOptions
