@@ -1,17 +1,16 @@
 namespace Reci.Services;
 
-public class SearchService(IRecipeService recipeService) : ISearchService
+public class SearchService : ISearchService
 {
     private const int MaxResults = 10;
 
-    public async Task<List<SearchResult>> SearchAsync(string query, CancellationToken cancellationToken = default)
+    public List<SearchResult> Search(string query, IReadOnlyList<RecipeSummary> summaries)
     {
         if (string.IsNullOrWhiteSpace(query))
         {
             return [];
         }
 
-        List<RecipeSummary> summaries = await recipeService.GetRecipeSummariesAsync(cancellationToken);
         List<SearchResult> results = new(MaxResults);
         HashSet<string> matchedSlugs = [];
 

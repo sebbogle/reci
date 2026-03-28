@@ -32,6 +32,8 @@ public class RecipeService(IRecipeRepository recipeRepository, IRecipeStateNotif
     {
         ArgumentNullException.ThrowIfNull(recipe);
 
+        recipe.Sanitise();
+
         Result result;
         if (recipe.IsNew)
         {

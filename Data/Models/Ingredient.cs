@@ -21,8 +21,7 @@ public static class IngredientExtensions
         }
         return string.IsNullOrEmpty(ingredient.Name)
             && ingredient.QuantityAmount == 0
-            && string.IsNullOrEmpty(ingredient.QuantityUnit)
-            && ingredient.Group is null;
+            && string.IsNullOrEmpty(ingredient.QuantityUnit);
     }
 
 }

@@ -9,8 +9,7 @@
 
 @if (isLoading)
 {
-    <FluentProgressRing />
-    <p>Loading recipe...</p>
+    <LoadingSpinner Text="Loading recipe..." />
 }
 else if (Recipe is null)
 {
@@ -209,9 +208,9 @@ else
 
         DialogResult result = await _dialog.Result;
 
-        if (!result.Cancelled && Recipe is not null)
+        if (!result.Cancelled && result.Data is Recipe savedRecipe)
         {
-            RecipeKey newKey = new(Recipe.Name, Recipe.Group);
+            RecipeKey newKey = new(savedRecipe.Name, savedRecipe.Group);
             string newSlug = newKey.ToSlug();
             if (!string.Equals(RecipeSlug, newSlug, StringComparison.Ordinal))
             {

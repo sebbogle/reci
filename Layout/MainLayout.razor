@@ -4,10 +4,7 @@
 
 @if (isInitializing)
 {
-    <div class="loading">
-        <div class="loading-progress lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-        <div style="font-size: 16px;">Loading...</div>
-    </div>
+    <LoadingSpinner />
 }
 else if (ConnectionState.IsBrowserSupported == false)
 {
