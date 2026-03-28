@@ -9,8 +9,7 @@
 
 @if (isLoading)
 {
-    <FluentProgressRing />
-    <p>Loading recipe...</p>
+    <LoadingSpinner Text="Loading recipe..." />
 }
 else if (Recipe is null)
 {

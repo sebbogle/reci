@@ -9,8 +9,7 @@
 
 @if (isLoading)
 {
-    <FluentProgressRing />
-    <p>Loading recipes...</p>
+    <LoadingSpinner />
 }
 else if (GroupName is not null && (filteredSummaries is null || !filteredSummaries.Any()))
 {

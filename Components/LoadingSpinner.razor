@@ -1,0 +1,12 @@
+<div class="loading-spinner">
+    <div class="loading-progress lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    @if (!string.IsNullOrEmpty(Text))
+    {
+        <div style="font-size: 16px;">@Text</div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string Text { get; set; } = "Loading...";
+}
