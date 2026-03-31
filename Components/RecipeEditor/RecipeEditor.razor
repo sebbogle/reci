@@ -1,6 +1,7 @@
 ﻿@implements IDialogContentComponent<Recipe>
 @implements IAsyncDisposable
 @inject IRecipeService RecipeService
+@inject IFilePathService FilePathService
 @inject IDialogService DialogService
 @inject IToastService ToastService
 
@@ -12,6 +13,7 @@
         <FluentGrid Spacing="1" Style="margin-bottom: 12px">
             <FluentGridItem xs="12" sm="6" md="6" lg="6">
                 <FluentTextField @bind-Value="Content.Name"
+                                 @bind-Value:after="ValidateNameField"
                                  Required
                                  Autofocus
                                  Style="width: 100%;">
@@ -26,14 +28,16 @@
                     <div class="group-selector-input">
                         <FluentCombobox TOption="string"
                                     @bind-Value="Content.Group"
+                                    @bind-Value:after="ValidateGroupField"
                                     Items="@existingGroupNames"
                                     OptionText="@(g => g ?? "Ungrouped")"
                                     Placeholder="Select or type to create..."
-                                    Style="width: 100%; min-width: 0"> 
+                                    Style="width: 100%; min-width: 0">
                             <LabelTemplate>
                                 <FluentLabel Typo="Typography.Subject">Group</FluentLabel>
                             </LabelTemplate>
                         </FluentCombobox>
+                        <FluentValidationMessage For="@(() => Content.Group)" />
                     </div>
                 </div>
             </FluentGridItem>
@@ -302,6 +306,7 @@
     private RecipeKey? _originalKey;
 
     private EditContext? _editContext;
+    private ValidationMessageStore? _validationMessageStore;
     private bool _hasValidationErrors;
     private List<string> existingGroupNames = [];
     private CancellationTokenSource _cts = new();
@@ -375,6 +380,7 @@
         }
         Content = Content.DeepClone();
         _editContext = new EditContext(Content);
+        _validationMessageStore = new ValidationMessageStore(_editContext);
         _editContext.OnValidationStateChanged += OnValidationStateChanged;
         List<RecipeSummary> summaries = await RecipeService.GetRecipeSummariesAsync(_cts.Token);
         existingGroupNames = summaries
@@ -394,6 +400,34 @@
         _cts.Cancel();
         _cts.Dispose();
         return ValueTask.CompletedTask;
+    }
+
+    private void ValidateNameField()
+    {
+        FieldIdentifier field = _editContext!.Field(nameof(Content.Name));
+        _validationMessageStore!.Clear(field);
+
+        string? error = FilePathService.ValidateFileName(Content.Name);
+        if (error is not null)
+        {
+            _validationMessageStore.Add(field, error);
+        }
+
+        _editContext.NotifyValidationStateChanged();
+    }
+
+    private void ValidateGroupField()
+    {
+        FieldIdentifier field = _editContext!.Field(nameof(Content.Group));
+        _validationMessageStore!.Clear(field);
+
+        string? error = FilePathService.ValidateGroupName(Content.Group);
+        if (error is not null)
+        {
+            _validationMessageStore.Add(field, error);
+        }
+
+        _editContext.NotifyValidationStateChanged();
     }
 
     private void OnValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)

@@ -10,7 +10,7 @@ Blazor WebAssembly (.NET 10) client-side recipe manager using Fluent UI. All dat
 - `Services/` — Business logic (`RecipeService`, `RecipeExportService`, `ConnectionStateService`, etc.)
 - `Components/` — Reusable Razor components (display + editor)
 - `Pages/` — Routable pages (`Contents.razor` at `/`, `RecipePage.razor` at `/recipe/{slug}`)
-- `Core/` — Utilities (`Result<T>`, extension methods, `FileNameHelper`)
+- `Core/` — Utilities (`Result<T>`, extension methods)
 - `Layout/` — App shell (`MainLayout`, `NavMenu`, `Header`)
 
 **Key patterns:**
@@ -54,7 +54,7 @@ dotnet test --project Tests/Tests.csproj
 
 ## Conventions
 
-- File names are sanitized via `FileNameHelper` with an 8-char GUID prefix for uniqueness
+- File names are sanitized via `IFilePathService` / `FilePathService` with cross-platform validation
 - JSON config: camelCase property names, null values omitted, indented formatting
 - UI components use Microsoft Fluent UI (`FluentButton`, `FluentDialog`, etc.)
 - Global usings are declared in `Reci.csproj` `<Using>` items — no need for repeated `using` statements in most files

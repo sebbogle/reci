@@ -1,9 +1,10 @@
 namespace Reci.Services;
 
-public class RecipeService(IRecipeRepository recipeRepository, IRecipeStateNotifier recipeStateNotifier, ILogger<RecipeService> logger) : IRecipeService
+public class RecipeService(IRecipeRepository recipeRepository, IRecipeStateNotifier recipeStateNotifier, IFilePathService filePathService, ILogger<RecipeService> logger) : IRecipeService
 {
     private readonly IRecipeRepository _recipeRepository = recipeRepository.ThrowIfNull();
     private readonly IRecipeStateNotifier _recipeStateNotifier = recipeStateNotifier.ThrowIfNull();
+    private readonly IFilePathService _filePathService = filePathService.ThrowIfNull();
     private readonly ILogger<RecipeService> _logger = logger.ThrowIfNull();
 
     public async Task<List<RecipeSummary>> GetRecipeSummariesAsync(CancellationToken cancellationToken = default)
@@ -33,6 +34,13 @@ public class RecipeService(IRecipeRepository recipeRepository, IRecipeStateNotif
         ArgumentNullException.ThrowIfNull(recipe);
 
         recipe.Sanitise();
+
+        string? validationError = _filePathService.ValidateRecipePath(recipe.Name, recipe.Group);
+        if (validationError is not null)
+        {
+            _logger.LogWarning("Recipe validation failed for '{RecipeName}': {Error}", recipe.Name, validationError);
+            return Result.Failure(validationError);
+        }
 
         Result result;
         if (recipe.IsNew)
