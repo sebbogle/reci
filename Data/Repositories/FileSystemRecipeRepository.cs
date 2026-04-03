@@ -1,8 +1,9 @@
 namespace Reci.Data.Repositories;
 
-public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAccess, ILogger<FileSystemRecipeRepository> logger, JsonSerializerOptions jsonOptions) : IRecipeRepository, IDisposable
+public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAccess, IFilePathService filePathService, ILogger<FileSystemRecipeRepository> logger, JsonSerializerOptions jsonOptions) : IRecipeRepository, IDisposable
 {
     private readonly IFileSystemAccessService _fileSystemAccess = fileSystemAccess.ThrowIfNull();
+    private readonly IFilePathService _filePathService = filePathService.ThrowIfNull();
     private readonly ILogger<FileSystemRecipeRepository> _logger = logger.ThrowIfNull();
     private readonly JsonSerializerOptions _jsonOptions = jsonOptions.ThrowIfNull();
 
@@ -68,11 +69,13 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
             if (cache.ContainsKey(key))
                 return Result.Failure($"A recipe named '{recipe.Name}' already exists in group '{recipe.Group ?? "ungrouped"}'");
 
-            string folderName = recipe.Group ?? string.Empty;
+            string folderName = string.IsNullOrEmpty(recipe.Group)
+                ? string.Empty
+                : _filePathService.SanitizeForFileSystem(recipe.Group);
             if (!string.IsNullOrEmpty(folderName))
                 await EnsureFolderExistsAsync(folderName);
 
-            string fileName = FileNameHelper.ToFileName(recipe.Name);
+            string fileName = _filePathService.ToFileName(recipe.Name);
             string filePath = string.IsNullOrEmpty(folderName) ? fileName : $"{folderName}/{fileName}";
 
             string json = JsonSerializer.Serialize(recipe, _jsonOptions);
@@ -111,11 +114,13 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
             if (!originalKey.Equals(newKey) && cache.ContainsKey(newKey))
                 return Result.Failure($"A recipe named '{recipe.Name}' already exists in group '{recipe.Group ?? "ungrouped"}'");
 
-            string newFolderName = recipe.Group ?? string.Empty;
+            string newFolderName = string.IsNullOrEmpty(recipe.Group)
+                ? string.Empty
+                : _filePathService.SanitizeForFileSystem(recipe.Group);
             if (!string.IsNullOrEmpty(newFolderName))
                 await EnsureFolderExistsAsync(newFolderName);
 
-            string newFileName = FileNameHelper.ToFileName(recipe.Name);
+            string newFileName = _filePathService.ToFileName(recipe.Name);
             string newFilePath = string.IsNullOrEmpty(newFolderName) ? newFileName : $"{newFolderName}/{newFileName}";
 
             string json = JsonSerializer.Serialize(recipe, _jsonOptions);

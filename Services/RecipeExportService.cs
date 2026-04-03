@@ -1,8 +1,9 @@
 namespace Reci.Services;
 
-public class RecipeExportService(IRecipeRepository recipeRepository, ILogger<RecipeExportService> logger, JsonSerializerOptions jsonOptions) : IRecipeExportService
+public class RecipeExportService(IRecipeRepository recipeRepository, IFilePathService filePathService, ILogger<RecipeExportService> logger, JsonSerializerOptions jsonOptions) : IRecipeExportService
 {
     private readonly IRecipeRepository _recipeRepository = recipeRepository.ThrowIfNull();
+    private readonly IFilePathService _filePathService = filePathService.ThrowIfNull();
     private readonly ILogger<RecipeExportService> _logger = logger.ThrowIfNull();
     private readonly JsonSerializerOptions _jsonOptions = jsonOptions.ThrowIfNull();
 
@@ -73,7 +74,7 @@ public class RecipeExportService(IRecipeRepository recipeRepository, ILogger<Rec
 
             string json = JsonSerializer.Serialize(recipe, _jsonOptions);
             byte[] content = Encoding.UTF8.GetBytes(json);
-            string fileName = FileNameHelper.ToFileName(recipe.Name);
+            string fileName = _filePathService.ToFileName(recipe.Name);
 
             _logger.LogInformation("Exported recipe '{RecipeName}'", recipe.Name);
             return new RecipeExportResult(content, fileName);
@@ -92,7 +93,7 @@ public class RecipeExportService(IRecipeRepository recipeRepository, ILogger<Rec
         {
             foreach (Recipe recipe in recipes)
             {
-                string fileName = FileNameHelper.ToFileName(recipe.Name);
+                string fileName = _filePathService.ToFileName(recipe.Name);
                 string entryPath = string.IsNullOrEmpty(recipe.Group) ? fileName : $"{recipe.Group}/{fileName}";
 
                 ZipArchiveEntry entry = archive.CreateEntry(entryPath);

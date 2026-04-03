@@ -40,13 +40,13 @@ dotnet build Tests/Tests.csproj && pwsh Tests/bin/Debug/net10.0/playwright.ps1 i
 - `Services/` — Business logic, all registered as **Scoped** in `Program.cs`, coded to interfaces in `Services/Interfaces/`
 - `Data/Repositories/` — `FileSystemRecipeRepository` with in-memory cache + semaphore locking
 - `Data/Models/` — Record types (`Recipe`, `Ingredient`, `Instruction`, etc.)
-- `Core/` — Utilities (`Result<T>` railway-oriented error handling, `FileNameHelper`, extension methods)
+- `Core/` — Utilities (`Result<T>` railway-oriented error handling, extension methods)
 
 **Key patterns:**
 - Cross-component state sync via `IRecipeStateNotifier` (pub-sub); components implement `IAsyncDisposable` to unsubscribe
 - Error handling uses `Result<T>` — prefer `Result.Success()`/`Result.Failure()` over exceptions for expected failures
 - JS interop through `wwwroot/js/fileSystemHelper.js` bridged via `FileSystemAccessService`
-- File names: `{SanitizedName}_{8-char GUID}.reci` (see `FileNameHelper`)
+- File names: `{SanitizedName}.reci` (see `IFilePathService` / `FilePathService`)
 - JSON serialization: camelCase, indented, null values omitted
 
 ## Code Style

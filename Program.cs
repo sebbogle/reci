@@ -24,6 +24,7 @@ builder.Services.AddScoped<IConnectionStateService, ConnectionStateService>();
 builder.Services.AddScoped<IRecipeRepository, FileSystemRecipeRepository>();
 
 // Services
+builder.Services.AddScoped<IFilePathService, FilePathService>();
 builder.Services.AddScoped<IScreenWakeLockService, ScreenWakeLockService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IRecipeExportService, RecipeExportService>();
