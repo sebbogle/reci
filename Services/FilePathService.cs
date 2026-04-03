@@ -121,7 +121,7 @@ public partial class FilePathService : IFilePathService
             return groupError;
         }
 
-        int combinedLength = name!.Length + FileExtension.Length;
+        int combinedLength = (name?.Length ?? 0) + FileExtension.Length;
         if (!string.IsNullOrEmpty(group))
         {
             combinedLength += group.Length + 1;
