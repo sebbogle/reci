@@ -21,20 +21,20 @@
             <FluentLabel Color="Color.Lightweight" Typo="Typography.Body" Style="opacity: 0.7; margin-right: 8px;">
                 @ConnectionState.FolderName
             </FluentLabel>
+
+            <FluentButton Appearance="Appearance.Lightweight"
+                          IconEnd="@(new Icons.Regular.Size20.ArrowDownload())"
+                          OnClick="OnExportClick"
+                          Title="@exportTooltip"
+                          Loading="@isExporting">
+            </FluentButton>
+
+            <FluentButton Appearance="Appearance.Lightweight"
+                          IconEnd="@(new Icons.Regular.Size20.PlugDisconnected())"
+                          OnClick="OnDisconnectClick"
+                          Title="Disconnect folder">
+            </FluentButton>
         }
-
-        <FluentButton Appearance="Appearance.Lightweight"
-                      IconEnd="@(new Icons.Regular.Size20.ArrowDownload())" 
-                      OnClick="OnExportClick"
-                      Title="@exportTooltip"
-                      Loading="@isExporting">
-        </FluentButton>
-
-        <FluentButton Appearance="Appearance.Lightweight"
-                      IconEnd="@(new Icons.Regular.Size20.PlugDisconnected())"
-                      OnClick="OnDisconnectClick"
-                      Title="Disconnect folder">
-        </FluentButton>
     </div>
 </div>
 
@@ -44,8 +44,14 @@
 
     protected override void OnInitialized()
     {
+        ConnectionState.ConnectionStateChanged += OnConnectionStateChanged;
         NavigationManager.LocationChanged += OnLocationChanged;
         UpdateExportTooltip();
+    }
+
+    private async Task OnConnectionStateChanged()
+    {
+        await InvokeAsync(StateHasChanged);
     }
 
     private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
@@ -169,6 +175,7 @@
 
     public void Dispose()
     {
+        ConnectionState.ConnectionStateChanged -= OnConnectionStateChanged;
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
 

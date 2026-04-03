@@ -3,6 +3,7 @@
 @inject IDialogService DialogService
 @inject IRecipeService RecipeService
 @inject IRecipeStateNotifier RecipeStateNotifier
+@inject IConnectionStateService ConnectionState
 
 
 <div class="navmenu">
@@ -12,26 +13,30 @@
         <FluentNavMenu Id="main-menu" Width="250" Collapsible="true" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
              <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.BookOpen())" IconColor="Color.Accent">Contents</FluentNavLink>
 
-             @foreach (IGrouping<string?, RecipeSummary> recipeGroup in recipeSummaries.GroupBy(r => r.Group).OrderBy(g => g.Key ?? string.Empty))
-            {
-                @if (!string.IsNullOrEmpty(recipeGroup.Key))
+             @if (ConnectionState.IsConnected)
+             {
+                 @foreach (IGrouping<string?, RecipeSummary> recipeGroup in recipeSummaries.GroupBy(r => r.Group).OrderBy(g => g.Key ?? string.Empty))
                 {
-                    <FluentNavGroup Title="@recipeGroup.Key"
-                                    Icon="@(new Icons.Regular.Size20.FolderOpen())"
-                                    Href="@($"/group/{Uri.EscapeDataString(recipeGroup.Key)}")">
+                    @if (!string.IsNullOrEmpty(recipeGroup.Key))
+                    {
+                        <FluentNavGroup Title="@recipeGroup.Key"
+                                        Icon="@(new Icons.Regular.Size20.FolderOpen())"
+                                        Href="@($"/group/{Uri.EscapeDataString(recipeGroup.Key)}")">
+                            @RenderRecipes(recipeGroup)
+                        </FluentNavGroup>
+                    }
+                    else
+                    {
                         @RenderRecipes(recipeGroup)
-                    </FluentNavGroup>
+                    }
                 }
-                else
-                {
-                    @RenderRecipes(recipeGroup)
-                }
-            }
+             }
 
             <FluentDivider Style="margin: 10px 0;"></FluentDivider>
 
             <FluentNavLink Icon="@(new Icons.Regular.Size20.Add())"
-                           OnClick="AddNewRecipe">
+                           OnClick="AddNewRecipe"
+                           Disabled="@(!ConnectionState.IsConnected)">
                 Add New Recipe
             </FluentNavLink>
 
@@ -48,8 +53,13 @@
 
     protected override async Task OnInitializedAsync()
     {
+        ConnectionState.ConnectionStateChanged += OnConnectionStateChanged;
         RecipeStateNotifier.Subscribe(OnRecipesChanged);
-        await LoadRecipesAsync();
+
+        if (ConnectionState.IsConnected)
+        {
+            await LoadRecipesAsync();
+        }
     }
 
     private async Task LoadRecipesAsync()
@@ -75,8 +85,36 @@
         }
     }
 
+    private async Task OnConnectionStateChanged()
+    {
+        try
+        {
+            if (_cts.Token.IsCancellationRequested) return;
+
+            if (ConnectionState.IsConnected)
+            {
+                await LoadRecipesAsync();
+            }
+            else
+            {
+                recipeSummaries = new();
+            }
+
+            await InvokeAsync(StateHasChanged);
+        }
+        catch (OperationCanceledException)
+        {
+            // Component is being disposed, ignore.
+        }
+        catch (ObjectDisposedException)
+        {
+            // Component already disposed, ignore.
+        }
+    }
+
     public ValueTask DisposeAsync()
     {
+        ConnectionState.ConnectionStateChanged -= OnConnectionStateChanged;
         RecipeStateNotifier.Unsubscribe(OnRecipesChanged);
         _cts.Cancel();
         _cts.Dispose();

@@ -1,0 +1,35 @@
+<div class="viewport-center">
+    <FluentStack Orientation="Orientation.Vertical"
+                 VerticalGap="20"
+                 HorizontalAlignment="HorizontalAlignment.Center"
+                 Style="padding: 2rem; pointer-events: auto;">
+        <FluentLabel Typo="Typography.H2">Welcome to Reci</FluentLabel>
+        <FluentLabel Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Style="text-align: center; max-width: 500px;">
+            Choose a folder on your device to store your recipes. Each recipe is saved as its own file, giving you full ownership of your data.
+        </FluentLabel>
+        @if (HasStoredDirectory)
+        {
+            <FluentButton Appearance="Appearance.Accent"
+                          OnClick="OnReconnect"
+                          Style="min-width: 200px;">
+                Reconnect Folder
+            </FluentButton>
+        }
+        <FluentButton Appearance="@(HasStoredDirectory ? Appearance.Outline : Appearance.Accent)"
+                      OnClick="OnConnect"
+                      Style="min-width: 200px;">
+            @(HasStoredDirectory ? "Choose Different Folder" : "Connect Folder")
+        </FluentButton>
+    </FluentStack>
+</div>
+
+@code {
+    [Parameter]
+    public bool HasStoredDirectory { get; set; }
+
+    [Parameter]
+    public EventCallback OnConnect { get; set; }
+
+    [Parameter]
+    public EventCallback OnReconnect { get; set; }
+}

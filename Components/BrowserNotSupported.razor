@@ -1,0 +1,15 @@
+<div class="viewport-center">
+    <FluentStack Orientation="Orientation.Vertical"
+                 VerticalGap="20"
+                 HorizontalAlignment="HorizontalAlignment.Center"
+                 Style="padding: 2rem; pointer-events: auto;">
+        <FluentIcon Value="@(new Icons.Regular.Size48.Warning())" Color="Color.Custom" CustomColor="var(--warning)" />
+        <FluentLabel Typo="Typography.H2">Browser Not Supported</FluentLabel>
+        <FluentLabel Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Style="text-align: center; max-width: 550px;">
+            Reci uses the File System Access API to store recipes directly on your device. This API is not available in your current browser.
+        </FluentLabel>
+        <FluentLabel Color="Color.Custom" CustomColor="var(--neutral-foreground-hint)" Style="text-align: center; max-width: 550px;">
+            Please use Chrome or a Chromium based browser.
+        </FluentLabel>
+    </FluentStack>
+</div>
