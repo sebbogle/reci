@@ -7,13 +7,14 @@ public abstract class ReciPage : PageTest
     private readonly AppFixture _app;
     private bool _stateInitialized;
 
+    private static readonly string _shimPath = Path.Combine(
+        AppContext.BaseDirectory, "Resources", "fileSystemShim.js");
+
     protected ReciPage(AppFixture app)
     {
         ArgumentNullException.ThrowIfNull(app);
         _app = app;
     }
-
-    protected virtual string? StateFilePath => null;
 
     public override BrowserNewContextOptions ContextOptions()
     {
@@ -65,24 +66,43 @@ public abstract class ReciPage : PageTest
 
         if (attr is null)
         {
+            // No attribute: no shim injected, app shows natural unconnected state.
             return;
         }
 
-        string path = attr.StateName is not null
+        if (!attr.Connected)
+        {
+            // Explicitly disconnected: no shim, app falls through to ConnectFolder.
+            return;
+        }
+
+        // Load the shim script.
+        string shimScript = await File.ReadAllTextAsync(_shimPath);
+
+        // Load recipe data from the state file.
+        string statePath = attr.StateName is not null
             ? Path.Combine(AppContext.BaseDirectory, "Resources", $"{attr.StateName}.json")
-            : StateFilePath ?? GetDefaultStatePath();
+            : GetDefaultStatePath();
 
-        string json = await File.ReadAllTextAsync(path);
+        string recipesJson = await File.ReadAllTextAsync(statePath);
 
-        await Page.Context.AddInitScriptAsync(
+        // Inject: set test recipes, then run the shim which reads them.
+        string initScript =
             $$"""
-            (() => {
-                const state = {{json}};
-                for (const [key, value] of Object.entries(state)) {
-                    localStorage.setItem(key, JSON.stringify(value));
-                }
-            })();
-            """);
+            window.__testRecipes = {{recipesJson}};
+            {{shimScript}}
+            """;
+
+        await Page.Context.AddInitScriptAsync(initScript);
+    }
+
+    protected async Task WaitForNavigationIdleAsync()
+    {
+        await Page.WaitForLoadStateAsync(LoadState.NetworkIdle);
+        await Page.WaitForFunctionAsync(
+            "() => !document.querySelector('fluent-progress-ring')",
+            arg: null,
+            new PageWaitForFunctionOptions { Timeout = 30_000 });
     }
 
     private async Task WaitForAppReadyAsync()

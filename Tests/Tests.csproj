@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Reci.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Microsoft.Playwright" />
     <Using Include="Microsoft.Playwright.Xunit.v3" />
     <Using Include="System.Diagnostics" />
@@ -32,6 +36,10 @@
     <Using Include="Tests.Fixtures" />
     <Using Include="Tests.Utilities" />
     <Using Include="Xunit" />
+    <Using Include="Reci.Core" />
+    <Using Include="Reci.Data.Models" />
+    <Using Include="Reci.Services" />
+    <Using Include="Reci.Services.Interfaces" />
   </ItemGroup>
 
 </Project>
