@@ -180,20 +180,6 @@ public class FileSystemRecipeRepository(IFileSystemAccessService fileSystemAcces
         }
     }
 
-    public async Task RefreshCacheAsync(CancellationToken cancellationToken = default)
-    {
-        await _cacheLock.WaitAsync(cancellationToken);
-        try
-        {
-            _cache = null;
-        }
-        finally
-        {
-            _cacheLock.Release();
-        }
-        await GetOrLoadCacheAsync(cancellationToken);
-    }
-
     private async Task<Dictionary<RecipeKey, CachedRecipe>> GetOrLoadCacheAsync(CancellationToken cancellationToken = default)
     {
         if (_cache is not null)

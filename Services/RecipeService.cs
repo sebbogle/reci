@@ -106,10 +106,4 @@ public class RecipeService(IRecipeRepository recipeRepository, IRecipeStateNotif
         return !recipe.IsEqualTo(originalRecipe);
     }
 
-    public bool IsRecipeEmpty(Recipe recipe)
-    {
-        ArgumentNullException.ThrowIfNull(recipe);
-
-        return recipe.IsEmpty();
-    }
 }

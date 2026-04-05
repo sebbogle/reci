@@ -92,7 +92,7 @@
         InvokeAsync(StateHasChanged);
     }
 
-    public async ValueTask DisposeAsync()
+    public ValueTask DisposeAsync()
     {
         ConnectionState.ConnectionStateChanged -= OnConnectionStateChanged;
         NavigationManager.LocationChanged -= OnLocationChanged;
@@ -102,7 +102,7 @@
             RecipeStateNotifier.Unsubscribe(notifierCallback);
         }
 
-        await ValueTask.CompletedTask;
+        return ValueTask.CompletedTask;
     }
 
     private static Icon GetKindIcon(SearchResultKind kind) => kind switch

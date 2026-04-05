@@ -259,7 +259,7 @@
 
         if (isNewRecipe)
         {
-            bool recipeEmpty = RecipeService.IsRecipeEmpty(Content);
+            bool recipeEmpty = Content.IsEmpty();
 
             if (recipeEmpty && Dialog is not null)
             {

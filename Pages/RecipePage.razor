@@ -182,15 +182,6 @@ else
         return ValueTask.CompletedTask;
     }
 
-    private void NavigateToHome()
-    {
-        string currentPath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-        if (!string.IsNullOrEmpty(currentPath))
-        {
-            NavigationManager.NavigateTo("/");
-        }
-    }
-
     private async Task OpenRecipeEditor()
     {
         if (Recipe is null) return;

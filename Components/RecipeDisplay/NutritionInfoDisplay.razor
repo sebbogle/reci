@@ -1,4 +1,4 @@
-@if (NutritionInfo is not null && HasNutritionData())
+@if (NutritionInfo is not null && !NutritionInfo.IsEmpty())
 {
     <FluentStack Orientation="Orientation.Vertical">
         <FluentStack Orientation="Orientation.Horizontal" VerticalAlignment="VerticalAlignment.Center" HorizontalGap="5">
@@ -45,9 +45,4 @@
     [Parameter]
     public NutritionInfo? NutritionInfo { get; set; }
 
-    private bool HasNutritionData() => 
-        NutritionInfo?.Calories.HasValue == true
-        || NutritionInfo?.Protein.HasValue == true
-        || NutritionInfo?.Carbohydrates.HasValue == true
-        || NutritionInfo?.Fat.HasValue == true;
 }

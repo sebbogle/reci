@@ -11,6 +11,4 @@ public interface IRecipeService
     Task<Result> DeleteRecipeAsync(RecipeKey key, CancellationToken cancellationToken = default);
 
     Task<bool> IsRecipeModifiedAsync(Recipe recipe, RecipeKey? originalKey = null, CancellationToken cancellationToken = default);
-
-    bool IsRecipeEmpty(Recipe recipe);
 }
