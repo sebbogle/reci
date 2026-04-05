@@ -1,114 +1,95 @@
-﻿{
-  "recipes": [
-    {
-      "Id": "20000000-0000-0000-0000-000000000001",
-      "Name": "Classic Pancakes",
-      "Description": "Fluffy golden pancakes perfect for weekend mornings",
-      "GroupId": "10000000-0000-0000-0000-000000000001",
-      "Ingredients": [
-        { "Name": "All-purpose flour", "QuantityAmount": 1.5, "QuantityUnit": "cups", "GroupId": null },
-        { "Name": "Milk", "QuantityAmount": 1.25, "QuantityUnit": "cups", "GroupId": null },
-        { "Name": "Egg", "QuantityAmount": 1, "QuantityUnit": "", "GroupId": null },
-        { "Name": "Butter (melted)", "QuantityAmount": 3, "QuantityUnit": "tbsp", "GroupId": null },
-        { "Name": "Sugar", "QuantityAmount": 2, "QuantityUnit": "tbsp", "GroupId": null },
-        { "Name": "Baking powder", "QuantityAmount": 1, "QuantityUnit": "tbsp", "GroupId": null },
-        { "Name": "Salt", "QuantityAmount": 0.25, "QuantityUnit": "tsp", "GroupId": null }
-      ],
-      "Instructions": [
-        { "Text": "Whisk together flour, sugar, baking powder, and salt in a large bowl.", "GroupId": null },
-        { "Text": "In a separate bowl, beat the egg and add milk and melted butter.", "GroupId": null },
-        { "Text": "Pour wet ingredients into dry and stir until just combined.", "GroupId": null },
-        { "Text": "Heat a lightly oiled griddle over medium-high heat.", "GroupId": null },
-        { "Text": "Pour batter onto griddle using approximately 1/4 cup per pancake.", "GroupId": null },
-        { "Text": "Cook until bubbles form on the surface, then flip and cook until golden brown.", "GroupId": null }
-      ],
-      "NutritionInfo": {
-        "Calories": 350,
-        "Fat": 12.5,
-        "Carbohydrates": 48.0,
-        "Protein": 9.0
-      },
-      "Source": {
-        "Text": "Family Recipe",
-        "Url": null
-      },
-      "Tags": [ "breakfast", "quick" ],
-      "FurtherNotes": "For extra fluffy pancakes, let the batter rest for 5 minutes before cooking."
+[
+  {
+    "name": "Classic Pancakes",
+    "description": "Fluffy golden pancakes perfect for weekend mornings",
+    "group": "Breakfast",
+    "ingredients": [
+      { "name": "All-purpose flour", "quantityAmount": 1.5, "quantityUnit": "cups" },
+      { "name": "Milk", "quantityAmount": 1.25, "quantityUnit": "cups" },
+      { "name": "Egg", "quantityAmount": 1, "quantityUnit": "" },
+      { "name": "Butter (melted)", "quantityAmount": 3, "quantityUnit": "tbsp" },
+      { "name": "Sugar", "quantityAmount": 2, "quantityUnit": "tbsp" },
+      { "name": "Baking powder", "quantityAmount": 1, "quantityUnit": "tbsp" },
+      { "name": "Salt", "quantityAmount": 0.25, "quantityUnit": "tsp" }
+    ],
+    "instructions": [
+      { "text": "Whisk together flour, sugar, baking powder, and salt in a large bowl." },
+      { "text": "In a separate bowl, beat the egg and add milk and melted butter." },
+      { "text": "Pour wet ingredients into dry and stir until just combined." },
+      { "text": "Heat a lightly oiled griddle over medium-high heat." },
+      { "text": "Pour batter onto griddle using approximately 1/4 cup per pancake." },
+      { "text": "Cook until bubbles form on the surface, then flip and cook until golden brown." }
+    ],
+    "nutritionInfo": {
+      "calories": 350,
+      "fat": 12.5,
+      "carbohydrates": 48.0,
+      "protein": 9.0
     },
-    {
-      "Id": "20000000-0000-0000-0000-000000000002",
-      "Name": "Spaghetti Bolognese",
-      "Description": "A rich and hearty Italian meat sauce served over spaghetti",
-      "GroupId": "10000000-0000-0000-0000-000000000002",
-      "Ingredients": [
-        { "Name": "Spaghetti", "QuantityAmount": 400, "QuantityUnit": "g", "GroupId": "30000000-0000-0000-0000-000000000002" },
-        { "Name": "Ground beef", "QuantityAmount": 500, "QuantityUnit": "g", "GroupId": "30000000-0000-0000-0000-000000000001" },
-        { "Name": "Onion (diced)", "QuantityAmount": 1, "QuantityUnit": "", "GroupId": "30000000-0000-0000-0000-000000000001" },
-        { "Name": "Garlic cloves (minced)", "QuantityAmount": 3, "QuantityUnit": "", "GroupId": "30000000-0000-0000-0000-000000000001" },
-        { "Name": "Crushed tomatoes", "QuantityAmount": 400, "QuantityUnit": "g", "GroupId": "30000000-0000-0000-0000-000000000001" },
-        { "Name": "Tomato paste", "QuantityAmount": 2, "QuantityUnit": "tbsp", "GroupId": "30000000-0000-0000-0000-000000000001" },
-        { "Name": "Olive oil", "QuantityAmount": 2, "QuantityUnit": "tbsp", "GroupId": "30000000-0000-0000-0000-000000000001" },
-        { "Name": "Salt and pepper", "QuantityAmount": 1, "QuantityUnit": "to taste", "GroupId": null }
-      ],
-      "Instructions": [
-        { "Text": "Heat olive oil in a large pan over medium heat. Saute onion until translucent.", "GroupId": "40000000-0000-0000-0000-000000000001" },
-        { "Text": "Add garlic and cook for 1 minute.", "GroupId": "40000000-0000-0000-0000-000000000001" },
-        { "Text": "Add ground beef and cook until browned, breaking it apart.", "GroupId": "40000000-0000-0000-0000-000000000001" },
-        { "Text": "Stir in crushed tomatoes and tomato paste. Simmer for 20 minutes.", "GroupId": "40000000-0000-0000-0000-000000000001" },
-        { "Text": "Cook spaghetti according to package directions. Drain.", "GroupId": "40000000-0000-0000-0000-000000000002" },
-        { "Text": "Serve sauce over spaghetti.", "GroupId": "40000000-0000-0000-0000-000000000002" }
-      ],
-      "NutritionInfo": {
-        "Calories": 620,
-        "Fat": 22.0,
-        "Carbohydrates": 65.0,
-        "Protein": 35.0
-      },
-      "Source": {
-        "Text": "Italian Cooking Basics",
-        "Url": "https://example.com/bolognese"
-      },
-      "Tags": [ "dinner", "italian", "pasta" ],
-      "FurtherNotes": null
+    "source": {
+      "text": "Family Recipe"
     },
-    {
-      "Id": "20000000-0000-0000-0000-000000000003",
-      "Name": "Chocolate Chip Cookies",
-      "Description": "Crispy on the outside, chewy on the inside",
-      "GroupId": null,
-      "Ingredients": [
-        { "Name": "All-purpose flour", "QuantityAmount": 2.25, "QuantityUnit": "cups", "GroupId": null },
-        { "Name": "Butter (softened)", "QuantityAmount": 1, "QuantityUnit": "cup", "GroupId": null },
-        { "Name": "Brown sugar", "QuantityAmount": 0.75, "QuantityUnit": "cups", "GroupId": null },
-        { "Name": "Granulated sugar", "QuantityAmount": 0.75, "QuantityUnit": "cups", "GroupId": null },
-        { "Name": "Eggs", "QuantityAmount": 2, "QuantityUnit": "", "GroupId": null },
-        { "Name": "Vanilla extract", "QuantityAmount": 1, "QuantityUnit": "tsp", "GroupId": null },
-        { "Name": "Baking soda", "QuantityAmount": 1, "QuantityUnit": "tsp", "GroupId": null },
-        { "Name": "Salt", "QuantityAmount": 1, "QuantityUnit": "tsp", "GroupId": null },
-        { "Name": "Chocolate chips", "QuantityAmount": 2, "QuantityUnit": "cups", "GroupId": null }
-      ],
-      "Instructions": [
-        { "Text": "Preheat oven to 375 F (190 C).", "GroupId": null },
-        { "Text": "Cream together butter, brown sugar, and granulated sugar until fluffy.", "GroupId": null },
-        { "Text": "Beat in eggs and vanilla extract.", "GroupId": null },
-        { "Text": "Mix in flour, baking soda, and salt until just combined.", "GroupId": null },
-        { "Text": "Fold in chocolate chips.", "GroupId": null },
-        { "Text": "Drop rounded tablespoons of dough onto baking sheets.", "GroupId": null },
-        { "Text": "Bake for 9 to 11 minutes or until golden brown.", "GroupId": null }
-      ],
-      "NutritionInfo": null,
-      "Source": null,
-      "Tags": [ "dessert", "baking", "cookies" ],
-      "FurtherNotes": "For softer cookies, remove from oven when edges are set but centers still look slightly underdone."
-    }
-  ],
-  "groups": [
-    { "Id": "10000000-0000-0000-0000-000000000001", "Name": "Breakfast", "SortOrder": 0, "GroupType": "Recipe" },
-    { "Id": "10000000-0000-0000-0000-000000000002", "Name": "Dinner", "SortOrder": 1, "GroupType": "Recipe" },
-    { "Id": "30000000-0000-0000-0000-000000000001", "Name": "Sauce", "SortOrder": 0, "GroupType": "Ingredient" },
-    { "Id": "30000000-0000-0000-0000-000000000002", "Name": "Pasta", "SortOrder": 1, "GroupType": "Ingredient" },
-    { "Id": "40000000-0000-0000-0000-000000000001", "Name": "Sauce", "SortOrder": 0, "GroupType": "Instruction" },
-    { "Id": "40000000-0000-0000-0000-000000000002", "Name": "Assembly", "SortOrder": 1, "GroupType": "Instruction" }
-  ],
-  "settings": {}
-}
+    "tags": [ "breakfast", "quick" ],
+    "furtherNotes": "For extra fluffy pancakes, let the batter rest for 5 minutes before cooking."
+  },
+  {
+    "name": "Spaghetti Bolognese",
+    "description": "A rich and hearty Italian meat sauce served over spaghetti",
+    "group": "Dinner",
+    "ingredients": [
+      { "name": "Spaghetti", "quantityAmount": 400, "quantityUnit": "g", "group": "Pasta" },
+      { "name": "Ground beef", "quantityAmount": 500, "quantityUnit": "g", "group": "Sauce" },
+      { "name": "Onion (diced)", "quantityAmount": 1, "quantityUnit": "", "group": "Sauce" },
+      { "name": "Garlic cloves (minced)", "quantityAmount": 3, "quantityUnit": "", "group": "Sauce" },
+      { "name": "Crushed tomatoes", "quantityAmount": 400, "quantityUnit": "g", "group": "Sauce" },
+      { "name": "Tomato paste", "quantityAmount": 2, "quantityUnit": "tbsp", "group": "Sauce" },
+      { "name": "Olive oil", "quantityAmount": 2, "quantityUnit": "tbsp", "group": "Sauce" },
+      { "name": "Salt and pepper", "quantityAmount": 1, "quantityUnit": "to taste" }
+    ],
+    "instructions": [
+      { "text": "Heat olive oil in a large pan over medium heat. Saute onion until translucent.", "group": "Sauce" },
+      { "text": "Add garlic and cook for 1 minute.", "group": "Sauce" },
+      { "text": "Add ground beef and cook until browned, breaking it apart.", "group": "Sauce" },
+      { "text": "Stir in crushed tomatoes and tomato paste. Simmer for 20 minutes.", "group": "Sauce" },
+      { "text": "Cook spaghetti according to package directions. Drain.", "group": "Assembly" },
+      { "text": "Serve sauce over spaghetti.", "group": "Assembly" }
+    ],
+    "nutritionInfo": {
+      "calories": 620,
+      "fat": 22.0,
+      "carbohydrates": 65.0,
+      "protein": 35.0
+    },
+    "source": {
+      "text": "Italian Cooking Basics",
+      "url": "https://example.com/bolognese"
+    },
+    "tags": [ "dinner", "italian", "pasta" ]
+  },
+  {
+    "name": "Chocolate Chip Cookies",
+    "description": "Crispy on the outside, chewy on the inside",
+    "ingredients": [
+      { "name": "All-purpose flour", "quantityAmount": 2.25, "quantityUnit": "cups" },
+      { "name": "Butter (softened)", "quantityAmount": 1, "quantityUnit": "cup" },
+      { "name": "Brown sugar", "quantityAmount": 0.75, "quantityUnit": "cups" },
+      { "name": "Granulated sugar", "quantityAmount": 0.75, "quantityUnit": "cups" },
+      { "name": "Eggs", "quantityAmount": 2, "quantityUnit": "" },
+      { "name": "Vanilla extract", "quantityAmount": 1, "quantityUnit": "tsp" },
+      { "name": "Baking soda", "quantityAmount": 1, "quantityUnit": "tsp" },
+      { "name": "Salt", "quantityAmount": 1, "quantityUnit": "tsp" },
+      { "name": "Chocolate chips", "quantityAmount": 2, "quantityUnit": "cups" }
+    ],
+    "instructions": [
+      { "text": "Preheat oven to 375 F (190 C)." },
+      { "text": "Cream together butter, brown sugar, and granulated sugar until fluffy." },
+      { "text": "Beat in eggs and vanilla extract." },
+      { "text": "Mix in flour, baking soda, and salt until just combined." },
+      { "text": "Fold in chocolate chips." },
+      { "text": "Drop rounded tablespoons of dough onto baking sheets." },
+      { "text": "Bake for 9 to 11 minutes or until golden brown." }
+    ],
+    "tags": [ "dessert", "baking", "cookies" ],
+    "furtherNotes": "For softer cookies, remove from oven when edges are set but centers still look slightly underdone."
+  }
+]

@@ -5,6 +5,8 @@ public sealed class ReciPageStateAttribute : Attribute
 {
     public string? StateName { get; }
 
+    public bool Connected { get; init; } = true;
+
     public ReciPageStateAttribute()
     {
         StateName = null;
