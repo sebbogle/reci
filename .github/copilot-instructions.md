@@ -32,7 +32,7 @@ Blazor WebAssembly (.NET 10) client-side recipe manager using Fluent UI. All dat
 - Async throughout with `CancellationToken` support
 - Components implement `IAsyncDisposable` to unsubscribe from notifiers
 
-## Build and Test
+## Build
 
 ```bash
 # Run the app (dev server at http://localhost:5265)
@@ -40,17 +40,7 @@ dotnet run
 
 # Build release
 dotnet build -c Release
-
-# Run E2E tests (Playwright — requires app to be running or fixture starts it)
-dotnet test --project Tests/Tests.csproj
 ```
-
-- **Testing framework**: xunit.v3 + Microsoft.Playwright for E2E browser automation
-- `AppFixture` (shared via `AppCollection`) starts the app process automatically
-- `ReciPage` base class provides Playwright page helpers
-- `[ReciPageState]` attribute injects JSON state into localStorage before tests
-- `ScreenshotAssert` does golden-image visual regression against `Tests/Resources/Golden Screenshots/`
-- Playwright must be installed: `pwsh Tests/bin/Debug/net10.0/playwright.ps1 install`
 
 ## Conventions
 
